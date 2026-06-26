@@ -4,7 +4,8 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch: # Ajoute ce bouton pour tester manuellement !
-
+  schedule:
+    - cron: '0 6 * * 1'   # tous les lundis à 06:00 UTC (08:00 Paris en été)
 jobs:
   build:
     runs-on: ubuntu-latest
