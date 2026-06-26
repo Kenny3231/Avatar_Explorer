@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pose Explorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@1.21.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
@@ -40,20 +40,20 @@
 
                 <div class="flex flex-col md:flex-row items-center gap-5 w-full xl:w-auto justify-center flex-1">
                     <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-700 flex flex-col gap-1 w-full md:w-80 shadow-inner">
-                        <input type="text" id="name1" oninput="save()" placeholder="Utilisateur 1" 
+                        <input type="text" id="name1" oninput="save()" placeholder="Utilisateur 1" aria-label="Nom de l'utilisateur 1"
                                class="bg-transparent text-yellow-500 font-black text-3xl sm:text-4xl outline-none tracking-tighter placeholder:text-yellow-900/20">
-                        <input type="text" id="id1" oninput="saveAndRender()" placeholder="ID Bitmoji 1" 
+                        <input type="text" id="id1" oninput="saveAndRender()" placeholder="ID Bitmoji 1" aria-label="ID Bitmoji de l'utilisateur 1"
                                class="bg-transparent text-slate-600 text-sm font-mono outline-none border-t border-slate-800/50 pt-2">
                     </div>
 
-                    <button onclick="swapIds()" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
+                    <button onclick="swapIds()" aria-label="Échanger les utilisateurs 1 et 2" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
                         <i data-lucide="arrow-right-left" class="w-6 h-6"></i>
                     </button>
 
                     <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-700 flex flex-col gap-1 w-full md:w-80 shadow-inner">
-                        <input type="text" id="name2" oninput="save()" placeholder="Utilisateur 2" 
+                        <input type="text" id="name2" oninput="save()" placeholder="Utilisateur 2" aria-label="Nom de l'utilisateur 2"
                                class="bg-transparent text-blue-400 font-black text-3xl sm:text-4xl outline-none tracking-tighter placeholder:text-blue-900/20">
-                        <input type="text" id="id2" oninput="saveAndRender()" placeholder="ID Bitmoji 2" 
+                        <input type="text" id="id2" oninput="saveAndRender()" placeholder="ID Bitmoji 2" aria-label="ID Bitmoji de l'utilisateur 2"
                                class="bg-transparent text-slate-600 text-sm font-mono outline-none border-t border-slate-800/50 pt-2">
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         <i data-lucide="folder-archive" class="w-7 h-7"></i> GÉNÉRER ZIP
                     </button>
 
-                    <button onclick="openHelp()" title="Centre d'aide" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
+                    <button onclick="openHelp()" title="Centre d'aide" aria-label="Centre d'aide" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
                         <i data-lucide="circle-help" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
                     </button>
                 </div>
@@ -101,7 +101,7 @@
             </div>
 
             <div class="relative group h-[60px] col-span-2 md:col-span-1 xl:col-span-1">
-                <input type="search" id="categoryInput" list="categoryList" oninput="render()" placeholder="Catégorie..." 
+                <input type="search" id="categoryInput" list="categoryList" oninput="render()" placeholder="Catégorie..." aria-label="Filtrer par catégorie"
                        class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-text shadow-lg pr-12 text-slate-300 focus:border-yellow-500 placeholder:text-slate-600">
                 <datalist id="categoryList">
                     </datalist>
@@ -112,7 +112,7 @@
 
             <div class="relative col-span-2 md:col-span-2 xl:col-span-2 h-[60px]">
                 <i data-lucide="search" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600"></i>
-                <input type="search" id="search" oninput="render()" placeholder="Rechercher (ex: sourire, amour)..." 
+                <input type="search" id="search" oninput="render()" placeholder="Rechercher (ex: sourire, amour)..." aria-label="Rechercher une pose"
                        class="w-full h-full bg-slate-900 border border-slate-800 px-14 rounded-[1.5rem] outline-none focus:border-yellow-500 font-bold shadow-lg text-sm placeholder:text-slate-600 placeholder:font-normal">
             </div>
         </div>
@@ -125,7 +125,7 @@
     <div id="helpLightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-8" onclick="closeHelp()">
         <div class="relative max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-[3rem] p-8 sm:p-12 modal-animate text-left shadow-2xl" onclick="event.stopPropagation()">
             
-            <button onclick="closeHelp()" class="absolute top-8 right-8 text-slate-500 hover:text-white transition-all hover:rotate-90">
+            <button onclick="closeHelp()" aria-label="Fermer le centre d'aide" class="absolute top-8 right-8 text-slate-500 hover:text-white transition-all hover:rotate-90">
                 <i data-lucide="x" class="w-8 h-8"></i>
             </button>
             
@@ -144,12 +144,12 @@
     <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-8" onclick="closeLightbox()">
         <div class="relative max-w-2xl w-full modal-animate flex flex-col items-center text-center" onclick="event.stopPropagation()">
             
-            <button onclick="closeLightbox()" class="absolute -top-16 right-0 text-slate-500 hover:text-white transition-all hover:rotate-90">
+            <button onclick="closeLightbox()" aria-label="Fermer l'aperçu" class="absolute -top-16 right-0 text-slate-500 hover:text-white transition-all hover:rotate-90">
                 <i data-lucide="x" class="w-12 h-12"></i>
             </button>
             
             <div class="bg-gradient-to-b from-slate-900/50 to-transparent p-10 rounded-full mb-10 border border-slate-800/50">
-                <img id="lightbox-img" src="" class="max-h-[50vh] sm:max-h-[55vh] drop-shadow-[0_0_50px_rgba(234,179,8,0.25)] object-contain">
+                <img id="lightbox-img" src="" alt="" class="max-h-[50vh] sm:max-h-[55vh] drop-shadow-[0_0_50px_rgba(234,179,8,0.25)] object-contain">
             </div>
 
             <h3 id="lightbox-title" class="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-yellow-500">Nom de la Pose</h3>
@@ -352,7 +352,7 @@
                 
                 return `
                 <div class="grid-item group bg-slate-900/40 p-5 rounded-[2.5rem] border border-slate-800 text-center cursor-pointer hover:border-yellow-500/40 transition-all" onclick="openLightbox('${url}', '${t.displayTag.replace(/'/g, "\\'")}')">
-                    <img src="${url}" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy">
+                    <img src="${url}" alt="${t.displayTag.replace(/"/g, '&quot;')}" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy">
                     <span class="text-[9px] text-slate-600 uppercase font-black tracking-widest block truncate">${t.displayTag}</span>
                 </div>`;
             }).join('');
@@ -416,6 +416,7 @@
         function openLightbox(url, title) {
             const scale = document.getElementById('scaleSelect').value;
             document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox-img').alt = title;
             document.getElementById('lightbox-title').innerText = title;
             document.getElementById('lightbox-res').innerText = `FORMAT PNG • RÉSOLUTION ${scale}X`;
             

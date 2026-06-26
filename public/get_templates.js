@@ -2,64 +2,63 @@ const fs = require('fs');
 
 async function fetchAndSaveTemplates(languageHeader, fileName) {
     console.log(`📥 Récupération des données pour : ${fileName}...`);
-    
+
+    const response = await fetch("https://api.bitmoji.com/content/templates?app_name=bitmoji&platform=ios", {
+        headers: { "Accept-Language": languageHeader }
+    });
+
+    if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+
+    let data;
     try {
-        const response = await fetch("https://api.bitmoji.com/content/templates?app_name=bitmoji&platform=ios", {
-            headers: { "Accept-Language": languageHeader }
-        });
-
-        if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
-
-        const data = await response.json();
-
-        const processList = (list) => {
-            const seen = new Set();
-            return list
-                .map(item => {
-                    const cleanSrc = item.src ? item.src.split('?')[0] : "";
-                    const uniqueId = item.id || item.template_id || cleanSrc;
-                    
-                    const searchData = [
-                        ...(item.tags || []),
-                        ...(item.supertags || []),
-                        item.alt_text || "",
-                        item.descriptive_alt_text || ""
-                    ].join(" ").toLowerCase();
-
-                    return {
-                        id: uniqueId,
-                        src: cleanSrc,
-                        displayTag: item.tags && item.tags[0] ? item.tags[0] : "Pose",
-                        keywords: searchData,
-                        categories: item.categories || []
-                    };
-                })
-                .filter(item => {
-                    if (!item.id || seen.has(item.id)) return false;
-                    seen.add(item.id);
-                    return true;
-                });
-        };
-
-        const imoji = processList(data.imoji || []);
-        const friends = processList(data.friends || []);
-
-        const cleanData = {
-            categories: data.categories || [],
-            imoji: imoji,
-            friends: friends
-        };
-
-        fs.writeFileSync(fileName, JSON.stringify(cleanData, null, 2));
-        console.log(`✅ ${fileName} généré ! (Solo: ${imoji.length} | Duo: ${friends.length})`);
-        
-        // On retourne les statistiques pour les utiliser dans aide.json
-        return { solo: imoji.length, duo: friends.length };
-
-    } catch (error) {
-        console.error(`❌ Erreur sur ${fileName} :`, error);
-        return { solo: 0, duo: 0 };
+        data = await response.json();
+    } catch (e) {
+        throw new Error(`Réponse JSON invalide depuis l'API Bitmoji : ${e.message}`);
     }
+
+    const processList = (list) => {
+        const seen = new Set();
+        return list
+            .map(item => {
+                const cleanSrc = item.src ? item.src.split('?')[0] : "";
+                const uniqueId = item.id || item.template_id || cleanSrc;
+
+                const searchData = [
+                    ...(item.tags || []),
+                    ...(item.supertags || []),
+                    item.alt_text || "",
+                    item.descriptive_alt_text || ""
+                ].join(" ").toLowerCase();
+
+                return {
+                    id: uniqueId,
+                    src: cleanSrc,
+                    displayTag: item.tags && item.tags[0] ? item.tags[0] : "Pose",
+                    keywords: searchData,
+                    categories: item.categories || []
+                };
+            })
+            .filter(item => {
+                if (!item.id || seen.has(item.id)) return false;
+                seen.add(item.id);
+                return true;
+            });
+    };
+
+    const imoji = processList(data.imoji || []);
+    const friends = processList(data.friends || []);
+
+    const cleanData = {
+        categories: data.categories || [],
+        imoji: imoji,
+        friends: friends
+    };
+
+    fs.writeFileSync(fileName, JSON.stringify(cleanData, null, 2));
+    console.log(`✅ ${fileName} généré ! (Solo: ${imoji.length} | Duo: ${friends.length})`);
+
+    // On retourne les statistiques pour les utiliser dans aide.json
+    return { solo: imoji.length, duo: friends.length };
 }
 
 // Nouvelle fonction pour générer ou mettre à jour aide.json
@@ -110,4 +109,7 @@ async function main() {
     console.log("🎉 Terminé ! Tout est à jour.");
 }
 
-main();
+main().catch(error => {
+    console.error("❌ Échec du script :", error);
+    process.exit(1);
+});

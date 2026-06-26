@@ -33,4 +33,4 @@ jobs:
           git commit -m "🚀 Mise à jour auto [skip ci]" || echo "Aucune modification à commit"
           git push
       - name: 🚀 Force redeploy Cloudflare
-        run: curl -X POST "${{ secrets.CF_DEPLOY_HOOK }}"
+        run: curl -fsS -X POST "${{ secrets.CF_DEPLOY_HOOK }}" -o /dev/null
