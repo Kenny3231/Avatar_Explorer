@@ -22,14 +22,14 @@ jobs:
           node-version: '24' # On force Node 24 pour 2026
 
       - name: ⚙️ Exécution du script
-        # On ajoute "|| exit 1" pour être sûr de voir l'erreur si le script échoue
+        working-directory: public
         run: node get_templates.js
 
       - name: 📤 Sauvegarde
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          git add .
+          git add public/templates_fr.json public/templates_en.json public/aide.json
           git commit -m "🚀 Mise à jour auto [skip ci]" || echo "Aucune modification à commit"
           git push
       - name: 🚀 Force redeploy Cloudflare

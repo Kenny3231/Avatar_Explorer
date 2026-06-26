@@ -9,8 +9,20 @@ export async function onRequest(context) {
     const mode = url.searchParams.get('mode') || 'solo';
     const scale = url.searchParams.get('scale') || '2';
     const dir = url.searchParams.get('dir') || 'bitmojis';
-    const type = url.searchParams.get('type'); 
+    const type = url.searchParams.get('type');
     const targetUser = url.searchParams.get('targetUser'); // '1', '2' ou 'duo'
+
+    // id1/id2/name1/name2/dir finissent interpolés tels quels dans un script bash généré :
+    // un caractère hors de cette whitelist permettrait d'en sortir (injection de commande).
+    const SAFE_PATTERN = /^[a-zA-Z0-9_-]+$/;
+    const badRequest = (msg) => new Response(msg, { status: 400 });
+
+    if (!id1 || !SAFE_PATTERN.test(id1)) return badRequest("Paramètre id1 invalide (lettres, chiffres, _ et - uniquement).");
+    if (id2 && !SAFE_PATTERN.test(id2)) return badRequest("Paramètre id2 invalide (lettres, chiffres, _ et - uniquement).");
+    if (!SAFE_PATTERN.test(n1)) return badRequest("Paramètre name1 invalide (lettres, chiffres, _ et - uniquement).");
+    if (!SAFE_PATTERN.test(n2)) return badRequest("Paramètre name2 invalide (lettres, chiffres, _ et - uniquement).");
+    if (!SAFE_PATTERN.test(dir)) return badRequest("Paramètre dir invalide (lettres, chiffres, _ et - uniquement).");
+    if (!['1', '2', '4'].includes(scale)) return badRequest("Paramètre scale invalide (valeurs autorisées : 1, 2, 4).");
 
     // 1. Chargement des données
     let templateReq = await fetch('https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/public/templates_fr.json');
