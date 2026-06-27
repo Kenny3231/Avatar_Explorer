@@ -33,7 +33,7 @@ curl -sL "https://pose-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mo
 | `name2` | Dossier/Préfixe utilisateur 2 | Défaut: `Utilisateur2` |
 | `mode` | Type de poses à récupérer | `solo` ou `duo` |
 | `scale` | Qualité de l'image (1x, 2x, 4x) | `1`, `2`, `4` |
-| `dir` | Dossier dans `/config/www/` | Défaut: `bitmojis` |
+| `dir` | Dossier dans `/config/www/` (sous-dossiers possibles avec `/`) | Défaut: `bitmojis`, ex: `media/bitmojis` |
 
 > [!IMPORTANT]
 > **Pré-requis :** Avant de lancer la commande, assurez-vous de créer manuellement vos dossiers de destination dans `/config/www/` (ex: `/config/www/bitmojis/Kenny/`). Le script nécessite que les dossiers existent pour y déposer les fichiers `.png` et `.json`.

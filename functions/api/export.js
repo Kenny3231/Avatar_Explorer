@@ -15,13 +15,15 @@ export async function onRequest(context) {
     // id1/id2/name1/name2/dir finissent interpolés tels quels dans un script bash généré :
     // un caractère hors de cette whitelist permettrait d'en sortir (injection de commande).
     const SAFE_PATTERN = /^[a-zA-Z0-9_-]+$/;
+    // dir admet aussi "/" pour les sous-dossiers, mais ni "." (pas de ../) ni "//" (segments vides).
+    const DIR_SAFE_PATTERN = /^[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*$/;
     const badRequest = (msg) => new Response(msg, { status: 400 });
 
     if (!id1 || !SAFE_PATTERN.test(id1)) return badRequest("Paramètre id1 invalide (lettres, chiffres, _ et - uniquement).");
     if (id2 && !SAFE_PATTERN.test(id2)) return badRequest("Paramètre id2 invalide (lettres, chiffres, _ et - uniquement).");
     if (!SAFE_PATTERN.test(n1)) return badRequest("Paramètre name1 invalide (lettres, chiffres, _ et - uniquement).");
     if (!SAFE_PATTERN.test(n2)) return badRequest("Paramètre name2 invalide (lettres, chiffres, _ et - uniquement).");
-    if (!SAFE_PATTERN.test(dir)) return badRequest("Paramètre dir invalide (lettres, chiffres, _ et - uniquement).");
+    if (!DIR_SAFE_PATTERN.test(dir.replace(/^\/+|\/+$/g, ''))) return badRequest("Paramètre dir invalide (lettres, chiffres, _, - et / pour les sous-dossiers uniquement).");
     if (!['1', '2', '4'].includes(scale)) return badRequest("Paramètre scale invalide (valeurs autorisées : 1, 2, 4).");
 
     // 1. Chargement des données
