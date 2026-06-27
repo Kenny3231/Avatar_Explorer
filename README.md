@@ -34,6 +34,17 @@ curl -sL "https://pose-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mo
 | `mode` | Type de poses à récupérer | `solo` ou `duo` |
 | `scale` | Qualité de l'image (1x, 2x, 4x) | `1`, `2`, `4` |
 | `dir` | Dossier dans `/config/www/` (sous-dossiers possibles avec `/`) | Défaut: `bitmojis`, ex: `media/bitmojis` |
+| `lang` | Langue du catalogue de poses | Défaut: `fr`. Voir [langues disponibles](#-langues-disponibles) |
+
+### 🌐 Langues disponibles
+
+| Code | Langue |
+| :--- | :--- |
+| `fr` | Français (défaut) |
+| `en` | Anglais |
+
+> [!NOTE]
+> Cette liste s'étendra avec le temps (cf. `SUPPORTED_LANGS` dans [functions/api/export.js](functions/api/export.js)). Chaque langue suppose l'existence d'un fichier `public/templates_<lang>.json`, généré par [public/get_templates.js](public/get_templates.js).
 
 > [!IMPORTANT]
 > **Pré-requis :** Avant de lancer la commande, assurez-vous de créer manuellement vos dossiers de destination dans `/config/www/` (ex: `/config/www/bitmojis/Kenny/`). Le script nécessite que les dossiers existent pour y déposer les fichiers `.png` et `.json`.

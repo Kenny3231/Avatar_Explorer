@@ -12,6 +12,11 @@ export async function onRequest(context) {
     const type = url.searchParams.get('type');
     const targetUser = url.searchParams.get('targetUser'); // '1', '2' ou 'duo'
 
+    // Langues disponibles : un templates_<lang>.json doit exister (généré par public/get_templates.js).
+    // Pour ajouter une langue : générer son fichier templates_<lang>.json puis l'ajouter ici.
+    const SUPPORTED_LANGS = ['fr', 'en'];
+    const lang = (url.searchParams.get('lang') || 'fr').toLowerCase();
+
     // id1/id2/name1/name2/dir finissent interpolés tels quels dans un script bash généré :
     // un caractère hors de cette whitelist permettrait d'en sortir (injection de commande).
     const SAFE_PATTERN = /^[a-zA-Z0-9_-]+$/;
@@ -25,10 +30,11 @@ export async function onRequest(context) {
     if (!SAFE_PATTERN.test(n2)) return badRequest("Paramètre name2 invalide (lettres, chiffres, _ et - uniquement).");
     if (!DIR_SAFE_PATTERN.test(dir.replace(/^\/+|\/+$/g, ''))) return badRequest("Paramètre dir invalide (lettres, chiffres, _, - et / pour les sous-dossiers uniquement).");
     if (!['1', '2', '4'].includes(scale)) return badRequest("Paramètre scale invalide (valeurs autorisées : 1, 2, 4).");
+    if (!SUPPORTED_LANGS.includes(lang)) return badRequest(`Paramètre lang invalide. Langues supportées : ${SUPPORTED_LANGS.join(', ')}.`);
 
     // 1. Chargement des données
-    let templateReq = await fetch('https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/public/templates_fr.json');
-    if (!templateReq.ok) templateReq = await fetch('https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/templates_fr.json');
+    let templateReq = await fetch(`https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/public/templates_${lang}.json`);
+    if (!templateReq.ok) templateReq = await fetch(`https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/templates_${lang}.json`);
     const rawData = await templateReq.json();
 
     const cleanName = (str) => {
@@ -81,7 +87,7 @@ export async function onRequest(context) {
     let script = "#!/bin/bash\n\n";
     script += "echo '--- DEBUT DU TELECHARGEMENT ---'\n";
     
-    const apiBase = `https://${url.hostname}/api/export?id1=${id1}&id2=${id2}&name1=${n1}&name2=${n2}&mode=${mode}&type=json`;
+    const apiBase = `https://${url.hostname}/api/export?id1=${id1}&id2=${id2}&name1=${n1}&name2=${n2}&mode=${mode}&lang=${lang}&type=json`;
 
     // Fonction pour générer le téléchargement Solo (utilisée aussi en mode Duo)
     const buildSoloCmds = (id, name, userNum) => {
