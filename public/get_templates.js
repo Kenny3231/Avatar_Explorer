@@ -66,9 +66,12 @@ function updateAideJson(statsFr, statsEn) {
     const aidePath = 'aide.json';
     let aideData = {};
 
-    // 1. On génère la date du jour en français (ex: "15 mars 2026")
+    // 1. On génère la date du jour en français (ex: "15 mars 2026") et en ISO 8601
+    // pour les consommateurs API (ex: Avatar Explorer) qui veulent comparer une date.
+    const now = new Date();
     const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-    const dateMaj = new Date().toLocaleDateString('fr-FR', dateOptions);
+    const dateMaj = now.toLocaleDateString('fr-FR', dateOptions);
+    const lastUpdatedIso = now.toISOString();
 
     // 2. On lit le fichier existant pour ne pas écraser ton texte de guide !
     if (fs.existsSync(aidePath)) {
@@ -81,6 +84,7 @@ function updateAideJson(statsFr, statsEn) {
 
     // 3. On met à jour uniquement les stats et la date
     aideData.date_maj = dateMaj;
+    aideData.last_updated_iso = lastUpdatedIso;
     aideData.stats = {
         fr: statsFr,
         en: statsEn
