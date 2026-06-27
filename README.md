@@ -40,6 +40,50 @@ curl -sL "https://pose-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mo
 
 ---
 
+## 📡 API de métadonnées (`aide.json`)
+
+Le fichier `aide.json` est servi statiquement à la racine du site et expose entre autres la date du dernier import du catalogue. Utile pour qu'une application tierce (ex: Avatar Explorer) sache si elle doit relancer un import.
+
+### Endpoint
+```
+GET https://pose-explorer.pages.dev/aide.json
+```
+
+### Réponse
+```json
+{
+  "date_maj": "26 juin 2026",
+  "last_updated_iso": "2026-06-26T07:46:33.000Z",
+  "stats": {
+    "fr": { "solo": 1261, "duo": 614 },
+    "en": { "solo": 1975, "duo": 1050 }
+  },
+  "guide": "..."
+}
+```
+
+| Champ | Type | Description |
+| :--- | :--- | :--- |
+| `date_maj` | `string` | Date du dernier import, formatée en français (affichage uniquement, ne pas parser). |
+| `last_updated_iso` | `string` (ISO 8601) | Date du dernier import, à utiliser pour toute comparaison programmatique. |
+| `stats.fr` / `stats.en` | `{ solo: number, duo: number }` | Nombre de poses disponibles par langue et par mode. |
+| `guide` | `string` (Markdown) | Texte affiché dans le centre d'aide de l'application. |
+
+### Exemple d'utilisation
+```js
+const { last_updated_iso } = await fetch('https://pose-explorer.pages.dev/aide.json').then(r => r.json());
+const remoteDate = new Date(last_updated_iso);
+
+if (remoteDate > localLastImportDate) {
+  // déclencher un nouvel import
+}
+```
+
+> [!NOTE]
+> `aide.json` est régénéré automatiquement chaque lundi (cron GitHub Actions) et à chaque déclenchement manuel du workflow `update_data.yml`. `last_updated_iso` ne change que si cet import a réellement eu lieu.
+
+---
+
 ## 🛠️ Technologies Utilisées
 
 * **Frontend :** HTML5, JavaScript (Vanilla), TailwindCSS (CDN), Lucide Icons.
