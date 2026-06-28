@@ -169,6 +169,7 @@
     <script>
         let rawData = { categories: [], imoji: [], friends: [] };
         let currentMode = 'solo';
+        let currentRenderItems = [];
 
         // Fonction pour nettoyer le nom des images proprement
         function formatPoseName(str) {
@@ -188,15 +189,28 @@
                 .replace(/[\u0300-\u036f]/g, "")
                 .toLowerCase();
         }
+        function escapeHtml(str) {
+            if (!str) return "";
+            return str.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
 
         window.onload = async () => {
             document.getElementById('id1').value = localStorage.getItem('bt_id1') || "";
             document.getElementById('id2').value = localStorage.getItem('bt_id2') || "";
             document.getElementById('name1').value = localStorage.getItem('bt_name1') || "";
             document.getElementById('name2').value = localStorage.getItem('bt_name2') || "";
+
+            const savedLang = localStorage.getItem('bt_lang') || 'fr';
+            document.getElementById('langSelect').value = savedLang;
+
             lucide.createIcons();
-            
-            await loadData('fr');
+
+            await loadData(savedLang);
         };
 
         async function loadData(lang) {
@@ -264,11 +278,11 @@
                     
                     <div class="bg-blue-900/20 border border-blue-500/20 p-6 rounded-3xl">
                         <h4 class="text-xs font-black tracking-widest text-blue-400 mb-4 uppercase">Mode d'emploi</h4>
-                        <p class="text-slate-300 leading-relaxed whitespace-pre-line">${aideDonnees.guide}</p>
+                        <p class="text-slate-300 leading-relaxed whitespace-pre-line">${escapeHtml(aideDonnees.guide)}</p>
                     </div>
 
                     <div class="text-center mt-6">
-                        <p class="text-[10px] font-black tracking-[0.3em] text-slate-600 uppercase">Dernière mise à jour : ${aideDonnees.date_maj}</p>
+                        <p class="text-[10px] font-black tracking-[0.3em] text-slate-600 uppercase">Dernière mise à jour : ${escapeHtml(aideDonnees.date_maj)}</p>
                     </div>
                 `;
             } catch (e) {
@@ -289,6 +303,7 @@
 
         function changeLanguage() {
             const lang = document.getElementById('langSelect').value;
+            localStorage.setItem('bt_lang', lang);
             loadData(lang);
         }
 
@@ -333,29 +348,41 @@
             
             const list = currentMode === 'solo' ? rawData.imoji : rawData.friends;
 
-            grid.innerHTML = list.filter(t => {
+            const filtered = list.filter(t => {
                 const normalizedKeywords = normalizeStr(t.keywords);
                 const matchSearch = normalizedKeywords.includes(search);
-                
+
                 let matchCategory = true;
                 // Si l'utilisateur a tapé quelque chose dans catégorie
                 if (categoryInput !== '') {
                     // On cherche si une catégorie de l'image contient le texte tapé (ex: "amo" trouvera "AMOUR")
                     matchCategory = t.categories && t.categories.some(c => normalizeStr(c).includes(categoryInput));
                 }
-                
+
                 return matchSearch && matchCategory;
-            }).map(t => {
+            });
+
+            // On garde les items rendus de côté (par index) plutôt que d'injecter leurs
+            // données dans des attributs onclick, ce qui évitait d'avoir à les échapper pour
+            // un contexte JS + HTML imbriqué (risque de casse/injection sur des titres avec guillemets).
+            currentRenderItems = filtered.map(t => {
                 let url = t.src.replace('%s', id1);
                 if(url.includes('%s')) url = url.replace('%s', id2);
                 url += `?transparent=1&palette=1&scale=${scale}`;
-                
-                return `
-                <div class="grid-item group bg-slate-900/40 p-5 rounded-[2.5rem] border border-slate-800 text-center cursor-pointer hover:border-yellow-500/40 transition-all" onclick="openLightbox('${url}', '${t.displayTag.replace(/'/g, "\\'")}')">
-                    <img src="${url}" alt="${t.displayTag.replace(/"/g, '&quot;')}" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy">
-                    <span class="text-[9px] text-slate-600 uppercase font-black tracking-widest block truncate">${t.displayTag}</span>
-                </div>`;
-            }).join('');
+                return { url, title: t.displayTag };
+            });
+
+            grid.innerHTML = currentRenderItems.map((item, i) => `
+                <div class="grid-item group bg-slate-900/40 p-5 rounded-[2.5rem] border border-slate-800 text-center cursor-pointer hover:border-yellow-500/40 transition-all" onclick="openLightboxByIndex(${i})">
+                    <img src="${item.url}" alt="${escapeHtml(item.title)}" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy">
+                    <span class="text-[9px] text-slate-600 uppercase font-black tracking-widest block truncate">${escapeHtml(item.title)}</span>
+                </div>`).join('');
+        }
+
+        function openLightboxByIndex(i) {
+            const item = currentRenderItems[i];
+            if (!item) return;
+            openLightbox(item.url, item.title);
         }
 
         async function forceDownload(url, filename) {

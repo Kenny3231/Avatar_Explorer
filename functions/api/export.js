@@ -31,10 +31,13 @@ export async function onRequest(context) {
     if (!DIR_SAFE_PATTERN.test(dir.replace(/^\/+|\/+$/g, ''))) return badRequest("Paramètre dir invalide (lettres, chiffres, _, - et / pour les sous-dossiers uniquement).");
     if (!['1', '2', '4'].includes(scale)) return badRequest("Paramètre scale invalide (valeurs autorisées : 1, 2, 4).");
     if (!SUPPORTED_LANGS.includes(lang)) return badRequest(`Paramètre lang invalide. Langues supportées : ${SUPPORTED_LANGS.join(', ')}.`);
+    if (!['solo', 'duo'].includes(mode)) return badRequest("Paramètre mode invalide (valeurs autorisées : solo, duo).");
+    if (mode === 'duo' && !id2) return badRequest("Paramètre id2 requis pour le mode duo.");
 
-    // 1. Chargement des données
-    let templateReq = await fetch(`https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/public/templates_${lang}.json`);
-    if (!templateReq.ok) templateReq = await fetch(`https://raw.githubusercontent.com/Kenny3231/Pose-Explorer/main/templates_${lang}.json`);
+    // 1. Chargement des données : on lit le fichier statique servi par ce même site
+    // (déployé via le script public/get_templates.js) plutôt que GitHub, plus rapide et sans dépendance externe.
+    const templateReq = await fetch(new URL(`/templates_${lang}.json`, url));
+    if (!templateReq.ok) return new Response("Catalogue introuvable pour cette langue.", { status: 500 });
     const rawData = await templateReq.json();
 
     const cleanName = (str) => {
