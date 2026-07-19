@@ -1,3 +1,5 @@
+🇫🇷 Français | 🇬🇧 [English](README.en.md)
+
 # 🎨 Avatar Explorer
 
 Une application web interactive et rapide permettant de rechercher, filtrer et télécharger des poses Bitmoji (Solo et Duo) en haute définition. 
@@ -5,7 +7,7 @@ Une application web interactive et rapide permettant de rechercher, filtrer et t
 ## ✨ Fonctionnalités
 
 * **Recherche Avancée :** Filtrage intelligent des poses ignorant les accents et les majuscules.
-* **Support Bilingue :** Catalogue disponible en Français (FR) et en Anglais (EN).
+* **Interface & Catalogue en 14 langues :** Français, Anglais, Espagnol, Français (Canada), Allemand, Japonais, Coréen, Italien, Portugais, Chinois, Turc, Polonais, Roumain, Grec. Le sélecteur de langue traduit **toute l'interface** (textes, boutons, centre d'aide) en plus du catalogue de poses.
 * **Catégories Dynamiques :** Menu déroulant autocomplété listant toutes les catégories existantes.
 * **Modes Solo & Duo :** Aperçu avec un ou deux personnages simultanément.
 * **Export Massif :** Génération d'un fichier `.zip` depuis l'interface web (limité par le navigateur).
@@ -42,9 +44,21 @@ curl -sL "https://avatar-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&
 | :--- | :--- |
 | `fr` | Français (défaut) |
 | `en` | Anglais |
+| `es` | Espagnol |
+| `fr-ca` | Français (Canada) |
+| `de` | Allemand |
+| `ja` | Japonais |
+| `ko` | Coréen |
+| `it` | Italien |
+| `pt` | Portugais |
+| `zh` | Chinois |
+| `tr` | Turc |
+| `pl` | Polonais |
+| `ro` | Roumain |
+| `el` | Grec |
 
 > [!NOTE]
-> Cette liste s'étendra avec le temps (cf. `SUPPORTED_LANGS` dans [functions/api/export.js](functions/api/export.js)). Chaque langue suppose l'existence d'un fichier `public/templates_<lang>.json`, généré par [public/get_templates.js](public/get_templates.js).
+> Cette liste peut s'étendre avec le temps (cf. `SUPPORTED_LANGS` dans [functions/api/export.js](functions/api/export.js)). Chaque langue suppose l'existence d'un fichier `public/templates_<lang>.json`, généré par [public/get_templates.js](public/get_templates.js). Pour les langues à alphabet non-latin (`ja`, `ko`, `zh`, `el`), un champ `slugFallback` (tag anglais correspondant) garantit que les noms de fichiers générés restent lisibles même quand le tag natif ne contient aucun caractère latin.
 
 > [!IMPORTANT]
 > **Pré-requis :** Avant de lancer la commande, assurez-vous de créer manuellement vos dossiers de destination dans `/config/www/` (ex: `/config/www/bitmojis/Kenny/`). Le script nécessite que les dossiers existent pour y déposer les fichiers `.png` et `.json`.
@@ -63,13 +77,20 @@ GET https://avatar-explorer.pages.dev/aide.json
 ### Réponse
 ```json
 {
-  "date_maj": "26 juin 2026",
-  "last_updated_iso": "2026-06-26T07:46:33.000Z",
+  "date_maj": "19 juillet 2026",
+  "last_updated_iso": "2026-07-19T10:10:28.730Z",
   "stats": {
     "fr": { "solo": 1261, "duo": 614 },
-    "en": { "solo": 1975, "duo": 1050 }
+    "en": { "solo": 1975, "duo": 1050 },
+    "es": { "solo": 1278, "duo": 607 },
+    "...": { "solo": "...", "duo": "..." }
   },
-  "guide": "..."
+  "guide": {
+    "fr": "Bienvenue dans la Forge Bitmoji ! ...",
+    "en": "Welcome to the Bitmoji Forge! ...",
+    "es": "¡Bienvenido a la Forja Bitmoji! ...",
+    "...": "..."
+  }
 }
 ```
 
@@ -77,8 +98,8 @@ GET https://avatar-explorer.pages.dev/aide.json
 | :--- | :--- | :--- |
 | `date_maj` | `string` | Date du dernier import, formatée en français (affichage uniquement, ne pas parser). |
 | `last_updated_iso` | `string` (ISO 8601) | Date du dernier import, à utiliser pour toute comparaison programmatique. |
-| `stats.fr` / `stats.en` | `{ solo: number, duo: number }` | Nombre de poses disponibles par langue et par mode. |
-| `guide` | `string` (Markdown) | Texte affiché dans le centre d'aide de l'application. |
+| `stats.<lang>` | `{ solo: number, duo: number }` | Nombre de poses disponibles pour la langue `<lang>` (un des 14 codes ci-dessus), par mode. |
+| `guide.<lang>` | `string` (Markdown) | Texte affiché dans le centre d'aide de l'application, traduit pour la langue `<lang>`. |
 
 ### Exemple d'utilisation
 ```js

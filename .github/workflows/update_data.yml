@@ -29,7 +29,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/templates_fr.json public/templates_en.json public/aide.json
+          git add public/templates_*.json public/aide.json
           git commit -m "🚀 Mise à jour auto [skip ci]" || echo "Aucune modification à commit"
           git push
       - name: 🚀 Force redeploy Cloudflare

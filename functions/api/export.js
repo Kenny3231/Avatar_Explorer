@@ -14,7 +14,7 @@ export async function onRequest(context) {
 
     // Langues disponibles : un templates_<lang>.json doit exister (généré par public/get_templates.js).
     // Pour ajouter une langue : générer son fichier templates_<lang>.json puis l'ajouter ici.
-    const SUPPORTED_LANGS = ['fr', 'en'];
+    const SUPPORTED_LANGS = ['fr', 'en', 'es', 'fr-ca', 'de', 'ja', 'ko', 'it', 'pt', 'zh', 'tr', 'pl', 'ro', 'el'];
     const lang = (url.searchParams.get('lang') || 'fr').toLowerCase();
 
     // id1/id2/name1/name2/dir finissent interpolés tels quels dans un script bash généré :
@@ -44,6 +44,13 @@ export async function onRequest(context) {
         if (!str) return "pose";
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/'/g, " ").toLowerCase().replace(/[^a-z0-9 ]/g, "_").trim();
     };
+    // Pour les langues a alphabet non-latin (ja, ko, zh, el...), le tag natif peut se reduire
+    // a une chaine vide apres nettoyage : on retombe alors sur le tag anglais (slugFallback).
+    const resolveTag = (t) => {
+        const tag = cleanName(t.displayTag);
+        if (tag.replace(/[_ ]/g, "").length > 0) return tag;
+        return cleanName(t.slugFallback) || "pose";
+    };
 
     // --- PARTIE A : GÉNÉRATION DU JSON PRÉCIS ---
     if (type === 'json') {
@@ -54,7 +61,7 @@ export async function onRequest(context) {
         if (targetUser === '1' || targetUser === '2') {
             const currentName = targetUser === '1' ? n1 : n2;
             for (let t of rawData.imoji) {
-                let tag = cleanName(t.displayTag);
+                let tag = resolveTag(t);
                 nameCount[tag] = (nameCount[tag] || 0) + 1;
                 const suf = nameCount[tag] === 1 ? "" : `_${nameCount[tag]}`;
                 const filename = `${currentName}__${tag}${suf}.png`;
@@ -69,10 +76,10 @@ export async function onRequest(context) {
         // Cas 2 : Metadata pour le dossier DUO
         else if (targetUser === 'duo') {
             for (let t of rawData.friends) {
-                let tag = cleanName(t.displayTag);
+                let tag = resolveTag(t);
                 nameCount[tag] = (nameCount[tag] || 0) + 1;
                 const suf = nameCount[tag] === 1 ? "" : `_${nameCount[tag]}`;
-                
+
                 const f1 = `${n1}__${n2}__${tag}${suf}.png`;
                 metadata.push({ fichier: f1, titre: t.displayTag, mots_cles: t.keywords || "", categories: t.categories || [] });
                 const f2 = `${n2}__${n1}__${tag}${suf}.png`;
@@ -97,7 +104,7 @@ export async function onRequest(context) {
         let out = `echo 'Dossier Solo : ${name}'\n`;
         const counts = {};
         for (let t of rawData.imoji) {
-            let tag = cleanName(t.displayTag);
+            let tag = resolveTag(t);
             counts[tag] = (counts[tag] || 0) + 1;
             const suf = counts[tag] === 1 ? "" : `_${counts[tag]}`;
             const imgUrl = t.src.replace('%s', id) + `?transparent=1&palette=1&scale=${scale}`;
@@ -118,7 +125,7 @@ export async function onRequest(context) {
         script += "echo 'Dossier Duo...'\n";
         const countsDuo = {};
         for (let t of rawData.friends) {
-            let tag = cleanName(t.displayTag);
+            let tag = resolveTag(t);
             countsDuo[tag] = (countsDuo[tag] || 0) + 1;
             const suf = countsDuo[tag] === 1 ? "" : `_${countsDuo[tag]}`;
             

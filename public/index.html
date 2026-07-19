@@ -14,16 +14,16 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .animate-mode-switch { animation: fadeInScale 0.4s ease-out forwards; }
-        
+
         @keyframes modalPop {
             from { opacity: 0; transform: scale(0.95) translateY(10px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
         .modal-animate { animation: modalPop 0.2s ease-out forwards; }
-        
+
         .grid-item:hover img { transform: translateY(-8px); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         select { appearance: none; -webkit-appearance: none; }
-        /* Permet de styliser légèrement le bouton pour vider l'input (croix native) */
+        /* Permet de styliser legerement le bouton pour vider l'input (croix native) */
         input[type="text"]::-webkit-search-cancel-button { cursor: pointer; }
     </style>
 </head>
@@ -32,7 +32,7 @@
     <div class="w-full">
         <header class="bg-slate-900 p-6 sm:p-10 rounded-[3rem] border border-slate-800 shadow-2xl mb-10">
             <div class="flex flex-col xl:flex-row justify-between items-center gap-8 xl:gap-10">
-                
+
                 <div class="text-center xl:text-left">
                     <h1 class="text-4xl sm:text-5xl font-black text-yellow-500 italic leading-none tracking-tighter">Avatar Explorer</h1>
                     <p id="stats" class="text-[10px] text-slate-500 uppercase font-black mt-3 tracking-[0.3em] opacity-50 italic">Initialisation...</p>
@@ -46,7 +46,7 @@
                                class="bg-transparent text-slate-600 text-sm font-mono outline-none border-t border-slate-800/50 pt-2">
                     </div>
 
-                    <button onclick="swapIds()" aria-label="Échanger les utilisateurs 1 et 2" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
+                    <button onclick="swapIds()" id="swapBtn" aria-label="Échanger les utilisateurs 1 et 2" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
                         <i data-lucide="arrow-right-left" class="w-6 h-6"></i>
                     </button>
 
@@ -63,7 +63,7 @@
                         <i data-lucide="folder-archive" class="w-7 h-7"></i> GÉNÉRER ZIP
                     </button>
 
-                    <button onclick="openHelp()" title="Centre d'aide" aria-label="Centre d'aide" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
+                    <button onclick="openHelp()" id="helpBtn" title="Centre d'aide" aria-label="Centre d'aide" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
                         <i data-lucide="circle-help" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
                     </button>
                 </div>
@@ -71,17 +71,29 @@
         </header>
 
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-12 items-stretch">
-            
+
             <div class="flex bg-slate-900 rounded-[1.5rem] p-1.5 border border-slate-800 col-span-2 md:col-span-1 shadow-lg h-[60px]">
                 <button onclick="setMode('solo')" id="btn-solo" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">SOLO</button>
                 <button onclick="setMode('duo')" id="btn-duo" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">DUO</button>
             </div>
-            
+
             <div class="relative group h-[60px] col-span-1">
-                <select id="langSelect" onchange="changeLanguage()" 
+                <select id="langSelect" onchange="changeLanguage()"
                         class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
                     <option value="fr">🇫🇷 FR</option>
                     <option value="en">🇬🇧 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="fr-ca">🇨🇦 FR-CA</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="ja">🇯🇵 JA</option>
+                    <option value="ko">🇰🇷 KO</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="pt">🇵🇹 PT</option>
+                    <option value="zh">🇨🇳 ZH</option>
+                    <option value="tr">🇹🇷 TR</option>
+                    <option value="pl">🇵🇱 PL</option>
+                    <option value="ro">🇷🇴 RO</option>
+                    <option value="el">🇬🇷 EL</option>
                 </select>
                 <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 group-hover:text-yellow-500 transition-colors">
                     <i data-lucide="globe" class="w-5 h-5"></i>
@@ -89,7 +101,7 @@
             </div>
 
             <div class="relative group h-[60px] col-span-1">
-                <select id="scaleSelect" onchange="render()" 
+                <select id="scaleSelect" onchange="render()"
                         class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
                     <option value="1" selected>WEB (1x)</option>
                     <option value="2" >HD (2x)</option>
@@ -101,7 +113,7 @@
             </div>
 
             <div class="relative group h-[60px] col-span-2 md:col-span-1 xl:col-span-1">
-                <input type="search" id="categoryInput" list="categoryList" oninput="render()" placeholder="Catégorie..." aria-label="Filtrer par catégorie"
+                <input type="search" id="categoryInput" list="categoryList" oninput="render()" placeholder="Categorie..." aria-label="Filtrer par categorie"
                        class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-text shadow-lg pr-12 text-slate-300 focus:border-yellow-500 placeholder:text-slate-600">
                 <datalist id="categoryList">
                     </datalist>
@@ -124,13 +136,13 @@
 
     <div id="helpLightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-8" onclick="closeHelp()">
         <div class="relative max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-[3rem] p-8 sm:p-12 modal-animate text-left shadow-2xl" onclick="event.stopPropagation()">
-            
-            <button onclick="closeHelp()" aria-label="Fermer le centre d'aide" class="absolute top-8 right-8 text-slate-500 hover:text-white transition-all hover:rotate-90">
+
+            <button onclick="closeHelp()" id="helpCloseBtn" aria-label="Fermer le centre d'aide" class="absolute top-8 right-8 text-slate-500 hover:text-white transition-all hover:rotate-90">
                 <i data-lucide="x" class="w-8 h-8"></i>
             </button>
-            
+
             <h2 class="text-3xl sm:text-4xl font-black text-yellow-500 italic tracking-tighter mb-8 flex items-center gap-4">
-                <i data-lucide="book-open" class="w-8 h-8"></i> CENTRE D'AIDE
+                <i data-lucide="book-open" class="w-8 h-8"></i> <span id="helpTitleText">CENTRE D'AIDE</span>
             </h2>
 
             <div id="helpContent" class="text-slate-300 space-y-6">
@@ -143,18 +155,18 @@
 
     <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-8" onclick="closeLightbox()">
         <div class="relative max-w-2xl w-full modal-animate flex flex-col items-center text-center" onclick="event.stopPropagation()">
-            
-            <button onclick="closeLightbox()" aria-label="Fermer l'aperçu" class="absolute -top-16 right-0 text-slate-500 hover:text-white transition-all hover:rotate-90">
+
+            <button onclick="closeLightbox()" id="lightboxCloseBtn" aria-label="Fermer l'aperçu" class="absolute -top-16 right-0 text-slate-500 hover:text-white transition-all hover:rotate-90">
                 <i data-lucide="x" class="w-12 h-12"></i>
             </button>
-            
+
             <div class="bg-gradient-to-b from-slate-900/50 to-transparent p-10 rounded-full mb-10 border border-slate-800/50">
                 <img id="lightbox-img" src="" alt="" class="max-h-[50vh] sm:max-h-[55vh] drop-shadow-[0_0_50px_rgba(234,179,8,0.25)] object-contain">
             </div>
 
             <h3 id="lightbox-title" class="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-yellow-500">Nom de la Pose</h3>
             <p id="lightbox-res" class="text-slate-600 text-[10px] mt-3 uppercase font-black tracking-[0.4em]">PNG Transparent</p>
-            
+
             <div class="mt-12 w-full flex flex-col sm:flex-row justify-center gap-4">
                 <button id="copyBtn" class="bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
                     <i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform"></i> COPIER L'IMAGE
@@ -170,17 +182,310 @@
         let rawData = { categories: [], imoji: [], friends: [] };
         let currentMode = 'solo';
         let currentRenderItems = [];
+        let currentLang = 'fr';
+
+        const FLAGS = { fr:'🇫🇷', en:'🇬🇧', es:'🇪🇸', 'fr-ca':'🇨🇦', de:'🇩🇪', ja:'🇯🇵', ko:'🇰🇷', it:'🇮🇹', pt:'🇵🇹', zh:'🇨🇳', tr:'🇹🇷', pl:'🇵🇱', ro:'🇷🇴', el:'🇬🇷' };
+
+        const I18N = {
+            fr: {
+                statsInit: "Initialisation...",
+                name1Placeholder: "Utilisateur 1", name1Aria: "Nom de l'utilisateur 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji de l'utilisateur 1",
+                swapAria: "Échanger les utilisateurs 1 et 2",
+                name2Placeholder: "Utilisateur 2", name2Aria: "Nom de l'utilisateur 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji de l'utilisateur 2",
+                zipBtn: "GÉNÉRER ZIP", helpAria: "Centre d'aide",
+                modeSolo: "SOLO", modeDuo: "DUO",
+                categoryPlaceholder: "Catégorie...", categoryAria: "Filtrer par catégorie",
+                searchPlaceholder: "Rechercher (ex: sourire, amour)...", searchAria: "Rechercher une pose",
+                helpCloseAria: "Fermer le centre d'aide", helpTitle: "CENTRE D'AIDE", helpLoading: "Chargement des données...",
+                lightboxCloseAria: "Fermer l'aperçu", lightboxDefaultTitle: "Nom de la Pose", lightboxDefaultRes: "PNG Transparent",
+                copyBtnText: "COPIER L'IMAGE", saveBtnText: "ENREGISTRER PNG",
+                statsSuffix: "POSES RÉPERTORIÉES", statsError: "ERREUR CATALOGUE (Fichiers introuvables)",
+                catalogLabel: "CATALOGUE", helpGuideTitle: "Mode d'emploi", helpLastUpdate: "Dernière mise à jour :",
+                helpErrorTitle: "Impossible de charger le fichier", helpErrorSubtitle: "Assurez-vous d'avoir créé le fichier à la racine de votre dossier.",
+                downloadError: "Erreur de téléchargement.", copyInProgress: "COPIE...", copiedSuccess: "COPIÉ !", copyError: "ERREUR",
+                lightboxResFormat: "FORMAT PNG • RÉSOLUTION", zipMissingIds: "Veuillez renseigner les IDs Bitmoji.", zipCompressing: "COMPRESSION..."
+            },
+            en: {
+                statsInit: "Initializing...",
+                name1Placeholder: "User 1", name1Aria: "User 1 name",
+                id1Placeholder: "Bitmoji ID 1", id1Aria: "User 1's Bitmoji ID",
+                swapAria: "Swap users 1 and 2",
+                name2Placeholder: "User 2", name2Aria: "User 2 name",
+                id2Placeholder: "Bitmoji ID 2", id2Aria: "User 2's Bitmoji ID",
+                zipBtn: "GENERATE ZIP", helpAria: "Help center",
+                modeSolo: "SOLO", modeDuo: "DUO",
+                categoryPlaceholder: "Category...", categoryAria: "Filter by category",
+                searchPlaceholder: "Search (e.g. smile, love)...", searchAria: "Search a pose",
+                helpCloseAria: "Close help center", helpTitle: "HELP CENTER", helpLoading: "Loading data...",
+                lightboxCloseAria: "Close preview", lightboxDefaultTitle: "Pose Name", lightboxDefaultRes: "Transparent PNG",
+                copyBtnText: "COPY IMAGE", saveBtnText: "SAVE PNG",
+                statsSuffix: "POSES LISTED", statsError: "CATALOG ERROR (Files not found)",
+                catalogLabel: "CATALOG", helpGuideTitle: "User guide", helpLastUpdate: "Last update:",
+                helpErrorTitle: "Unable to load the file", helpErrorSubtitle: "Make sure the file was created at the root of your folder.",
+                downloadError: "Download error.", copyInProgress: "COPYING...", copiedSuccess: "COPIED!", copyError: "ERROR",
+                lightboxResFormat: "PNG FORMAT • RESOLUTION", zipMissingIds: "Please enter the Bitmoji IDs.", zipCompressing: "COMPRESSING..."
+            },
+            es: {
+                statsInit: "Inicializando...",
+                name1Placeholder: "Usuario 1", name1Aria: "Nombre del usuario 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji del usuario 1",
+                swapAria: "Intercambiar usuarios 1 y 2",
+                name2Placeholder: "Usuario 2", name2Aria: "Nombre del usuario 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji del usuario 2",
+                zipBtn: "GENERAR ZIP", helpAria: "Centro de ayuda",
+                modeSolo: "SOLO", modeDuo: "DÚO",
+                categoryPlaceholder: "Categoría...", categoryAria: "Filtrar por categoría",
+                searchPlaceholder: "Buscar (ej: sonrisa, amor)...", searchAria: "Buscar una pose",
+                helpCloseAria: "Cerrar el centro de ayuda", helpTitle: "CENTRO DE AYUDA", helpLoading: "Cargando datos...",
+                lightboxCloseAria: "Cerrar vista previa", lightboxDefaultTitle: "Nombre de la Pose", lightboxDefaultRes: "PNG Transparente",
+                copyBtnText: "COPIAR IMAGEN", saveBtnText: "GUARDAR PNG",
+                statsSuffix: "POSES CATALOGADAS", statsError: "ERROR DE CATÁLOGO (Archivos no encontrados)",
+                catalogLabel: "CATÁLOGO", helpGuideTitle: "Modo de empleo", helpLastUpdate: "Última actualización:",
+                helpErrorTitle: "No se pudo cargar el archivo", helpErrorSubtitle: "Asegúrate de haber creado el archivo en la raíz de tu carpeta.",
+                downloadError: "Error de descarga.", copyInProgress: "COPIANDO...", copiedSuccess: "¡COPIADO!", copyError: "ERROR",
+                lightboxResFormat: "FORMATO PNG • RESOLUCIÓN", zipMissingIds: "Por favor, introduce los IDs de Bitmoji.", zipCompressing: "COMPRIMIENDO..."
+            },
+            'fr-ca': {
+                statsInit: "Initialisation...",
+                name1Placeholder: "Utilisateur 1", name1Aria: "Nom de l'utilisateur 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji de l'utilisateur 1",
+                swapAria: "Échanger les utilisateurs 1 et 2",
+                name2Placeholder: "Utilisateur 2", name2Aria: "Nom de l'utilisateur 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji de l'utilisateur 2",
+                zipBtn: "GÉNÉRER ZIP", helpAria: "Centre d'aide",
+                modeSolo: "SOLO", modeDuo: "DUO",
+                categoryPlaceholder: "Catégorie...", categoryAria: "Filtrer par catégorie",
+                searchPlaceholder: "Rechercher (ex: sourire, amour)...", searchAria: "Rechercher une pose",
+                helpCloseAria: "Fermer le centre d'aide", helpTitle: "CENTRE D'AIDE", helpLoading: "Chargement des données...",
+                lightboxCloseAria: "Fermer l'aperçu", lightboxDefaultTitle: "Nom de la Pose", lightboxDefaultRes: "PNG Transparent",
+                copyBtnText: "COPIER L'IMAGE", saveBtnText: "ENREGISTRER PNG",
+                statsSuffix: "POSES RÉPERTORIÉES", statsError: "ERREUR CATALOGUE (Fichiers introuvables)",
+                catalogLabel: "CATALOGUE", helpGuideTitle: "Mode d'emploi", helpLastUpdate: "Dernière mise à jour :",
+                helpErrorTitle: "Impossible de charger le fichier", helpErrorSubtitle: "Assurez-vous d'avoir créé le fichier à la racine de votre dossier.",
+                downloadError: "Erreur de téléchargement.", copyInProgress: "COPIE...", copiedSuccess: "COPIÉ !", copyError: "ERREUR",
+                lightboxResFormat: "FORMAT PNG • RÉSOLUTION", zipMissingIds: "Veuillez renseigner les IDs Bitmoji.", zipCompressing: "COMPRESSION..."
+            },
+            de: {
+                statsInit: "Initialisierung...",
+                name1Placeholder: "Benutzer 1", name1Aria: "Name von Benutzer 1",
+                id1Placeholder: "Bitmoji-ID 1", id1Aria: "Bitmoji-ID von Benutzer 1",
+                swapAria: "Benutzer 1 und 2 tauschen",
+                name2Placeholder: "Benutzer 2", name2Aria: "Name von Benutzer 2",
+                id2Placeholder: "Bitmoji-ID 2", id2Aria: "Bitmoji-ID von Benutzer 2",
+                zipBtn: "ZIP ERSTELLEN", helpAria: "Hilfecenter",
+                modeSolo: "SOLO", modeDuo: "DUO",
+                categoryPlaceholder: "Kategorie...", categoryAria: "Nach Kategorie filtern",
+                searchPlaceholder: "Suchen (z. B. Lächeln, Liebe)...", searchAria: "Eine Pose suchen",
+                helpCloseAria: "Hilfecenter schließen", helpTitle: "HILFECENTER", helpLoading: "Daten werden geladen...",
+                lightboxCloseAria: "Vorschau schließen", lightboxDefaultTitle: "Name der Pose", lightboxDefaultRes: "Transparentes PNG",
+                copyBtnText: "BILD KOPIEREN", saveBtnText: "PNG SPEICHERN",
+                statsSuffix: "POSEN GELISTET", statsError: "KATALOGFEHLER (Dateien nicht gefunden)",
+                catalogLabel: "KATALOG", helpGuideTitle: "Bedienungsanleitung", helpLastUpdate: "Letzte Aktualisierung:",
+                helpErrorTitle: "Datei konnte nicht geladen werden", helpErrorSubtitle: "Stellen Sie sicher, dass die Datei im Stammverzeichnis Ihres Ordners erstellt wurde.",
+                downloadError: "Download-Fehler.", copyInProgress: "KOPIEREN...", copiedSuccess: "KOPIERT!", copyError: "FEHLER",
+                lightboxResFormat: "PNG-FORMAT • AUFLÖSUNG", zipMissingIds: "Bitte geben Sie die Bitmoji-IDs ein.", zipCompressing: "KOMPRIMIEREN..."
+            },
+            ja: {
+                statsInit: "初期化中...",
+                name1Placeholder: "ユーザー1", name1Aria: "ユーザー1の名前",
+                id1Placeholder: "Bitmoji ID 1", id1Aria: "ユーザー1のBitmoji ID",
+                swapAria: "ユーザー1と2を入れ替える",
+                name2Placeholder: "ユーザー2", name2Aria: "ユーザー2の名前",
+                id2Placeholder: "Bitmoji ID 2", id2Aria: "ユーザー2のBitmoji ID",
+                zipBtn: "ZIPを生成", helpAria: "ヘルプセンター",
+                modeSolo: "ソロ", modeDuo: "デュオ",
+                categoryPlaceholder: "カテゴリー...", categoryAria: "カテゴリーで絞り込む",
+                searchPlaceholder: "検索（例：笑顔、愛）...", searchAria: "ポーズを検索",
+                helpCloseAria: "ヘルプセンターを閉じる", helpTitle: "ヘルプセンター", helpLoading: "データを読み込み中...",
+                lightboxCloseAria: "プレビューを閉じる", lightboxDefaultTitle: "ポーズ名", lightboxDefaultRes: "透過PNG",
+                copyBtnText: "画像をコピー", saveBtnText: "PNGを保存",
+                statsSuffix: "ポーズ登録済み", statsError: "カタログエラー（ファイルが見つかりません）",
+                catalogLabel: "カタログ", helpGuideTitle: "使い方", helpLastUpdate: "最終更新日：",
+                helpErrorTitle: "ファイルを読み込めませんでした", helpErrorSubtitle: "フォルダーのルートにファイルが作成されていることを確認してください。",
+                downloadError: "ダウンロードエラー。", copyInProgress: "コピー中...", copiedSuccess: "コピーしました！", copyError: "エラー",
+                lightboxResFormat: "PNG形式 • 解像度", zipMissingIds: "Bitmoji IDを入力してください。", zipCompressing: "圧縮中..."
+            },
+            ko: {
+                statsInit: "초기화 중...",
+                name1Placeholder: "사용자 1", name1Aria: "사용자 1 이름",
+                id1Placeholder: "Bitmoji ID 1", id1Aria: "사용자 1의 Bitmoji ID",
+                swapAria: "사용자 1과 2 바꾸기",
+                name2Placeholder: "사용자 2", name2Aria: "사용자 2 이름",
+                id2Placeholder: "Bitmoji ID 2", id2Aria: "사용자 2의 Bitmoji ID",
+                zipBtn: "ZIP 생성", helpAria: "고객 센터",
+                modeSolo: "솔로", modeDuo: "듀오",
+                categoryPlaceholder: "카테고리...", categoryAria: "카테고리로 필터링",
+                searchPlaceholder: "검색 (예: 미소, 사랑)...", searchAria: "포즈 검색",
+                helpCloseAria: "고객 센터 닫기", helpTitle: "고객 센터", helpLoading: "데이터 로딩 중...",
+                lightboxCloseAria: "미리보기 닫기", lightboxDefaultTitle: "포즈 이름", lightboxDefaultRes: "투명 PNG",
+                copyBtnText: "이미지 복사", saveBtnText: "PNG 저장",
+                statsSuffix: "개의 포즈 등록됨", statsError: "카탈로그 오류 (파일을 찾을 수 없음)",
+                catalogLabel: "카탈로그", helpGuideTitle: "사용 방법", helpLastUpdate: "마지막 업데이트:",
+                helpErrorTitle: "파일을 불러올 수 없습니다", helpErrorSubtitle: "폴더 루트에 파일이 생성되었는지 확인하세요.",
+                downloadError: "다운로드 오류.", copyInProgress: "복사 중...", copiedSuccess: "복사됨!", copyError: "오류",
+                lightboxResFormat: "PNG 형식 • 해상도", zipMissingIds: "Bitmoji ID를 입력해 주세요.", zipCompressing: "압축 중..."
+            },
+            it: {
+                statsInit: "Inizializzazione...",
+                name1Placeholder: "Utente 1", name1Aria: "Nome dell'utente 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji dell'utente 1",
+                swapAria: "Scambia utente 1 e 2",
+                name2Placeholder: "Utente 2", name2Aria: "Nome dell'utente 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji dell'utente 2",
+                zipBtn: "GENERA ZIP", helpAria: "Centro assistenza",
+                modeSolo: "SOLO", modeDuo: "DUO",
+                categoryPlaceholder: "Categoria...", categoryAria: "Filtra per categoria",
+                searchPlaceholder: "Cerca (es: sorriso, amore)...", searchAria: "Cerca una posa",
+                helpCloseAria: "Chiudi il centro assistenza", helpTitle: "CENTRO ASSISTENZA", helpLoading: "Caricamento dati...",
+                lightboxCloseAria: "Chiudi anteprima", lightboxDefaultTitle: "Nome della Posa", lightboxDefaultRes: "PNG Trasparente",
+                copyBtnText: "COPIA IMMAGINE", saveBtnText: "SALVA PNG",
+                statsSuffix: "POSE CATALOGATE", statsError: "ERRORE CATALOGO (File non trovati)",
+                catalogLabel: "CATALOGO", helpGuideTitle: "Istruzioni per l'uso", helpLastUpdate: "Ultimo aggiornamento:",
+                helpErrorTitle: "Impossibile caricare il file", helpErrorSubtitle: "Assicurati di aver creato il file nella radice della tua cartella.",
+                downloadError: "Errore di download.", copyInProgress: "COPIA IN CORSO...", copiedSuccess: "COPIATO!", copyError: "ERRORE",
+                lightboxResFormat: "FORMATO PNG • RISOLUZIONE", zipMissingIds: "Inserisci gli ID Bitmoji.", zipCompressing: "COMPRESSIONE..."
+            },
+            pt: {
+                statsInit: "Inicializando...",
+                name1Placeholder: "Usuário 1", name1Aria: "Nome do usuário 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji do usuário 1",
+                swapAria: "Trocar usuários 1 e 2",
+                name2Placeholder: "Usuário 2", name2Aria: "Nome do usuário 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji do usuário 2",
+                zipBtn: "GERAR ZIP", helpAria: "Central de ajuda",
+                modeSolo: "SOLO", modeDuo: "DUPLA",
+                categoryPlaceholder: "Categoria...", categoryAria: "Filtrar por categoria",
+                searchPlaceholder: "Pesquisar (ex: sorriso, amor)...", searchAria: "Pesquisar uma pose",
+                helpCloseAria: "Fechar a central de ajuda", helpTitle: "CENTRAL DE AJUDA", helpLoading: "Carregando dados...",
+                lightboxCloseAria: "Fechar pré-visualização", lightboxDefaultTitle: "Nome da Pose", lightboxDefaultRes: "PNG Transparente",
+                copyBtnText: "COPIAR IMAGEM", saveBtnText: "SALVAR PNG",
+                statsSuffix: "POSES CATALOGADAS", statsError: "ERRO NO CATÁLOGO (Arquivos não encontrados)",
+                catalogLabel: "CATÁLOGO", helpGuideTitle: "Modo de uso", helpLastUpdate: "Última atualização:",
+                helpErrorTitle: "Não foi possível carregar o arquivo", helpErrorSubtitle: "Certifique-se de ter criado o arquivo na raiz da sua pasta.",
+                downloadError: "Erro de download.", copyInProgress: "COPIANDO...", copiedSuccess: "COPIADO!", copyError: "ERRO",
+                lightboxResFormat: "FORMATO PNG • RESOLUÇÃO", zipMissingIds: "Por favor, informe os IDs do Bitmoji.", zipCompressing: "COMPACTANDO..."
+            },
+            zh: {
+                statsInit: "初始化中...",
+                name1Placeholder: "用户1", name1Aria: "用户1的名称",
+                id1Placeholder: "Bitmoji ID 1", id1Aria: "用户1的Bitmoji ID",
+                swapAria: "交换用户1和用户2",
+                name2Placeholder: "用户2", name2Aria: "用户2的名称",
+                id2Placeholder: "Bitmoji ID 2", id2Aria: "用户2的Bitmoji ID",
+                zipBtn: "生成ZIP", helpAria: "帮助中心",
+                modeSolo: "单人", modeDuo: "双人",
+                categoryPlaceholder: "分类...", categoryAria: "按分类筛选",
+                searchPlaceholder: "搜索（例如：微笑、爱）...", searchAria: "搜索姿势",
+                helpCloseAria: "关闭帮助中心", helpTitle: "帮助中心", helpLoading: "正在加载数据...",
+                lightboxCloseAria: "关闭预览", lightboxDefaultTitle: "姿势名称", lightboxDefaultRes: "透明PNG",
+                copyBtnText: "复制图片", saveBtnText: "保存PNG",
+                statsSuffix: "个姿势已收录", statsError: "目录错误（找不到文件）",
+                catalogLabel: "目录", helpGuideTitle: "使用说明", helpLastUpdate: "最后更新：",
+                helpErrorTitle: "无法加载文件", helpErrorSubtitle: "请确保已在文件夹根目录创建该文件。",
+                downloadError: "下载错误。", copyInProgress: "复制中...", copiedSuccess: "已复制！", copyError: "错误",
+                lightboxResFormat: "PNG格式 • 分辨率", zipMissingIds: "请填写Bitmoji ID。", zipCompressing: "压缩中..."
+            },
+            tr: {
+                statsInit: "Başlatılıyor...",
+                name1Placeholder: "Kullanıcı 1", name1Aria: "Kullanıcı 1 adı",
+                id1Placeholder: "Bitmoji ID 1", id1Aria: "Kullanıcı 1 Bitmoji ID",
+                swapAria: "Kullanıcı 1 ve 2'yi değiştir",
+                name2Placeholder: "Kullanıcı 2", name2Aria: "Kullanıcı 2 adı",
+                id2Placeholder: "Bitmoji ID 2", id2Aria: "Kullanıcı 2 Bitmoji ID",
+                zipBtn: "ZIP OLUŞTUR", helpAria: "Yardım merkezi",
+                modeSolo: "SOLO", modeDuo: "DUET",
+                categoryPlaceholder: "Kategori...", categoryAria: "Kategoriye göre filtrele",
+                searchPlaceholder: "Ara (örn: gülümseme, aşk)...", searchAria: "Bir poz ara",
+                helpCloseAria: "Yardım merkezini kapat", helpTitle: "YARDIM MERKEZİ", helpLoading: "Veriler yükleniyor...",
+                lightboxCloseAria: "Önizlemeyi kapat", lightboxDefaultTitle: "Poz Adı", lightboxDefaultRes: "Şeffaf PNG",
+                copyBtnText: "GÖRSELİ KOPYALA", saveBtnText: "PNG KAYDET",
+                statsSuffix: "POZ LİSTELENDİ", statsError: "KATALOG HATASI (Dosyalar bulunamadı)",
+                catalogLabel: "KATALOG", helpGuideTitle: "Kullanım kılavuzu", helpLastUpdate: "Son güncelleme:",
+                helpErrorTitle: "Dosya yüklenemedi", helpErrorSubtitle: "Dosyanın klasörünüzün kök dizininde oluşturulduğundan emin olun.",
+                downloadError: "İndirme hatası.", copyInProgress: "KOPYALANIYOR...", copiedSuccess: "KOPYALANDI!", copyError: "HATA",
+                lightboxResFormat: "PNG FORMATI • ÇÖZÜNÜRLÜK", zipMissingIds: "Lütfen Bitmoji ID'lerini girin.", zipCompressing: "SIKIŞTIRILIYOR..."
+            },
+            pl: {
+                statsInit: "Inicjalizacja...",
+                name1Placeholder: "Użytkownik 1", name1Aria: "Nazwa użytkownika 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji użytkownika 1",
+                swapAria: "Zamień użytkowników 1 i 2",
+                name2Placeholder: "Użytkownik 2", name2Aria: "Nazwa użytkownika 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji użytkownika 2",
+                zipBtn: "GENERUJ ZIP", helpAria: "Centrum pomocy",
+                modeSolo: "SOLO", modeDuo: "DUET",
+                categoryPlaceholder: "Kategoria...", categoryAria: "Filtruj według kategorii",
+                searchPlaceholder: "Szukaj (np. uśmiech, miłość)...", searchAria: "Szukaj pozy",
+                helpCloseAria: "Zamknij centrum pomocy", helpTitle: "CENTRUM POMOCY", helpLoading: "Ładowanie danych...",
+                lightboxCloseAria: "Zamknij podgląd", lightboxDefaultTitle: "Nazwa Pozy", lightboxDefaultRes: "Przezroczysty PNG",
+                copyBtnText: "KOPIUJ OBRAZ", saveBtnText: "ZAPISZ PNG",
+                statsSuffix: "POZ W KATALOGU", statsError: "BŁĄD KATALOGU (Nie znaleziono plików)",
+                catalogLabel: "KATALOG", helpGuideTitle: "Instrukcja obsługi", helpLastUpdate: "Ostatnia aktualizacja:",
+                helpErrorTitle: "Nie można wczytać pliku", helpErrorSubtitle: "Upewnij się, że plik został utworzony w katalogu głównym folderu.",
+                downloadError: "Błąd pobierania.", copyInProgress: "KOPIOWANIE...", copiedSuccess: "SKOPIOWANO!", copyError: "BŁĄD",
+                lightboxResFormat: "FORMAT PNG • ROZDZIELCZOŚĆ", zipMissingIds: "Proszę podać identyfikatory Bitmoji.", zipCompressing: "KOMPRESOWANIE..."
+            },
+            ro: {
+                statsInit: "Se inițializează...",
+                name1Placeholder: "Utilizator 1", name1Aria: "Numele utilizatorului 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji al utilizatorului 1",
+                swapAria: "Schimbă utilizatorii 1 și 2",
+                name2Placeholder: "Utilizator 2", name2Aria: "Numele utilizatorului 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji al utilizatorului 2",
+                zipBtn: "GENEREAZĂ ZIP", helpAria: "Centru de asistență",
+                modeSolo: "SOLO", modeDuo: "DUO",
+                categoryPlaceholder: "Categorie...", categoryAria: "Filtrează după categorie",
+                searchPlaceholder: "Caută (ex: zâmbet, dragoste)...", searchAria: "Caută o poză",
+                helpCloseAria: "Închide centrul de asistență", helpTitle: "CENTRU DE ASISTENȚĂ", helpLoading: "Se încarcă datele...",
+                lightboxCloseAria: "Închide previzualizarea", lightboxDefaultTitle: "Numele Pozei", lightboxDefaultRes: "PNG Transparent",
+                copyBtnText: "COPIAZĂ IMAGINEA", saveBtnText: "SALVEAZĂ PNG",
+                statsSuffix: "POZE CATALOGATE", statsError: "EROARE CATALOG (Fișiere negăsite)",
+                catalogLabel: "CATALOG", helpGuideTitle: "Mod de utilizare", helpLastUpdate: "Ultima actualizare:",
+                helpErrorTitle: "Nu s-a putut încărca fișierul", helpErrorSubtitle: "Asigură-te că ai creat fișierul în rădăcina folderului tău.",
+                downloadError: "Eroare de descarcare.", copyInProgress: "SE COPIAZĂ...", copiedSuccess: "COPIAT!", copyError: "EROARE",
+                lightboxResFormat: "FORMAT PNG • REZOLUȚIE", zipMissingIds: "Te rugăm să introduci ID-urile Bitmoji.", zipCompressing: "SE COMPRIMĂ..."
+            },
+            el: {
+                statsInit: "Αρχικοποίηση...",
+                name1Placeholder: "Χρήστης 1", name1Aria: "Όνομα χρήστη 1",
+                id1Placeholder: "ID Bitmoji 1", id1Aria: "ID Bitmoji του χρήστη 1",
+                swapAria: "Εναλλαγή χρηστών 1 και 2",
+                name2Placeholder: "Χρήστης 2", name2Aria: "Όνομα χρήστη 2",
+                id2Placeholder: "ID Bitmoji 2", id2Aria: "ID Bitmoji του χρήστη 2",
+                zipBtn: "ΔΗΜΙΟΥΡΓΙΑ ZIP", helpAria: "Κέντρο βοήθειας",
+                modeSolo: "ΣΟΛΟ", modeDuo: "ΝΤΟΥΕΤΟ",
+                categoryPlaceholder: "Κατηγορία...", categoryAria: "Φιλτράρισμα κατά κατηγορία",
+                searchPlaceholder: "Αναζήτηση (π.χ. χαμόγελο, αγάπη)...", searchAria: "Αναζήτηση πόζας",
+                helpCloseAria: "Κλείσιμο κέντρου βοήθειας", helpTitle: "ΚΕΝΤΡΟ ΒΟΗΘΕΙΑΣ", helpLoading: "Φόρτωση δεδομένων...",
+                lightboxCloseAria: "Κλείσιμο προεπισκόπησης", lightboxDefaultTitle: "Όνομα Πόζας", lightboxDefaultRes: "Διαφανές PNG",
+                copyBtnText: "ΑΝΤΙΓΡΑΦΗ ΕΙΚΟΝΑΣ", saveBtnText: "ΑΠΟΘΗΚΕΥΣΗ PNG",
+                statsSuffix: "ΠΟΖΕΣ ΚΑΤΑΓΕΓΡΑΜΜΕΝΕΣ", statsError: "ΣΦΑΛΜΑ ΚΑΤΑΛΟΓΟΥ (Δεν βρέθηκαν αρχεία)",
+                catalogLabel: "ΚΑΤΑΛΟΓΟΣ", helpGuideTitle: "Οδηγίες χρήσης", helpLastUpdate: "Τελευταία ενημέρωση:",
+                helpErrorTitle: "Δεν ήταν δυνατή η φόρτωση του αρχείου", helpErrorSubtitle: "Βεβαιωθείτε ότι το αρχείο έχει δημιουργηθεί στη ρίζα του φακέλου σας.",
+                downloadError: "Σφάλμα λήψης.", copyInProgress: "ΓΙΝΕΤΑΙ ΑΝΤΙΓΡΑΦΗ...", copiedSuccess: "ΑΝΤΙΓΡΑΦΗΚΕ!", copyError: "ΣΦΑΛΜΑ",
+                lightboxResFormat: "ΜΟΡΦΗ PNG • ΑΝΑΛΥΣΗ", zipMissingIds: "Παρακαλώ εισαγάγετε τα ID Bitmoji.", zipCompressing: "ΓΙΝΕΤΑΙ ΣΥΜΠΙΕΣΗ..."
+            }
+        };
 
         // Fonction pour nettoyer le nom des images proprement
         function formatPoseName(str) {
             if (!str) return "pose";
             return str
-                .normalize("NFD") // Sépare les lettres de leurs accents
-                .replace(/[\u0300-\u036f]/g, "") // Supprime les accents (é -> e)
+                .normalize("NFD") // Separe les lettres de leurs accents
+                .replace(/[\u0300-\u036f]/g, "") // Supprime les accents (e -> e)
                 .replace(/'/g, " ") // Remplace les apostrophes par un espace
                 .toLowerCase() // Met tout en minuscules
                 .replace(/[^a-z0-9 ]/g, "_") // Remplace tout le reste (symboles bizarres) par des _
-                .trim(); // Enlève les espaces en trop au début et à la fin
+                .trim(); // Enleve les espaces en trop au debut et a la fin
+        }
+        // Pour les langues a alphabet non-latin (ja, ko, zh, el...), le tag natif peut se reduire
+        // a une chaine vide apres nettoyage : on retombe alors sur le tag anglais (slugFallback).
+        function resolveTag(title, slugFallback) {
+            const tag = formatPoseName(title);
+            if (tag.replace(/[_ ]/g, "").length > 0) return tag;
+            return formatPoseName(slugFallback) || "pose";
         }
         function normalizeStr(str) {
             if (!str) return "";
@@ -199,6 +504,60 @@
                 .replace(/'/g, '&#39;');
         }
 
+        function renderZipBtnIdle() {
+            document.getElementById('zipBtn').innerHTML = `<i data-lucide="folder-archive" class="w-7 h-7"></i> ${I18N[currentLang].zipBtn}`;
+        }
+        function renderCopyBtnIdle() {
+            const btn = document.getElementById('copyBtn');
+            btn.innerHTML = `<i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform"></i> ${I18N[currentLang].copyBtnText}`;
+            btn.className = "bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group";
+        }
+        function renderSaveBtnIdle() {
+            document.getElementById('singleDlBtn').innerHTML = `<i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i> ${I18N[currentLang].saveBtnText}`;
+        }
+
+        function applyTranslations(lang) {
+            const t = I18N[lang] || I18N.en;
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            document.getElementById('stats').innerText = t.statsInit;
+
+            document.getElementById('name1').placeholder = t.name1Placeholder;
+            document.getElementById('name1').setAttribute('aria-label', t.name1Aria);
+            document.getElementById('id1').placeholder = t.id1Placeholder;
+            document.getElementById('id1').setAttribute('aria-label', t.id1Aria);
+            document.getElementById('swapBtn').setAttribute('aria-label', t.swapAria);
+            document.getElementById('name2').placeholder = t.name2Placeholder;
+            document.getElementById('name2').setAttribute('aria-label', t.name2Aria);
+            document.getElementById('id2').placeholder = t.id2Placeholder;
+            document.getElementById('id2').setAttribute('aria-label', t.id2Aria);
+
+            document.getElementById('helpBtn').setAttribute('title', t.helpAria);
+            document.getElementById('helpBtn').setAttribute('aria-label', t.helpAria);
+
+            document.getElementById('btn-solo').innerText = t.modeSolo;
+            document.getElementById('btn-duo').innerText = t.modeDuo;
+
+            document.getElementById('categoryInput').placeholder = t.categoryPlaceholder;
+            document.getElementById('categoryInput').setAttribute('aria-label', t.categoryAria);
+            document.getElementById('search').placeholder = t.searchPlaceholder;
+            document.getElementById('search').setAttribute('aria-label', t.searchAria);
+
+            document.getElementById('helpCloseBtn').setAttribute('aria-label', t.helpCloseAria);
+            document.getElementById('helpTitleText').innerText = t.helpTitle;
+
+            document.getElementById('lightboxCloseBtn').setAttribute('aria-label', t.lightboxCloseAria);
+            document.getElementById('lightbox-title').innerText = t.lightboxDefaultTitle;
+            document.getElementById('lightbox-res').innerText = t.lightboxDefaultRes;
+
+            renderZipBtnIdle();
+            renderCopyBtnIdle();
+            renderSaveBtnIdle();
+
+            lucide.createIcons();
+        }
+
         window.onload = async () => {
             document.getElementById('id1').value = localStorage.getItem('bt_id1') || "";
             document.getElementById('id2').value = localStorage.getItem('bt_id2') || "";
@@ -208,19 +567,21 @@
             const savedLang = localStorage.getItem('bt_lang') || 'fr';
             document.getElementById('langSelect').value = savedLang;
 
+            applyTranslations(savedLang);
             lucide.createIcons();
 
             await loadData(savedLang);
         };
 
         async function loadData(lang) {
+            const t = I18N[lang] || I18N.en;
             try {
                 const response = await fetch(`./templates_${lang}.json`);
                 const json = await response.json();
                 rawData = json;
-                
-                document.getElementById('stats').innerText = `${rawData.imoji.length + rawData.friends.length} POSES RÉPERTORIÉES`;
-                
+
+                document.getElementById('stats').innerText = `${rawData.imoji.length + rawData.friends.length} ${t.statsSuffix}`;
+
                 const categoriesMap = new Map();
                 const allItems = [...rawData.imoji, ...rawData.friends];
                 allItems.forEach(item => {
@@ -237,17 +598,17 @@
                 // Remplissage de la datalist
                 const catList = document.getElementById('categoryList');
                 catList.innerHTML = ''; // On vide l'ancienne liste
-                
+
                 const sortedKeys = Array.from(categoriesMap.keys()).sort();
                 sortedKeys.forEach(normCat => {
                     const originalName = categoriesMap.get(normCat);
                     // On injecte les options dans la datalist
                     catList.innerHTML += `<option value="${originalName.toUpperCase()}"></option>`;
                 });
-                
+
                 setMode(currentMode);
-            } catch (err) { 
-                document.getElementById('stats').innerText = "ERREUR CATALOGUE (Fichiers introuvables)"; 
+            } catch (err) {
+                document.getElementById('stats').innerText = t.statsError;
                 console.error(err);
             }
         }
@@ -256,44 +617,41 @@
         async function openHelp() {
             document.getElementById('helpLightbox').classList.remove('hidden');
             const helpContent = document.getElementById('helpContent');
-            
+            const t = I18N[currentLang] || I18N.en;
+
             try {
                 const res = await fetch('./aide.json');
                 const aideDonnees = await res.json();
-                
+                const stats = aideDonnees.stats[currentLang] || aideDonnees.stats.en;
+                const guide = (aideDonnees.guide && (aideDonnees.guide[currentLang] || aideDonnees.guide.en)) || "";
+                const flag = FLAGS[currentLang] || '';
+
                 // Formater l'affichage avec le JSON
                 helpContent.innerHTML = `
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                        <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800">
-                            <h4 class="text-xs font-black tracking-widest text-slate-500 mb-2">CATALOGUE FR 🇫🇷</h4>
-                            <p class="text-2xl font-black text-slate-200">${aideDonnees.stats.fr.solo} <span class="text-sm font-normal text-slate-500">SOLO</span></p>
-                            <p class="text-2xl font-black text-slate-200">${aideDonnees.stats.fr.duo} <span class="text-sm font-normal text-slate-500">DUO</span></p>
-                        </div>
-                        <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800">
-                            <h4 class="text-xs font-black tracking-widest text-slate-500 mb-2">CATALOGUE EN 🇬🇧</h4>
-                            <p class="text-2xl font-black text-slate-200">${aideDonnees.stats.en.solo} <span class="text-sm font-normal text-slate-500">SOLO</span></p>
-                            <p class="text-2xl font-black text-slate-200">${aideDonnees.stats.en.duo} <span class="text-sm font-normal text-slate-500">DUO</span></p>
-                        </div>
+                    <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 mb-8">
+                        <h4 class="text-xs font-black tracking-widest text-slate-500 mb-2">${escapeHtml(t.catalogLabel)} ${flag}</h4>
+                        <p class="text-2xl font-black text-slate-200">${stats.solo} <span class="text-sm font-normal text-slate-500">${escapeHtml(t.modeSolo)}</span></p>
+                        <p class="text-2xl font-black text-slate-200">${stats.duo} <span class="text-sm font-normal text-slate-500">${escapeHtml(t.modeDuo)}</span></p>
                     </div>
-                    
+
                     <div class="bg-blue-900/20 border border-blue-500/20 p-6 rounded-3xl">
-                        <h4 class="text-xs font-black tracking-widest text-blue-400 mb-4 uppercase">Mode d'emploi</h4>
-                        <p class="text-slate-300 leading-relaxed whitespace-pre-line">${escapeHtml(aideDonnees.guide)}</p>
+                        <h4 class="text-xs font-black tracking-widest text-blue-400 mb-4 uppercase">${escapeHtml(t.helpGuideTitle)}</h4>
+                        <p class="text-slate-300 leading-relaxed whitespace-pre-line">${escapeHtml(guide)}</p>
                     </div>
 
                     <div class="text-center mt-6">
-                        <p class="text-[10px] font-black tracking-[0.3em] text-slate-600 uppercase">Dernière mise à jour : ${escapeHtml(aideDonnees.date_maj)}</p>
+                        <p class="text-[10px] font-black tracking-[0.3em] text-slate-600 uppercase">${escapeHtml(t.helpLastUpdate)} ${escapeHtml(aideDonnees.date_maj)}</p>
                     </div>
                 `;
             } catch (e) {
                 helpContent.innerHTML = `
                     <div class="bg-red-900/20 text-red-400 p-6 rounded-2xl border border-red-500/20">
-                        <p><i data-lucide="alert-triangle" class="inline w-5 h-5 mr-2"></i> Impossible de charger le fichier <strong>aide.json</strong>.</p>
-                        <p class="text-sm mt-2 opacity-80">Assurez-vous d'avoir créé le fichier à la racine de votre dossier.</p>
+                        <p><i data-lucide="alert-triangle" class="inline w-5 h-5 mr-2"></i> ${escapeHtml(t.helpErrorTitle)} <strong>aide.json</strong>.</p>
+                        <p class="text-sm mt-2 opacity-80">${escapeHtml(t.helpErrorSubtitle)}</p>
                     </div>
                 `;
-                lucide.createIcons();
             }
+            lucide.createIcons();
         }
 
         function closeHelp() {
@@ -304,6 +662,7 @@
         function changeLanguage() {
             const lang = document.getElementById('langSelect').value;
             localStorage.setItem('bt_lang', lang);
+            applyTranslations(lang);
             loadData(lang);
         }
 
@@ -329,12 +688,14 @@
             const isS = mode === 'solo';
             document.getElementById('btn-solo').className = isS ? 'flex-1 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/20' : 'flex-1 text-slate-500 hover:text-white';
             document.getElementById('btn-duo').className = !isS ? 'flex-1 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/20' : 'flex-1 text-slate-500 hover:text-white';
-            
+            document.getElementById('btn-solo').innerText = I18N[currentLang].modeSolo;
+            document.getElementById('btn-duo').innerText = I18N[currentLang].modeDuo;
+
             const container = document.getElementById('grid-container');
             container.classList.remove('animate-mode-switch');
-            void container.offsetWidth; 
+            void container.offsetWidth;
             container.classList.add('animate-mode-switch');
-            
+
             render();
         }
 
@@ -342,10 +703,10 @@
             const grid = document.getElementById('grid');
             const search = normalizeStr(document.getElementById('search').value);
             const scale = document.getElementById('scaleSelect').value;
-            // On récupère le texte tapé dans l'input catégorie
-            const categoryInput = normalizeStr(document.getElementById('categoryInput').value); 
+            // On recupere le texte tape dans l'input categorie
+            const categoryInput = normalizeStr(document.getElementById('categoryInput').value);
             const id1 = document.getElementById('id1').value || "%s", id2 = document.getElementById('id2').value || "%s";
-            
+
             const list = currentMode === 'solo' ? rawData.imoji : rawData.friends;
 
             const filtered = list.filter(t => {
@@ -353,23 +714,23 @@
                 const matchSearch = normalizedKeywords.includes(search);
 
                 let matchCategory = true;
-                // Si l'utilisateur a tapé quelque chose dans catégorie
+                // Si l'utilisateur a tape quelque chose dans categorie
                 if (categoryInput !== '') {
-                    // On cherche si une catégorie de l'image contient le texte tapé (ex: "amo" trouvera "AMOUR")
+                    // On cherche si une categorie de l'image contient le texte tape (ex: "amo" trouvera "AMOUR")
                     matchCategory = t.categories && t.categories.some(c => normalizeStr(c).includes(categoryInput));
                 }
 
                 return matchSearch && matchCategory;
             });
 
-            // On garde les items rendus de côté (par index) plutôt que d'injecter leurs
-            // données dans des attributs onclick, ce qui évitait d'avoir à les échapper pour
-            // un contexte JS + HTML imbriqué (risque de casse/injection sur des titres avec guillemets).
+            // On garde les items rendus de cote (par index) plutot que d'injecter leurs
+            // donnees dans des attributs onclick, ce qui evitait d'avoir a les echapper pour
+            // un contexte JS + HTML imbrique (risque de casse/injection sur des titres avec guillemets).
             currentRenderItems = filtered.map(t => {
                 let url = t.src.replace('%s', id1);
                 if(url.includes('%s')) url = url.replace('%s', id2);
                 url += `?transparent=1&palette=1&scale=${scale}`;
-                return { url, title: t.displayTag };
+                return { url, title: t.displayTag, slugFallback: t.slugFallback };
             });
 
             grid.innerHTML = currentRenderItems.map((item, i) => `
@@ -382,7 +743,7 @@
         function openLightboxByIndex(i) {
             const item = currentRenderItems[i];
             if (!item) return;
-            openLightbox(item.url, item.title);
+            openLightbox(item.url, item.title, item.slugFallback);
         }
 
         async function forceDownload(url, filename) {
@@ -395,44 +756,45 @@
                 const response = await fetch(url);
                 const blob = await response.blob();
                 saveAs(blob, filename);
-            } catch (e) { alert("Erreur de téléchargement."); }
-            
+            } catch (e) { alert(I18N[currentLang].downloadError); }
+
             btn.innerHTML = originalHtml;
             lucide.createIcons();
         }
         async function copyImage(url) {
             const btn = document.getElementById('copyBtn');
             const originalHtml = btn.innerHTML;
-            
+            const t = I18N[currentLang];
+
             // Animation de chargement
-            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> COPIE...`;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> ${t.copyInProgress}`;
             lucide.createIcons();
 
             try {
-                // On télécharge l'image en mémoire
+                // On telecharge l'image en memoire
                 const response = await fetch(url);
                 const blob = await response.blob();
-                
-                // On écrit le fichier PNG directement dans le presse-papier
+
+                // On ecrit le fichier PNG directement dans le presse-papier
                 await navigator.clipboard.write([
                     new ClipboardItem({
                         'image/png': blob
                     })
                 ]);
-                
-                // Animation de succès
-                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-green-400"></i> COPIÉ !`;
+
+                // Animation de succes
+                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-green-400"></i> ${t.copiedSuccess}`;
                 btn.classList.add('bg-green-900/30', 'border', 'border-green-500/50');
                 lucide.createIcons();
-                
-            } catch (e) { 
+
+            } catch (e) {
                 console.error("Erreur de copie :", e);
-                // Animation d'erreur (si le navigateur bloque l'accès)
-                btn.innerHTML = `<i data-lucide="x" class="w-5 h-5 text-red-500"></i> ERREUR`;
+                // Animation d'erreur (si le navigateur bloque l'acces)
+                btn.innerHTML = `<i data-lucide="x" class="w-5 h-5 text-red-500"></i> ${t.copyError}`;
                 lucide.createIcons();
             }
 
-            // Au bout de 2 secondes, on remet le bouton à son état normal
+            // Au bout de 2 secondes, on remet le bouton a son etat normal
             setTimeout(() => {
                 btn.innerHTML = originalHtml;
                 btn.classList.remove('bg-green-900/30', 'border', 'border-green-500/50');
@@ -440,19 +802,20 @@
             }, 2000);
         }
 
-        function openLightbox(url, title) {
+        function openLightbox(url, title, slugFallback) {
             const scale = document.getElementById('scaleSelect').value;
+            const t = I18N[currentLang];
             document.getElementById('lightbox-img').src = url;
             document.getElementById('lightbox-img').alt = title;
             document.getElementById('lightbox-title').innerText = title;
-            document.getElementById('lightbox-res').innerText = `FORMAT PNG • RÉSOLUTION ${scale}X`;
-            
+            document.getElementById('lightbox-res').innerText = `${t.lightboxResFormat} ${scale}X`;
+
             const n1 = document.getElementById('name1').value || "Utilisateur1";
             const n2 = document.getElementById('name2').value || "Utilisateur2";
-            
+
             // On nettoie le nom de la pose (sans accents, avec les bons espaces)
-            const cleanTitle = formatPoseName(title);
-            
+            const cleanTitle = resolveTag(title, slugFallback);
+
             let filename;
             if (currentMode === 'solo') {
                 // Mode Solo : Nom1__nom_de_la_pose.png
@@ -461,7 +824,7 @@
                 // Mode Duo : Nom1__Nom2__nom_de_la_pose.png
                 filename = `${n1}__${n2}__${cleanTitle}.png`;
             }
-            
+
             document.getElementById('copyBtn').onclick = () => copyImage(url);
             document.getElementById('singleDlBtn').onclick = () => forceDownload(url, filename);
             document.getElementById('lightbox').classList.remove('hidden');
@@ -473,16 +836,17 @@
  async function downloadAllAsZip() {
             const zip = new JSZip();
             const btn = document.getElementById('zipBtn');
+            const t = I18N[currentLang];
             const id1 = document.getElementById('id1').value, id2 = document.getElementById('id2').value;
             const n1 = document.getElementById('name1').value || "Utilisateur1";
             const n2 = document.getElementById('name2').value || "Utilisateur2";
             const scale = document.getElementById('scaleSelect').value;
-            
+
             const search = normalizeStr(document.getElementById('search').value);
             const categoryInput = normalizeStr(document.getElementById('categoryInput').value);
-            
-            if(!id1 || (currentMode === 'duo' && !id2)) return alert("Veuillez renseigner les IDs Bitmoji.");
-            
+
+            if(!id1 || (currentMode === 'duo' && !id2)) return alert(t.zipMissingIds);
+
             btn.disabled = true;
 
             const list = currentMode === 'solo' ? rawData.imoji : rawData.friends;
@@ -496,46 +860,46 @@
                 return matchSearch && matchCategory;
             });
 
-            // ÉTAPE 1 : Préparer les tâches et les métadonnées
+            // ETAPE 1 : Preparer les taches et les metadonnees
             const tasks = [];
             const nameCount = {};
-            const metadataUser1 = []; 
-            const metadataUser2 = []; 
+            const metadataUser1 = [];
+            const metadataUser2 = [];
             const metadataDuo = [];   // JSON pour le mode duo
-            
+
             let f1, f2;
-            
-            if(currentMode === 'solo') { 
-                f1 = zip.folder(n1); 
-                f2 = zip.folder(n2); 
+
+            if(currentMode === 'solo') {
+                f1 = zip.folder(n1);
+                f2 = zip.folder(n2);
             }
 
-            for (let t of filteredList) {
-                let tag = formatPoseName(t.displayTag);
+            for (let item of filteredList) {
+                let tag = resolveTag(item.displayTag, item.slugFallback);
                 nameCount[tag] = (nameCount[tag] || 0) + 1;
                 const suf = nameCount[tag] === 1 ? "" : `_${nameCount[tag]}`;
-                
+
                 const imgData = {
-                    titre: t.displayTag,
-                    mots_cles: t.keywords,
-                    categories: t.categories || []
+                    titre: item.displayTag,
+                    mots_cles: item.keywords,
+                    categories: item.categories || []
                 };
-                
+
                 if (currentMode === 'solo') {
                     // Pour l'utilisateur 1
                     const filename1 = `${n1}__${tag}${suf}.png`;
                     tasks.push({
-                        url: t.src.replace('%s', id1) + `?transparent=1&palette=1&scale=${scale}`,
+                        url: item.src.replace('%s', id1) + `?transparent=1&palette=1&scale=${scale}`,
                         folder: f1,
                         filename: filename1
                     });
                     metadataUser1.push({ fichier: filename1, ...imgData });
-                    
+
                     // Pour l'utilisateur 2
                     if(id2) {
                         const filename2 = `${n2}__${tag}${suf}.png`;
                         tasks.push({
-                            url: t.src.replace('%s', id2) + `?transparent=1&palette=1&scale=${scale}`,
+                            url: item.src.replace('%s', id2) + `?transparent=1&palette=1&scale=${scale}`,
                             folder: f2,
                             filename: filename2
                         });
@@ -545,11 +909,11 @@
                     // ==========================================
                     // MODE DUO : ON FAIT LES DEUX SENS !
                     // ==========================================
-                    
+
                     // Sens 1 : Utilisateur 1 d'abord, Utilisateur 2 ensuite
-                    let url1 = t.src.replace('%s', id1);
+                    let url1 = item.src.replace('%s', id1);
                     if(url1.includes('%s')) url1 = url1.replace('%s', id2);
-                    
+
                     const filenameDuo1 = `${n1}__${n2}__${tag}${suf}.png`;
                     tasks.push({
                         url: url1 + `?transparent=1&palette=1&scale=${scale}`,
@@ -559,9 +923,9 @@
                     metadataDuo.push({ fichier: filenameDuo1, ...imgData });
 
                     // Sens 2 : Utilisateur 2 d'abord, Utilisateur 1 ensuite (Inversion)
-                    let url2 = t.src.replace('%s', id2);
+                    let url2 = item.src.replace('%s', id2);
                     if(url2.includes('%s')) url2 = url2.replace('%s', id1);
-                    
+
                     const filenameDuo2 = `${n2}__${n1}__${tag}${suf}.png`;
                     tasks.push({
                         url: url2 + `?transparent=1&palette=1&scale=${scale}`,
@@ -572,47 +936,47 @@
                 }
             }
 
-            // ÉTAPE 2 : Lancer les téléchargements en parallèle (par lots de 15)
+            // ETAPE 2 : Lancer les telechargements en parallele (par lots de 15)
             const BATCH_SIZE = 15;
             let completed = 0;
 
             for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
                 const batch = tasks.slice(i, i + BATCH_SIZE);
-                
+
                 btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin"></i> ${completed} / ${tasks.length}`;
                 lucide.createIcons();
 
                 await Promise.all(batch.map(async (task) => {
                     try {
                         const response = await fetch(task.url);
-                        if (!response.ok) throw new Error("Erreur réseau");
+                        if (!response.ok) throw new Error("Erreur reseau");
                         const blob = await response.blob();
                         task.folder.file(task.filename, blob);
                     } catch (e) {
                         console.warn(`Erreur sur l'image ${task.filename}`);
                     }
                 }));
-                
+
                 completed += batch.length;
             }
 
-            // ÉTAPE 3 : Création finale du ZIP
-            btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin"></i> COMPRESSION...`;
+            // ETAPE 3 : Creation finale du ZIP
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin"></i> ${t.zipCompressing}`;
             lucide.createIcons();
 
             if (currentMode === 'solo') {
                 f1.file(`metadata_${n1}.json`, JSON.stringify(metadataUser1, null, 2));
                 if(id2) f2.file(`metadata_${n2}.json`, JSON.stringify(metadataUser2, null, 2));
             } else {
-                // Création du fichier avec le nom exact pour ton Home Assistant
+                // Creation du fichier avec le nom exact pour ton Home Assistant
                 zip.file(`metadata_Duo.json`, JSON.stringify(metadataDuo, null, 2));
             }
 
             const content = await zip.generateAsync({type:"blob"});
             saveAs(content, `AvatarExplorer__${currentMode === 'solo' ? n1 : 'Duo'}.zip`);
-            
-            // Remise à zéro
-            btn.innerHTML = `<i data-lucide="folder-archive" class="w-7 h-7"></i> GÉNÉRER ZIP`;
+
+            // Remise a zero
+            renderZipBtnIdle();
             btn.disabled = false;
             lucide.createIcons();
         }
