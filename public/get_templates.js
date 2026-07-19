@@ -67,7 +67,7 @@ function updateAideJson(statsFr, statsEn) {
     let aideData = {};
 
     // 1. On génère la date du jour en français (ex: "15 mars 2026") et en ISO 8601
-    // pour les consommateurs API (ex: Avatar Explorer) qui veulent comparer une date.
+    // pour les consommateurs API (ex: Avatar Explorer HA) qui veulent comparer une date.
     const now = new Date();
     const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
     const dateMaj = now.toLocaleDateString('fr-FR', dateOptions);

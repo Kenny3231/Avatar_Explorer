@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pose Explorer</title>
+    <title>Avatar Explorer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@1.21.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -34,7 +34,7 @@
             <div class="flex flex-col xl:flex-row justify-between items-center gap-8 xl:gap-10">
                 
                 <div class="text-center xl:text-left">
-                    <h1 class="text-4xl sm:text-5xl font-black text-yellow-500 italic leading-none tracking-tighter">Pose Explorer</h1>
+                    <h1 class="text-4xl sm:text-5xl font-black text-yellow-500 italic leading-none tracking-tighter">Avatar Explorer</h1>
                     <p id="stats" class="text-[10px] text-slate-500 uppercase font-black mt-3 tracking-[0.3em] opacity-50 italic">Initialisation...</p>
                 </div>
 
@@ -609,7 +609,7 @@
             }
 
             const content = await zip.generateAsync({type:"blob"});
-            saveAs(content, `PoseExplorer__${currentMode === 'solo' ? n1 : 'Duo'}.zip`);
+            saveAs(content, `AvatarExplorer__${currentMode === 'solo' ? n1 : 'Duo'}.zip`);
             
             // Remise à zéro
             btn.innerHTML = `<i data-lucide="folder-archive" class="w-7 h-7"></i> GÉNÉRER ZIP`;

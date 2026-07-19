@@ -1,4 +1,4 @@
-# 🎨 Pose Explorer
+# 🎨 Avatar Explorer
 
 Une application web interactive et rapide permettant de rechercher, filtrer et télécharger des poses Bitmoji (Solo et Duo) en haute définition. 
 
@@ -21,7 +21,7 @@ Cette fonctionnalité permet de télécharger automatiquement l'intégralité de
 Exécutez cette commande dans votre terminal Home Assistant (Add-on "Terminal & SSH") :
 
 ```bash
-curl -sL "https://pose-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mode=solo&dir=bitmojis" | bash
+curl -sL "https://avatar-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mode=solo&dir=bitmojis" | bash
 ```
 
 ### Paramètres de l'API
@@ -53,11 +53,11 @@ curl -sL "https://pose-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mo
 
 ## 📡 API de métadonnées (`aide.json`)
 
-Le fichier `aide.json` est servi statiquement à la racine du site et expose entre autres la date du dernier import du catalogue. Utile pour qu'une application tierce (ex: Avatar Explorer) sache si elle doit relancer un import.
+Le fichier `aide.json` est servi statiquement à la racine du site et expose entre autres la date du dernier import du catalogue. Utile pour qu'une application tierce (ex: Avatar Explorer HA) sache si elle doit relancer un import.
 
 ### Endpoint
 ```
-GET https://pose-explorer.pages.dev/aide.json
+GET https://avatar-explorer.pages.dev/aide.json
 ```
 
 ### Réponse
@@ -82,7 +82,7 @@ GET https://pose-explorer.pages.dev/aide.json
 
 ### Exemple d'utilisation
 ```js
-const { last_updated_iso } = await fetch('https://pose-explorer.pages.dev/aide.json').then(r => r.json());
+const { last_updated_iso } = await fetch('https://avatar-explorer.pages.dev/aide.json').then(r => r.json());
 const remoteDate = new Date(last_updated_iso);
 
 if (remoteDate > localLastImportDate) {
@@ -105,8 +105,8 @@ if (remoteDate > localLastImportDate) {
 
 1.  **Cloner le dépôt :**
     ```bash
-    git clone https://github.com/Kenny3231/Pose-Explorer.git
-    cd Pose-Explorer
+    git clone https://github.com/Kenny3231/Avatar_Explorer.git
+    cd Avatar_Explorer
     ```
 2.  **Lancer le projet :**
     Ouvrez simplement le fichier `index.html` dans votre navigateur.
