@@ -2057,43 +2057,6 @@
       ]
     },
     {
-      "id": "27090",
-      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
-      "displayTag": "θετική διάθεση",
-      "keywords": "θετική διάθεση θάμνος doves πουλιά πρωί καλημέρα start of the day beautiful day morning vibes beautiful morning κέφι άδραξε τη μέρα καλή ημέρα #popmoji main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key"
-      ],
-      "slugFallback": "positive vibes"
-    },
-    {
-      "id": "14513",
-      "src": "https://sdk.bitmoji.com/render/panel/10221958-%s-v1.png",
-      "displayTag": "καφές",
-      "keywords": "καφές καφετιέρα πρωί #popmoji coffee pot hanging out in a giant pot of coffee holding a coffee cup",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_food_venmo",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "coffee"
-    },
-    {
-      "id": "15449",
-      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
-      "displayTag": "καλημέρα",
-      "keywords": "καλημέρα χαρούμενος στη δουλειά καλή μέρα στη δουλειά χαρτοφύλακας #popmoji going to work happy walking smiling with a briefcase",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive"
-      ],
-      "slugFallback": "good morning"
-    },
-    {
       "id": "13057",
       "src": "https://sdk.bitmoji.com/render/panel/10217325-%s-v1.png",
       "displayTag": "αεροπλάνο",
@@ -4835,6 +4798,19 @@
       "slugFallback": "bad morning"
     },
     {
+      "id": "14513",
+      "src": "https://sdk.bitmoji.com/render/panel/10221958-%s-v1.png",
+      "displayTag": "καφές",
+      "keywords": "καφές καφετιέρα πρωί #ifrowny coffee pot hanging out in a giant pot of coffee holding a coffee cup",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_food_venmo",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "coffee"
+    },
+    {
       "id": "26930",
       "src": "https://sdk.bitmoji.com/render/panel/20087173-%s-v1.png",
       "displayTag": "σνακ",
@@ -6050,34 +6026,6 @@
         "#mt_hometab_inuanced",
         "#mt_meme"
       ]
-    },
-    {
-      "id": "19340",
-      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
-      "displayTag": "γεια",
-      "keywords": "γεια γεια πουλιά πουλιά στο σύρμα πουλί πουλί στο σύρμα πουλί σύρμα πουλί φίλοι πουλί στο σύρμα χαιρετίζω #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_hello_com_textless_key",
-        "#mt_itme",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "hi"
-    },
-    {
-      "id": "22689",
-      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
-      "displayTag": "ωδικό πτηνό",
-      "keywords": "ωδικό πτηνό πουλί κοκατέιλ τραγούδι τραγούδι σφυρίζω καλημέρα σφυρίχτρα τραγουδώ πρωί τσίου τσίου ζώο #ismiley songbird as a bird sitting on a perch singing",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "songbird"
     },
     {
       "id": "15424",
@@ -7757,6 +7705,22 @@
       "slugFallback": "hey you"
     },
     {
+      "id": "19340",
+      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
+      "displayTag": "γεια",
+      "keywords": "γεια γεια πουλιά πουλιά στο σύρμα πουλί πουλί στο σύρμα πουλί σύρμα πουλί φίλοι πουλί στο σύρμα χαιρετίζω #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_hello_com_textless_key",
+        "#mt_itme",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "hi"
+    },
+    {
       "id": "6150",
       "src": "https://sdk.bitmoji.com/render/panel/10233636-%s-v1.png",
       "displayTag": "ρολό",
@@ -7846,6 +7810,42 @@
         "#mt_hometab_ismiley_batcha"
       ],
       "slugFallback": "hi"
+    },
+    {
+      "id": "27090",
+      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
+      "displayTag": "θετική διάθεση",
+      "keywords": "θετική διάθεση θάμνος doves πουλιά πρωί καλημέρα start of the day beautiful day morning vibes beautiful morning κέφι άδραξε τη μέρα καλή ημέρα #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key"
+      ],
+      "slugFallback": "positive vibes"
+    },
+    {
+      "id": "15449",
+      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
+      "displayTag": "καλημέρα",
+      "keywords": "καλημέρα χαρούμενος στη δουλειά καλή μέρα στη δουλειά χαρτοφύλακας #ismiley going to work happy walking smiling with a briefcase",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive"
+      ],
+      "slugFallback": "good morning"
+    },
+    {
+      "id": "22689",
+      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
+      "displayTag": "ωδικό πτηνό",
+      "keywords": "ωδικό πτηνό πουλί κοκατέιλ τραγούδι τραγούδι σφυρίζω καλημέρα σφυρίχτρα τραγουδώ πρωί τσίου τσίου ζώο #ismiley songbird as a bird sitting on a perch singing",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "songbird"
     },
     {
       "id": "16634",
@@ -11341,46 +11341,6 @@
     }
   ],
   "friends": [
-    {
-      "id": "15509",
-      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
-      "displayTag": "ξυπνητήρι",
-      "keywords": "ξυπνητήρι πρωινός χορός καλημέρα χαρούμενο ξύπνημα χαρούμενο ξυπνητήρι #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "alarm clock"
-    },
-    {
-      "id": "23883",
-      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
-      "displayTag": "γεια",
-      "keywords": "γεια καλημέρα σάντουιτς πρωινού χας μπράουν καλημέρα καλημερούδια ώρα να ξυπνήσεις καφές γεια πρωινό γεια άδραξε τη μέρα αγγλικό μάφιν καλημέρα πρωί #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "hi"
-    },
-    {
-      "id": "13799",
-      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
-      "displayTag": "βούρτσισμα δοντιών",
-      "keywords": "βούρτσισμα δοντιών βουρτσίζω με τη γάτα βούρτσισμα δοντιών οδοντόβουρτσα οδοντόβουρτσα #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "tooth brushing"
-    },
     {
       "id": "20114",
       "src": "https://sdk.bitmoji.com/render/panel/20011476-%s-%s-v1.png",
@@ -16164,6 +16124,46 @@
         "#mt_meme",
         "#mt_meme_yay"
       ]
+    },
+    {
+      "id": "15509",
+      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
+      "displayTag": "ξυπνητήρι",
+      "keywords": "ξυπνητήρι πρωινός χορός καλημέρα χαρούμενο ξύπνημα χαρούμενο ξυπνητήρι #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "alarm clock"
+    },
+    {
+      "id": "23883",
+      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
+      "displayTag": "γεια",
+      "keywords": "γεια καλημέρα σάντουιτς πρωινού χας μπράουν καλημέρα καλημερούδια ώρα να ξυπνήσεις καφές γεια πρωινό γεια άδραξε τη μέρα αγγλικό μάφιν καλημέρα πρωί #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "hi"
+    },
+    {
+      "id": "13799",
+      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
+      "displayTag": "βούρτσισμα δοντιών",
+      "keywords": "βούρτσισμα δοντιών βουρτσίζω με τη γάτα βούρτσισμα δοντιών οδοντόβουρτσα οδοντόβουρτσα #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "tooth brushing"
     },
     {
       "id": "18742",

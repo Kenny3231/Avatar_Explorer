@@ -1939,40 +1939,6 @@
       ]
     },
     {
-      "id": "27090",
-      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
-      "displayTag": "pozytywne wibracje",
-      "keywords": "pozytywne wibracje krzak doves ptaki rano dobry start of the day beautiful day morning vibes beautiful morning pozytywne wibracje czas wstawać dobrego dnia #popmoji main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key"
-      ]
-    },
-    {
-      "id": "14513",
-      "src": "https://sdk.bitmoji.com/render/panel/10221958-%s-v1.png",
-      "displayTag": "kawa",
-      "keywords": "kawa dzbanek z kawą rano #popmoji coffee pot hanging out in a giant pot of coffee holding a coffee cup",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_food_venmo",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "15449",
-      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
-      "displayTag": "dzień dobry",
-      "keywords": "dzień dobry do pracy w dobrym humorze dobry dzień w pracy teczka #popmoji going to work happy walking smiling with a briefcase",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive"
-      ]
-    },
-    {
       "id": "13057",
       "src": "https://sdk.bitmoji.com/render/panel/10217325-%s-v1.png",
       "displayTag": "samolot",
@@ -4541,6 +4507,18 @@
       ]
     },
     {
+      "id": "14513",
+      "src": "https://sdk.bitmoji.com/render/panel/10221958-%s-v1.png",
+      "displayTag": "kawa",
+      "keywords": "kawa dzbanek z kawą rano #ifrowny coffee pot hanging out in a giant pot of coffee holding a coffee cup",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_food_venmo",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "26930",
       "src": "https://sdk.bitmoji.com/render/panel/20087173-%s-v1.png",
       "displayTag": "przekąska",
@@ -5680,32 +5658,6 @@
         "#mt_meme_boo",
         "#mt_hometab_inuanced",
         "#mt_meme"
-      ]
-    },
-    {
-      "id": "19340",
-      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
-      "displayTag": "witaj",
-      "keywords": "witaj cześć ptaki ptak na kablu ptak ptak na drucie ptak na przewodzie ptasi przyjaciele ptak na kablu machanie #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_hello_com_textless_key",
-        "#mt_itme",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "22689",
-      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
-      "displayTag": "ptak śpiewający",
-      "keywords": "ptak śpiewający ptak nimfa piosenka śpiewanie gwizdanie dzień dobry gwizdek śpiew rano ćwierk zwierzę #ismiley songbird as a bird sitting on a perch singing",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -7265,6 +7217,21 @@
       ]
     },
     {
+      "id": "19340",
+      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
+      "displayTag": "witaj",
+      "keywords": "witaj cześć ptaki ptak na kablu ptak ptak na drucie ptak na przewodzie ptasi przyjaciele ptak na kablu machanie #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_hello_com_textless_key",
+        "#mt_itme",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "6150",
       "src": "https://sdk.bitmoji.com/render/panel/10233636-%s-v1.png",
       "displayTag": "żaluzje",
@@ -7346,6 +7313,39 @@
         "#mt_itme",
         "#mt_hometab_ismiley",
         "#mt_hometab_ismiley_batcha"
+      ]
+    },
+    {
+      "id": "27090",
+      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
+      "displayTag": "pozytywne wibracje",
+      "keywords": "pozytywne wibracje krzak doves ptaki rano dobry start of the day beautiful day morning vibes beautiful morning pozytywne wibracje czas wstawać dobrego dnia #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key"
+      ]
+    },
+    {
+      "id": "15449",
+      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
+      "displayTag": "dzień dobry",
+      "keywords": "dzień dobry do pracy w dobrym humorze dobry dzień w pracy teczka #ismiley going to work happy walking smiling with a briefcase",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive"
+      ]
+    },
+    {
+      "id": "22689",
+      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
+      "displayTag": "ptak śpiewający",
+      "keywords": "ptak śpiewający ptak nimfa piosenka śpiewanie gwizdanie dzień dobry gwizdek śpiew rano ćwierk zwierzę #ismiley songbird as a bird sitting on a perch singing",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -10566,43 +10566,6 @@
     }
   ],
   "friends": [
-    {
-      "id": "15509",
-      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
-      "displayTag": "zegar z budzikiem",
-      "keywords": "zegar z budzikiem poranny taniec dzień dobry wesoła pobudka wesoły budzik #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "23883",
-      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
-      "displayTag": "witaj",
-      "keywords": "witaj dzień dobry kanapka na śniadanie hash brown dzień dobry pobudka pora wstawać kawa cześć śniadanie hej czas wstawać muffinka angielska dobry rano #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "13799",
-      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
-      "displayTag": "mycie zębów",
-      "keywords": "mycie zębów szczotkowanie zębów z kotem szczotkowanie zębów szczoteczka do zębów szczoteczka do zębów #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ]
-    },
     {
       "id": "20114",
       "src": "https://sdk.bitmoji.com/render/panel/20011476-%s-%s-v1.png",
@@ -15065,6 +15028,43 @@
         "#mt_meme_yay_key",
         "#mt_meme",
         "#mt_meme_yay"
+      ]
+    },
+    {
+      "id": "15509",
+      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
+      "displayTag": "zegar z budzikiem",
+      "keywords": "zegar z budzikiem poranny taniec dzień dobry wesoła pobudka wesoły budzik #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "23883",
+      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
+      "displayTag": "witaj",
+      "keywords": "witaj dzień dobry kanapka na śniadanie hash brown dzień dobry pobudka pora wstawać kawa cześć śniadanie hej czas wstawać muffinka angielska dobry rano #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "13799",
+      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
+      "displayTag": "mycie zębów",
+      "keywords": "mycie zębów szczotkowanie zębów z kotem szczotkowanie zębów szczoteczka do zębów szczoteczka do zębów #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
       ]
     },
     {

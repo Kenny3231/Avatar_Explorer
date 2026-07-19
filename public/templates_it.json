@@ -2,16 +2,6 @@
   "categories": [],
   "imoji": [
     {
-      "id": "6388",
-      "src": "https://sdk.bitmoji.com/render/panel/20084144-%s-v1.png",
-      "displayTag": "tazza di caffè",
-      "keywords": "tazza di caffè buongiorno buongiorno* colazione cibo buongiorno mattino 'giorno #ismiley good morning peering out from behind a giant mug of coffee, good morning",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key"
-      ]
-    },
-    {
       "id": "3437",
       "src": "https://sdk.bitmoji.com/render/panel/20083874-%s-v1.png",
       "displayTag": "abbracci*",
@@ -118,6 +108,16 @@
       "categories": [
         "#mt_signoff",
         "#mt_signoff_key"
+      ]
+    },
+    {
+      "id": "6388",
+      "src": "https://sdk.bitmoji.com/render/panel/20084144-%s-v1.png",
+      "displayTag": "tazza di caffè",
+      "keywords": "tazza di caffè buongiorno buongiorno* colazione cibo buongiorno mattino 'giorno #ismiley good morning peering out from behind a giant mug of coffee, good morning",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key"
       ]
     },
     {
@@ -2242,45 +2242,6 @@
         "#mt_idk",
         "#mt_hometab_inuanced_batcha",
         "#mt_hometab_inuanced"
-      ]
-    },
-    {
-      "id": "23805",
-      "src": "https://sdk.bitmoji.com/render/panel/20048636-%s-v1.png",
-      "displayTag": "ciao",
-      "keywords": "ciao buongiorno che si dice saluti haiii come state ehilà salve ehi buondì primavera scoiattolo foresta procione gufo scoiattolo albero animali parco estate #popmoji waving with forest critters peaking out of a hole in a tree waving surrounded by an owl a raccoon and squirrels",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "27090",
-      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
-      "displayTag": "energia positiva",
-      "keywords": "energia positiva cespuglio doves uccelli mattino 'giorno start of the day beautiful day morning vibes beautiful morning energia positiva giù dal letto buondì #popmoji main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key"
-      ]
-    },
-    {
-      "id": "19340",
-      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
-      "displayTag": "ciao",
-      "keywords": "ciao salve uccelli uccelli su un filo uccello uccello su filo uccello filo amici uccelli uccello su un filo salutare con le mani #popmoji bird friends sitting on a telephone wire with various birds smiling and waving",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_hello_com_textless_key",
-        "#mt_itme",
-        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -6003,39 +5964,6 @@
       ]
     },
     {
-      "id": "26920",
-      "src": "https://sdk.bitmoji.com/render/panel/20086820-%s-v1.png",
-      "displayTag": "buongiorno",
-      "keywords": "buongiorno morning coffee good morning sunshine mattino buongiorno 'giorno saluti mattutini mornin sunshine mornin sunshine* caffè esplosione giù dal letto morning sunshine tazza cup #ismiley morning sunshine smiling on a coffee mug, mornin sunshine",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_text",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_text_key"
-      ]
-    },
-    {
-      "id": "15449",
-      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
-      "displayTag": "buongiorno",
-      "keywords": "buongiorno andare al lavoro felice buona giornata al lavoro ventiquattrore #ismiley going to work happy walking smiling with a briefcase",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive"
-      ]
-    },
-    {
-      "id": "19506",
-      "src": "https://sdk.bitmoji.com/render/panel/20006989-%s-v1.png",
-      "displayTag": "buongiorno",
-      "keywords": "buongiorno svegliarsi mattiniero mattino uccello è ora di svegliarsi giù dal letto #ismiley wake up stretching arms while waking up in bed with a bird chirping happily on window sill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
       "id": "15424",
       "src": "https://sdk.bitmoji.com/render/panel/10224154-%s-v1.png",
       "displayTag": "compiti",
@@ -7853,6 +7781,21 @@
       ]
     },
     {
+      "id": "19340",
+      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
+      "displayTag": "ciao",
+      "keywords": "ciao salve uccelli uccelli su un filo uccello uccello su filo uccello filo amici uccelli uccello su un filo salutare con le mani #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_hello_com_textless_key",
+        "#mt_itme",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "24341",
       "src": "https://sdk.bitmoji.com/render/panel/20055094-%s-v1.png",
       "displayTag": "ciao",
@@ -8044,6 +7987,18 @@
       ]
     },
     {
+      "id": "23805",
+      "src": "https://sdk.bitmoji.com/render/panel/20048636-%s-v1.png",
+      "displayTag": "ciao",
+      "keywords": "ciao buongiorno che si dice saluti haiii come state ehilà salve ehi buondì primavera scoiattolo foresta procione gufo scoiattolo albero animali parco estate #ismiley waving with forest critters peaking out of a hole in a tree waving surrounded by an owl a raccoon and squirrels",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "6150",
       "src": "https://sdk.bitmoji.com/render/panel/10233636-%s-v1.png",
       "displayTag": "veneziane",
@@ -8068,6 +8023,51 @@
         "#mt_hello",
         "#mt_hello_com_textless_key",
         "#mt_itme"
+      ]
+    },
+    {
+      "id": "27090",
+      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
+      "displayTag": "energia positiva",
+      "keywords": "energia positiva cespuglio doves uccelli mattino 'giorno start of the day beautiful day morning vibes beautiful morning energia positiva giù dal letto buondì #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key"
+      ]
+    },
+    {
+      "id": "26920",
+      "src": "https://sdk.bitmoji.com/render/panel/20086820-%s-v1.png",
+      "displayTag": "buongiorno",
+      "keywords": "buongiorno morning coffee good morning sunshine mattino buongiorno 'giorno saluti mattutini mornin sunshine mornin sunshine* caffè esplosione giù dal letto morning sunshine tazza cup #ismiley morning sunshine smiling on a coffee mug, mornin sunshine",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_text",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_text_key"
+      ]
+    },
+    {
+      "id": "15449",
+      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
+      "displayTag": "buongiorno",
+      "keywords": "buongiorno andare al lavoro felice buona giornata al lavoro ventiquattrore #ismiley going to work happy walking smiling with a briefcase",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive"
+      ]
+    },
+    {
+      "id": "19506",
+      "src": "https://sdk.bitmoji.com/render/panel/20006989-%s-v1.png",
+      "displayTag": "buongiorno",
+      "keywords": "buongiorno svegliarsi mattiniero mattino uccello è ora di svegliarsi giù dal letto #ismiley wake up stretching arms while waking up in bed with a bird chirping happily on window sill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -11606,41 +11606,6 @@
       ]
     },
     {
-      "id": "14229",
-      "src": "https://sdk.bitmoji.com/render/panel/10220913-%s-%s-v1.png",
-      "displayTag": "danza della colazione",
-      "keywords": "danza della colazione ballare uovo toast danzante cibo brunch danzante brindisi colazione danzante waffle brunch danza del brunch caffè colazione buon brunch buona colazione #ismiley happy brunch with friend ",
-      "categories": [
-        "#mt_food_interactive",
-        "#mt_food",
-        "#mt_goodmorning",
-        "#mt_food_venmo",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "14872",
-      "src": "https://sdk.bitmoji.com/render/panel/10223179-%s-%s-v1.png",
-      "displayTag": "sbadiglio",
-      "keywords": "sbadiglio stanco assonnato ora della nanna #ismiley yawning friends yawning and stretching with your friend",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive"
-      ]
-    },
-    {
-      "id": "15722",
-      "src": "https://sdk.bitmoji.com/render/panel/10225451-%s-%s-v1.png",
-      "displayTag": "sorpresa caffè",
-      "keywords": "sorpresa caffè caffè tazza tazza di caffè tazza caffè buongiorno mattino #ismiley coffee surprise friend your friend popping out of a giant cup of coffee",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_goodmorning_textless",
-        "#mt_food"
-      ]
-    },
-    {
       "id": "25803",
       "src": "https://sdk.bitmoji.com/render/panel/20073396-%s-%s-v1.png",
       "displayTag": "compleanno",
@@ -14829,6 +14794,19 @@
       ]
     },
     {
+      "id": "14229",
+      "src": "https://sdk.bitmoji.com/render/panel/10220913-%s-%s-v1.png",
+      "displayTag": "danza della colazione",
+      "keywords": "danza della colazione ballare uovo toast danzante cibo brunch danzante brindisi colazione danzante waffle brunch danza del brunch caffè colazione buon brunch buona colazione #ifrowny happy brunch with friend ",
+      "categories": [
+        "#mt_food_interactive",
+        "#mt_food",
+        "#mt_goodmorning",
+        "#mt_food_venmo",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "19434",
       "src": "https://sdk.bitmoji.com/render/panel/20005766-%s-%s-v1.png",
       "displayTag": "milkshake",
@@ -14871,6 +14849,18 @@
         "#mt_food",
         "#mt_food_venmo",
         "#mt_bff"
+      ]
+    },
+    {
+      "id": "15722",
+      "src": "https://sdk.bitmoji.com/render/panel/10225451-%s-%s-v1.png",
+      "displayTag": "sorpresa caffè",
+      "keywords": "sorpresa caffè caffè tazza tazza di caffè tazza caffè buongiorno mattino #ifrowny coffee surprise friend your friend popping out of a giant cup of coffee",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_goodmorning_textless",
+        "#mt_food"
       ]
     },
     {
@@ -16229,6 +16219,16 @@
       "keywords": "musica utah jazz suonare blues con il sassofono sassofono strumento blues #popmoji saxophone blues with friend ",
       "categories": [
         "#mt_waaah_com_textless"
+      ]
+    },
+    {
+      "id": "14872",
+      "src": "https://sdk.bitmoji.com/render/panel/10223179-%s-%s-v1.png",
+      "displayTag": "sbadiglio",
+      "keywords": "sbadiglio stanco assonnato ora della nanna #ismiley yawning friends yawning and stretching with your friend",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive"
       ]
     },
     {

@@ -1939,40 +1939,6 @@
       ]
     },
     {
-      "id": "27090",
-      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
-      "displayTag": "vibrații pozitive",
-      "keywords": "vibrații pozitive tufiș doves păsări dimineața 'neața start of the day beautiful day morning vibes beautiful morning gânduri bune scularea bună ziua #popmoji main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key"
-      ]
-    },
-    {
-      "id": "14513",
-      "src": "https://sdk.bitmoji.com/render/panel/10221958-%s-v1.png",
-      "displayTag": "cafea",
-      "keywords": "cafea ibric de cafea dimineața #popmoji coffee pot hanging out in a giant pot of coffee holding a coffee cup",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_food_venmo",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "15449",
-      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
-      "displayTag": "bună dimineața",
-      "keywords": "bună dimineața mergând fericit la muncă zi bună la muncă servietă #popmoji going to work happy walking smiling with a briefcase",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive"
-      ]
-    },
-    {
       "id": "13057",
       "src": "https://sdk.bitmoji.com/render/panel/10217325-%s-v1.png",
       "displayTag": "avion",
@@ -4541,6 +4507,18 @@
       ]
     },
     {
+      "id": "14513",
+      "src": "https://sdk.bitmoji.com/render/panel/10221958-%s-v1.png",
+      "displayTag": "cafea",
+      "keywords": "cafea ibric de cafea dimineața #ifrowny coffee pot hanging out in a giant pot of coffee holding a coffee cup",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_food_venmo",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "26930",
       "src": "https://sdk.bitmoji.com/render/panel/20087173-%s-v1.png",
       "displayTag": "gustare",
@@ -5680,32 +5658,6 @@
         "#mt_meme_boo",
         "#mt_hometab_inuanced",
         "#mt_meme"
-      ]
-    },
-    {
-      "id": "19340",
-      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
-      "displayTag": "salut",
-      "keywords": "salut salut păsări păsări pe o sârmă pasăre pasăre pe sârmă pasăre pe sârmă prietenii păsărilor pasăre pe o sârmă face cu mâna #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_hello_com_textless_key",
-        "#mt_itme",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "22689",
-      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
-      "displayTag": "pasăre cântătoare",
-      "keywords": "pasăre cântătoare pasăre papagal nimfă cântec cântând fluierat bună dimineața fluier a cânta dimineața ciripit animal #ismiley songbird as a bird sitting on a perch singing",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -7265,6 +7217,21 @@
       ]
     },
     {
+      "id": "19340",
+      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
+      "displayTag": "salut",
+      "keywords": "salut salut păsări păsări pe o sârmă pasăre pasăre pe sârmă pasăre pe sârmă prietenii păsărilor pasăre pe o sârmă face cu mâna #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_hello_com_textless_key",
+        "#mt_itme",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "6150",
       "src": "https://sdk.bitmoji.com/render/panel/10233636-%s-v1.png",
       "displayTag": "jaluzele",
@@ -7346,6 +7313,39 @@
         "#mt_itme",
         "#mt_hometab_ismiley",
         "#mt_hometab_ismiley_batcha"
+      ]
+    },
+    {
+      "id": "27090",
+      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
+      "displayTag": "vibrații pozitive",
+      "keywords": "vibrații pozitive tufiș doves păsări dimineața 'neața start of the day beautiful day morning vibes beautiful morning gânduri bune scularea bună ziua #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key"
+      ]
+    },
+    {
+      "id": "15449",
+      "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
+      "displayTag": "bună dimineața",
+      "keywords": "bună dimineața mergând fericit la muncă zi bună la muncă servietă #ismiley going to work happy walking smiling with a briefcase",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive"
+      ]
+    },
+    {
+      "id": "22689",
+      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
+      "displayTag": "pasăre cântătoare",
+      "keywords": "pasăre cântătoare pasăre papagal nimfă cântec cântând fluierat bună dimineața fluier a cânta dimineața ciripit animal #ismiley songbird as a bird sitting on a perch singing",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -10566,43 +10566,6 @@
     }
   ],
   "friends": [
-    {
-      "id": "15509",
-      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
-      "displayTag": "ceas deșteptător",
-      "keywords": "ceas deșteptător dans matinal bună dimineața trezire fericită ceas deșteptător fericit #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "23883",
-      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
-      "displayTag": "salut",
-      "keywords": "salut bună dimineața sandviș mic dejun bună dimineața trezirea trezirea ora de trezire cafea salut micul dejun hei scularea brioșă 'neața dimineața #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "13799",
-      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
-      "displayTag": "periat de dinți",
-      "keywords": "periat de dinți spălat pe dinți cu pisica spălat pe dinți perie de dinți periuţă de dinţi #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ]
-    },
     {
       "id": "20114",
       "src": "https://sdk.bitmoji.com/render/panel/20011476-%s-%s-v1.png",
@@ -15065,6 +15028,43 @@
         "#mt_meme_yay_key",
         "#mt_meme",
         "#mt_meme_yay"
+      ]
+    },
+    {
+      "id": "15509",
+      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
+      "displayTag": "ceas deșteptător",
+      "keywords": "ceas deșteptător dans matinal bună dimineața trezire fericită ceas deșteptător fericit #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "23883",
+      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
+      "displayTag": "salut",
+      "keywords": "salut bună dimineața sandviș mic dejun bună dimineața trezirea trezirea ora de trezire cafea salut micul dejun hei scularea brioșă 'neața dimineața #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "13799",
+      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
+      "displayTag": "periat de dinți",
+      "keywords": "periat de dinți spălat pe dinți cu pisica spălat pe dinți perie de dinți periuţă de dinţi #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
       ]
     },
     {

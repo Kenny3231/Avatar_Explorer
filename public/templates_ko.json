@@ -2,27 +2,6 @@
   "categories": [],
   "imoji": [
     {
-      "id": "7362",
-      "src": "https://sdk.bitmoji.com/render/panel/20040365-%s-v1.png",
-      "displayTag": "좋은 하루 보내세요*",
-      "keywords": "좋은 하루 보내세요* 즐거운 하루 되세요 좋은 하루 보내세요 좋은 하루 보내세요 좋은 하루 보내세요 #ismiley have a great day holding a bagged lunch and a travel mug, have a great day",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key"
-      ],
-      "slugFallback": "have a great day*"
-    },
-    {
-      "id": "6642",
-      "src": "https://sdk.bitmoji.com/render/panel/20041248-%s-v1.png",
-      "displayTag": "아침 방귀*",
-      "keywords": "아침 방귀* 좋은 아침 포옹 아침 방귀 일 좋은 아침 #ismiley morning hugs standing in front of a shining sun with arms outstretched, morning hugs",
-      "categories": [
-        "#mt_goodmorning"
-      ],
-      "slugFallback": "morning hugs*"
-    },
-    {
       "id": "9293",
       "src": "https://sdk.bitmoji.com/render/panel/20085033-%s-v1.png",
       "displayTag": "사랑해",
@@ -468,6 +447,27 @@
         "#mt_hello"
       ],
       "slugFallback": "hai"
+    },
+    {
+      "id": "7362",
+      "src": "https://sdk.bitmoji.com/render/panel/20040365-%s-v1.png",
+      "displayTag": "좋은 하루 보내세요*",
+      "keywords": "좋은 하루 보내세요* 즐거운 하루 되세요 좋은 하루 보내세요 좋은 하루 보내세요 좋은 하루 보내세요 #ismiley have a great day holding a bagged lunch and a travel mug, have a great day",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key"
+      ],
+      "slugFallback": "have a great day*"
+    },
+    {
+      "id": "6642",
+      "src": "https://sdk.bitmoji.com/render/panel/20041248-%s-v1.png",
+      "displayTag": "아침 방귀*",
+      "keywords": "아침 방귀* 좋은 아침 포옹 아침 방귀 일 좋은 아침 #ismiley morning hugs standing in front of a shining sun with arms outstretched, morning hugs",
+      "categories": [
+        "#mt_goodmorning"
+      ],
+      "slugFallback": "morning hugs*"
     },
     {
       "id": "6510",
@@ -2709,44 +2709,6 @@
         "#mt_hometab_inuanced_batcha",
         "#mt_hometab_inuanced"
       ]
-    },
-    {
-      "id": "23805",
-      "src": "https://sdk.bitmoji.com/render/panel/20048636-%s-v1.png",
-      "displayTag": "안녕",
-      "keywords": "안녕 좋은 아침 안녕 인사 안녕 어이 안녕하슈 안녕 안녕 좋은 날 봄 다람쥐 숲 너구리 올빼미 다람쥐 나무 동물 공원 여름 #popmoji waving with forest critters peaking out of a hole in a tree waving surrounded by an owl a raccoon and squirrels",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "hi"
-    },
-    {
-      "id": "27090",
-      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
-      "displayTag": "긍정적인 기운",
-      "keywords": "긍정적인 기운 풀숲 doves 새 아침 안녕 start of the day beautiful day morning vibes beautiful morning 긍정적인 기운 어서 일어나 좋은 날 #popmoji main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key"
-      ],
-      "slugFallback": "positive vibes"
-    },
-    {
-      "id": "18740",
-      "src": "https://sdk.bitmoji.com/render/panel/10237549-%s-v1.png",
-      "displayTag": "일광욕",
-      "keywords": "일광욕 햇빛 일광욕 일광욕 일 여름 일광욕 hot weather sun bathing #popmoji sun basking basking directly below sun eyes closed looking content",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "summer solstice"
     },
     {
       "id": "13057",
@@ -6761,35 +6723,6 @@
       "slugFallback": "kermit meme"
     },
     {
-      "id": "25579",
-      "src": "https://sdk.bitmoji.com/render/panel/20070491-%s-v1.png",
-      "displayTag": "좋은 아침",
-      "keywords": "좋은 아침 좋은 아침* 아침 flamingo 안녕 식물 어서 일어나 정원 울타리 어서 일어나 좋은 날 gnome #ismiley good morning waving joyfully behind a fence and garden surrounded by plants and a garden gnome, good morning",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_text",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_text_key"
-      ],
-      "slugFallback": "good morning"
-    },
-    {
-      "id": "19340",
-      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
-      "displayTag": "안녕",
-      "keywords": "안녕 안녕 새 전선 위의 새들 새 전선 위 새 새와 전선 새와 함께 전선 위의 새 손 흔들기 #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_hello_com_textless_key",
-        "#mt_itme",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "hi"
-    },
-    {
       "id": "30219",
       "src": "https://sdk.bitmoji.com/render/panel/37850924-%s-v1.png",
       "displayTag": "아니",
@@ -8584,6 +8517,22 @@
       "slugFallback": "hiding"
     },
     {
+      "id": "19340",
+      "src": "https://sdk.bitmoji.com/render/panel/20006682-%s-v1.png",
+      "displayTag": "안녕",
+      "keywords": "안녕 안녕 새 전선 위의 새들 새 전선 위 새 새와 전선 새와 함께 전선 위의 새 손 흔들기 #ismiley bird friends sitting on a telephone wire with various birds smiling and waving",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_hello_com_textless_key",
+        "#mt_itme",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "hi"
+    },
+    {
       "id": "24312",
       "src": "https://sdk.bitmoji.com/render/panel/20054902-%s-v1.png",
       "displayTag": "안녕",
@@ -8592,6 +8541,19 @@
         "#mt_hello_interactive",
         "#mt_hello",
         "#mt_itme"
+      ],
+      "slugFallback": "hi"
+    },
+    {
+      "id": "23805",
+      "src": "https://sdk.bitmoji.com/render/panel/20048636-%s-v1.png",
+      "displayTag": "안녕",
+      "keywords": "안녕 좋은 아침 안녕 인사 안녕 어이 안녕하슈 안녕 안녕 좋은 날 봄 다람쥐 숲 너구리 올빼미 다람쥐 나무 동물 공원 여름 #ismiley waving with forest critters peaking out of a hole in a tree waving surrounded by an owl a raccoon and squirrels",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_textless"
       ],
       "slugFallback": "hi"
     },
@@ -8669,6 +8631,44 @@
         "#mt_signoff"
       ],
       "slugFallback": "ttyl"
+    },
+    {
+      "id": "27090",
+      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
+      "displayTag": "긍정적인 기운",
+      "keywords": "긍정적인 기운 풀숲 doves 새 아침 안녕 start of the day beautiful day morning vibes beautiful morning 긍정적인 기운 어서 일어나 좋은 날 #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key"
+      ],
+      "slugFallback": "positive vibes"
+    },
+    {
+      "id": "18740",
+      "src": "https://sdk.bitmoji.com/render/panel/10237549-%s-v1.png",
+      "displayTag": "일광욕",
+      "keywords": "일광욕 햇빛 일광욕 일광욕 일 여름 일광욕 hot weather sun bathing #ismiley sun basking basking directly below sun eyes closed looking content",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "summer solstice"
+    },
+    {
+      "id": "25579",
+      "src": "https://sdk.bitmoji.com/render/panel/20070491-%s-v1.png",
+      "displayTag": "좋은 아침",
+      "keywords": "좋은 아침 좋은 아침* 아침 flamingo 안녕 식물 어서 일어나 정원 울타리 어서 일어나 좋은 날 gnome #ismiley good morning waving joyfully behind a fence and garden surrounded by plants and a garden gnome, good morning",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_text",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_text_key"
+      ],
+      "slugFallback": "good morning"
     },
     {
       "id": "15449",
@@ -12322,46 +12322,6 @@
     }
   ],
   "friends": [
-    {
-      "id": "15509",
-      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
-      "displayTag": "알람 시계",
-      "keywords": "알람 시계 모닝 댄스 좋은 아침 상쾌한 기상 알람 시계 댄스 #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "alarm clock"
-    },
-    {
-      "id": "23883",
-      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
-      "displayTag": "안녕",
-      "keywords": "안녕 좋은 아침 아침 샌드위치 해시 브라운 좋은 아침! 일어나 일어나 일어날 시간 커피 안녕 아침 식사 안녕 어서 일어나 잉글리시 머핀 안녕 아침 #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "hi"
-    },
-    {
-      "id": "13799",
-      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
-      "displayTag": "양치질",
-      "keywords": "양치질 고양이와 양치질 양치질 칫솔 칫솔 #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ],
-      "slugFallback": "tooth brushing"
-    },
     {
       "id": "20114",
       "src": "https://sdk.bitmoji.com/render/panel/20011476-%s-%s-v1.png",
@@ -17182,6 +17142,46 @@
         "#mt_meme",
         "#mt_meme_yay"
       ]
+    },
+    {
+      "id": "15509",
+      "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
+      "displayTag": "알람 시계",
+      "keywords": "알람 시계 모닝 댄스 좋은 아침 상쾌한 기상 알람 시계 댄스 #ismiley alarm dance friends dancing happily with your friend and a happy alarm clock",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "alarm clock"
+    },
+    {
+      "id": "23883",
+      "src": "https://sdk.bitmoji.com/render/panel/20049931-%s-%s-v1.png",
+      "displayTag": "안녕",
+      "keywords": "안녕 좋은 아침 아침 샌드위치 해시 브라운 좋은 아침! 일어나 일어나 일어날 시간 커피 안녕 아침 식사 안녕 어서 일어나 잉글리시 머핀 안녕 아침 #ismiley breakfast sandwich friends smiling at friend sitting on a breakfast sandwich, friend smiles back sitting on a hash brown",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "hi"
+    },
+    {
+      "id": "13799",
+      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
+      "displayTag": "양치질",
+      "keywords": "양치질 고양이와 양치질 양치질 칫솔 칫솔 #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
+      ],
+      "slugFallback": "tooth brushing"
     },
     {
       "id": "18742",
