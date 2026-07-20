@@ -1939,6 +1939,43 @@
       ]
     },
     {
+      "id": "14223",
+      "src": "https://sdk.bitmoji.com/render/panel/10220906-%s-v1.png",
+      "displayTag": "dança de café da manhã",
+      "keywords": "dança de café da manhã sair pra dançar ovo comida brunch dançante torrada café da manhã dançante waffle brunch dança de brunch café café da manhã bom brunch #popmoji happy brunch dancing with arms outstretched surrounded by dancing breakfast foods and musical notes looking happy",
+      "categories": [
+        "#mt_food_interactive",
+        "#mt_food",
+        "#mt_goodmorning",
+        "#mt_food_venmo",
+        "#mt_hometab_ifrowny",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "23805",
+      "src": "https://sdk.bitmoji.com/render/panel/20048636-%s-v1.png",
+      "displayTag": "oi",
+      "keywords": "oi bom dia td bem? cumprimentos eei qualé fala olá ei bom dia primavera esquilo floresta guaxinim coruja esquilo árvore animais parque verão #popmoji waving with forest critters peaking out of a hole in a tree waving surrounded by an owl a raccoon and squirrels",
+      "categories": [
+        "#mt_hello_com_textless",
+        "#mt_hello",
+        "#mt_goodmorning",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "22689",
+      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
+      "displayTag": "pardal",
+      "keywords": "pardal pássaro calopsita canção canto assobiando bom dia apito cantar de manhã tweet animal #popmoji songbird as a bird sitting on a perch singing",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "13057",
       "src": "https://sdk.bitmoji.com/render/panel/10217325-%s-v1.png",
       "displayTag": "avião",
@@ -4172,20 +4209,6 @@
       ]
     },
     {
-      "id": "14223",
-      "src": "https://sdk.bitmoji.com/render/panel/10220906-%s-v1.png",
-      "displayTag": "dança de café da manhã",
-      "keywords": "dança de café da manhã sair pra dançar ovo comida brunch dançante torrada café da manhã dançante waffle brunch dança de brunch café café da manhã bom brunch #ifrowny happy brunch dancing with arms outstretched surrounded by dancing breakfast foods and musical notes looking happy",
-      "categories": [
-        "#mt_food_interactive",
-        "#mt_food",
-        "#mt_goodmorning",
-        "#mt_food_venmo",
-        "#mt_hometab_ifrowny",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
       "id": "16566",
       "src": "https://sdk.bitmoji.com/render/panel/10227284-%s-v1.png",
       "displayTag": "coma de comida",
@@ -5661,6 +5684,31 @@
       ]
     },
     {
+      "id": "27090",
+      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
+      "displayTag": "vibes positivas",
+      "keywords": "vibes positivas mato doves pássaros de manhã bom dia start of the day beautiful day morning vibes beautiful morning boas vibes pronta pra brilhar bom dia #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key"
+      ]
+    },
+    {
+      "id": "23875",
+      "src": "https://sdk.bitmoji.com/render/panel/20049930-%s-v1.png",
+      "displayTag": "oi",
+      "keywords": "oi bom dia sanduíche de café da manhã bolinho de batata no café da manhã bom dia acorda acorda hora de acordar bom dia café olá café da manhã ei pronta pra brilhar bolo inglês de manhã #ismiley breakfast sandwich sitting on a breakfast sandwich waving surrounded by a coffee and hash brown",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
       "id": "15424",
       "src": "https://sdk.bitmoji.com/render/panel/10224154-%s-v1.png",
       "displayTag": "trabalho de escola",
@@ -6203,17 +6251,29 @@
       ]
     },
     {
-      "id": "19334",
-      "src": "https://sdk.bitmoji.com/render/panel/20005759-%s-v1.png",
-      "displayTag": "piscando",
-      "keywords": "piscando flertar piscar sexy close up #popmoji flirty wink zoomed in on face and winking confidently and surrounded by glittering sparkles",
+      "id": "30010",
+      "src": "https://sdk.bitmoji.com/render/panel/31137070-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar heart hands eu amo você bj te amo amo vc mandando amor amo coração amo você t amo ilysm #popmoji heart hands looking happy making a heart with middle and pointer fingers",
       "categories": [
         "#mt_xoxo",
         "#mt_xoxo_com_textless",
         "#mt_xoxo_key",
         "#mt_xoxo_com_textless_key",
-        "#mt_hometab_ilove",
-        "#mt_hometab_ilove_batcha"
+        "#mt_hometab_ilove_batcha",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "25005",
+      "src": "https://sdk.bitmoji.com/render/panel/20063089-%s-v1.png",
+      "displayTag": "pássaro de origami",
+      "keywords": "pássaro de origami oi arte em papel opa oi origami origami cumprimentos pássaro de origami artes eei oiê qualé eaí olá ei e aí acenando aceno #popmoji origami wave cheerfully waving while sitting on a paper origami bird",
+      "categories": [
+        "#mt_hello_interactive",
+        "#mt_hello",
+        "#mt_hello_interactive_key",
+        "#mt_hello_key"
       ]
     },
     {
@@ -6286,18 +6346,6 @@
         "#mt_hello",
         "#mt_hello_key",
         "#mt_hello_interactive_key"
-      ]
-    },
-    {
-      "id": "25005",
-      "src": "https://sdk.bitmoji.com/render/panel/20063089-%s-v1.png",
-      "displayTag": "pássaro de origami",
-      "keywords": "pássaro de origami oi arte em papel opa oi origami origami cumprimentos pássaro de origami artes eei oiê qualé eaí olá ei e aí acenando aceno #ismiley origami wave cheerfully waving while sitting on a paper origami bird",
-      "categories": [
-        "#mt_hello_interactive",
-        "#mt_hello",
-        "#mt_hello_interactive_key",
-        "#mt_hello_key"
       ]
     },
     {
@@ -7071,16 +7119,15 @@
       ]
     },
     {
-      "id": "18813",
-      "src": "https://sdk.bitmoji.com/render/panel/20088503-%s-v1.png",
-      "displayTag": "montando uma joaninha",
-      "keywords": "montando uma joaninha passeio de joaninha joaninha montando uma joaninha joaninha bicho inseto acenando aceno #popmoji riding a ladybug sitting on a ladybug looking amused and waving",
+      "id": "26080",
+      "src": "https://sdk.bitmoji.com/render/panel/20078161-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar paper hearts amo vc amo te amo scissors artes eu amo você :* heart cutouts corações t amo eu gosto de você amo você afeto fazendo arte arte em papel #popmoji heart cutout happily holding a cutout row of paper hearts",
       "categories": [
-        "#mt_hello",
-        "#mt_hello_com_textless",
-        "#mt_hello_com_textless_key",
-        "#mt_itme",
-        "#mt_hometab_ismiley"
+        "#mt_xoxo_com_textless",
+        "#mt_xoxo",
+        "#mt_xoxo_com_textless_key",
+        "#mt_xoxo_key"
       ]
     },
     {
@@ -7143,18 +7190,6 @@
       ]
     },
     {
-      "id": "23805",
-      "src": "https://sdk.bitmoji.com/render/panel/20048636-%s-v1.png",
-      "displayTag": "oi",
-      "keywords": "oi bom dia td bem? cumprimentos eei qualé fala olá ei bom dia primavera esquilo floresta guaxinim coruja esquilo árvore animais parque verão #ismiley waving with forest critters peaking out of a hole in a tree waving surrounded by an owl a raccoon and squirrels",
-      "categories": [
-        "#mt_hello_com_textless",
-        "#mt_hello",
-        "#mt_goodmorning",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
       "id": "24341",
       "src": "https://sdk.bitmoji.com/render/panel/20055094-%s-v1.png",
       "displayTag": "oi",
@@ -7173,6 +7208,19 @@
       "categories": [
         "#mt_hello_com_textless",
         "#mt_hello"
+      ]
+    },
+    {
+      "id": "18813",
+      "src": "https://sdk.bitmoji.com/render/panel/20088503-%s-v1.png",
+      "displayTag": "montando uma joaninha",
+      "keywords": "montando uma joaninha passeio de joaninha joaninha montando uma joaninha joaninha bicho inseto acenando aceno #ismiley riding a ladybug sitting on a ladybug looking amused and waving",
+      "categories": [
+        "#mt_hello",
+        "#mt_hello_com_textless",
+        "#mt_hello_com_textless_key",
+        "#mt_itme",
+        "#mt_hometab_ismiley"
       ]
     },
     {
@@ -7316,18 +7364,6 @@
       ]
     },
     {
-      "id": "27090",
-      "src": "https://sdk.bitmoji.com/render/panel/20089591-%s-v1.png",
-      "displayTag": "vibes positivas",
-      "keywords": "vibes positivas mato doves pássaros de manhã bom dia start of the day beautiful day morning vibes beautiful morning boas vibes pronta pra brilhar bom dia #ismiley main character energy looking optimistic opening the blinds and leaning on a flower filled windowsill",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key"
-      ]
-    },
-    {
       "id": "15449",
       "src": "https://sdk.bitmoji.com/render/panel/10224150-%s-v1.png",
       "displayTag": "bom dia",
@@ -7335,17 +7371,6 @@
       "categories": [
         "#mt_goodmorning",
         "#mt_goodmorning_interactive"
-      ]
-    },
-    {
-      "id": "22689",
-      "src": "https://sdk.bitmoji.com/render/panel/20033227-%s-v1.png",
-      "displayTag": "pardal",
-      "keywords": "pardal pássaro calopsita canção canto assobiando bom dia apito cantar de manhã tweet animal #ismiley songbird as a bird sitting on a perch singing",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_textless"
       ]
     },
     {
@@ -7358,19 +7383,6 @@
         "#mt_goodmorning_com_textless",
         "#mt_goodmorning_key",
         "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "23875",
-      "src": "https://sdk.bitmoji.com/render/panel/20049930-%s-v1.png",
-      "displayTag": "oi",
-      "keywords": "oi bom dia sanduíche de café da manhã bolinho de batata no café da manhã bom dia acorda acorda hora de acordar bom dia café olá café da manhã ei pronta pra brilhar bolo inglês de manhã #ismiley breakfast sandwich sitting on a breakfast sandwich waving surrounded by a coffee and hash brown",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_key",
         "#mt_goodmorning_textless"
       ]
     },
@@ -7423,15 +7435,13 @@
       ]
     },
     {
-      "id": "25422",
-      "src": "https://sdk.bitmoji.com/render/panel/20069557-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar crayon amo vc mandando amor coração :* te amo t amo eu gosto de você amo você heart art eu amo você heart sketch bj #popmoji crayon heart joyfully drawing a heart with a giant crayon",
+      "id": "19202",
+      "src": "https://sdk.bitmoji.com/render/panel/20063706-%s-v1.png",
+      "displayTag": "chefe",
+      "keywords": "chefe trabalho pode deixar chefe mesa de trabalho ocupado/a trabalhando telefone #popmoji you got it boss looking stressed and smiling reluctantly with work piling up on desk",
       "categories": [
-        "#mt_xoxo",
-        "#mt_xoxo_com_interactive",
-        "#mt_xoxo_key",
-        "#mt_xoxo_com_interactive_key"
+        "#mt_waaah_com_textless",
+        "#mt_waaah_com_textless_key"
       ]
     },
     {
@@ -7538,37 +7548,13 @@
       ]
     },
     {
-      "id": "11446",
-      "src": "https://sdk.bitmoji.com/render/panel/10216880-%s-v1.png",
-      "displayTag": "tango",
-      "keywords": "tango rosa romântico sexy flor #popmoji tango rose looking romantic with a rose in mouth",
-      "categories": [
-        "#mt_romance",
-        "#mt_romance_com_textless_key",
-        "#mt_hometab_ilove",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "13938",
-      "src": "https://sdk.bitmoji.com/render/panel/10220064-%s-v1.png",
-      "displayTag": "piano romântico",
-      "keywords": "piano romântico pianista pianista tocando o piano piano de cauda tocando piano piano sexy piano música #popmoji romantic piano looking sly behind a piano with a rose on top",
+      "id": "15493",
+      "src": "https://sdk.bitmoji.com/render/panel/10224365-%s-v1.png",
+      "displayTag": "spaghetti cachorro",
+      "keywords": "spaghetti cachorro espaguete massa com cachorro shiba inu encontro de cachorro espaguete cachorro macarrão de cachorro namoro cachorro encontro espaguete de cachorro a dama e o vagabundo massa acompanhado de cachorro cachorro spaghetti #popmoji dog date sharing a noodle with a dog over a fancy pasta dinner",
       "categories": [
         "#mt_romance",
         "#mt_romance_com_textless"
-      ]
-    },
-    {
-      "id": "26080",
-      "src": "https://sdk.bitmoji.com/render/panel/20078161-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar paper hearts amo vc amo te amo scissors artes eu amo você :* heart cutouts corações t amo eu gosto de você amo você afeto fazendo arte arte em papel #popmoji heart cutout happily holding a cutout row of paper hearts",
-      "categories": [
-        "#mt_xoxo_com_textless",
-        "#mt_xoxo",
-        "#mt_xoxo_com_textless_key",
-        "#mt_xoxo_key"
       ]
     },
     {
@@ -7583,13 +7569,15 @@
       ]
     },
     {
-      "id": "19202",
-      "src": "https://sdk.bitmoji.com/render/panel/20063706-%s-v1.png",
-      "displayTag": "chefe",
-      "keywords": "chefe trabalho pode deixar chefe mesa de trabalho ocupado/a trabalhando telefone #popmoji you got it boss looking stressed and smiling reluctantly with work piling up on desk",
+      "id": "5378",
+      "src": "https://sdk.bitmoji.com/render/panel/8770505-%s-v1.png",
+      "displayTag": "coração",
+      "keywords": "coração mandando beijo coraçãozinho manda beijo te amo sensual mandando beijo coração beijo smack #popmoji blowing kiss blowing a kiss heart",
       "categories": [
-        "#mt_waaah_com_textless",
-        "#mt_waaah_com_textless_key"
+        "#mt_xoxo",
+        "#mt_xoxo_interactive",
+        "#mt_xoxo_interactive_key",
+        "#mt_hometab_ilove"
       ]
     },
     {
@@ -7606,72 +7594,62 @@
       ]
     },
     {
-      "id": "11389",
-      "src": "https://sdk.bitmoji.com/render/panel/20087047-%s-v1.png",
+      "id": "22630",
+      "src": "https://sdk.bitmoji.com/render/panel/20032874-%s-v1.png",
       "displayTag": "amar",
-      "keywords": "amar romance amo oi amor esconde-esconde coração doce coração coraçãozinho corações bolha de coração amo você adorar #popmoji hearts greeting peaking out of a speech bubble surrounded by hearts",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou_com_textless_key",
-        "#mt_loveyou",
-        "#mt_hometab_ilove",
-        "#mt_lovethisquicksend",
-        "#mt_love_venmo",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "16616",
-      "src": "https://sdk.bitmoji.com/render/panel/10228094-%s-v1.png",
-      "displayTag": "feliz ano novo",
-      "keywords": "feliz ano novo confete véspera de ano novo curtição produtor de ruído feliz ano novo ano novo ano novo #popmoji confetti and noisemaker looking excited with a party blower and confetti falling",
-      "categories": []
-    },
-    {
-      "id": "30139",
-      "src": "https://sdk.bitmoji.com/render/panel/36114626-%s-v1.png",
-      "displayTag": "tímido",
-      "keywords": "tímido envergonhado i think i like you embarrassment encabulado tô com vergonha flertar que vergonha embarassing embarassment ficar vermelho vermelho lisonjeado #popmoji embarrassed looking embarrassed ",
+      "keywords": "amar três corações adorei 3 corações explosão de coração coração estourando amo adoro coração coração explodindo corações explodindo de amor amo tanto você te amo te amo tanto amo vc #popmoji bursting with love eyes closed and smiling with 3 smiling hearts bursting from your chest ",
       "categories": [
         "#mt_xoxo_com_textless",
         "#mt_xoxo",
-        "#mt_hometab_inuanced_batcha",
-        "#mt_hometab_ilove"
+        "#mt_xoxo_key",
+        "#mt_xoxo_com_textless_key"
       ]
     },
     {
-      "id": "30010",
-      "src": "https://sdk.bitmoji.com/render/panel/31137070-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar heart hands eu amo você bj te amo amo vc mandando amor amo coração amo você t amo ilysm #popmoji heart hands looking happy making a heart with middle and pointer fingers",
+      "id": "18081",
+      "src": "https://sdk.bitmoji.com/render/panel/10232805-%s-v1.png",
+      "displayTag": "suando frio",
+      "keywords": "suando frio ansioso nervoso suando suando de nervoso culpado sob pressão ansiedade #popmoji nervous sweating looking anxious and sweating under pressure",
+      "categories": [
+        "#mt_waaah_com_textless",
+        "#mt_hometab_inuanced",
+        "#mt_hometab_inuanced_batcha"
+      ]
+    },
+    {
+      "id": "13938",
+      "src": "https://sdk.bitmoji.com/render/panel/10220064-%s-v1.png",
+      "displayTag": "piano romântico",
+      "keywords": "piano romântico pianista pianista tocando o piano piano de cauda tocando piano piano sexy piano música #popmoji romantic piano looking sly behind a piano with a rose on top",
+      "categories": [
+        "#mt_romance",
+        "#mt_romance_com_textless"
+      ]
+    },
+    {
+      "id": "19334",
+      "src": "https://sdk.bitmoji.com/render/panel/20005759-%s-v1.png",
+      "displayTag": "piscando",
+      "keywords": "piscando flertar piscar sexy close up #popmoji flirty wink zoomed in on face and winking confidently and surrounded by glittering sparkles",
       "categories": [
         "#mt_xoxo",
         "#mt_xoxo_com_textless",
         "#mt_xoxo_key",
         "#mt_xoxo_com_textless_key",
-        "#mt_hometab_ilove_batcha",
-        "#mt_hometab_ilove"
+        "#mt_hometab_ilove",
+        "#mt_hometab_ilove_batcha"
       ]
     },
     {
-      "id": "30224",
-      "src": "https://sdk.bitmoji.com/render/panel/31239530-%s-v1.png",
-      "displayTag": "inocente",
-      "keywords": "inocente seat aleatório oh me fofurinha sou eu :* bj so me sentando fui eu pose sentado sat cutesy demure #popmoji cutesy sit looking cute sitting with hands in your lap",
+      "id": "14655",
+      "src": "https://sdk.bitmoji.com/render/panel/20087210-%s-v1.png",
+      "displayTag": "balão de ar quente",
+      "keywords": "balão de ar quente <3 balão de coração oi olá coração aceno #popmoji hot air balloon smiling and waving in a heart shaped hot air balloon",
       "categories": [
-        "#mt_xoxo_com_textless",
         "#mt_xoxo",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "15493",
-      "src": "https://sdk.bitmoji.com/render/panel/10224365-%s-v1.png",
-      "displayTag": "spaghetti cachorro",
-      "keywords": "spaghetti cachorro espaguete massa com cachorro shiba inu encontro de cachorro espaguete cachorro macarrão de cachorro namoro cachorro encontro espaguete de cachorro a dama e o vagabundo massa acompanhado de cachorro cachorro spaghetti #popmoji dog date sharing a noodle with a dog over a fancy pasta dinner",
-      "categories": [
-        "#mt_romance",
-        "#mt_romance_com_textless"
+        "#mt_xoxo_interactive",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo"
       ]
     },
     {
@@ -7685,6 +7663,278 @@
         "#mt_love_venmo",
         "#mt_hometab_ilove",
         "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "16377",
+      "src": "https://sdk.bitmoji.com/render/panel/10226905-%s-v1.png",
+      "displayTag": "coração musculoso",
+      "keywords": "coração musculoso músculo coração músculos coração forte amor forte heart flex coração #popmoji strong heart holding a flexing muscular heart",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou_com_textless_key",
+        "#mt_loveyou",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "19336",
+      "src": "https://sdk.bitmoji.com/render/panel/20006400-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar beijos texto smack amo você :* lábios adorar #popmoji kisses receiving a text of kissy lips and feeling special",
+      "categories": [
+        "#mt_loveyou",
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou_com_textless_key",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "25422",
+      "src": "https://sdk.bitmoji.com/render/panel/20069557-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar crayon amo vc mandando amor coração :* te amo t amo eu gosto de você amo você heart art eu amo você heart sketch bj #popmoji crayon heart joyfully drawing a heart with a giant crayon",
+      "categories": [
+        "#mt_xoxo",
+        "#mt_xoxo_com_interactive",
+        "#mt_xoxo_key",
+        "#mt_xoxo_com_interactive_key"
+      ]
+    },
+    {
+      "id": "18600",
+      "src": "https://sdk.bitmoji.com/render/panel/10236260-%s-v1.png",
+      "displayTag": "primavera",
+      "keywords": "primavera rosa vermelha rosa flor happy spring #popmoji red rose popping out from the centre of a red rose looking happy",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou",
+        "#mt_loveyou_com_textless_key",
+        "#mt_love_venmo",
+        "#mt_hometab_ilove",
+        "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "15508",
+      "src": "https://sdk.bitmoji.com/render/panel/10224588-%s-v1.png",
+      "displayTag": "coala",
+      "keywords": "coala coala sdds saudades :* #popmoji koala friend holding a koala next to a big heart",
+      "categories": [
+        "#mt_xoxo"
+      ]
+    },
+    {
+      "id": "16616",
+      "src": "https://sdk.bitmoji.com/render/panel/10228094-%s-v1.png",
+      "displayTag": "feliz ano novo",
+      "keywords": "feliz ano novo confete véspera de ano novo curtição produtor de ruído feliz ano novo ano novo ano novo #popmoji confetti and noisemaker looking excited with a party blower and confetti falling",
+      "categories": []
+    },
+    {
+      "id": "18517",
+      "src": "https://sdk.bitmoji.com/render/panel/10235699-%s-v1.png",
+      "displayTag": "emojis",
+      "keywords": "emojis amar balões balão de coração olhos de coração balões de emoji emoji piscar beijo piscando beijo piscadela emoji beijo piscando beijo emoji olhos de coração adorar 💘 💝 💖 💗 💓 💞 💕 ❤️ ♥ 😗 😘 😙 😚 😍 😽 #popmoji love emoji balloons giving a flirty look floating and holding emoji balloons of winking face and heart eyes",
+      "categories": [
+        "#mt_loveyou_interactive",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "13928",
+      "src": "https://sdk.bitmoji.com/render/panel/10219953-%s-v1.png",
+      "displayTag": "gatinho de estimação",
+      "keywords": "gatinho de estimação gato com corações bichano gato de estimação gato fazendo carinho nos gatinhos gatinho adoro gatos amar #popmoji love this with cat looking upwards emotionally next to a cat surrounded by hearts",
+      "categories": [
+        "#mt_xoxo",
+        "#mt_xoxo_com_textless",
+        "#mt_lovethisquicksend"
+      ]
+    },
+    {
+      "id": "26450",
+      "src": "https://sdk.bitmoji.com/render/panel/20081645-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar meu doce pirulito heart lollipop coração :* bj namorados te amo namorado amo vc t amo dia dos namorados amo você #popmoji heart lollipop holding a giant heart shaped lollipop",
+      "categories": [
+        "#mt_xoxo_com_textless",
+        "#mt_xoxo",
+        "#mt_xoxo_key",
+        "#mt_xoxo_com_textless_key"
+      ]
+    },
+    {
+      "id": "17516",
+      "src": "https://sdk.bitmoji.com/render/panel/10230580-%s-v1.png",
+      "displayTag": "dedos cruzados",
+      "keywords": "dedos cruzados dedões de espuma otimista esperança esportes de inverno dedos cruzados cruzando os dedos #popmoji fingers crossed wearing giant foam fingers that are crossed for good luck and looking hopeful",
+      "categories": []
+    },
+    {
+      "id": "11446",
+      "src": "https://sdk.bitmoji.com/render/panel/10216880-%s-v1.png",
+      "displayTag": "tango",
+      "keywords": "tango rosa romântico sexy flor #popmoji tango rose looking romantic with a rose in mouth",
+      "categories": [
+        "#mt_romance",
+        "#mt_romance_com_textless_key",
+        "#mt_hometab_ilove",
+        "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "18514",
+      "src": "https://sdk.bitmoji.com/render/panel/10235696-%s-v1.png",
+      "displayTag": "emojis",
+      "keywords": "emojis amar coração partido balões triste balões de emoji emoji coração partido emoji triste balão lágrimas emoji choro emoji chorando lágrima chorando dor no coração emoji de coração partido choro lamentando adorar 😭 😢 😿 💔 :( #popmoji sad emoji balloons crying and floating holding emoji balloons of crying broken heart and sad ",
+      "categories": [
+        "#mt_waaah_interactive"
+      ]
+    },
+    {
+      "id": "16631",
+      "src": "https://sdk.bitmoji.com/render/panel/10227490-%s-v1.png",
+      "displayTag": "corações",
+      "keywords": "corações caixa de coração caixa de coração coração :* eu amo você t amo amo você #popmoji heart box smiling while popping out of a heart shaped box",
+      "categories": [
+        "#mt_xoxo",
+        "#mt_xoxo_com_textless",
+        "#mt_xoxo_key",
+        "#mt_xoxo_com_textless_key",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "19038",
+      "src": "https://sdk.bitmoji.com/render/panel/20003400-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar eu amo você apaixonei explosão de coração amo você adorar #popmoji bursting with love hands on chest with eyes closed and smiling while surrounded by a burst of hearts ",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou",
+        "#mt_loveyou_com_textless_key",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "3438",
+      "src": "https://sdk.bitmoji.com/render/panel/8149231-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar coração coração gigante coraçãozinho te amo namorado coração amo você adorar #popmoji giant heart holding a giant heart",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou_com_textless_key",
+        "#mt_loveyou",
+        "#mt_hometab_ilove",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo"
+      ]
+    },
+    {
+      "id": "30418",
+      "src": "https://sdk.bitmoji.com/render/panel/34972096-%s-v1.png",
+      "displayTag": "me deixa em paz",
+      "keywords": "me deixa em paz laid back curtindo esperando hora da pausa curtir contemplating from the back ignoring pensando view facing away curtindo paciência sentado laidback back view pensar vibrando deep thoughts relaxar relaxando analisando introspective de olho pendurado sentando #popmoji sitting looking off sitting on the ground",
+      "categories": [
+        "#mt_posvibes",
+        "#mt_posvibes_com_textless",
+        "#mt_posvibes_key",
+        "#mt_posvibes_com_textless_key",
+        "#mt_hometab_ifrowny"
+      ]
+    },
+    {
+      "id": "18464",
+      "src": "https://sdk.bitmoji.com/render/panel/10235624-%s-v1.png",
+      "displayTag": "emojis",
+      "keywords": "emojis balões balões de emoji amar balão de coração olhos de coração emoji beijo balão emoji <3 corações emoji piscando emoji beijo piscando coração emoji olhos de coração adorar 💘 💝 💖 💗 💓 💞 💕 ❤️ ♥ #popmoji love emoji balloons happily holding love emoji balloons",
+      "categories": [
+        "#mt_loveyou",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo",
+        "#mt_lovethisquicksend2"
+      ]
+    },
+    {
+      "id": "19629",
+      "src": "https://sdk.bitmoji.com/render/panel/20007943-%s-v1.png",
+      "displayTag": "carimbo de adorei",
+      "keywords": "carimbo de adorei adorei carimbo de coração selo coração adoro adoro adorei adoro #popmoji heart stamp holding a heart stamp",
+      "categories": [
+        "#mt_xoxo_com_textless",
+        "#mt_xoxo_com_textless_key",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo",
+        "#mt_hometab_ilove",
+        "#mt_xoxo",
+        "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "17514",
+      "src": "https://sdk.bitmoji.com/render/panel/10230578-%s-v1.png",
+      "displayTag": "perda",
+      "keywords": "perda desapontado dedo de espuma perdido/a triste esportes de inverno :( #popmoji disappointed  looking sad while wearing a giant foam finger and pointing down",
+      "categories": []
+    },
+    {
+      "id": "13692",
+      "src": "https://sdk.bitmoji.com/render/panel/10218976-%s-v1.png",
+      "displayTag": "vou sentir saudades",
+      "keywords": "vou sentir saudades vou sentir saudades beijo sentirei saudades mandando beijo mandando amor #popmoji heart kiss blowing a heart shaped kiss with wings",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou",
+        "#mt_xoxo",
+        "#mt_hometab_ilove",
+        "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "6251",
+      "src": "https://sdk.bitmoji.com/render/panel/20086771-%s-v1.png",
+      "displayTag": "arco-íris",
+      "keywords": "arco-íris orgulho coração lgbt lgbt lgbtq orgulho lgbtq tá tudo sob controle explosão de coração coração arco-íris good vibes lésbica gay bissexual transgênero interrogatório interssexual pansexual dois-espíritos dois-espíritos andrógino assexual 2-espíritos dois-espíritos dois-espíritos alegria #popmoji pride heart burst looking confident as a heart rainbow pops from your chest",
+      "categories": [
+        "#mt_posvibes",
+        "#mt_posvibes_com_textless",
+        "#mt_posvibes_key",
+        "#mt_xoxo",
+        "#mt_hometab_ifrowny"
+      ]
+    },
+    {
+      "id": "15881",
+      "src": "https://sdk.bitmoji.com/render/panel/10226313-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar gato olhos de coração amor felino gato amor de gato olhos de coração gatinho adorar bichano gatos yearn yearning #popmoji cat heart eyes smiling with hearts for eyes with a cat",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou_com_textless_key",
+        "#mt_loveyou",
+        "#mt_hometab_ilove",
+        "#mt_lovethisquicksend",
+        "#mt_expenses_venmo",
+        "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "15885",
+      "src": "https://sdk.bitmoji.com/render/panel/10226490-%s-v1.png",
+      "displayTag": "corações",
+      "keywords": "corações corações arco-íris :* #popmoji rainbow hearts rainbow colored hearts encircling smiling face",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou_com_textless_key",
+        "#mt_loveyou",
+        "#mt_hometab_ilove",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo"
       ]
     },
     {
@@ -7704,173 +7954,42 @@
       ]
     },
     {
-      "id": "16631",
-      "src": "https://sdk.bitmoji.com/render/panel/10227490-%s-v1.png",
-      "displayTag": "corações",
-      "keywords": "corações caixa de coração caixa de coração coração :* eu amo você t amo amo você #popmoji heart box smiling while popping out of a heart shaped box",
+      "id": "30033",
+      "src": "https://sdk.bitmoji.com/render/panel/35987067-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar lots of love adorei finger hearts coração bj corações feeling loved eu amo você t amo amo vc saranghae coreano amo você #popmoji  making finger hearts",
       "categories": [
-        "#mt_xoxo",
         "#mt_xoxo_com_textless",
+        "#mt_xoxo",
         "#mt_xoxo_key",
         "#mt_xoxo_com_textless_key",
-        "#mt_lovethisquicksend",
-        "#mt_love_venmo",
         "#mt_hometab_ilove"
       ]
     },
     {
-      "id": "23839",
-      "src": "https://sdk.bitmoji.com/render/panel/20049494-%s-v1.png",
-      "displayTag": "árvore de coração",
-      "keywords": "árvore de coração árvore amo vc coração eu amo você :* te amo eu gosto de você amo você tesoura no jardim podando a árvore tesouras coração aparado jardinagem topiária de coração aparando topiária te amo aparando o arbusto arbusto cerca-viva ouriço #popmoji heart tree smiling while trimming the leaves of a tree into the shape of a heart ",
-      "categories": [
-        "#mt_xoxo_com_textless",
-        "#mt_xoxo",
-        "#mt_xoxo_com_textless_key",
-        "#mt_xoxo_key"
-      ]
-    },
-    {
-      "id": "18464",
-      "src": "https://sdk.bitmoji.com/render/panel/10235624-%s-v1.png",
-      "displayTag": "emojis",
-      "keywords": "emojis balões balões de emoji amar balão de coração olhos de coração emoji beijo balão emoji <3 corações emoji piscando emoji beijo piscando coração emoji olhos de coração adorar 💘 💝 💖 💗 💓 💞 💕 ❤️ ♥ #popmoji love emoji balloons happily holding love emoji balloons",
-      "categories": [
-        "#mt_loveyou",
-        "#mt_lovethisquicksend",
-        "#mt_love_venmo",
-        "#mt_lovethisquicksend2"
-      ]
-    },
-    {
-      "id": "15881",
-      "src": "https://sdk.bitmoji.com/render/panel/10226313-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar gato olhos de coração amor felino gato amor de gato olhos de coração gatinho adorar bichano gatos yearn yearning #popmoji cat heart eyes smiling with hearts for eyes with a cat",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou_com_textless_key",
-        "#mt_loveyou",
-        "#mt_hometab_ilove",
-        "#mt_lovethisquicksend",
-        "#mt_expenses_venmo",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "13928",
-      "src": "https://sdk.bitmoji.com/render/panel/10219953-%s-v1.png",
-      "displayTag": "gatinho de estimação",
-      "keywords": "gatinho de estimação gato com corações bichano gato de estimação gato fazendo carinho nos gatinhos gatinho adoro gatos amar #popmoji love this with cat looking upwards emotionally next to a cat surrounded by hearts",
-      "categories": [
-        "#mt_xoxo",
-        "#mt_xoxo_com_textless",
-        "#mt_lovethisquicksend"
-      ]
-    },
-    {
-      "id": "19629",
-      "src": "https://sdk.bitmoji.com/render/panel/20007943-%s-v1.png",
-      "displayTag": "carimbo de adorei",
-      "keywords": "carimbo de adorei adorei carimbo de coração selo coração adoro adoro adorei adoro #popmoji heart stamp holding a heart stamp",
-      "categories": [
-        "#mt_xoxo_com_textless",
-        "#mt_xoxo_com_textless_key",
-        "#mt_lovethisquicksend",
-        "#mt_love_venmo",
-        "#mt_hometab_ilove",
-        "#mt_xoxo",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "13692",
-      "src": "https://sdk.bitmoji.com/render/panel/10218976-%s-v1.png",
-      "displayTag": "vou sentir saudades",
-      "keywords": "vou sentir saudades vou sentir saudades beijo sentirei saudades mandando beijo mandando amor #popmoji heart kiss blowing a heart shaped kiss with wings",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou",
-        "#mt_xoxo",
-        "#mt_hometab_ilove",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "5378",
-      "src": "https://sdk.bitmoji.com/render/panel/8770505-%s-v1.png",
-      "displayTag": "coração",
-      "keywords": "coração mandando beijo coraçãozinho manda beijo te amo sensual mandando beijo coração beijo smack #popmoji blowing kiss blowing a kiss heart",
+      "id": "13794",
+      "src": "https://sdk.bitmoji.com/render/panel/10219580-%s-v1.png",
+      "displayTag": "gato em cima da minha cabeça",
+      "keywords": "gato em cima da minha cabeça gato na cabeça adoro :* #popmoji cat on head love a cat sitting on head while hands are clasped over the heart looking loving with eyes closed",
       "categories": [
         "#mt_xoxo",
         "#mt_xoxo_interactive",
-        "#mt_xoxo_interactive_key",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "18514",
-      "src": "https://sdk.bitmoji.com/render/panel/10235696-%s-v1.png",
-      "displayTag": "emojis",
-      "keywords": "emojis amar coração partido balões triste balões de emoji emoji coração partido emoji triste balão lágrimas emoji choro emoji chorando lágrima chorando dor no coração emoji de coração partido choro lamentando adorar 😭 😢 😿 💔 :( #popmoji sad emoji balloons crying and floating holding emoji balloons of crying broken heart and sad ",
-      "categories": [
-        "#mt_waaah_interactive"
-      ]
-    },
-    {
-      "id": "17514",
-      "src": "https://sdk.bitmoji.com/render/panel/10230578-%s-v1.png",
-      "displayTag": "perda",
-      "keywords": "perda desapontado dedo de espuma perdido/a triste esportes de inverno :( #popmoji disappointed  looking sad while wearing a giant foam finger and pointing down",
-      "categories": []
-    },
-    {
-      "id": "19038",
-      "src": "https://sdk.bitmoji.com/render/panel/20003400-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar eu amo você apaixonei explosão de coração amo você adorar #popmoji bursting with love hands on chest with eyes closed and smiling while surrounded by a burst of hearts ",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou",
-        "#mt_loveyou_com_textless_key",
+        "#mt_xoxo_com_textless_key",
         "#mt_lovethisquicksend",
-        "#mt_love_venmo",
         "#mt_hometab_ilove"
       ]
     },
     {
-      "id": "26450",
-      "src": "https://sdk.bitmoji.com/render/panel/20081645-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar meu doce pirulito heart lollipop coração :* bj namorados te amo namorado amo vc t amo dia dos namorados amo você #popmoji heart lollipop holding a giant heart shaped lollipop",
+      "id": "16393",
+      "src": "https://sdk.bitmoji.com/render/panel/10227004-%s-v1.png",
+      "displayTag": "espalhando amor",
+      "keywords": "espalhando amor distribuindo corações corações distribuidor de corações :* #popmoji heart distribution enthusiastically running throwing hearts into the air",
       "categories": [
-        "#mt_xoxo_com_textless",
         "#mt_xoxo",
-        "#mt_xoxo_key",
-        "#mt_xoxo_com_textless_key"
-      ]
-    },
-    {
-      "id": "9253",
-      "src": "https://sdk.bitmoji.com/render/panel/10212282-%s-v1.png",
-      "displayTag": "bochecha",
-      "keywords": "bochecha beijo na bochecha batom beijo smack #popmoji kiss on cheek looking shocked with kiss mark on cheek",
-      "categories": [
-        "#mt_xoxo"
-      ]
-    },
-    {
-      "id": "3438",
-      "src": "https://sdk.bitmoji.com/render/panel/8149231-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar coração coração gigante coraçãozinho te amo namorado coração amo você adorar #popmoji giant heart holding a giant heart",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou_com_textless_key",
-        "#mt_loveyou",
+        "#mt_xoxo_interactive",
         "#mt_hometab_ilove",
         "#mt_lovethisquicksend",
-        "#mt_love_venmo"
+        "#mt_hometab_ilove_batcha"
       ]
     },
     {
@@ -7888,133 +8007,13 @@
       ]
     },
     {
-      "id": "16393",
-      "src": "https://sdk.bitmoji.com/render/panel/10227004-%s-v1.png",
-      "displayTag": "espalhando amor",
-      "keywords": "espalhando amor distribuindo corações corações distribuidor de corações :* #popmoji heart distribution enthusiastically running throwing hearts into the air",
-      "categories": [
-        "#mt_xoxo",
-        "#mt_xoxo_interactive",
-        "#mt_hometab_ilove",
-        "#mt_lovethisquicksend",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "30033",
-      "src": "https://sdk.bitmoji.com/render/panel/35987067-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar lots of love adorei finger hearts coração bj corações feeling loved eu amo você t amo amo vc saranghae coreano amo você #popmoji  making finger hearts",
-      "categories": [
-        "#mt_xoxo_com_textless",
-        "#mt_xoxo",
-        "#mt_xoxo_key",
-        "#mt_xoxo_com_textless_key",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "6251",
-      "src": "https://sdk.bitmoji.com/render/panel/20086771-%s-v1.png",
-      "displayTag": "arco-íris",
-      "keywords": "arco-íris orgulho coração lgbt lgbt lgbtq orgulho lgbtq tá tudo sob controle explosão de coração coração arco-íris good vibes lésbica gay bissexual transgênero interrogatório interssexual pansexual dois-espíritos dois-espíritos andrógino assexual 2-espíritos dois-espíritos dois-espíritos alegria #popmoji pride heart burst looking confident as a heart rainbow pops from your chest",
+      "id": "30036",
+      "src": "https://sdk.bitmoji.com/render/panel/37915809-%s-v1.png",
+      "displayTag": "fist in the air",
+      "keywords": "fist in the air power fist solidariedade punho cerrado #popmoji  looking determined with a raised fist",
       "categories": [
         "#mt_posvibes",
-        "#mt_posvibes_com_textless",
-        "#mt_posvibes_key",
-        "#mt_xoxo",
-        "#mt_hometab_ifrowny"
-      ]
-    },
-    {
-      "id": "16377",
-      "src": "https://sdk.bitmoji.com/render/panel/10226905-%s-v1.png",
-      "displayTag": "coração musculoso",
-      "keywords": "coração musculoso músculo coração músculos coração forte amor forte heart flex coração #popmoji strong heart holding a flexing muscular heart",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou_com_textless_key",
-        "#mt_loveyou",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "18081",
-      "src": "https://sdk.bitmoji.com/render/panel/10232805-%s-v1.png",
-      "displayTag": "suando frio",
-      "keywords": "suando frio ansioso nervoso suando suando de nervoso culpado sob pressão ansiedade #popmoji nervous sweating looking anxious and sweating under pressure",
-      "categories": [
-        "#mt_waaah_com_textless",
-        "#mt_hometab_inuanced",
-        "#mt_hometab_inuanced_batcha"
-      ]
-    },
-    {
-      "id": "15885",
-      "src": "https://sdk.bitmoji.com/render/panel/10226490-%s-v1.png",
-      "displayTag": "corações",
-      "keywords": "corações corações arco-íris :* #popmoji rainbow hearts rainbow colored hearts encircling smiling face",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou_com_textless_key",
-        "#mt_loveyou",
-        "#mt_hometab_ilove",
-        "#mt_lovethisquicksend",
-        "#mt_love_venmo"
-      ]
-    },
-    {
-      "id": "13794",
-      "src": "https://sdk.bitmoji.com/render/panel/10219580-%s-v1.png",
-      "displayTag": "gato em cima da minha cabeça",
-      "keywords": "gato em cima da minha cabeça gato na cabeça adoro :* #popmoji cat on head love a cat sitting on head while hands are clasped over the heart looking loving with eyes closed",
-      "categories": [
-        "#mt_xoxo",
-        "#mt_xoxo_interactive",
-        "#mt_xoxo_com_textless_key",
-        "#mt_lovethisquicksend",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "18517",
-      "src": "https://sdk.bitmoji.com/render/panel/10235699-%s-v1.png",
-      "displayTag": "emojis",
-      "keywords": "emojis amar balões balão de coração olhos de coração balões de emoji emoji piscar beijo piscando beijo piscadela emoji beijo piscando beijo emoji olhos de coração adorar 💘 💝 💖 💗 💓 💞 💕 ❤️ ♥ 😗 😘 😙 😚 😍 😽 #popmoji love emoji balloons giving a flirty look floating and holding emoji balloons of winking face and heart eyes",
-      "categories": [
-        "#mt_loveyou_interactive",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "17516",
-      "src": "https://sdk.bitmoji.com/render/panel/10230580-%s-v1.png",
-      "displayTag": "dedos cruzados",
-      "keywords": "dedos cruzados dedões de espuma otimista esperança esportes de inverno dedos cruzados cruzando os dedos #popmoji fingers crossed wearing giant foam fingers that are crossed for good luck and looking hopeful",
-      "categories": []
-    },
-    {
-      "id": "14655",
-      "src": "https://sdk.bitmoji.com/render/panel/20087210-%s-v1.png",
-      "displayTag": "balão de ar quente",
-      "keywords": "balão de ar quente <3 balão de coração oi olá coração aceno #popmoji hot air balloon smiling and waving in a heart shaped hot air balloon",
-      "categories": [
-        "#mt_xoxo",
-        "#mt_xoxo_interactive",
-        "#mt_lovethisquicksend",
-        "#mt_love_venmo"
-      ]
-    },
-    {
-      "id": "19336",
-      "src": "https://sdk.bitmoji.com/render/panel/20006400-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar beijos texto smack amo você :* lábios adorar #popmoji kisses receiving a text of kissy lips and feeling special",
-      "categories": [
-        "#mt_loveyou",
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou_com_textless_key",
-        "#mt_hometab_ilove"
+        "#mt_posvibes_com_textless"
       ]
     },
     {
@@ -8030,29 +8029,35 @@
       ]
     },
     {
-      "id": "18600",
-      "src": "https://sdk.bitmoji.com/render/panel/10236260-%s-v1.png",
-      "displayTag": "primavera",
-      "keywords": "primavera rosa vermelha rosa flor happy spring #popmoji red rose popping out from the centre of a red rose looking happy",
-      "categories": [
-        "#mt_loveyou_com_textless",
-        "#mt_loveyou",
-        "#mt_loveyou_com_textless_key",
-        "#mt_love_venmo",
-        "#mt_hometab_ilove",
-        "#mt_hometab_ilove_batcha"
-      ]
-    },
-    {
-      "id": "22630",
-      "src": "https://sdk.bitmoji.com/render/panel/20032874-%s-v1.png",
+      "id": "26896",
+      "src": "https://sdk.bitmoji.com/render/panel/20086414-%s-v1.png",
       "displayTag": "amar",
-      "keywords": "amar três corações adorei 3 corações explosão de coração coração estourando amo adoro coração coração explodindo corações explodindo de amor amo tanto você te amo te amo tanto amo vc #popmoji bursting with love eyes closed and smiling with 3 smiling hearts bursting from your chest ",
+      "keywords": "amar pb+j lanche sanduíche comida coração :* jelly sandwich geleia pbj jam sandwich pbandj #popmoji heart jam sandwich smiling as a jelly smeared heart sandwich",
       "categories": [
         "#mt_xoxo_com_textless",
         "#mt_xoxo",
         "#mt_xoxo_key",
         "#mt_xoxo_com_textless_key"
+      ]
+    },
+    {
+      "id": "9253",
+      "src": "https://sdk.bitmoji.com/render/panel/10212282-%s-v1.png",
+      "displayTag": "bochecha",
+      "keywords": "bochecha beijo na bochecha batom beijo smack #popmoji kiss on cheek looking shocked with kiss mark on cheek",
+      "categories": [
+        "#mt_xoxo"
+      ]
+    },
+    {
+      "id": "30222",
+      "src": "https://sdk.bitmoji.com/render/panel/39159642-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar adorei sobrecarregado adoro apaixonado ah, cara ficar vermelho bj corações oh my vermelho apaixonei fofurinha* feeling loved #popmoji happy blush hearts look overjoyed and blushing",
+      "categories": [
+        "#mt_xoxo_com_textless",
+        "#mt_xoxo",
+        "#mt_hometab_ilove"
       ]
     },
     {
@@ -8069,57 +8074,52 @@
       ]
     },
     {
-      "id": "26896",
-      "src": "https://sdk.bitmoji.com/render/panel/20086414-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar pb+j lanche sanduíche comida coração :* jelly sandwich geleia pbj jam sandwich pbandj #popmoji heart jam sandwich smiling as a jelly smeared heart sandwich",
+      "id": "23839",
+      "src": "https://sdk.bitmoji.com/render/panel/20049494-%s-v1.png",
+      "displayTag": "árvore de coração",
+      "keywords": "árvore de coração árvore amo vc coração eu amo você :* te amo eu gosto de você amo você tesoura no jardim podando a árvore tesouras coração aparado jardinagem topiária de coração aparando topiária te amo aparando o arbusto arbusto cerca-viva ouriço #popmoji heart tree smiling while trimming the leaves of a tree into the shape of a heart ",
       "categories": [
         "#mt_xoxo_com_textless",
         "#mt_xoxo",
-        "#mt_xoxo_key",
-        "#mt_xoxo_com_textless_key"
+        "#mt_xoxo_com_textless_key",
+        "#mt_xoxo_key"
       ]
     },
     {
-      "id": "30418",
-      "src": "https://sdk.bitmoji.com/render/panel/34972096-%s-v1.png",
-      "displayTag": "me deixa em paz",
-      "keywords": "me deixa em paz laid back curtindo esperando hora da pausa curtir contemplating from the back ignoring pensando view facing away curtindo paciência sentado laidback back view pensar vibrando deep thoughts relaxar relaxando analisando introspective de olho pendurado sentando #popmoji sitting looking off sitting on the ground",
-      "categories": [
-        "#mt_posvibes",
-        "#mt_posvibes_com_textless",
-        "#mt_posvibes_key",
-        "#mt_posvibes_com_textless_key",
-        "#mt_hometab_ifrowny"
-      ]
-    },
-    {
-      "id": "15508",
-      "src": "https://sdk.bitmoji.com/render/panel/10224588-%s-v1.png",
-      "displayTag": "coala",
-      "keywords": "coala coala sdds saudades :* #popmoji koala friend holding a koala next to a big heart",
-      "categories": [
-        "#mt_xoxo"
-      ]
-    },
-    {
-      "id": "30036",
-      "src": "https://sdk.bitmoji.com/render/panel/37915809-%s-v1.png",
-      "displayTag": "fist in the air",
-      "keywords": "fist in the air power fist solidariedade punho cerrado #popmoji  looking determined with a raised fist",
-      "categories": [
-        "#mt_posvibes",
-        "#mt_posvibes_com_textless"
-      ]
-    },
-    {
-      "id": "30222",
-      "src": "https://sdk.bitmoji.com/render/panel/39159642-%s-v1.png",
+      "id": "11389",
+      "src": "https://sdk.bitmoji.com/render/panel/20087047-%s-v1.png",
       "displayTag": "amar",
-      "keywords": "amar adorei sobrecarregado adoro apaixonado ah, cara ficar vermelho bj corações oh my vermelho apaixonei fofurinha* feeling loved #popmoji happy blush hearts look overjoyed and blushing",
+      "keywords": "amar romance amo oi amor esconde-esconde coração doce coração coraçãozinho corações bolha de coração amo você adorar #popmoji hearts greeting peaking out of a speech bubble surrounded by hearts",
+      "categories": [
+        "#mt_loveyou_com_textless",
+        "#mt_loveyou_com_textless_key",
+        "#mt_loveyou",
+        "#mt_hometab_ilove",
+        "#mt_lovethisquicksend",
+        "#mt_love_venmo",
+        "#mt_hometab_ilove_batcha"
+      ]
+    },
+    {
+      "id": "30224",
+      "src": "https://sdk.bitmoji.com/render/panel/31239530-%s-v1.png",
+      "displayTag": "inocente",
+      "keywords": "inocente seat aleatório oh me fofurinha sou eu :* bj so me sentando fui eu pose sentado sat cutesy demure #popmoji cutesy sit looking cute sitting with hands in your lap",
       "categories": [
         "#mt_xoxo_com_textless",
         "#mt_xoxo",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "30139",
+      "src": "https://sdk.bitmoji.com/render/panel/36114626-%s-v1.png",
+      "displayTag": "tímido",
+      "keywords": "tímido envergonhado i think i like you embarrassment encabulado tô com vergonha flertar que vergonha embarassing embarassment ficar vermelho vermelho lisonjeado #popmoji embarrassed looking embarrassed ",
+      "categories": [
+        "#mt_xoxo_com_textless",
+        "#mt_xoxo",
+        "#mt_hometab_inuanced_batcha",
         "#mt_hometab_ilove"
       ]
     },
@@ -10566,6 +10566,41 @@
     }
   ],
   "friends": [
+    {
+      "id": "14228",
+      "src": "https://sdk.bitmoji.com/render/panel/10220910-%s-%s-v1.png",
+      "displayTag": "despertador",
+      "keywords": "despertador acorda dança do despertador acordando #ismiley sleepy dance friends looking sleepy with your friend and trying to dance with a happy dancing alarm clock",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_interactive",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "13799",
+      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
+      "displayTag": "escovando os dentes",
+      "keywords": "escovando os dentes escovando o dente com um gato escovando os dentes escova de dente escova de dente #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_key",
+        "#mt_goodmorning_com_textless_key",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
+      ]
+    },
+    {
+      "id": "18742",
+      "src": "https://sdk.bitmoji.com/render/panel/10237550-%s-%s-v1.png",
+      "displayTag": "solstício de verão",
+      "keywords": "solstício de verão luz do sol solstício banho de sol dom. verão feliz :) hot weather sun bathing alegria #ismiley sunbasking friends you and your friend basking in the rays of the sun",
+      "categories": [
+        "#mt_goodmorning",
+        "#mt_goodmorning_com_textless",
+        "#mt_goodmorning_textless"
+      ]
+    },
     {
       "id": "20114",
       "src": "https://sdk.bitmoji.com/render/panel/20011476-%s-%s-v1.png",
@@ -15031,6 +15066,15 @@
       ]
     },
     {
+      "id": "30050",
+      "src": "https://sdk.bitmoji.com/render/panel/38208895-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
       "id": "15509",
       "src": "https://sdk.bitmoji.com/render/panel/20063785-%s-%s-v1.png",
       "displayTag": "despertador",
@@ -15055,30 +15099,6 @@
       ]
     },
     {
-      "id": "13799",
-      "src": "https://sdk.bitmoji.com/render/panel/20044922-%s-%s-v1.png",
-      "displayTag": "escovando os dentes",
-      "keywords": "escovando os dentes escovando o dente com um gato escovando os dentes escova de dente escova de dente #ismiley teeth brushing friends and cat you and your friend are brushing your teeth with a cat that is also brushing it's teeth",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_key",
-        "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "18742",
-      "src": "https://sdk.bitmoji.com/render/panel/10237550-%s-%s-v1.png",
-      "displayTag": "solstício de verão",
-      "keywords": "solstício de verão luz do sol solstício banho de sol dom. verão feliz :) hot weather sun bathing alegria #ismiley sunbasking friends you and your friend basking in the rays of the sun",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_com_textless",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
       "id": "16639",
       "src": "https://sdk.bitmoji.com/render/panel/10227521-%s-%s-v1.png",
       "displayTag": "nuvem de coração",
@@ -15088,17 +15108,6 @@
         "#mt_goodmorning_com_textless",
         "#mt_goodmorning_key",
         "#mt_goodmorning_com_textless_key",
-        "#mt_goodmorning_textless"
-      ]
-    },
-    {
-      "id": "14228",
-      "src": "https://sdk.bitmoji.com/render/panel/10220910-%s-%s-v1.png",
-      "displayTag": "despertador",
-      "keywords": "despertador acorda dança do despertador acordando #ismiley sleepy dance friends looking sleepy with your friend and trying to dance with a happy dancing alarm clock",
-      "categories": [
-        "#mt_goodmorning",
-        "#mt_goodmorning_interactive",
         "#mt_goodmorning_textless"
       ]
     },
@@ -15123,8 +15132,17 @@
       ]
     },
     {
-      "id": "30053",
-      "src": "https://sdk.bitmoji.com/render/panel/30031084-%s-%s-v1.png",
+      "id": "30062",
+      "src": "https://sdk.bitmoji.com/render/panel/32194107-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bro fist bate aqui twin #popmoji fist bump with friend ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30055",
+      "src": "https://sdk.bitmoji.com/render/panel/33633766-%s-%s-v1.png",
       "displayTag": "bff",
       "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
       "categories": [
@@ -15132,21 +15150,12 @@
       ]
     },
     {
-      "id": "30057",
-      "src": "https://sdk.bitmoji.com/render/panel/38070588-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose this guy twin #popmoji  ",
+      "id": "9033",
+      "src": "https://sdk.bitmoji.com/render/panel/10211827-%s-%s-v1.png",
+      "displayTag": "não consigo",
+      "keywords": "não consigo que dia! exaustivo sobrecarregado não vai dar cooked im cooked hopeless #popmoji exhausted lying on ground with friend ",
       "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30054",
-      "src": "https://sdk.bitmoji.com/render/panel/37482391-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
+        "#mt_boo_interactive"
       ]
     },
     {
@@ -15183,464 +15192,10 @@
       ]
     },
     {
-      "id": "9389",
-      "src": "https://sdk.bitmoji.com/render/panel/10212644-%s-%s-v1.png",
-      "displayTag": "fotografia",
-      "keywords": "fotografia retrato de escola foto porta-retrato foto da escola foto de escola #popmoji school portrait with friend ",
-      "categories": [
-        "#mt_yayrandom_com_textless"
-      ]
-    },
-    {
-      "id": "30058",
-      "src": "https://sdk.bitmoji.com/render/panel/30152873-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose sinal da paz ayyy twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "13207",
-      "src": "https://sdk.bitmoji.com/render/panel/10217919-%s-%s-v1.png",
-      "displayTag": "como isso foi acontecer?",
-      "keywords": "como isso foi acontecer? isso não está acontecendo o que tá rolando? o que tá acontecendo? isso tá acontecendo mesmo? socorro vórtex aaaah #popmoji spinning vortex with friend ",
-      "categories": [
-        "#mt_waaah_hold",
-        "#mt_waah_key_hold",
-        "#mt_waaah_com_textless"
-      ]
-    },
-    {
-      "id": "9338",
-      "src": "https://sdk.bitmoji.com/render/panel/10212489-%s-%s-v1.png",
-      "displayTag": "martelo gigante",
-      "keywords": "martelo gigante marreta #popmoji giant mallet smash with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "12971",
-      "src": "https://sdk.bitmoji.com/render/panel/10217072-%s-%s-v1.png",
-      "displayTag": "jaula",
-      "keywords": "jaula enjaulado cadeia preso prisão tim tim cadeia justiça a lei tribunal #popmoji caged looking sly outside a prison cage friend is locked in",
-      "categories": [
-        "#mt_boo_interactive",
-        "#mt_hometab_inuanced"
-      ]
-    },
-    {
-      "id": "13735",
-      "src": "https://sdk.bitmoji.com/render/panel/10219154-%s-%s-v1.png",
-      "displayTag": "amar",
-      "keywords": "amar coração balões coraçãozinho balões de coração adorar #popmoji heart balloons with friend ",
-      "categories": [
-        "#mt_loveyou_interactive",
-        "#mt_loveyou_interactive_key",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "9377",
-      "src": "https://sdk.bitmoji.com/render/panel/10216247-%s-%s-v1.png",
-      "displayTag": "queimando",
-      "keywords": "queimando queimar match queimando coisas #popmoji match mischief with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "9023",
-      "src": "https://sdk.bitmoji.com/render/panel/10211810-%s-%s-v1.png",
-      "displayTag": "acenando",
-      "keywords": "acenando olá ei aceno #popmoji waving with friend ",
-      "categories": [
-        "#mt_hello_interactive"
-      ]
-    },
-    {
-      "id": "14166",
-      "src": "https://sdk.bitmoji.com/render/panel/10220679-%s-%s-v1.png",
-      "displayTag": "música",
-      "keywords": "música jazz blues de saxofone saxofone instrumento blues #popmoji saxophone blues with friend ",
-      "categories": [
-        "#mt_waaah_com_textless"
-      ]
-    },
-    {
-      "id": "16618",
-      "src": "https://sdk.bitmoji.com/render/panel/10227516-%s-%s-v1.png",
-      "displayTag": "leite",
-      "keywords": "leite natal leite e biscoitos cookies #popmoji milk & cookies with friend ",
-      "categories": []
-    },
-    {
-      "id": "18956",
-      "src": "https://sdk.bitmoji.com/render/panel/20002113-%s-%s-v1.png",
-      "displayTag": "volante",
-      "keywords": "volante pássaro voando montando um pássaro pássaro amigo pássaro carona com pássaro #popmoji bird with friend ",
-      "categories": [
-        "#mt_yay_com_textless",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9250",
-      "src": "https://sdk.bitmoji.com/render/panel/10212311-%s-%s-v1.png",
-      "displayTag": "skate",
-      "keywords": "skate skatista patinação skates skatistas skate #popmoji skateboarding with friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9022",
-      "src": "https://sdk.bitmoji.com/render/panel/10211808-%s-%s-v1.png",
-      "displayTag": "dando uma olhada",
-      "keywords": "dando uma olhada passando olá ei aceno olhadinha #popmoji popping in with friend waving ",
-      "categories": [
-        "#mt_hello_interactive"
-      ]
-    },
-    {
-      "id": "17125",
-      "src": "https://sdk.bitmoji.com/render/panel/10229981-%s-%s-v1.png",
-      "displayTag": "muito feliz",
-      "keywords": "muito feliz maracas feliz contente :) alegria #popmoji maracas with friend ",
-      "categories": [
-        "#mt_yay_com_textless"
-      ]
-    },
-    {
-      "id": "9275",
-      "src": "https://sdk.bitmoji.com/render/panel/10212355-%s-%s-v1.png",
-      "displayTag": "trem de brinquedo",
-      "keywords": "trem de brinquedo trem #popmoji toy train with friend ",
-      "categories": [
-        "#mt_yay_interactive"
-      ]
-    },
-    {
-      "id": "15461",
-      "src": "https://sdk.bitmoji.com/render/panel/10224202-%s-%s-v1.png",
-      "displayTag": "viciado em livros",
-      "keywords": "viciado em livros estudar livros estudando lição de casa escola lendo eu amo ler volta às aulas professor prova prova faculdade first day of school #popmoji happy books with friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_expenses_venmo"
-      ]
-    },
-    {
-      "id": "30419",
-      "src": "https://sdk.bitmoji.com/render/panel/34196776-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff amizade curtir kick back togetherness parças view companions companheiro/a parças bff mates relaxando amigos mate bffs passeando melhor amigo curtindo companion hangout curtindo parça together sentado sits descansando relaxar amigos partner pendurado duo sentando #popmoji sitting looking off sitting on the ground with friend",
-      "categories": [
-        "#mt_posvibes",
-        "#mt_posvibes_com_textless",
-        "#mt_posvibes_key",
-        "#mt_posvibes_com_textless_key"
-      ]
-    },
-    {
-      "id": "9393",
-      "src": "https://sdk.bitmoji.com/render/panel/10212665-%s-%s-v1.png",
-      "displayTag": "missão impossível",
-      "keywords": "missão impossível #popmoji mission impossible with friend ",
-      "categories": [
-        "#mt_yay_interactive"
-      ]
-    },
-    {
-      "id": "30050",
-      "src": "https://sdk.bitmoji.com/render/panel/38208895-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30061",
-      "src": "https://sdk.bitmoji.com/render/panel/36496174-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bobão being silly twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30068",
-      "src": "https://sdk.bitmoji.com/render/panel/37466758-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose sair pra dançar bobão being silly dança playful twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9088",
-      "src": "https://sdk.bitmoji.com/render/panel/10211833-%s-%s-v1.png",
-      "displayTag": "relaxando",
-      "keywords": "relaxando sexy sensual de boa reclinado twin #popmoji sexy pose with friend ",
-      "categories": [
-        "#mt_sexy_interactive_key",
-        "#mt_sexy_interactive",
-        "#mt_hometab_ilove",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9346",
-      "src": "https://sdk.bitmoji.com/render/panel/10212483-%s-%s-v1.png",
-      "displayTag": "enfrentar",
-      "keywords": "enfrentar #popmoji football tackle with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "9268",
-      "src": "https://sdk.bitmoji.com/render/panel/10212318-%s-%s-v1.png",
-      "displayTag": "buraco na parede",
-      "keywords": "buraco na parede twin #popmoji hole in the wall front view with friend ",
-      "categories": [
-        "#mt_hello_interactive",
-        "#mt_hometab_ismiley",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30066",
-      "src": "https://sdk.bitmoji.com/render/panel/30264103-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose sinal da paz peace signs peace sign pose paz twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "15619",
-      "src": "https://sdk.bitmoji.com/render/panel/10224725-%s-%s-v1.png",
-      "displayTag": "comprar, loja",
-      "keywords": "comprar, loja maratona de compras sacolas de compras compras black friday boxing day #popmoji shopping bags with friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_expenses_venmo"
-      ]
-    },
-    {
-      "id": "13674",
-      "src": "https://sdk.bitmoji.com/render/panel/10218951-%s-%s-v1.png",
-      "displayTag": "proibido",
-      "keywords": "proibido não permitido sem sinal sem símbolo sinal de pare #popmoji no symbol with friend ",
-      "categories": [
-        "#mt_no_interactive"
-      ]
-    },
-    {
-      "id": "9192",
-      "src": "https://sdk.bitmoji.com/render/panel/10212157-%s-%s-v1.png",
-      "displayTag": "carinho",
-      "keywords": "carinho acordei assim travesseiro deitado curtindo relaxando #popmoji lying down looking relaxed with friend lying down",
-      "categories": [
-        "#mt_loveyou_interactive",
-        "#mt_loveyou_interactive_key",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "14283",
-      "src": "https://sdk.bitmoji.com/render/panel/10221177-%s-%s-v1.png",
-      "displayTag": "oh não",
-      "keywords": "oh não destino opa estou condenado assustado #popmoji uh oh with friend ",
-      "categories": []
-    },
-    {
-      "id": "30065",
-      "src": "https://sdk.bitmoji.com/render/panel/33097431-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9300",
-      "src": "https://sdk.bitmoji.com/render/panel/10212446-%s-%s-v1.png",
-      "displayTag": "jogando tinta",
-      "keywords": "jogando tinta tinta lançamento de tinta jogar tinta arte artesanato holi festival holi #popmoji paint toss with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "30056",
-      "src": "https://sdk.bitmoji.com/render/panel/30384097-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose ei você! apontando apontar twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "18957",
-      "src": "https://sdk.bitmoji.com/render/panel/20002114-%s-%s-v1.png",
-      "displayTag": "lendo um livro",
-      "keywords": "lendo um livro livro lendo viciado em livros jardim lendo em um cogumelo cogumelo banco de cogumelo volta às aulas escola book club #popmoji mushroom with friend ",
-      "categories": [
-        "#mt_yay_com_textless",
-        "#mt_expenses_venmo"
-      ]
-    },
-    {
-      "id": "9263",
-      "src": "https://sdk.bitmoji.com/render/panel/10212299-%s-%s-v1.png",
-      "displayTag": "sair pra dançar",
-      "keywords": "sair pra dançar festa dance night dança festa festejando twin #popmoji dance party with friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_bff",
-        "#mt_yayquicksend_removedfriend"
-      ]
-    },
-    {
-      "id": "30051",
-      "src": "https://sdk.bitmoji.com/render/panel/34940092-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30055",
-      "src": "https://sdk.bitmoji.com/render/panel/33633766-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9162",
-      "src": "https://sdk.bitmoji.com/render/panel/10212221-%s-%s-v1.png",
-      "displayTag": "carregar nos ombros",
-      "keywords": "carregar nos ombros twin #popmoji piggyback friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "17498",
-      "src": "https://sdk.bitmoji.com/render/panel/10230743-%s-%s-v1.png",
-      "displayTag": "patinação artística em dupla",
-      "keywords": "patinação artística em dupla duplas patinação artística esportes de inverno #popmoji figure skating with friend ",
-      "categories": []
-    },
-    {
-      "id": "11205",
-      "src": "https://sdk.bitmoji.com/render/panel/10216246-%s-%s-v1.png",
-      "displayTag": "isqueiro",
-      "keywords": "isqueiro #popmoji waving lighter  with friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_randomquicksend_removedfriend"
-      ]
-    },
-    {
-      "id": "30062",
-      "src": "https://sdk.bitmoji.com/render/panel/32194107-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bro fist bate aqui twin #popmoji fist bump with friend ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9478",
-      "src": "https://sdk.bitmoji.com/render/panel/10212904-%s-%s-v1.png",
-      "displayTag": "limpando",
-      "keywords": "limpando sujo varrer trabalhador vassoura porcalhão bagunçado zelador #popmoji sweeping friend with broom ",
-      "categories": [
-        "#mt_boo_interactive",
-        "#mt_hometab_inuanced"
-      ]
-    },
-    {
       "id": "30070",
       "src": "https://sdk.bitmoji.com/render/panel/30865694-%s-%s-v1.png",
       "displayTag": "friendship pose",
       "keywords": "friendship pose amizade pose amigo talking convo conversation amigos twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30047",
-      "src": "https://sdk.bitmoji.com/render/panel/35147912-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose ei você! apontando ai, vc apontar twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30063",
-      "src": "https://sdk.bitmoji.com/render/panel/33109030-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose ei você! ayyy this guy apontando apontar twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9204",
-      "src": "https://sdk.bitmoji.com/render/panel/10212244-%s-%s-v1.png",
-      "displayTag": "barco de amor",
-      "keywords": "barco de amor barco do amor barco a remo pá #popmoji row boat with friend ",
-      "categories": [
-        "#mt_loveyou_interactive",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "8971",
-      "src": "https://sdk.bitmoji.com/render/panel/10211604-%s-%s-v1.png",
-      "displayTag": "beijando",
-      "keywords": "beijando beijo #popmoji kissing friend on the cheek ",
-      "categories": [
-        "#mt_xoxo_interactive",
-        "#mt_xoxo_interactive_key",
-        "#mt_hometab_ilove"
-      ]
-    },
-    {
-      "id": "9148",
-      "src": "https://sdk.bitmoji.com/render/panel/10212020-%s-%s-v1.png",
-      "displayTag": "balançar",
-      "keywords": "balançar segurar balançando suspense #popmoji dangling with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "30060",
-      "src": "https://sdk.bitmoji.com/render/panel/32773209-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bobão being silly twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "30052",
-      "src": "https://sdk.bitmoji.com/render/panel/38893761-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
       "categories": [
         "#mt_bff"
       ]
@@ -15658,17 +15213,239 @@
       ]
     },
     {
-      "id": "9147",
-      "src": "https://sdk.bitmoji.com/render/panel/10212019-%s-%s-v1.png",
-      "displayTag": "reprovado/a",
-      "keywords": "reprovado/a nota dos jurados juiz 1 1/10 juiz #popmoji olympics judge 1 with friend ",
+      "id": "9249",
+      "src": "https://sdk.bitmoji.com/render/panel/10212236-%s-%s-v1.png",
+      "displayTag": "balanço de cipó",
+      "keywords": "balanço de cipó balançar balançando tarzan cipó #popmoji vine swing friends swinging on a vine smiling with your friend",
+      "categories": [
+        "#mt_hello_interactive",
+        "#mt_hometab_ifrowny",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9346",
+      "src": "https://sdk.bitmoji.com/render/panel/10212483-%s-%s-v1.png",
+      "displayTag": "enfrentar",
+      "keywords": "enfrentar #popmoji football tackle with friend ",
       "categories": [
         "#mt_boo_interactive"
       ]
     },
     {
+      "id": "14283",
+      "src": "https://sdk.bitmoji.com/render/panel/10221177-%s-%s-v1.png",
+      "displayTag": "oh não",
+      "keywords": "oh não destino opa estou condenado assustado #popmoji uh oh with friend ",
+      "categories": []
+    },
+    {
+      "id": "11228",
+      "src": "https://sdk.bitmoji.com/render/panel/10216320-%s-%s-v1.png",
+      "displayTag": "laço",
+      "keywords": "laço laçando #popmoji lasso with friend ",
+      "categories": [
+        "#mt_boo_interactive"
+      ]
+    },
+    {
+      "id": "9031",
+      "src": "https://sdk.bitmoji.com/render/panel/10211813-%s-%s-v1.png",
+      "displayTag": "dando uma olhada",
+      "keywords": "dando uma olhada passando olhadinha #popmoji peeking in with friend ",
+      "categories": [
+        "#mt_hello_interactive",
+        "#mt_hello_interactive_key"
+      ]
+    },
+    {
+      "id": "11205",
+      "src": "https://sdk.bitmoji.com/render/panel/10216246-%s-%s-v1.png",
+      "displayTag": "isqueiro",
+      "keywords": "isqueiro #popmoji waving lighter  with friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_randomquicksend_removedfriend"
+      ]
+    },
+    {
+      "id": "9192",
+      "src": "https://sdk.bitmoji.com/render/panel/10212157-%s-%s-v1.png",
+      "displayTag": "carinho",
+      "keywords": "carinho acordei assim travesseiro deitado curtindo relaxando #popmoji lying down looking relaxed with friend lying down",
+      "categories": [
+        "#mt_loveyou_interactive",
+        "#mt_loveyou_interactive_key",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "30066",
+      "src": "https://sdk.bitmoji.com/render/panel/30264103-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose sinal da paz peace signs peace sign pose paz twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "18956",
+      "src": "https://sdk.bitmoji.com/render/panel/20002113-%s-%s-v1.png",
+      "displayTag": "volante",
+      "keywords": "volante pássaro voando montando um pássaro pássaro amigo pássaro carona com pássaro #popmoji bird with friend ",
+      "categories": [
+        "#mt_yay_com_textless",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "16618",
+      "src": "https://sdk.bitmoji.com/render/panel/10227516-%s-%s-v1.png",
+      "displayTag": "leite",
+      "keywords": "leite natal leite e biscoitos cookies #popmoji milk & cookies with friend ",
+      "categories": []
+    },
+    {
+      "id": "30059",
+      "src": "https://sdk.bitmoji.com/render/panel/30158859-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9250",
+      "src": "https://sdk.bitmoji.com/render/panel/10212311-%s-%s-v1.png",
+      "displayTag": "skate",
+      "keywords": "skate skatista patinação skates skatistas skate #popmoji skateboarding with friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9023",
+      "src": "https://sdk.bitmoji.com/render/panel/10211810-%s-%s-v1.png",
+      "displayTag": "acenando",
+      "keywords": "acenando olá ei aceno #popmoji waving with friend ",
+      "categories": [
+        "#mt_hello_interactive"
+      ]
+    },
+    {
+      "id": "9268",
+      "src": "https://sdk.bitmoji.com/render/panel/10212318-%s-%s-v1.png",
+      "displayTag": "buraco na parede",
+      "keywords": "buraco na parede twin #popmoji hole in the wall front view with friend ",
+      "categories": [
+        "#mt_hello_interactive",
+        "#mt_hometab_ismiley",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30067",
+      "src": "https://sdk.bitmoji.com/render/panel/33203828-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bobão being silly twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9454",
+      "src": "https://sdk.bitmoji.com/render/panel/10212845-%s-%s-v1.png",
+      "displayTag": "spray para grafite",
+      "keywords": "spray para grafite spray de grafite tinta grafite vandalismo arte artesanato #popmoji spray paint with friend ",
+      "categories": [
+        "#mt_yay_interactive"
+      ]
+    },
+    {
+      "id": "9549",
+      "src": "https://sdk.bitmoji.com/render/panel/10213094-%s-%s-v1.png",
+      "displayTag": "faixa de primeiro",
+      "keywords": "faixa de primeiro número um número um* primeiro lugar #popmoji number one ribbon friend ",
+      "categories": [
+        "#mt_yay_com_textless",
+        "#mt_randomquicksend_removed",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9300",
+      "src": "https://sdk.bitmoji.com/render/panel/10212446-%s-%s-v1.png",
+      "displayTag": "jogando tinta",
+      "keywords": "jogando tinta tinta lançamento de tinta jogar tinta arte artesanato holi festival holi #popmoji paint toss with friend ",
+      "categories": [
+        "#mt_boo_interactive"
+      ]
+    },
+    {
+      "id": "9478",
+      "src": "https://sdk.bitmoji.com/render/panel/10212904-%s-%s-v1.png",
+      "displayTag": "limpando",
+      "keywords": "limpando sujo varrer trabalhador vassoura porcalhão bagunçado zelador #popmoji sweeping friend with broom ",
+      "categories": [
+        "#mt_boo_interactive",
+        "#mt_hometab_inuanced"
+      ]
+    },
+    {
+      "id": "9088",
+      "src": "https://sdk.bitmoji.com/render/panel/10211833-%s-%s-v1.png",
+      "displayTag": "relaxando",
+      "keywords": "relaxando sexy sensual de boa reclinado twin #popmoji sexy pose with friend ",
+      "categories": [
+        "#mt_sexy_interactive_key",
+        "#mt_sexy_interactive",
+        "#mt_hometab_ilove",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30053",
+      "src": "https://sdk.bitmoji.com/render/panel/30031084-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9263",
+      "src": "https://sdk.bitmoji.com/render/panel/10212299-%s-%s-v1.png",
+      "displayTag": "sair pra dançar",
+      "keywords": "sair pra dançar festa dance night dança festa festejando twin #popmoji dance party with friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_bff",
+        "#mt_yayquicksend_removedfriend"
+      ]
+    },
+    {
+      "id": "12971",
+      "src": "https://sdk.bitmoji.com/render/panel/10217072-%s-%s-v1.png",
+      "displayTag": "jaula",
+      "keywords": "jaula enjaulado cadeia preso prisão tim tim cadeia justiça a lei tribunal #popmoji caged looking sly outside a prison cage friend is locked in",
+      "categories": [
+        "#mt_boo_interactive",
+        "#mt_hometab_inuanced"
+      ]
+    },
+    {
       "id": "30049",
       "src": "https://sdk.bitmoji.com/render/panel/38821339-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30065",
+      "src": "https://sdk.bitmoji.com/render/panel/33097431-%s-%s-v1.png",
       "displayTag": "bff",
       "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
       "categories": [
@@ -15683,88 +15460,41 @@
       "categories": []
     },
     {
-      "id": "30046",
-      "src": "https://sdk.bitmoji.com/render/panel/39740496-%s-%s-v1.png",
-      "displayTag": "bff",
-      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose aceno twin #popmoji  ",
-      "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9249",
-      "src": "https://sdk.bitmoji.com/render/panel/10212236-%s-%s-v1.png",
-      "displayTag": "balanço de cipó",
-      "keywords": "balanço de cipó balançar balançando tarzan cipó #popmoji vine swing friends swinging on a vine smiling with your friend",
-      "categories": [
-        "#mt_hello_interactive",
-        "#mt_hometab_ifrowny",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "10579",
-      "src": "https://sdk.bitmoji.com/render/panel/10214909-%s-%s-v1.png",
-      "displayTag": "acampar",
-      "keywords": "acampar fogo fogueira de acampamento camp #popmoji campfire with friend ",
-      "categories": [
-        "#mt_yay_interactive",
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9454",
-      "src": "https://sdk.bitmoji.com/render/panel/10212845-%s-%s-v1.png",
-      "displayTag": "spray para grafite",
-      "keywords": "spray para grafite spray de grafite tinta grafite vandalismo arte artesanato #popmoji spray paint with friend ",
+      "id": "9393",
+      "src": "https://sdk.bitmoji.com/render/panel/10212665-%s-%s-v1.png",
+      "displayTag": "missão impossível",
+      "keywords": "missão impossível #popmoji mission impossible with friend ",
       "categories": [
         "#mt_yay_interactive"
       ]
     },
     {
-      "id": "30067",
-      "src": "https://sdk.bitmoji.com/render/panel/33203828-%s-%s-v1.png",
+      "id": "17125",
+      "src": "https://sdk.bitmoji.com/render/panel/10229981-%s-%s-v1.png",
+      "displayTag": "muito feliz",
+      "keywords": "muito feliz maracas feliz contente :) alegria #popmoji maracas with friend ",
+      "categories": [
+        "#mt_yay_com_textless"
+      ]
+    },
+    {
+      "id": "30419",
+      "src": "https://sdk.bitmoji.com/render/panel/34196776-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff amizade curtir kick back togetherness parças view companions companheiro/a parças bff mates relaxando amigos mate bffs passeando melhor amigo curtindo companion hangout curtindo parça together sentado sits descansando relaxar amigos partner pendurado duo sentando #popmoji sitting looking off sitting on the ground with friend",
+      "categories": [
+        "#mt_posvibes",
+        "#mt_posvibes_com_textless",
+        "#mt_posvibes_key",
+        "#mt_posvibes_com_textless_key"
+      ]
+    },
+    {
+      "id": "30060",
+      "src": "https://sdk.bitmoji.com/render/panel/32773209-%s-%s-v1.png",
       "displayTag": "bff",
       "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bobão being silly twin #popmoji  ",
       "categories": [
-        "#mt_bff"
-      ]
-    },
-    {
-      "id": "9021",
-      "src": "https://sdk.bitmoji.com/render/panel/10211796-%s-%s-v1.png",
-      "displayTag": "dando uma olhada",
-      "keywords": "dando uma olhada olhadinha #popmoji looking in from the bottom with friend ",
-      "categories": [
-        "#mt_hello_interactive"
-      ]
-    },
-    {
-      "id": "9033",
-      "src": "https://sdk.bitmoji.com/render/panel/10211827-%s-%s-v1.png",
-      "displayTag": "não consigo",
-      "keywords": "não consigo que dia! exaustivo sobrecarregado não vai dar cooked im cooked hopeless #popmoji exhausted lying on ground with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "11228",
-      "src": "https://sdk.bitmoji.com/render/panel/10216320-%s-%s-v1.png",
-      "displayTag": "laço",
-      "keywords": "laço laçando #popmoji lasso with friend ",
-      "categories": [
-        "#mt_boo_interactive"
-      ]
-    },
-    {
-      "id": "9549",
-      "src": "https://sdk.bitmoji.com/render/panel/10213094-%s-%s-v1.png",
-      "displayTag": "faixa de primeiro",
-      "keywords": "faixa de primeiro número um número um* primeiro lugar #popmoji number one ribbon friend ",
-      "categories": [
-        "#mt_yay_com_textless",
-        "#mt_randomquicksend_removed",
         "#mt_bff"
       ]
     },
@@ -15780,8 +15510,38 @@
       ]
     },
     {
-      "id": "30059",
-      "src": "https://sdk.bitmoji.com/render/panel/30158859-%s-%s-v1.png",
+      "id": "13735",
+      "src": "https://sdk.bitmoji.com/render/panel/10219154-%s-%s-v1.png",
+      "displayTag": "amar",
+      "keywords": "amar coração balões coraçãozinho balões de coração adorar #popmoji heart balloons with friend ",
+      "categories": [
+        "#mt_loveyou_interactive",
+        "#mt_loveyou_interactive_key",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "30068",
+      "src": "https://sdk.bitmoji.com/render/panel/37466758-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose sair pra dançar bobão being silly dança playful twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "15619",
+      "src": "https://sdk.bitmoji.com/render/panel/10224725-%s-%s-v1.png",
+      "displayTag": "comprar, loja",
+      "keywords": "comprar, loja maratona de compras sacolas de compras compras black friday boxing day #popmoji shopping bags with friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_expenses_venmo"
+      ]
+    },
+    {
+      "id": "30052",
+      "src": "https://sdk.bitmoji.com/render/panel/38893761-%s-%s-v1.png",
       "displayTag": "bff",
       "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
       "categories": [
@@ -15789,13 +15549,215 @@
       ]
     },
     {
-      "id": "9031",
-      "src": "https://sdk.bitmoji.com/render/panel/10211813-%s-%s-v1.png",
-      "displayTag": "dando uma olhada",
-      "keywords": "dando uma olhada passando olhadinha #popmoji peeking in with friend ",
+      "id": "30057",
+      "src": "https://sdk.bitmoji.com/render/panel/38070588-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose this guy twin #popmoji  ",
       "categories": [
-        "#mt_hello_interactive",
-        "#mt_hello_interactive_key"
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "18957",
+      "src": "https://sdk.bitmoji.com/render/panel/20002114-%s-%s-v1.png",
+      "displayTag": "lendo um livro",
+      "keywords": "lendo um livro livro lendo viciado em livros jardim lendo em um cogumelo cogumelo banco de cogumelo volta às aulas escola book club #popmoji mushroom with friend ",
+      "categories": [
+        "#mt_yay_com_textless",
+        "#mt_expenses_venmo"
+      ]
+    },
+    {
+      "id": "30058",
+      "src": "https://sdk.bitmoji.com/render/panel/30152873-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose sinal da paz ayyy twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "10579",
+      "src": "https://sdk.bitmoji.com/render/panel/10214909-%s-%s-v1.png",
+      "displayTag": "acampar",
+      "keywords": "acampar fogo fogueira de acampamento camp #popmoji campfire with friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9338",
+      "src": "https://sdk.bitmoji.com/render/panel/10212489-%s-%s-v1.png",
+      "displayTag": "martelo gigante",
+      "keywords": "martelo gigante marreta #popmoji giant mallet smash with friend ",
+      "categories": [
+        "#mt_boo_interactive"
+      ]
+    },
+    {
+      "id": "17498",
+      "src": "https://sdk.bitmoji.com/render/panel/10230743-%s-%s-v1.png",
+      "displayTag": "patinação artística em dupla",
+      "keywords": "patinação artística em dupla duplas patinação artística esportes de inverno #popmoji figure skating with friend ",
+      "categories": []
+    },
+    {
+      "id": "13674",
+      "src": "https://sdk.bitmoji.com/render/panel/10218951-%s-%s-v1.png",
+      "displayTag": "proibido",
+      "keywords": "proibido não permitido sem sinal sem símbolo sinal de pare #popmoji no symbol with friend ",
+      "categories": [
+        "#mt_no_interactive"
+      ]
+    },
+    {
+      "id": "15461",
+      "src": "https://sdk.bitmoji.com/render/panel/10224202-%s-%s-v1.png",
+      "displayTag": "viciado em livros",
+      "keywords": "viciado em livros estudar livros estudando lição de casa escola lendo eu amo ler volta às aulas professor prova prova faculdade first day of school #popmoji happy books with friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_expenses_venmo"
+      ]
+    },
+    {
+      "id": "9021",
+      "src": "https://sdk.bitmoji.com/render/panel/10211796-%s-%s-v1.png",
+      "displayTag": "dando uma olhada",
+      "keywords": "dando uma olhada olhadinha #popmoji looking in from the bottom with friend ",
+      "categories": [
+        "#mt_hello_interactive"
+      ]
+    },
+    {
+      "id": "30047",
+      "src": "https://sdk.bitmoji.com/render/panel/35147912-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose ei você! apontando ai, vc apontar twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30056",
+      "src": "https://sdk.bitmoji.com/render/panel/30384097-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose ei você! apontando apontar twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9147",
+      "src": "https://sdk.bitmoji.com/render/panel/10212019-%s-%s-v1.png",
+      "displayTag": "reprovado/a",
+      "keywords": "reprovado/a nota dos jurados juiz 1 1/10 juiz #popmoji olympics judge 1 with friend ",
+      "categories": [
+        "#mt_boo_interactive"
+      ]
+    },
+    {
+      "id": "8971",
+      "src": "https://sdk.bitmoji.com/render/panel/10211604-%s-%s-v1.png",
+      "displayTag": "beijando",
+      "keywords": "beijando beijo #popmoji kissing friend on the cheek ",
+      "categories": [
+        "#mt_xoxo_interactive",
+        "#mt_xoxo_interactive_key",
+        "#mt_hometab_ilove"
+      ]
+    },
+    {
+      "id": "9377",
+      "src": "https://sdk.bitmoji.com/render/panel/10216247-%s-%s-v1.png",
+      "displayTag": "queimando",
+      "keywords": "queimando queimar match queimando coisas #popmoji match mischief with friend ",
+      "categories": [
+        "#mt_boo_interactive"
+      ]
+    },
+    {
+      "id": "9022",
+      "src": "https://sdk.bitmoji.com/render/panel/10211808-%s-%s-v1.png",
+      "displayTag": "dando uma olhada",
+      "keywords": "dando uma olhada passando olá ei aceno olhadinha #popmoji popping in with friend waving ",
+      "categories": [
+        "#mt_hello_interactive"
+      ]
+    },
+    {
+      "id": "9148",
+      "src": "https://sdk.bitmoji.com/render/panel/10212020-%s-%s-v1.png",
+      "displayTag": "balançar",
+      "keywords": "balançar segurar balançando suspense #popmoji dangling with friend ",
+      "categories": [
+        "#mt_boo_interactive"
+      ]
+    },
+    {
+      "id": "9204",
+      "src": "https://sdk.bitmoji.com/render/panel/10212244-%s-%s-v1.png",
+      "displayTag": "barco de amor",
+      "keywords": "barco de amor barco do amor barco a remo pá #popmoji row boat with friend ",
+      "categories": [
+        "#mt_loveyou_interactive",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9275",
+      "src": "https://sdk.bitmoji.com/render/panel/10212355-%s-%s-v1.png",
+      "displayTag": "trem de brinquedo",
+      "keywords": "trem de brinquedo trem #popmoji toy train with friend ",
+      "categories": [
+        "#mt_yay_interactive"
+      ]
+    },
+    {
+      "id": "14166",
+      "src": "https://sdk.bitmoji.com/render/panel/10220679-%s-%s-v1.png",
+      "displayTag": "música",
+      "keywords": "música jazz blues de saxofone saxofone instrumento blues #popmoji saxophone blues with friend ",
+      "categories": [
+        "#mt_waaah_com_textless"
+      ]
+    },
+    {
+      "id": "30046",
+      "src": "https://sdk.bitmoji.com/render/panel/39740496-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose aceno twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30061",
+      "src": "https://sdk.bitmoji.com/render/panel/36496174-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose bobão being silly twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9162",
+      "src": "https://sdk.bitmoji.com/render/panel/10212221-%s-%s-v1.png",
+      "displayTag": "carregar nos ombros",
+      "keywords": "carregar nos ombros twin #popmoji piggyback friend ",
+      "categories": [
+        "#mt_yay_interactive",
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "9389",
+      "src": "https://sdk.bitmoji.com/render/panel/10212644-%s-%s-v1.png",
+      "displayTag": "fotografia",
+      "keywords": "fotografia retrato de escola foto porta-retrato foto da escola foto de escola #popmoji school portrait with friend ",
+      "categories": [
+        "#mt_yayrandom_com_textless"
       ]
     },
     {
@@ -15805,6 +15767,44 @@
       "keywords": "arma zap sci-fi atirar arma de raios #popmoji ray gun with friend ",
       "categories": [
         "#mt_yay_interactive"
+      ]
+    },
+    {
+      "id": "30054",
+      "src": "https://sdk.bitmoji.com/render/panel/37482391-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30063",
+      "src": "https://sdk.bitmoji.com/render/panel/33109030-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose ei você! ayyy this guy apontando apontar twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "30051",
+      "src": "https://sdk.bitmoji.com/render/panel/34940092-%s-%s-v1.png",
+      "displayTag": "bff",
+      "keywords": "bff melhor amigo amigos amizade pose friend pose friendship pose picture pose twin #popmoji  ",
+      "categories": [
+        "#mt_bff"
+      ]
+    },
+    {
+      "id": "13207",
+      "src": "https://sdk.bitmoji.com/render/panel/10217919-%s-%s-v1.png",
+      "displayTag": "como isso foi acontecer?",
+      "keywords": "como isso foi acontecer? isso não está acontecendo o que tá rolando? o que tá acontecendo? isso tá acontecendo mesmo? socorro vórtex aaaah #popmoji spinning vortex with friend ",
+      "categories": [
+        "#mt_waaah_hold",
+        "#mt_waah_key_hold",
+        "#mt_waaah_com_textless"
       ]
     },
     {
