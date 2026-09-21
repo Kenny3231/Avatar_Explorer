@@ -1,62 +1,62 @@
 {
-  "date_maj": "14 septembre 2026",
-  "last_updated_iso": "2026-09-14T12:18:00.356Z",
+  "date_maj": "21 septembre 2026",
+  "last_updated_iso": "2026-09-21T12:25:35.262Z",
   "stats": {
     "en": {
-      "solo": 1977,
-      "duo": 1049
+      "solo": 1981,
+      "duo": 1052
     },
     "fr": {
-      "solo": 1261,
-      "duo": 613
+      "solo": 1263,
+      "duo": 616
     },
     "es": {
-      "solo": 1279,
-      "duo": 606
+      "solo": 1280,
+      "duo": 609
     },
     "fr-ca": {
-      "solo": 1261,
-      "duo": 613
+      "solo": 1263,
+      "duo": 616
     },
     "de": {
-      "solo": 1247,
-      "duo": 602
+      "solo": 1249,
+      "duo": 605
     },
     "ja": {
-      "solo": 1131,
-      "duo": 590
+      "solo": 1132,
+      "duo": 593
     },
     "ko": {
-      "solo": 1061,
-      "duo": 546
+      "solo": 1062,
+      "duo": 549
     },
     "it": {
-      "solo": 1077,
-      "duo": 572
+      "solo": 1078,
+      "duo": 575
     },
     "pt": {
-      "solo": 983,
-      "duo": 545
+      "solo": 984,
+      "duo": 548
     },
     "zh": {
-      "solo": 983,
-      "duo": 545
+      "solo": 984,
+      "duo": 548
     },
     "tr": {
-      "solo": 983,
-      "duo": 545
+      "solo": 984,
+      "duo": 548
     },
     "pl": {
-      "solo": 983,
-      "duo": 545
+      "solo": 984,
+      "duo": 548
     },
     "ro": {
-      "solo": 983,
-      "duo": 545
+      "solo": 984,
+      "duo": 548
     },
     "el": {
-      "solo": 983,
-      "duo": 545
+      "solo": 984,
+      "duo": 548
     }
   },
   "guide": {
