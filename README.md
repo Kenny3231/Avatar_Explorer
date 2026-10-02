@@ -26,6 +26,9 @@ Exécutez cette commande dans votre terminal Home Assistant (Add-on "Terminal & 
 curl -sL "https://avatar-explorer.pages.dev/api/export?id1=VOTRE_ID&name1=Kenny&mode=solo&dir=bitmojis" | bash
 ```
 
+> [!NOTE]
+> Le script généré ne contient que des URLs validées côté serveur. Chaque image doit provenir de `https://sdk.bitmoji.com/` avec un jeu de caractères restreint : ni guillemet, ni `$`, ni backtick, ni `\`, ni espace. Chaque destination doit rester sous `/config/www/`. Une pose dont l'URL ne respecte pas ces règles est ignorée, et signalée en tête du script ainsi que dans l'en-tête HTTP `X-Skipped-Items`. Comme pour tout `curl | bash`, vous pouvez d'abord inspecter le script en remplaçant `| bash` par `> script.sh`.
+
 ### Paramètres de l'API
 | Paramètre | Description | Valeurs possibles |
 | :--- | :--- | :--- |
@@ -112,14 +115,14 @@ if (remoteDate > localLastImportDate) {
 ```
 
 > [!NOTE]
-> `aide.json` est régénéré automatiquement chaque lundi (cron GitHub Actions) et à chaque déclenchement manuel du workflow `update_data.yml`. `last_updated_iso` ne change que si cet import a réellement eu lieu.
+> Le catalogue est recollecté chaque lundi (cron GitHub Actions), à chaque déclenchement manuel du workflow `update_data.yml` et à chaque push qui modifie le script de collecte. `last_updated_iso` et `date_maj` n'avancent **que si le contenu d'au moins un `templates_<lang>.json` a réellement changé** (empreinte SHA-256 comparée avant et après). Une collecte qui ne ramène rien de nouveau ne déclenche donc aucune resynchronisation chez les consommateurs. Un simple réordonnancement des poses par Bitmoji compte comme un changement, car il peut décaler les suffixes `_2`, `_3` des noms de fichiers.
 
 ---
 
 ## 🛠️ Technologies Utilisées
 
 * **Frontend :** HTML5, JavaScript (Vanilla), TailwindCSS (CDN), Lucide Icons.
-* **Backend (Cloudflare Workers) :** API d'exportation dynamique pour la génération de scripts Bash et de métadonnées JSON.
+* **Backend (Cloudflare Pages Functions) :** API d'exportation dynamique pour la génération de scripts Bash et de métadonnées JSON.
 * **Bibliothèques JS :** JSZip, FileSaver.js.
 
 ## 🚀 Installation & Utilisation locale
@@ -131,6 +134,7 @@ if (remoteDate > localLastImportDate) {
     ```
 2.  **Lancer le projet :**
     Ouvrez simplement le fichier `index.html` dans votre navigateur.
+3.  **Catalogue (Node.js ≥ 20.19) :** `npm run collect` recollecte les `templates_*.json`, `npm run collect:dry` fait la même chose sans rien écrire, et `npm run check` valide hors ligne les fichiers déjà présents.
 
 ## ⚠️ Disclaimer (Avertissement légal)
 

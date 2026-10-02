@@ -1,7 +1,16 @@
 {
   "name": "avatar-explorer",
   "version": "1.0.0",
-  "dependencies": { 
+  "private": true,
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "collect": "cd public && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON get_templates.js",
+    "collect:dry": "cd public && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON get_templates.js --dry-run",
+    "check": "node --check functions/api/export.js && node --check public/get_templates.js && cd public && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON get_templates.js --check"
+  },
+  "dependencies": {
     "jszip": "^3.10.1"
   }
 }

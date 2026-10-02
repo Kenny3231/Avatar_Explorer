@@ -4,3 +4,6 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# Configuration locale de Claude Code
+.claude/

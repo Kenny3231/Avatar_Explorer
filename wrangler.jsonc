@@ -1,4 +1,8 @@
 {
+  // Le site de production (avatar-explorer.pages.dev + functions/api/export.js) est un projet
+  // Cloudflare PAGES. Pages ignore ce fichier tant qu'il ne contient pas "pages_build_output_dir" :
+  // il ne sert qu'à un éventuel déploiement Workers (« wrangler deploy »), qui lui n'exécuterait
+  // pas le dossier functions/. Ne pas le transformer sans vérifier le projet dans le dashboard.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "avatar-explorer",
   "compatibility_date": "2026-04-10",
@@ -6,7 +10,10 @@
     "enabled": true
   },
   "assets": {
-    "directory": "public"
+    "directory": "public",
+    // Mode Workers : une URL inconnue sert public/404.html avec un statut 404.
+    // (Côté Pages, c'est la simple présence de public/404.html qui désactive le repli SPA.)
+    "not_found_handling": "404-page"
   },
   "compatibility_flags": [
     "nodejs_compat"

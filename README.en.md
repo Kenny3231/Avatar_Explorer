@@ -26,6 +26,9 @@ Run this command in your Home Assistant terminal (the "Terminal & SSH" add-on):
 curl -sL "https://avatar-explorer.pages.dev/api/export?id1=YOUR_ID&name1=Kenny&mode=solo&dir=bitmojis" | bash
 ```
 
+> [!NOTE]
+> The generated script only contains URLs validated server-side. Every image must come from `https://sdk.bitmoji.com/` with a restricted character set: no quote, `$`, backtick, `\` or space. Every destination must stay under `/config/www/`. A pose whose URL breaks these rules is skipped, and reported at the top of the script and in the `X-Skipped-Items` HTTP header. As with any `curl | bash`, you can inspect the script first by replacing `| bash` with `> script.sh`.
+
 ### API parameters
 | Parameter | Description | Possible values |
 | :--- | :--- | :--- |
@@ -112,14 +115,14 @@ if (remoteDate > localLastImportDate) {
 ```
 
 > [!NOTE]
-> `aide.json` is regenerated automatically every Monday (GitHub Actions cron) and on every manual trigger of the `update_data.yml` workflow. `last_updated_iso` only changes if that import actually ran.
+> The catalog is re-collected every Monday (GitHub Actions cron), on every manual trigger of the `update_data.yml` workflow, and on every push that changes the collection script. `last_updated_iso` and `date_maj` **only move forward if the content of at least one `templates_<lang>.json` actually changed** (SHA-256 fingerprint compared before and after). A collection run that brings nothing new therefore triggers no resync for consumers. A plain reordering of poses by Bitmoji counts as a change, since it can shift the `_2`, `_3` suffixes in file names.
 
 ---
 
 ## 🛠️ Technologies Used
 
 * **Frontend:** HTML5, JavaScript (Vanilla), TailwindCSS (CDN), Lucide Icons.
-* **Backend (Cloudflare Workers):** Dynamic export API for generating Bash scripts and JSON metadata.
+* **Backend (Cloudflare Pages Functions):** Dynamic export API for generating Bash scripts and JSON metadata.
 * **JS Libraries:** JSZip, FileSaver.js.
 
 ## 🚀 Local Setup & Usage
@@ -131,6 +134,7 @@ if (remoteDate > localLastImportDate) {
     ```
 2.  **Run the project:**
     Just open the `index.html` file in your browser.
+3.  **Catalog (Node.js ≥ 20.19):** `npm run collect` re-collects the `templates_*.json` files, `npm run collect:dry` does the same without writing anything, and `npm run check` validates the existing files offline.
 
 ## ⚠️ Disclaimer
 
