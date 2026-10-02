@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
     <title>Avatar Explorer</title>
+    <!-- Pas de SRI possible sur le Play CDN de Tailwind : cdn.tailwindcss.com sert un script
+         généré dont le contenu change sans changement d'URL (aucune empreinte stable à épingler). -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@1.21.0"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <!-- Scripts tiers figés par version + SRI (sha384 du fichier exact) : un fichier modifié sur
+         le CDN est refusé par le navigateur. Pour lucide, URL finale du fichier (unpkg redirige
+         lucide@1.21.0 vers dist/umd/lucide.min.js) : l'empreinte porte sur un fichier fixe. -->
+    <script src="https://unpkg.com/lucide@1.21.0/dist/umd/lucide.min.js" integrity="sha384-xphWpUp6pRlNpM8BxCtyoW96oteA0kPxUX0VP6V32gICuE4ViDFBfaoyj5BS7M4w" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha384-PlRSzpewlarQuj5alIadXwjNUX+2eNMKwr0f07ShWYLy8B6TjEbm7ZlcN/ScSbwy" crossorigin="anonymous"></script>
     <style>
+        :root { color-scheme: dark; }
+
         @keyframes fadeInScale {
             from { opacity: 0; transform: translateY(10px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
@@ -21,184 +29,232 @@
         }
         .modal-animate { animation: modalPop 0.2s ease-out forwards; }
 
-        .grid-item:hover img { transform: translateY(-8px); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        /* L'effet de survol est aussi applique au focus clavier */
+        .grid-item:hover img,
+        .grid-item:focus-visible img { transform: translateY(-8px); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         select { appearance: none; -webkit-appearance: none; }
         /* Permet de styliser legerement le bouton pour vider l'input (croix native) */
         input[type="text"]::-webkit-search-cancel-button { cursor: pointer; }
+
+        /* Focus clavier visible partout (WCAG 2.4.7 / 2.4.11) */
+        :focus-visible { outline: 3px solid #eab308; outline-offset: 2px; }
+
+        /* Respecte la preference systeme "reduire les animations" */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen p-4 sm:p-6 md:p-8 overflow-x-hidden">
 
-    <div class="w-full">
+    <a id="skipLink" href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] bg-yellow-500 text-black font-black px-5 py-3 rounded-xl">Aller au contenu principal</a>
+
+    <!-- Message affiche si le module JS (i18n, utilitaires) ne peut pas etre charge -->
+    <div id="fatalError" role="alert" class="hidden mb-6 bg-red-900/30 text-red-200 border border-red-500/40 rounded-3xl p-6 text-sm font-bold"></div>
+
+    <!-- Contenu principal : passe en "inert" pendant qu'une modale est ouverte -->
+    <div id="appRoot" class="w-full">
         <header class="bg-slate-900 p-6 sm:p-10 rounded-[3rem] border border-slate-800 shadow-2xl mb-10">
             <div class="flex flex-col xl:flex-row justify-between items-center gap-8 xl:gap-10">
 
                 <div class="text-center xl:text-left">
                     <h1 class="text-4xl sm:text-5xl font-black text-yellow-500 italic leading-none tracking-tighter">Avatar Explorer</h1>
-                    <p id="stats" class="text-[10px] text-slate-500 uppercase font-black mt-3 tracking-[0.3em] opacity-50 italic">Initialisation...</p>
+                    <p id="stats" role="status" aria-live="polite" class="text-xs text-slate-400 uppercase font-black mt-3 tracking-[0.3em] italic">Initialisation...</p>
                 </div>
 
                 <div class="flex flex-col md:flex-row items-center gap-5 w-full xl:w-auto justify-center flex-1">
-                    <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-700 flex flex-col gap-1 w-full md:w-80 shadow-inner">
-                        <input type="text" id="name1" oninput="save()" placeholder="Utilisateur 1" aria-label="Nom de l'utilisateur 1"
-                               class="bg-transparent text-yellow-500 font-black text-3xl sm:text-4xl outline-none tracking-tighter placeholder:text-yellow-900/20">
-                        <input type="text" id="id1" oninput="saveAndRender()" placeholder="ID Bitmoji 1" aria-label="ID Bitmoji de l'utilisateur 1"
-                               class="bg-transparent text-slate-600 text-sm font-mono outline-none border-t border-slate-800/50 pt-2">
+                    <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-600 flex flex-col gap-1 w-full md:w-80 shadow-inner">
+                        <input type="text" id="name1" maxlength="40" autocomplete="off" placeholder="Utilisateur 1" aria-label="Nom de l'utilisateur 1"
+                               class="bg-transparent text-yellow-500 font-black text-3xl sm:text-4xl tracking-tighter placeholder:text-yellow-500/80">
+                        <input type="text" id="id1" autocomplete="off" spellcheck="false" placeholder="ID Bitmoji 1" aria-label="ID Bitmoji de l'utilisateur 1"
+                               class="bg-transparent text-slate-300 text-sm font-mono border-t border-slate-700 pt-2 placeholder:text-slate-400 aria-[invalid=true]:text-red-400">
                     </div>
 
-                    <button onclick="swapIds()" id="swapBtn" aria-label="Échanger les utilisateurs 1 et 2" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
-                        <i data-lucide="arrow-right-left" class="w-6 h-6"></i>
+                    <button type="button" id="swapBtn" aria-label="Échanger les utilisateurs 1 et 2" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
+                        <i data-lucide="arrow-right-left" class="w-6 h-6" aria-hidden="true"></i>
                     </button>
 
-                    <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-700 flex flex-col gap-1 w-full md:w-80 shadow-inner">
-                        <input type="text" id="name2" oninput="save()" placeholder="Utilisateur 2" aria-label="Nom de l'utilisateur 2"
-                               class="bg-transparent text-blue-400 font-black text-3xl sm:text-4xl outline-none tracking-tighter placeholder:text-blue-900/20">
-                        <input type="text" id="id2" oninput="saveAndRender()" placeholder="ID Bitmoji 2" aria-label="ID Bitmoji de l'utilisateur 2"
-                               class="bg-transparent text-slate-600 text-sm font-mono outline-none border-t border-slate-800/50 pt-2">
+                    <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-600 flex flex-col gap-1 w-full md:w-80 shadow-inner">
+                        <input type="text" id="name2" maxlength="40" autocomplete="off" placeholder="Utilisateur 2" aria-label="Nom de l'utilisateur 2"
+                               class="bg-transparent text-blue-400 font-black text-3xl sm:text-4xl tracking-tighter placeholder:text-blue-400/80">
+                        <input type="text" id="id2" autocomplete="off" spellcheck="false" placeholder="ID Bitmoji 2" aria-label="ID Bitmoji de l'utilisateur 2"
+                               class="bg-transparent text-slate-300 text-sm font-mono border-t border-slate-700 pt-2 placeholder:text-slate-400 aria-[invalid=true]:text-red-400">
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-center gap-4 w-full xl:w-auto justify-center shrink-0">
-                    <button onclick="downloadAllAsZip()" id="zipBtn" class="w-full sm:w-auto flex-1 bg-yellow-500 hover:bg-yellow-400 text-black px-12 py-6 rounded-[2rem] font-black text-xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-yellow-500/20 active:scale-95 whitespace-nowrap">
-                        <i data-lucide="folder-archive" class="w-7 h-7"></i> GÉNÉRER ZIP
+                    <button type="button" id="zipBtn" class="w-full sm:w-auto flex-1 bg-yellow-500 hover:bg-yellow-400 text-black px-12 py-6 rounded-[2rem] font-black text-xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-yellow-500/20 active:scale-95 whitespace-nowrap aria-disabled:opacity-70 aria-disabled:cursor-wait">
+                        <i data-lucide="folder-archive" class="w-7 h-7" aria-hidden="true"></i> GÉNÉRER ZIP
                     </button>
 
-                    <button onclick="openHelp()" id="helpBtn" title="Centre d'aide" aria-label="Centre d'aide" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
-                        <i data-lucide="circle-help" class="w-7 h-7 group-hover:scale-110 transition-transform"></i>
+                    <button type="button" id="helpBtn" title="Centre d'aide" aria-label="Centre d'aide" aria-haspopup="dialog" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
+                        <i data-lucide="circle-help" class="w-7 h-7 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </header>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-12 items-stretch">
+        <main id="main" tabindex="-1">
+            <div id="filters" role="search" aria-label="Recherche et filtres" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-12 items-stretch">
 
-            <div class="flex bg-slate-900 rounded-[1.5rem] p-1.5 border border-slate-800 col-span-2 md:col-span-1 shadow-lg h-[60px]">
-                <button onclick="setMode('solo')" id="btn-solo" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">SOLO</button>
-                <button onclick="setMode('duo')" id="btn-duo" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">DUO</button>
-            </div>
-
-            <div class="relative group h-[60px] col-span-1">
-                <select id="langSelect" onchange="changeLanguage()"
-                        class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
-                    <option value="fr">🇫🇷 FR</option>
-                    <option value="en">🇬🇧 EN</option>
-                    <option value="es">🇪🇸 ES</option>
-                    <option value="fr-ca">🇨🇦 FR-CA</option>
-                    <option value="de">🇩🇪 DE</option>
-                    <option value="ja">🇯🇵 JA</option>
-                    <option value="ko">🇰🇷 KO</option>
-                    <option value="it">🇮🇹 IT</option>
-                    <option value="pt">🇵🇹 PT</option>
-                    <option value="zh">🇨🇳 ZH</option>
-                    <option value="tr">🇹🇷 TR</option>
-                    <option value="pl">🇵🇱 PL</option>
-                    <option value="ro">🇷🇴 RO</option>
-                    <option value="el">🇬🇷 EL</option>
-                </select>
-                <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 group-hover:text-yellow-500 transition-colors">
-                    <i data-lucide="globe" class="w-5 h-5"></i>
+                <div id="modeGroup" role="group" aria-label="Mode d'affichage" class="flex bg-slate-900 rounded-[1.5rem] p-1.5 border border-slate-600 col-span-2 md:col-span-1 shadow-lg min-h-[60px]">
+                    <button type="button" id="btn-solo" aria-pressed="true" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">SOLO</button>
+                    <button type="button" id="btn-duo" aria-pressed="false" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">DUO</button>
                 </div>
-            </div>
 
-            <div class="relative group h-[60px] col-span-1">
-                <select id="scaleSelect" onchange="render()"
-                        class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
-                    <option value="1" selected>WEB (1x)</option>
-                    <option value="2" >HD (2x)</option>
-                    <option value="4">ULTRA (4x)</option>
-                </select>
-                <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 group-hover:text-yellow-500 transition-colors">
-                    <i data-lucide="monitor" class="w-5 h-5"></i>
+                <div class="relative group min-h-[60px] col-span-1">
+                    <select id="langSelect" aria-label="Langue"
+                            class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-6 rounded-[1.5rem] text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
+                        <option value="fr">🇫🇷 FR</option>
+                        <option value="en">🇬🇧 EN</option>
+                        <option value="es">🇪🇸 ES</option>
+                        <option value="fr-ca">🇨🇦 FR-CA</option>
+                        <option value="de">🇩🇪 DE</option>
+                        <option value="ja">🇯🇵 JA</option>
+                        <option value="ko">🇰🇷 KO</option>
+                        <option value="it">🇮🇹 IT</option>
+                        <option value="pt">🇵🇹 PT</option>
+                        <option value="zh">🇨🇳 ZH</option>
+                        <option value="tr">🇹🇷 TR</option>
+                        <option value="pl">🇵🇱 PL</option>
+                        <option value="ro">🇷🇴 RO</option>
+                        <option value="el">🇬🇷 EL</option>
+                    </select>
+                    <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-yellow-500 transition-colors">
+                        <i data-lucide="globe" class="w-5 h-5" aria-hidden="true"></i>
+                    </div>
                 </div>
-            </div>
 
-            <div class="relative group h-[60px] col-span-2 md:col-span-1 xl:col-span-1">
-                <input type="search" id="categoryInput" list="categoryList" oninput="render()" placeholder="Categorie..." aria-label="Filtrer par categorie"
-                       class="w-full h-full bg-slate-900 border border-slate-800 px-6 rounded-[1.5rem] outline-none text-xs font-black tracking-widest cursor-text shadow-lg pr-12 text-slate-300 focus:border-yellow-500 placeholder:text-slate-600">
-                <datalist id="categoryList">
+                <div class="relative group min-h-[60px] col-span-1">
+                    <select id="scaleSelect" aria-label="Résolution des images"
+                            class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-6 rounded-[1.5rem] text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
+                        <option value="1" selected>WEB (1x)</option>
+                        <option value="2" >HD (2x)</option>
+                        <option value="4">ULTRA (4x)</option>
+                    </select>
+                    <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-yellow-500 transition-colors">
+                        <i data-lucide="monitor" class="w-5 h-5" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="relative group min-h-[60px] col-span-2 md:col-span-1 xl:col-span-1">
+                    <input type="search" id="categoryInput" list="categoryList" placeholder="Categorie..." aria-label="Filtrer par categorie"
+                           class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-6 rounded-[1.5rem] text-xs font-black tracking-widest cursor-text shadow-lg pr-12 text-slate-300 focus:border-yellow-500 placeholder:text-slate-400">
+                    <datalist id="categoryList">
                     </datalist>
-                <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 group-hover:text-yellow-500 transition-colors">
-                    <i data-lucide="filter" class="w-5 h-5"></i>
+                    <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-yellow-500 transition-colors">
+                        <i data-lucide="filter" class="w-5 h-5" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="relative col-span-2 md:col-span-2 xl:col-span-2 min-h-[60px]">
+                    <i data-lucide="search" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" aria-hidden="true"></i>
+                    <input type="search" id="search" placeholder="Rechercher (ex: sourire, amour)..." aria-label="Rechercher une pose"
+                           class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-14 rounded-[1.5rem] focus:border-yellow-500 font-bold shadow-lg text-sm placeholder:text-slate-400 placeholder:font-normal">
                 </div>
             </div>
 
-            <div class="relative col-span-2 md:col-span-2 xl:col-span-2 h-[60px]">
-                <i data-lucide="search" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600"></i>
-                <input type="search" id="search" oninput="render()" placeholder="Rechercher (ex: sourire, amour)..." aria-label="Rechercher une pose"
-                       class="w-full h-full bg-slate-900 border border-slate-800 px-14 rounded-[1.5rem] outline-none focus:border-yellow-500 font-bold shadow-lg text-sm placeholder:text-slate-600 placeholder:font-normal">
+            <div id="grid-container">
+                <!-- Etats "Aucun resultat" / erreur de chargement (avec bouton Reessayer) -->
+                <div id="gridState" class="hidden text-center text-slate-300 font-bold py-16"></div>
+                <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-4 md:gap-6 lg:gap-8"></div>
             </div>
-        </div>
-
-        <div id="grid-container">
-            <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-4 md:gap-6 lg:gap-8"></div>
-        </div>
+        </main>
     </div>
 
-    <div id="helpLightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-8" onclick="closeHelp()">
-        <div class="relative max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-[3rem] p-8 sm:p-12 modal-animate text-left shadow-2xl" onclick="event.stopPropagation()">
+    <div id="helpLightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-8">
+        <div id="helpDialog" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1" class="relative max-w-2xl w-full max-h-full overflow-y-auto bg-slate-900 border border-slate-800 rounded-[3rem] p-8 sm:p-12 modal-animate text-left shadow-2xl">
 
-            <button onclick="closeHelp()" id="helpCloseBtn" aria-label="Fermer le centre d'aide" class="absolute top-8 right-8 text-slate-500 hover:text-white transition-all hover:rotate-90">
-                <i data-lucide="x" class="w-8 h-8"></i>
+            <button type="button" id="helpCloseBtn" aria-label="Fermer le centre d'aide" class="absolute top-8 right-8 text-slate-400 hover:text-white transition-all hover:rotate-90">
+                <i data-lucide="x" class="w-8 h-8" aria-hidden="true"></i>
             </button>
 
-            <h2 class="text-3xl sm:text-4xl font-black text-yellow-500 italic tracking-tighter mb-8 flex items-center gap-4">
-                <i data-lucide="book-open" class="w-8 h-8"></i> <span id="helpTitleText">CENTRE D'AIDE</span>
+            <h2 id="helpTitle" class="text-3xl sm:text-4xl font-black text-yellow-500 italic tracking-tighter mb-8 flex items-center gap-4">
+                <i data-lucide="book-open" class="w-8 h-8" aria-hidden="true"></i> <span id="helpTitleText">CENTRE D'AIDE</span>
             </h2>
 
             <div id="helpContent" class="text-slate-300 space-y-6">
-                <div class="flex items-center gap-3 text-slate-500 animate-pulse">
-                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Chargement des données...
+                <div class="flex items-center gap-3 text-slate-400 animate-pulse">
+                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> Chargement des données...
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-8" onclick="closeLightbox()">
-        <div class="relative max-w-2xl w-full modal-animate flex flex-col items-center text-center" onclick="event.stopPropagation()">
+    <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-8">
+        <div id="lightboxDialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" tabindex="-1" class="relative max-w-2xl w-full modal-animate flex flex-col items-center text-center">
 
-            <button onclick="closeLightbox()" id="lightboxCloseBtn" aria-label="Fermer l'aperçu" class="absolute -top-16 right-0 text-slate-500 hover:text-white transition-all hover:rotate-90">
-                <i data-lucide="x" class="w-12 h-12"></i>
+            <button type="button" id="lightboxCloseBtn" aria-label="Fermer l'aperçu" class="absolute -top-16 right-0 text-slate-400 hover:text-white transition-all hover:rotate-90">
+                <i data-lucide="x" class="w-12 h-12" aria-hidden="true"></i>
             </button>
 
             <div class="bg-gradient-to-b from-slate-900/50 to-transparent p-10 rounded-full mb-10 border border-slate-800/50">
-                <img id="lightbox-img" src="" alt="" class="max-h-[50vh] sm:max-h-[55vh] drop-shadow-[0_0_50px_rgba(234,179,8,0.25)] object-contain">
+                <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async" class="max-h-[50vh] sm:max-h-[55vh] drop-shadow-[0_0_50px_rgba(234,179,8,0.25)] object-contain">
             </div>
 
             <h3 id="lightbox-title" class="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-yellow-500">Nom de la Pose</h3>
-            <p id="lightbox-res" class="text-slate-600 text-[10px] mt-3 uppercase font-black tracking-[0.4em]">PNG Transparent</p>
+            <p id="lightbox-res" class="text-slate-400 text-xs mt-3 uppercase font-black tracking-[0.4em]">PNG Transparent</p>
 
             <div class="mt-12 w-full flex flex-col sm:flex-row justify-center gap-4">
-                <button id="copyBtn" class="bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
-                    <i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform"></i> COPIER L'IMAGE
+                <button type="button" id="copyBtn" class="bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
+                    <i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true"></i> COPIER L'IMAGE
                 </button>
-                <button id="singleDlBtn" class="bg-white text-black px-10 py-5 rounded-full font-black text-sm hover:bg-yellow-500 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
-                    <i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i> ENREGISTRER PNG
+                <button type="button" id="singleDlBtn" class="bg-white text-black px-10 py-5 rounded-full font-black text-sm hover:bg-yellow-500 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
+                    <i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform" aria-hidden="true"></i> ENREGISTRER PNG
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- Zone d'annonce visible (copie, ZIP, erreurs) : remplace les alert() -->
+    <div id="toast" role="status" aria-live="polite" aria-atomic="true" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-[90vw] rounded-2xl border bg-slate-800 px-6 py-4 text-sm font-bold text-center shadow-2xl empty:p-0 empty:border-0 empty:shadow-none"></div>
+
+    <!-- Un seul module : plus de globals implicites entre script classique et module -->
     <script type="module">
-        // Logique de nettoyage de nom de pose partagee avec functions/api/export.js
-        // (public/shared/poseNameUtils.js) : exposee ici en global pour rester utilisable
-        // depuis le script classique ci-dessous, sans changer son fonctionnement.
-        import { cleanPoseName, resolvePoseTag } from './shared/poseNameUtils.js';
-        import { I18N } from './shared/i18n.js';
-        window.formatPoseName = cleanPoseName;
-        window.resolveTag = resolvePoseTag;
-        window.I18N = I18N;
-    </script>
-    <script>
-        let rawData = { categories: [], imoji: [], friends: [] };
-        let currentMode = 'solo';
-        let currentRenderItems = [];
-        let currentLang = 'fr';
+        // Les modules partages sont charges dynamiquement pour pouvoir afficher un message
+        // lisible si le chargement echoue (un import statique planterait sans rien dire).
+        let I18N = null;
+        let poseFileTags = null; // noms de fichiers des poses, doublons numerotes (public/shared/poseNameUtils.js)
+
+        const $ = (id) => document.getElementById(id);
 
         const FLAGS = { fr:'🇫🇷', en:'🇬🇧', es:'🇪🇸', 'fr-ca':'🇨🇦', de:'🇩🇪', ja:'🇯🇵', ko:'🇰🇷', it:'🇮🇹', pt:'🇵🇹', zh:'🇨🇳', tr:'🇹🇷', pl:'🇵🇱', ro:'🇷🇴', el:'🇬🇷' };
 
-        // formatPoseName/resolveTag sont definis par le module partage
-        // (public/shared/poseNameUtils.js), charge juste avant ce script et
-        // expose en global — voir le <script type="module"> ci-dessus.
+        // Meme motif que l'API (functions/api/export.js) pour les IDs et les noms
+        const SAFE_RE = /^[A-Za-z0-9_-]+$/;
+        const DEFAULT_NAME_1 = 'Utilisateur1';
+        const DEFAULT_NAME_2 = 'Utilisateur2';
+
+        let rawData = { categories: [], imoji: [], friends: [] };
+        let dataReady = false;
+        let currentMode = 'solo';
+        let currentRenderItems = [];
+        let currentLang = 'en';
+        let gridStateKind = null; // null | 'empty' | 'error'
+
+        // Langue courante avec repli sur l'anglais (jamais de TypeError sur une cle inconnue)
+        const tr = () => (I18N && I18N[currentLang]) ?? (I18N && I18N.en) ?? {};
+
+        // --- Utilitaires -------------------------------------------------
+        const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+        const debounce = (fn, ms) => {
+            let h;
+            return (...args) => { clearTimeout(h); h = setTimeout(() => fn(...args), ms); };
+        };
+        const icons = () => { try { window.lucide && window.lucide.createIcons(); } catch (e) { /* icones facultatives */ } };
+
+        // localStorage peut lever une exception (navigation privee, stockage bloque)
+        const store = {
+            get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+            set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* ignore */ }
+            }
+        };
+
         function normalizeStr(str) {
             if (!str) return "";
             return str.toString()
@@ -216,134 +272,308 @@
                 .replace(/'/g, '&#39;');
         }
 
+        // Un ID n'est accepte que s'il respecte le motif de l'API (sinon chaine vide)
+        const validId = (v) => (typeof v === 'string' && SAFE_RE.test(v.trim()) ? v.trim() : '');
+        // Nom de dossier/fichier sur : sans accents, caracteres hors motif remplaces par "_"
+        function sanitizeName(v, fallback) {
+            const s = String(v || '')
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^A-Za-z0-9_-]+/g, '_')
+                .replace(/^_+|_+$/g, '')
+                .slice(0, 40);
+            return SAFE_RE.test(s) ? s : fallback;
+        }
+
+        // Annonce visible + lue par les lecteurs d'ecran (role="status")
+        let toastTimer;
+        function say(msg, isError = false) {
+            const toast = $('toast');
+            clearTimeout(toastTimer);
+            toast.textContent = '';
+            toast.classList.toggle('border-red-500', isError);
+            toast.classList.toggle('text-red-200', isError);
+            toast.classList.toggle('border-yellow-500/50', !isError);
+            toast.classList.toggle('text-slate-100', !isError);
+            toastTimer = setTimeout(() => {
+                toast.textContent = msg;
+                toastTimer = setTimeout(() => { toast.textContent = ''; }, 7000);
+            }, 60);
+        }
+
+        function setStats(text) { $('stats').textContent = text; }
+
+        // --- Langue ------------------------------------------------------
+        const hasLang = (l) => !!I18N && Object.prototype.hasOwnProperty.call(I18N, l);
+
+        // Detection : correspondance exacte (fr-ca), puis prefixe (fr), puis anglais
+        function detectLang() {
+            const prefs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language];
+            for (const raw of prefs) {
+                const l = String(raw || '').toLowerCase();
+                if (hasLang(l)) return l;
+                const base = l.split('-')[0];
+                if (hasLang(base)) return base;
+            }
+            return 'en';
+        }
+
+        // fr-ca -> fr-CA (BCP 47)
+        const toBcp47 = (l) => l.replace(/-([a-z]{2})$/i, (m, r) => '-' + r.toUpperCase());
+
+        // --- Boutons : etats "repos" -------------------------------------
+        const COPY_CLASS = "bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group aria-disabled:opacity-70 aria-disabled:cursor-wait";
+
         function renderZipBtnIdle() {
-            document.getElementById('zipBtn').innerHTML = `<i data-lucide="folder-archive" class="w-7 h-7"></i> ${I18N[currentLang].zipBtn}`;
+            const btn = $('zipBtn');
+            btn.innerHTML = `<i data-lucide="folder-archive" class="w-7 h-7" aria-hidden="true"></i> ${escapeHtml(tr().zipBtn)}`;
         }
         function renderCopyBtnIdle() {
-            const btn = document.getElementById('copyBtn');
-            btn.innerHTML = `<i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform"></i> ${I18N[currentLang].copyBtnText}`;
-            btn.className = "bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group";
+            const btn = $('copyBtn');
+            btn.innerHTML = `<i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true"></i> ${escapeHtml(tr().copyBtnText)}`;
+            btn.className = COPY_CLASS;
+            btn.removeAttribute('aria-disabled');
         }
         function renderSaveBtnIdle() {
-            document.getElementById('singleDlBtn').innerHTML = `<i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform"></i> ${I18N[currentLang].saveBtnText}`;
+            const btn = $('singleDlBtn');
+            btn.innerHTML = `<i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform" aria-hidden="true"></i> ${escapeHtml(tr().saveBtnText)}`;
+            btn.removeAttribute('aria-disabled');
+        }
+
+        function renderModeButtons() {
+            const t = tr();
+            const isS = currentMode === 'solo';
+            const on = 'flex-1 rounded-xl bg-yellow-500 text-black font-black text-xs tracking-[0.2em] shadow-lg shadow-yellow-500/20 transition-all';
+            const off = 'flex-1 rounded-xl text-slate-400 hover:text-white font-black text-xs tracking-[0.2em] transition-all';
+            $('btn-solo').className = isS ? on : off;
+            $('btn-duo').className = !isS ? on : off;
+            $('btn-solo').setAttribute('aria-pressed', String(isS));
+            $('btn-duo').setAttribute('aria-pressed', String(!isS));
+            $('btn-solo').textContent = t.modeSolo;
+            $('btn-duo').textContent = t.modeDuo;
         }
 
         function applyTranslations(lang) {
-            const t = I18N[lang] || I18N.en;
-            currentLang = lang;
-            document.documentElement.lang = lang;
+            currentLang = hasLang(lang) ? lang : 'en';
+            const t = tr();
+            document.documentElement.lang = toBcp47(currentLang);
+            document.title = t.pageTitle;
 
-            document.getElementById('stats').innerText = t.statsInit;
+            $('skipLink').textContent = t.skipLink;
+            setStats(t.statsInit);
 
-            document.getElementById('name1').placeholder = t.name1Placeholder;
-            document.getElementById('name1').setAttribute('aria-label', t.name1Aria);
-            document.getElementById('id1').placeholder = t.id1Placeholder;
-            document.getElementById('id1').setAttribute('aria-label', t.id1Aria);
-            document.getElementById('swapBtn').setAttribute('aria-label', t.swapAria);
-            document.getElementById('name2').placeholder = t.name2Placeholder;
-            document.getElementById('name2').setAttribute('aria-label', t.name2Aria);
-            document.getElementById('id2').placeholder = t.id2Placeholder;
-            document.getElementById('id2').setAttribute('aria-label', t.id2Aria);
+            $('name1').placeholder = t.name1Placeholder;
+            $('name1').setAttribute('aria-label', t.name1Aria);
+            $('id1').placeholder = t.id1Placeholder;
+            $('id1').setAttribute('aria-label', t.id1Aria);
+            $('swapBtn').setAttribute('aria-label', t.swapAria);
+            $('name2').placeholder = t.name2Placeholder;
+            $('name2').setAttribute('aria-label', t.name2Aria);
+            $('id2').placeholder = t.id2Placeholder;
+            $('id2').setAttribute('aria-label', t.id2Aria);
 
-            document.getElementById('helpBtn').setAttribute('title', t.helpAria);
-            document.getElementById('helpBtn').setAttribute('aria-label', t.helpAria);
+            $('helpBtn').setAttribute('title', t.helpAria);
+            $('helpBtn').setAttribute('aria-label', t.helpAria);
 
-            document.getElementById('btn-solo').innerText = t.modeSolo;
-            document.getElementById('btn-duo').innerText = t.modeDuo;
+            $('filters').setAttribute('aria-label', t.filtersAria);
+            $('modeGroup').setAttribute('aria-label', t.modeAria);
+            $('langSelect').setAttribute('aria-label', t.langAria);
+            $('scaleSelect').setAttribute('aria-label', t.scaleAria);
+            renderModeButtons();
 
-            document.getElementById('categoryInput').placeholder = t.categoryPlaceholder;
-            document.getElementById('categoryInput').setAttribute('aria-label', t.categoryAria);
-            document.getElementById('search').placeholder = t.searchPlaceholder;
-            document.getElementById('search').setAttribute('aria-label', t.searchAria);
+            $('categoryInput').placeholder = t.categoryPlaceholder;
+            $('categoryInput').setAttribute('aria-label', t.categoryAria);
+            $('search').placeholder = t.searchPlaceholder;
+            $('search').setAttribute('aria-label', t.searchAria);
 
-            document.getElementById('helpCloseBtn').setAttribute('aria-label', t.helpCloseAria);
-            document.getElementById('helpTitleText').innerText = t.helpTitle;
+            $('helpCloseBtn').setAttribute('aria-label', t.helpCloseAria);
+            $('helpTitleText').textContent = t.helpTitle;
 
-            document.getElementById('lightboxCloseBtn').setAttribute('aria-label', t.lightboxCloseAria);
-            document.getElementById('lightbox-title').innerText = t.lightboxDefaultTitle;
-            document.getElementById('lightbox-res').innerText = t.lightboxDefaultRes;
+            $('lightboxCloseBtn').setAttribute('aria-label', t.lightboxCloseAria);
+            $('lightbox-title').textContent = t.lightboxDefaultTitle;
+            $('lightbox-res').textContent = t.lightboxDefaultRes;
 
-            renderZipBtnIdle();
-            renderCopyBtnIdle();
-            renderSaveBtnIdle();
+            if (!zipBusy) renderZipBtnIdle();
+            if (!copyBusy) renderCopyBtnIdle();
+            if (!saveBusy) renderSaveBtnIdle();
+            if (gridStateKind) showGridState(gridStateKind);
 
-            lucide.createIcons();
+            icons();
         }
 
-        window.onload = async () => {
-            document.getElementById('id1').value = localStorage.getItem('bt_id1') || "";
-            document.getElementById('id2').value = localStorage.getItem('bt_id2') || "";
-            document.getElementById('name1').value = localStorage.getItem('bt_name1') || "";
-            document.getElementById('name2').value = localStorage.getItem('bt_name2') || "";
+        // --- Chargement du catalogue -------------------------------------
+        let loadSeq = 0;
+        let loadCtrl = null;
 
-            const savedLang = localStorage.getItem('bt_lang') || 'fr';
-            document.getElementById('langSelect').value = savedLang;
+        // Meme regle que l'API (SRC_PATTERN de functions/api/export.js) : seul le CDN Bitmoji est
+        // accepte, avec un jeu de caracteres sans guillemet, espace ni caractere de controle.
+        const SRC_RE = /^https:\/\/sdk\.bitmoji\.com\/[A-Za-z0-9_\-\/.%]+$/;
 
-            applyTranslations(savedLang);
-            lucide.createIcons();
-
-            await loadData(savedLang);
-        };
+        // Prepare les items une seule fois : mots-cles normalises (evite de les recalculer a
+        // chaque frappe) et nom de fichier _file (tag nettoye + suffixe _2, _3... des doublons).
+        // _file est calcule sur la liste COMPLETE, avant tout filtrage, avec la meme fonction que
+        // l'API (poseFileTags) : un item ecarte ne decale pas la numerotation des suivants, et le
+        // ZIP, ses metadata et la lightbox portent les memes noms que le script /api/export.
+        function prepareItems(list) {
+            if (!Array.isArray(list)) throw new Error('Catalogue invalide');
+            const files = poseFileTags(list);
+            const items = [];
+            list.forEach((it, i) => {
+                if (!it || typeof it.src !== 'string' || !SRC_RE.test(it.src)) return;
+                const categories = (Array.isArray(it.categories) ? it.categories : [])
+                    .map((c) => (typeof c === 'string' ? c : (c && c.name) || ''))
+                    .filter(Boolean);
+                items.push({
+                    ...it,
+                    displayTag: String(it.displayTag ?? ''),
+                    categories,
+                    _file: files[i],
+                    _kw: normalizeStr(it.keywords),
+                    _cats: categories.map(normalizeStr)
+                });
+            });
+            return items;
+        }
 
         async function loadData(lang) {
-            const t = I18N[lang] || I18N.en;
+            const seq = ++loadSeq;
+            if (loadCtrl) loadCtrl.abort();
+            loadCtrl = new AbortController();
+            showGridState(null);
             try {
-                const response = await fetch(`./templates_${lang}.json`);
+                const response = await fetch(`./templates_${lang}.json`, { signal: loadCtrl.signal });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const json = await response.json();
-                rawData = json;
+                if (seq !== loadSeq) return; // une langue plus recente a ete demandee entre-temps
 
-                document.getElementById('stats').innerText = `${rawData.imoji.length + rawData.friends.length} ${t.statsSuffix}`;
+                const data = {
+                    categories: json.categories || [],
+                    imoji: prepareItems(json.imoji),
+                    friends: prepareItems(json.friends)
+                };
+                rawData = data;
+                dataReady = true;
 
                 const categoriesMap = new Map();
-                const allItems = [...rawData.imoji, ...rawData.friends];
-                allItems.forEach(item => {
-                    if(item.categories && Array.isArray(item.categories)) {
-                        item.categories.forEach(c => {
-                            const catName = typeof c === 'string' ? c : (c.name || "");
-                            if (catName) {
-                                categoriesMap.set(normalizeStr(catName), catName);
-                            }
-                        });
-                    }
+                [...data.imoji, ...data.friends].forEach((item) => {
+                    item.categories.forEach((catName) => categoriesMap.set(normalizeStr(catName), catName));
                 });
 
-                // Remplissage de la datalist
-                const catList = document.getElementById('categoryList');
-                catList.innerHTML = ''; // On vide l'ancienne liste
-
-                const sortedKeys = Array.from(categoriesMap.keys()).sort();
-                sortedKeys.forEach(normCat => {
-                    const originalName = categoriesMap.get(normCat);
-                    // On injecte les options dans la datalist
-                    catList.innerHTML += `<option value="${originalName.toUpperCase()}"></option>`;
+                // Remplissage de la datalist (via le DOM : aucun HTML injecte)
+                const frag = document.createDocumentFragment();
+                Array.from(categoriesMap.keys()).sort().forEach((normCat) => {
+                    const opt = document.createElement('option');
+                    opt.value = categoriesMap.get(normCat).toUpperCase();
+                    frag.appendChild(opt);
                 });
+                $('categoryList').replaceChildren(frag);
 
                 setMode(currentMode);
             } catch (err) {
-                document.getElementById('stats').innerText = t.statsError;
+                if ((err && err.name === 'AbortError') || seq !== loadSeq) return;
                 console.error(err);
+                dataReady = false;
+                currentRenderItems = [];
+                $('grid').replaceChildren();
+                setStats(tr().statsError);
+                showGridState('error');
             }
         }
 
-        // --- GESTION DE LA MODALE D'AIDE ---
+        // Etat "Aucun resultat" ou erreur (avec bouton Reessayer)
+        function showGridState(kind) {
+            gridStateKind = kind;
+            const box = $('gridState');
+            box.replaceChildren();
+            box.removeAttribute('role');
+            if (!kind) { box.classList.add('hidden'); return; }
+            const t = tr();
+            const p = document.createElement('p');
+            if (kind === 'error') {
+                box.setAttribute('role', 'alert');
+                p.textContent = t.statsError;
+                p.className = 'text-red-300 mb-6';
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.id = 'retryBtn';
+                btn.className = 'bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-full font-black text-sm transition-all active:scale-95';
+                btn.textContent = t.retryBtn;
+                btn.addEventListener('click', () => { setStats(tr().statsInit); loadData(currentLang); });
+                box.append(p, btn);
+            } else {
+                p.textContent = t.noResults;
+                box.append(p);
+            }
+            box.classList.remove('hidden');
+        }
+
+        // --- Modales (aide, apercu) --------------------------------------
+        let activeModal = null;
+        let lastTrigger = null;
+        const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+        function openModal(overlay, focusEl, trigger) {
+            lastTrigger = trigger || document.activeElement;
+            activeModal = overlay;
+            overlay.classList.remove('hidden');
+            $('appRoot').inert = true; // le contenu principal n'est plus atteignable
+            document.body.classList.add('overflow-hidden');
+            (focusEl || overlay).focus();
+        }
+        function closeModal(overlay) {
+            if (!overlay || overlay.classList.contains('hidden')) return;
+            overlay.classList.add('hidden');
+            if (activeModal === overlay) activeModal = null;
+            $('appRoot').inert = false;
+            document.body.classList.remove('overflow-hidden');
+            const back = lastTrigger && lastTrigger.isConnected ? lastTrigger : $('search');
+            lastTrigger = null;
+            back.focus();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!activeModal) return;
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeModal(activeModal);
+            } else if (e.key === 'Tab') {
+                // Piege de focus : on reste dans la modale
+                const items = Array.from(activeModal.querySelectorAll(FOCUSABLE))
+                    .filter((el) => el.getAttribute('aria-disabled') !== 'true' && el.offsetParent !== null);
+                if (!items.length) { e.preventDefault(); return; }
+                const first = items[0], last = items[items.length - 1];
+                if (!activeModal.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+                else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
+        });
+
+        // --- Modale d'aide ------------------------------------------------
+        let helpSeq = 0;
+        const num = (v) => (Number.isFinite(Number(v)) ? String(Number(v)) : '?');
+
         async function openHelp() {
-            document.getElementById('helpLightbox').classList.remove('hidden');
-            const helpContent = document.getElementById('helpContent');
-            const t = I18N[currentLang] || I18N.en;
+            const seq = ++helpSeq;
+            const t = tr();
+            const helpContent = $('helpContent');
+            helpContent.innerHTML = `<div class="flex items-center gap-3 text-slate-400 animate-pulse"><i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> ${escapeHtml(t.helpLoading)}</div>`;
+            icons();
+            openModal($('helpLightbox'), $('helpCloseBtn'), $('helpBtn'));
 
             try {
                 const res = await fetch('./aide.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const aideDonnees = await res.json();
-                const stats = aideDonnees.stats[currentLang] || aideDonnees.stats.en;
+                if (seq !== helpSeq) return;
+                const stats = (aideDonnees.stats && (aideDonnees.stats[currentLang] || aideDonnees.stats.en)) || {};
                 const guide = (aideDonnees.guide && (aideDonnees.guide[currentLang] || aideDonnees.guide.en)) || "";
                 const flag = FLAGS[currentLang] || '';
 
-                // Formater l'affichage avec le JSON
+                // Formater l'affichage avec le JSON (tout est echappe ou converti en nombre)
                 helpContent.innerHTML = `
                     <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 mb-8">
-                        <h4 class="text-xs font-black tracking-widest text-slate-500 mb-2">${escapeHtml(t.catalogLabel)} ${flag}</h4>
-                        <p class="text-2xl font-black text-slate-200">${stats.solo} <span class="text-sm font-normal text-slate-500">${escapeHtml(t.modeSolo)}</span></p>
-                        <p class="text-2xl font-black text-slate-200">${stats.duo} <span class="text-sm font-normal text-slate-500">${escapeHtml(t.modeDuo)}</span></p>
+                        <h4 class="text-xs font-black tracking-widest text-slate-400 mb-2">${escapeHtml(t.catalogLabel)} ${flag}</h4>
+                        <p class="text-2xl font-black text-slate-200">${num(stats.solo)} <span class="text-sm font-normal text-slate-400">${escapeHtml(t.modeSolo)}</span></p>
+                        <p class="text-2xl font-black text-slate-200">${num(stats.duo)} <span class="text-sm font-normal text-slate-400">${escapeHtml(t.modeDuo)}</span></p>
                     </div>
 
                     <div class="bg-blue-900/20 border border-blue-500/20 p-6 rounded-3xl">
@@ -352,58 +582,73 @@
                     </div>
 
                     <div class="text-center mt-6">
-                        <p class="text-[10px] font-black tracking-[0.3em] text-slate-600 uppercase">${escapeHtml(t.helpLastUpdate)} ${escapeHtml(aideDonnees.date_maj)}</p>
+                        <p class="text-xs font-black tracking-[0.3em] text-slate-400 uppercase">${escapeHtml(t.helpLastUpdate)} ${escapeHtml(aideDonnees.date_maj)}</p>
                     </div>
                 `;
             } catch (e) {
+                if (seq !== helpSeq) return;
+                console.error(e);
                 helpContent.innerHTML = `
-                    <div class="bg-red-900/20 text-red-400 p-6 rounded-2xl border border-red-500/20">
-                        <p><i data-lucide="alert-triangle" class="inline w-5 h-5 mr-2"></i> ${escapeHtml(t.helpErrorTitle)} <strong>aide.json</strong>.</p>
-                        <p class="text-sm mt-2 opacity-80">${escapeHtml(t.helpErrorSubtitle)}</p>
+                    <div class="bg-red-900/20 text-red-300 p-6 rounded-2xl border border-red-500/20" role="alert">
+                        <p><i data-lucide="alert-triangle" class="inline w-5 h-5 mr-2" aria-hidden="true"></i> ${escapeHtml(t.helpErrorTitle)} <strong>aide.json</strong>.</p>
+                        <p class="text-sm mt-2">${escapeHtml(t.helpErrorSubtitle)}</p>
                     </div>
                 `;
             }
-            lucide.createIcons();
+            icons();
         }
 
-        function closeHelp() {
-            document.getElementById('helpLightbox').classList.add('hidden');
-        }
+        function closeHelp() { closeModal($('helpLightbox')); }
         // -----------------------------------
 
+        // --- Champs et persistance ---------------------------------------
+        const idState = { id1: true, id2: true }; // dernier etat de validite (evite de repeter l'annonce)
+
+        function checkIdField(el) {
+            const raw = el.value.trim();
+            const bad = raw !== '' && !SAFE_RE.test(raw);
+            el.setAttribute('aria-invalid', String(bad));
+            if (bad && idState[el.id]) say(tr().invalidIdMsg, true);
+            idState[el.id] = !bad;
+            return bad;
+        }
+
         function changeLanguage() {
-            const lang = document.getElementById('langSelect').value;
-            localStorage.setItem('bt_lang', lang);
+            const lang = $('langSelect').value;
+            if (!hasLang(lang)) return;
+            store.set('bt_lang', lang);
             applyTranslations(lang);
             loadData(lang);
         }
 
         function save() {
-            localStorage.setItem('bt_id1', document.getElementById('id1').value);
-            localStorage.setItem('bt_id2', document.getElementById('id2').value);
-            localStorage.setItem('bt_name1', document.getElementById('name1').value);
-            localStorage.setItem('bt_name2', document.getElementById('name2').value);
+            store.set('bt_id1', validId($('id1').value));
+            store.set('bt_id2', validId($('id2').value));
+            store.set('bt_name1', $('name1').value);
+            store.set('bt_name2', $('name2').value);
         }
 
-        function saveAndRender() { save(); render(); }
+        function onIdInput(e) {
+            checkIdField(e.currentTarget);
+            save();
+            render();
+        }
 
         function swapIds() {
-            const i1 = document.getElementById('id1'), i2 = document.getElementById('id2');
-            const n1 = document.getElementById('name1'), n2 = document.getElementById('name2');
+            const i1 = $('id1'), i2 = $('id2');
+            const n1 = $('name1'), n2 = $('name2');
             [i1.value, i2.value] = [i2.value, i1.value];
             [n1.value, n2.value] = [n2.value, n1.value];
-            saveAndRender();
+            checkIdField(i1); checkIdField(i2);
+            save();
+            render();
         }
 
         function setMode(mode) {
             currentMode = mode;
-            const isS = mode === 'solo';
-            document.getElementById('btn-solo').className = isS ? 'flex-1 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/20' : 'flex-1 text-slate-500 hover:text-white';
-            document.getElementById('btn-duo').className = !isS ? 'flex-1 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/20' : 'flex-1 text-slate-500 hover:text-white';
-            document.getElementById('btn-solo').innerText = I18N[currentLang].modeSolo;
-            document.getElementById('btn-duo').innerText = I18N[currentLang].modeDuo;
+            renderModeButtons();
 
-            const container = document.getElementById('grid-container');
+            const container = $('grid-container');
             container.classList.remove('animate-mode-switch');
             void container.offsetWidth;
             container.classList.add('animate-mode-switch');
@@ -411,287 +656,364 @@
             render();
         }
 
+        // Filtre commun a la grille et au ZIP (utilise les champs pre-calcules)
+        function filterItems(list) {
+            const search = normalizeStr($('search').value);
+            const category = normalizeStr($('categoryInput').value);
+            return list.filter((t) => t._kw.includes(search) && (category === '' || t._cats.some((c) => c.includes(category))));
+        }
+
         function render() {
-            const grid = document.getElementById('grid');
-            const search = normalizeStr(document.getElementById('search').value);
-            const scale = document.getElementById('scaleSelect').value;
-            // On recupere le texte tape dans l'input categorie
-            const categoryInput = normalizeStr(document.getElementById('categoryInput').value);
-            const id1 = document.getElementById('id1').value || "%s", id2 = document.getElementById('id2').value || "%s";
+            const grid = $('grid');
+            if (!dataReady) { grid.replaceChildren(); return; }
+            const scale = $('scaleSelect').value;
+            // ID absent ou invalide : on garde le marqueur "%s" (les images seront en erreur)
+            const id1 = validId($('id1').value) || "%s", id2 = validId($('id2').value) || "%s";
 
             const list = currentMode === 'solo' ? rawData.imoji : rawData.friends;
-
-            const filtered = list.filter(t => {
-                const normalizedKeywords = normalizeStr(t.keywords);
-                const matchSearch = normalizedKeywords.includes(search);
-
-                let matchCategory = true;
-                // Si l'utilisateur a tape quelque chose dans categorie
-                if (categoryInput !== '') {
-                    // On cherche si une categorie de l'image contient le texte tape (ex: "amo" trouvera "AMOUR")
-                    matchCategory = t.categories && t.categories.some(c => normalizeStr(c).includes(categoryInput));
-                }
-
-                return matchSearch && matchCategory;
-            });
+            const filtered = filterItems(list);
 
             // On garde les items rendus de cote (par index) plutot que d'injecter leurs
-            // donnees dans des attributs onclick, ce qui evitait d'avoir a les echapper pour
-            // un contexte JS + HTML imbrique (risque de casse/injection sur des titres avec guillemets).
-            currentRenderItems = filtered.map(t => {
+            // donnees dans des attributs onclick : le clic est gere par un listener delegue.
+            currentRenderItems = filtered.map((t) => {
                 let url = t.src.replace('%s', id1);
-                if(url.includes('%s')) url = url.replace('%s', id2);
+                if (url.includes('%s')) url = url.replace('%s', id2);
                 url += `?transparent=1&palette=1&scale=${scale}`;
-                return { url, title: t.displayTag, slugFallback: t.slugFallback };
+                return { url, title: t.displayTag || t.slugFallback || '', file: t._file };
             });
 
+            // Le span nomme deja le bouton : l'image est decorative (alt vide)
             grid.innerHTML = currentRenderItems.map((item, i) => `
-                <div class="grid-item group bg-slate-900/40 p-5 rounded-[2.5rem] border border-slate-800 text-center cursor-pointer hover:border-yellow-500/40 transition-all" onclick="openLightboxByIndex(${i})">
-                    <img src="${item.url}" alt="${escapeHtml(item.title)}" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy">
-                    <span class="text-[9px] text-slate-600 uppercase font-black tracking-widest block truncate">${escapeHtml(item.title)}</span>
-                </div>`).join('');
-        }
+                <button type="button" data-i="${i}" title="${escapeHtml(item.title)}" class="grid-item group block w-full bg-slate-900/40 p-5 rounded-[2.5rem] border border-slate-800 text-center cursor-pointer hover:border-yellow-500/40 focus-visible:border-yellow-500/60 transition-all">
+                    <img src="${escapeHtml(item.url)}" alt="" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy" decoding="async">
+                    <span class="text-xs text-slate-400 uppercase font-black tracking-widest block truncate">${escapeHtml(item.title)}</span>
+                </button>`).join('');
 
-        function openLightboxByIndex(i) {
+            setStats(`${currentRenderItems.length} ${tr().statsSuffix}`);
+            showGridState(currentRenderItems.length === 0 ? 'empty' : null);
+        }
+        const renderDebounced = debounce(render, 180);
+
+        function openLightboxByIndex(i, trigger) {
             const item = currentRenderItems[i];
             if (!item) return;
-            openLightbox(item.url, item.title, item.slugFallback);
+            openLightbox(item.url, item.title, item.file, trigger);
         }
 
+        // --- Telechargement / copie d'une image --------------------------
+        async function fetchBlob(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.blob();
+        }
+
+        let saveBusy = false;
         async function forceDownload(url, filename) {
-            const btn = document.getElementById('singleDlBtn');
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>...`;
-            lucide.createIcons();
+            if (saveBusy) return;
+            saveBusy = true;
+            const btn = $('singleDlBtn');
+            btn.setAttribute('aria-disabled', 'true');
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i>...`;
+            icons();
 
             try {
-                const response = await fetch(url);
-                const blob = await response.blob();
+                const blob = await fetchBlob(url);
                 saveAs(blob, filename);
-            } catch (e) { alert(I18N[currentLang].downloadError); }
-
-            btn.innerHTML = originalHtml;
-            lucide.createIcons();
+            } catch (e) {
+                console.error(e);
+                say(tr().downloadError, true);
+            } finally {
+                saveBusy = false;
+                renderSaveBtnIdle();
+                icons();
+            }
         }
+
+        let copyBusy = false;
         async function copyImage(url) {
-            const btn = document.getElementById('copyBtn');
-            const originalHtml = btn.innerHTML;
-            const t = I18N[currentLang];
+            if (copyBusy) return;
+            copyBusy = true;
+            const btn = $('copyBtn');
+            const t = tr();
+            btn.setAttribute('aria-disabled', 'true');
 
             // Animation de chargement
-            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> ${t.copyInProgress}`;
-            lucide.createIcons();
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> ${escapeHtml(t.copyInProgress)}`;
+            icons();
 
             try {
                 // On telecharge l'image en memoire
-                const response = await fetch(url);
-                const blob = await response.blob();
+                const blob = await fetchBlob(url);
+                const png = blob.type === 'image/png' ? blob : new Blob([blob], { type: 'image/png' });
 
                 // On ecrit le fichier PNG directement dans le presse-papier
-                await navigator.clipboard.write([
-                    new ClipboardItem({
-                        'image/png': blob
-                    })
-                ]);
+                await navigator.clipboard.write([new ClipboardItem({ 'image/png': png })]);
 
                 // Animation de succes
-                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-green-400"></i> ${t.copiedSuccess}`;
+                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-green-400" aria-hidden="true"></i> ${escapeHtml(t.copiedSuccess)}`;
                 btn.classList.add('bg-green-900/30', 'border', 'border-green-500/50');
-                lucide.createIcons();
-
+                say(t.copiedSuccess);
             } catch (e) {
                 console.error("Erreur de copie :", e);
                 // Animation d'erreur (si le navigateur bloque l'acces)
-                btn.innerHTML = `<i data-lucide="x" class="w-5 h-5 text-red-500"></i> ${t.copyError}`;
-                lucide.createIcons();
+                btn.innerHTML = `<i data-lucide="x" class="w-5 h-5 text-red-400" aria-hidden="true"></i> ${escapeHtml(t.copyError)}`;
+                say(t.copyError, true);
+            } finally {
+                icons();
+                // Au bout de 2 secondes, on remet le bouton a son etat normal
+                setTimeout(() => {
+                    copyBusy = false;
+                    renderCopyBtnIdle();
+                    icons();
+                }, 2000);
             }
-
-            // Au bout de 2 secondes, on remet le bouton a son etat normal
-            setTimeout(() => {
-                btn.innerHTML = originalHtml;
-                btn.classList.remove('bg-green-900/30', 'border', 'border-green-500/50');
-                lucide.createIcons();
-            }, 2000);
         }
 
-        function openLightbox(url, title, slugFallback) {
-            const scale = document.getElementById('scaleSelect').value;
-            const t = I18N[currentLang];
-            document.getElementById('lightbox-img').src = url;
-            document.getElementById('lightbox-img').alt = title;
-            document.getElementById('lightbox-title').innerText = title;
-            document.getElementById('lightbox-res').innerText = `${t.lightboxResFormat} ${scale}X`;
+        let lightboxState = null;
+        function openLightbox(url, title, file, trigger) {
+            const scale = $('scaleSelect').value;
+            const t = tr();
+            $('lightbox-img').src = url;
+            $('lightbox-img').alt = ''; // le titre juste en dessous nomme deja l'image
+            $('lightbox-title').textContent = title;
+            $('lightbox-res').textContent = `${t.lightboxResFormat} ${scale}X`;
 
-            const n1 = document.getElementById('name1').value || "Utilisateur1";
-            const n2 = document.getElementById('name2').value || "Utilisateur2";
+            const n1 = sanitizeName($('name1').value, DEFAULT_NAME_1);
+            const n2 = sanitizeName($('name2').value, DEFAULT_NAME_2);
 
-            // On nettoie le nom de la pose (sans accents, avec les bons espaces)
-            const cleanTitle = resolveTag(title, slugFallback);
+            // file = nom de pose nettoye + suffixe de doublon, calcule dans prepareItems (meme nom que l'API)
+            // Solo : Nom1__nom_de_la_pose.png / Duo : Nom1__Nom2__nom_de_la_pose.png
+            const filename = currentMode === 'solo'
+                ? `${n1}__${file}.png`
+                : `${n1}__${n2}__${file}.png`;
 
-            let filename;
-            if (currentMode === 'solo') {
-                // Mode Solo : Nom1__nom_de_la_pose.png
-                filename = `${n1}__${cleanTitle}.png`;
-            } else {
-                // Mode Duo : Nom1__Nom2__nom_de_la_pose.png
-                filename = `${n1}__${n2}__${cleanTitle}.png`;
-            }
-
-            document.getElementById('copyBtn').onclick = () => copyImage(url);
-            document.getElementById('singleDlBtn').onclick = () => forceDownload(url, filename);
-            document.getElementById('lightbox').classList.remove('hidden');
-            lucide.createIcons();
+            lightboxState = { url, filename };
+            openModal($('lightbox'), $('lightboxCloseBtn'), trigger);
+            icons();
         }
 
-        function closeLightbox() { document.getElementById('lightbox').classList.add('hidden'); }
+        function closeLightbox() { closeModal($('lightbox')); }
 
- async function downloadAllAsZip() {
-            const zip = new JSZip();
-            const btn = document.getElementById('zipBtn');
-            const t = I18N[currentLang];
-            const id1 = document.getElementById('id1').value, id2 = document.getElementById('id2').value;
-            const n1 = document.getElementById('name1').value || "Utilisateur1";
-            const n2 = document.getElementById('name2').value || "Utilisateur2";
-            const scale = document.getElementById('scaleSelect').value;
+        // --- Export ZIP -------------------------------------------------
+        let zipBusy = false;
 
-            const search = normalizeStr(document.getElementById('search').value);
-            const categoryInput = normalizeStr(document.getElementById('categoryInput').value);
+        // 1 tentative + 1 nouvelle tentative par image
+        async function fetchBlobRetry(url) {
+            try {
+                return await fetchBlob(url);
+            } catch (e) {
+                await sleep(400);
+                return fetchBlob(url);
+            }
+        }
 
-            if(!id1 || (currentMode === 'duo' && !id2)) return alert(t.zipMissingIds);
+        async function downloadAllAsZip() {
+            if (zipBusy) return;
+            const t = tr();
+            if (!window.JSZip || !window.saveAs) { say(t.downloadError, true); return; }
 
-            btn.disabled = true;
+            const id1 = validId($('id1').value), id2 = validId($('id2').value);
+            const bad1 = checkIdField($('id1')), bad2 = checkIdField($('id2'));
+            if (bad1 || bad2) { say(t.invalidIdMsg, true); return; }
+            if (!id1 || (currentMode === 'duo' && !id2)) { say(t.zipMissingIds, true); return; }
 
-            const list = currentMode === 'solo' ? rawData.imoji : rawData.friends;
-            const filteredList = list.filter(t => {
-                const normalizedKeywords = normalizeStr(t.keywords);
-                const matchSearch = normalizedKeywords.includes(search);
-                let matchCategory = true;
-                if (categoryInput !== '') {
-                    matchCategory = t.categories && t.categories.some(c => normalizeStr(c).includes(categoryInput));
+            const n1 = sanitizeName($('name1').value, DEFAULT_NAME_1);
+            const n2 = sanitizeName($('name2').value, DEFAULT_NAME_2);
+            const withUser2 = currentMode === 'duo' || !!id2;
+            // Deux noms identiques ecraseraient les fichiers (meme dossier / meme nom)
+            if (withUser2 && n1 === n2) { say(t.zipSameNames, true); return; }
+
+            const scale = $('scaleSelect').value;
+            const filteredList = filterItems(currentMode === 'solo' ? rawData.imoji : rawData.friends);
+            if (!filteredList.length) { say(t.noResults, true); return; }
+
+            zipBusy = true;
+            const btn = $('zipBtn');
+            btn.setAttribute('aria-disabled', 'true');
+            btn.setAttribute('aria-busy', 'true');
+
+            try {
+                const zip = new JSZip();
+                const qs = `?transparent=1&palette=1&scale=${scale}`;
+
+                // ETAPE 1 : Preparer les taches (chaque tache garde sa fiche de metadonnees)
+                // Noms de fichiers : item._file, numerote sur le catalogue COMPLET (prepareItems),
+                // donc identiques a /api/export meme quand un filtre de recherche est actif.
+                const tasks = [];
+
+                for (const item of filteredList) {
+                    const file = item._file;
+
+                    const imgData = {
+                        titre: item.displayTag,
+                        mots_cles: item.keywords,
+                        categories: item.categories || []
+                    };
+
+                    if (currentMode === 'solo') {
+                        // Pour l'utilisateur 1
+                        const filename1 = `${n1}__${file}.png`;
+                        tasks.push({ url: item.src.replace('%s', id1) + qs, dir: n1, filename: filename1, group: 'u1', meta: { fichier: filename1, ...imgData } });
+
+                        // Pour l'utilisateur 2 (uniquement s'il y a un ID : pas de dossier vide)
+                        if (id2) {
+                            const filename2 = `${n2}__${file}.png`;
+                            tasks.push({ url: item.src.replace('%s', id2) + qs, dir: n2, filename: filename2, group: 'u2', meta: { fichier: filename2, ...imgData } });
+                        }
+                    } else {
+                        // MODE DUO : ON FAIT LES DEUX SENS !
+                        // Sens 1 : Utilisateur 1 d'abord, Utilisateur 2 ensuite
+                        let url1 = item.src.replace('%s', id1);
+                        if (url1.includes('%s')) url1 = url1.replace('%s', id2);
+                        const filenameDuo1 = `${n1}__${n2}__${file}.png`;
+                        tasks.push({ url: url1 + qs, dir: null, filename: filenameDuo1, group: 'duo', meta: { fichier: filenameDuo1, ...imgData } });
+
+                        // Sens 2 : Utilisateur 2 d'abord, Utilisateur 1 ensuite (Inversion)
+                        let url2 = item.src.replace('%s', id2);
+                        if (url2.includes('%s')) url2 = url2.replace('%s', id1);
+                        const filenameDuo2 = `${n2}__${n1}__${file}.png`;
+                        tasks.push({ url: url2 + qs, dir: null, filename: filenameDuo2, group: 'duo', meta: { fichier: filenameDuo2, ...imgData } });
+                    }
                 }
-                return matchSearch && matchCategory;
+
+                // ETAPE 2 : Lancer les telechargements en parallele (par lots de 15)
+                const BATCH_SIZE = 15;
+                let completed = 0;
+
+                for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
+                    const batch = tasks.slice(i, i + BATCH_SIZE);
+
+                    btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin" aria-hidden="true"></i> ${completed} / ${tasks.length}`;
+                    icons();
+
+                    await Promise.all(batch.map(async (task) => {
+                        try {
+                            const blob = await fetchBlobRetry(task.url);
+                            // Les dossiers sont crees a la demande : jamais de dossier vide
+                            (task.dir ? zip.folder(task.dir) : zip).file(task.filename, blob);
+                            task.ok = true;
+                        } catch (e) {
+                            task.ok = false;
+                            console.warn(`Erreur sur l'image ${task.filename}`);
+                        }
+                    }));
+
+                    completed += batch.length;
+                }
+
+                const okTasks = tasks.filter((x) => x.ok);
+                const failures = tasks.length - okTasks.length;
+                if (okTasks.length === 0) { say(t.zipNothing, true); return; }
+
+                // ETAPE 3 : Creation finale du ZIP (metadonnees = images reussies uniquement)
+                btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin" aria-hidden="true"></i> ${escapeHtml(tr().zipCompressing)}`;
+                icons();
+
+                const metaOf = (g) => okTasks.filter((x) => x.group === g).map((x) => x.meta);
+                const meta1 = metaOf('u1'), meta2 = metaOf('u2'), metaDuo = metaOf('duo');
+                if (meta1.length) zip.folder(n1).file(`metadata_${n1}.json`, JSON.stringify(meta1, null, 2));
+                if (meta2.length) zip.folder(n2).file(`metadata_${n2}.json`, JSON.stringify(meta2, null, 2));
+                // Fichier au nom exact attendu par Home Assistant
+                if (metaDuo.length) zip.file(`metadata_Duo.json`, JSON.stringify(metaDuo, null, 2));
+
+                const content = await zip.generateAsync({ type: "blob" });
+                saveAs(content, `AvatarExplorer__${currentMode === 'solo' ? n1 : 'Duo'}.zip`);
+
+                const tNow = tr();
+                if (failures > 0) say(tNow.zipPartial.replace('{n}', String(failures)), true);
+                else say(tNow.zipDone);
+            } catch (e) {
+                console.error(e);
+                say(tr().downloadError, true);
+            } finally {
+                // Remise a zero : le bouton ne reste jamais bloque
+                zipBusy = false;
+                btn.removeAttribute('aria-disabled');
+                btn.removeAttribute('aria-busy');
+                renderZipBtnIdle();
+                icons();
+            }
+        }
+
+        // --- Demarrage ---------------------------------------------------
+        function showFatal() {
+            const fr = (navigator.language || '').toLowerCase().startsWith('fr');
+            const box = $('fatalError');
+            box.textContent = fr
+                ? "Impossible de charger les fichiers de l'application (traductions ou utilitaires). Vérifiez votre connexion puis "
+                : "Unable to load the application files (translations or utilities). Check your connection, then ";
+            const a = document.createElement('a');
+            a.href = location.pathname;
+            a.className = 'underline text-yellow-400';
+            a.textContent = fr ? "rechargez la page." : "reload the page.";
+            box.appendChild(a);
+            box.classList.remove('hidden');
+        }
+
+        function wireEvents() {
+            $('name1').addEventListener('input', save);
+            $('name2').addEventListener('input', save);
+            $('id1').addEventListener('input', onIdInput);
+            $('id2').addEventListener('input', onIdInput);
+            $('swapBtn').addEventListener('click', swapIds);
+            $('zipBtn').addEventListener('click', downloadAllAsZip);
+            $('helpBtn').addEventListener('click', openHelp);
+            $('btn-solo').addEventListener('click', () => setMode('solo'));
+            $('btn-duo').addEventListener('click', () => setMode('duo'));
+            $('langSelect').addEventListener('change', changeLanguage);
+            $('scaleSelect').addEventListener('change', render);
+            $('categoryInput').addEventListener('input', renderDebounced);
+            $('search').addEventListener('input', renderDebounced);
+
+            // Clic delegue sur les cartes de la grille
+            $('grid').addEventListener('click', (e) => {
+                const card = e.target.closest('.grid-item');
+                if (card) openLightboxByIndex(Number(card.dataset.i), card);
             });
 
-            // ETAPE 1 : Preparer les taches et les metadonnees
-            const tasks = [];
-            const nameCount = {};
-            const metadataUser1 = [];
-            const metadataUser2 = [];
-            const metadataDuo = [];   // JSON pour le mode duo
+            // Fermeture des modales : bouton x ou clic sur le fond
+            $('helpCloseBtn').addEventListener('click', closeHelp);
+            $('lightboxCloseBtn').addEventListener('click', closeLightbox);
+            $('helpLightbox').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeHelp(); });
+            $('lightbox').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeLightbox(); });
 
-            let f1, f2;
-
-            if(currentMode === 'solo') {
-                f1 = zip.folder(n1);
-                f2 = zip.folder(n2);
-            }
-
-            for (let item of filteredList) {
-                let tag = resolveTag(item.displayTag, item.slugFallback);
-                nameCount[tag] = (nameCount[tag] || 0) + 1;
-                const suf = nameCount[tag] === 1 ? "" : `_${nameCount[tag]}`;
-
-                const imgData = {
-                    titre: item.displayTag,
-                    mots_cles: item.keywords,
-                    categories: item.categories || []
-                };
-
-                if (currentMode === 'solo') {
-                    // Pour l'utilisateur 1
-                    const filename1 = `${n1}__${tag}${suf}.png`;
-                    tasks.push({
-                        url: item.src.replace('%s', id1) + `?transparent=1&palette=1&scale=${scale}`,
-                        folder: f1,
-                        filename: filename1
-                    });
-                    metadataUser1.push({ fichier: filename1, ...imgData });
-
-                    // Pour l'utilisateur 2
-                    if(id2) {
-                        const filename2 = `${n2}__${tag}${suf}.png`;
-                        tasks.push({
-                            url: item.src.replace('%s', id2) + `?transparent=1&palette=1&scale=${scale}`,
-                            folder: f2,
-                            filename: filename2
-                        });
-                        metadataUser2.push({ fichier: filename2, ...imgData });
-                    }
-                } else {
-                    // ==========================================
-                    // MODE DUO : ON FAIT LES DEUX SENS !
-                    // ==========================================
-
-                    // Sens 1 : Utilisateur 1 d'abord, Utilisateur 2 ensuite
-                    let url1 = item.src.replace('%s', id1);
-                    if(url1.includes('%s')) url1 = url1.replace('%s', id2);
-
-                    const filenameDuo1 = `${n1}__${n2}__${tag}${suf}.png`;
-                    tasks.push({
-                        url: url1 + `?transparent=1&palette=1&scale=${scale}`,
-                        folder: zip,
-                        filename: filenameDuo1
-                    });
-                    metadataDuo.push({ fichier: filenameDuo1, ...imgData });
-
-                    // Sens 2 : Utilisateur 2 d'abord, Utilisateur 1 ensuite (Inversion)
-                    let url2 = item.src.replace('%s', id2);
-                    if(url2.includes('%s')) url2 = url2.replace('%s', id1);
-
-                    const filenameDuo2 = `${n2}__${n1}__${tag}${suf}.png`;
-                    tasks.push({
-                        url: url2 + `?transparent=1&palette=1&scale=${scale}`,
-                        folder: zip,
-                        filename: filenameDuo2
-                    });
-                    metadataDuo.push({ fichier: filenameDuo2, ...imgData });
-                }
-            }
-
-            // ETAPE 2 : Lancer les telechargements en parallele (par lots de 15)
-            const BATCH_SIZE = 15;
-            let completed = 0;
-
-            for (let i = 0; i < tasks.length; i += BATCH_SIZE) {
-                const batch = tasks.slice(i, i + BATCH_SIZE);
-
-                btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin"></i> ${completed} / ${tasks.length}`;
-                lucide.createIcons();
-
-                await Promise.all(batch.map(async (task) => {
-                    try {
-                        const response = await fetch(task.url);
-                        if (!response.ok) throw new Error("Erreur reseau");
-                        const blob = await response.blob();
-                        task.folder.file(task.filename, blob);
-                    } catch (e) {
-                        console.warn(`Erreur sur l'image ${task.filename}`);
-                    }
-                }));
-
-                completed += batch.length;
-            }
-
-            // ETAPE 3 : Creation finale du ZIP
-            btn.innerHTML = `<i data-lucide="loader-2" class="w-7 h-7 animate-spin"></i> ${t.zipCompressing}`;
-            lucide.createIcons();
-
-            if (currentMode === 'solo') {
-                f1.file(`metadata_${n1}.json`, JSON.stringify(metadataUser1, null, 2));
-                if(id2) f2.file(`metadata_${n2}.json`, JSON.stringify(metadataUser2, null, 2));
-            } else {
-                // Creation du fichier avec le nom exact pour ton Home Assistant
-                zip.file(`metadata_Duo.json`, JSON.stringify(metadataDuo, null, 2));
-            }
-
-            const content = await zip.generateAsync({type:"blob"});
-            saveAs(content, `AvatarExplorer__${currentMode === 'solo' ? n1 : 'Duo'}.zip`);
-
-            // Remise a zero
-            renderZipBtnIdle();
-            btn.disabled = false;
-            lucide.createIcons();
+            $('copyBtn').addEventListener('click', () => { if (lightboxState) copyImage(lightboxState.url); });
+            $('singleDlBtn').addEventListener('click', () => { if (lightboxState) forceDownload(lightboxState.url, lightboxState.filename); });
         }
+
+        async function boot() {
+            try {
+                const [i18nMod, utilsMod] = await Promise.all([
+                    import('./shared/i18n.js'),
+                    import('./shared/poseNameUtils.js')
+                ]);
+                I18N = i18nMod.I18N;
+                poseFileTags = utilsMod.poseFileTags;
+                if (!I18N || !I18N.en) throw new Error('Dictionnaire i18n invalide');
+                if (typeof poseFileTags !== 'function') throw new Error('Utilitaires de nommage invalides');
+            } catch (err) {
+                console.error(err);
+                showFatal();
+                return;
+            }
+
+            // Valeurs enregistrees (ID valides uniquement)
+            $('id1').value = validId(store.get('bt_id1') || '');
+            $('id2').value = validId(store.get('bt_id2') || '');
+            $('name1').value = (store.get('bt_name1') || '').slice(0, 40);
+            $('name2').value = (store.get('bt_name2') || '').slice(0, 40);
+
+            // Langue enregistree si valide, sinon detection navigateur
+            const saved = store.get('bt_lang');
+            const lang = saved && hasLang(saved) ? saved : detectLang();
+            $('langSelect').value = lang;
+
+            wireEvents();
+            applyTranslations(lang);
+            await loadData(lang);
+        }
+
+        boot();
     </script>
 </body>
 </html>
