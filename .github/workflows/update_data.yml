@@ -6,6 +6,10 @@ on:
   workflow_dispatch: # Ajoute ce bouton pour tester manuellement !
   schedule:
     - cron: '0 6 * * 1'   # tous les lundis à 06:00 UTC (08:00 Paris en été)
+concurrency:
+  group: update-data-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +35,9 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add public/templates_*.json public/aide.json
           git commit -m "🚀 Mise à jour auto [skip ci]" || echo "Aucune modification à commit"
+          # Si main a bougé depuis le checkout (ex: push manuel entre-temps), on rebase
+          # avant de pousser plutôt que d'échouer sèchement sur un push rejeté.
+          git pull --rebase origin main
           git push
       - name: 🚀 Force redeploy Cloudflare
         run: curl -fsS -X POST "${{ secrets.CF_DEPLOY_HOOK }}" -o /dev/null

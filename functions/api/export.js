@@ -1,3 +1,5 @@
+import { resolvePoseTag } from '../../public/shared/poseNameUtils.js';
+
 export async function onRequest(context) {
     const { request } = context;
     const url = new URL(request.url);
@@ -40,17 +42,7 @@ export async function onRequest(context) {
     if (!templateReq.ok) return new Response("Catalogue introuvable pour cette langue.", { status: 500 });
     const rawData = await templateReq.json();
 
-    const cleanName = (str) => {
-        if (!str) return "pose";
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/'/g, " ").toLowerCase().replace(/[^a-z0-9 ]/g, "_").trim();
-    };
-    // Pour les langues a alphabet non-latin (ja, ko, zh, el...), le tag natif peut se reduire
-    // a une chaine vide apres nettoyage : on retombe alors sur le tag anglais (slugFallback).
-    const resolveTag = (t) => {
-        const tag = cleanName(t.displayTag);
-        if (tag.replace(/[_ ]/g, "").length > 0) return tag;
-        return cleanName(t.slugFallback) || "pose";
-    };
+    const resolveTag = (t) => resolvePoseTag(t.displayTag, t.slugFallback);
 
     // --- PARTIE A : GÉNÉRATION DU JSON PRÉCIS ---
     if (type === 'json') {

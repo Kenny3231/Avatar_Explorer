@@ -169,6 +169,79 @@ function updateAideJson(statsByLang) {
     console.log(`📝 Fichier aide.json mis à jour avec succès ! (Date: ${dateMaj})`);
 }
 
+// Langues a alphabet non-latin : leur tag natif peut disparaitre completement
+// apres nettoyage du nom de fichier (voir isEmptySlug), d'ou l'exigence d'un slugFallback.
+const NON_LATIN_LANGS = ['ja', 'ko', 'zh', 'el'];
+
+// Filet de securite avant de laisser la CI committer : une regression ici (fichier manquant,
+// encodage corrompu, slugFallback manquant) ferait planter le script au lieu de pousser des
+// données cassées sur origin/main.
+function verifyOutputs(allCodes) {
+    const errors = [];
+    const warnings = [];
+
+    for (const code of allCodes) {
+        const fileName = `templates_${code}.json`;
+        if (!fs.existsSync(fileName)) {
+            errors.push(`${fileName} est manquant.`);
+            continue;
+        }
+
+        const raw = fs.readFileSync(fileName, 'utf8');
+        if (raw.includes('�')) {
+            errors.push(`${fileName} contient des caractères de remplacement U+FFFD (corruption d'encodage).`);
+        }
+
+        let data;
+        try {
+            data = JSON.parse(raw);
+        } catch (e) {
+            errors.push(`${fileName} n'est pas un JSON valide : ${e.message}`);
+            continue;
+        }
+
+        if (!Array.isArray(data.imoji) || data.imoji.length === 0) errors.push(`${fileName} : liste "imoji" vide ou absente.`);
+        if (!Array.isArray(data.friends) || data.friends.length === 0) errors.push(`${fileName} : liste "friends" vide ou absente.`);
+
+        if (NON_LATIN_LANGS.includes(code)) {
+            // Pas bloquant : ces items n'ont simplement pas d'équivalent dans le catalogue
+            // anglais (ID absent du catalogue de référence). Le nommage de fichier retombe
+            // alors sur le mot générique "pose" (voir cleanPoseName), sans casser le script.
+            for (const item of [...(data.imoji || []), ...(data.friends || [])]) {
+                if (isEmptySlug(item.displayTag) && !item.slugFallback) {
+                    warnings.push(`${fileName} : item id=${item.id} n'a pas d'équivalent anglais (nom de fichier générique "pose" en repli).`);
+                }
+            }
+        }
+    }
+
+    if (!fs.existsSync('aide.json')) {
+        errors.push('aide.json est manquant.');
+    } else {
+        let aide;
+        try {
+            aide = JSON.parse(fs.readFileSync('aide.json', 'utf8'));
+        } catch (e) {
+            errors.push(`aide.json n'est pas un JSON valide : ${e.message}`);
+            aide = null;
+        }
+        if (aide) {
+            for (const code of allCodes) {
+                if (!aide.stats || !aide.stats[code]) errors.push(`aide.json : stats.${code} manquant.`);
+                if (!aide.guide || !aide.guide[code]) errors.push(`aide.json : guide.${code} manquant.`);
+            }
+        }
+    }
+
+    if (warnings.length > 0) {
+        console.warn(`⚠️ Vérification post-génération : ${warnings.length} avertissement(s) non bloquant(s) :\n- ${warnings.join('\n- ')}`);
+    }
+    if (errors.length > 0) {
+        throw new Error(`Vérification post-génération échouée :\n- ${errors.join('\n- ')}`);
+    }
+    console.log(`✅ Vérification post-génération OK (${allCodes.length} langues, ${warnings.length} avertissement(s)).`);
+}
+
 async function main() {
     console.log("🚀 Démarrage du script multilingue...");
 
@@ -187,6 +260,8 @@ async function main() {
 
     // On met à jour le fichier d'aide
     updateAideJson(stats);
+
+    verifyOutputs(LANGS.map(l => l.code));
 
     console.log("🎉 Terminé ! Tout est à jour.");
 }
