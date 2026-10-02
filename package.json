@@ -11,6 +11,6 @@
     "check": "node --check functions/api/export.js && node --check public/get_templates.js && cd public && node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON get_templates.js --check"
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "jszip": "^3.10.2"
   }
 }
