@@ -3,27 +3,46 @@ name: Mise à jour automatique du catalogue
 on:
   push:
     branches: [ main ]
+    # Seuls le script de collecte (et ce qu'il importe) ou ce workflow relancent une collecte :
+    # un push du README ou du front ne doit pas déclencher de mise à jour du catalogue.
+    paths:
+      - 'public/get_templates.js'
+      - 'public/shared/poseNameUtils.js'
+      - '.github/workflows/update_data.yml'
   workflow_dispatch: # Ajoute ce bouton pour tester manuellement !
   schedule:
     - cron: '0 6 * * 1'   # tous les lundis à 06:00 UTC (08:00 Paris en été)
+
+# Aucun droit par défaut : le job déclare uniquement ce dont il a besoin.
+permissions: {}
+
+concurrency:
+  group: update-data-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Filet de sécurité : sans limite, un amont bloqué pourrait figer le job pendant 6 h.
+    timeout-minutes: 15
     permissions:
-      contents: write
+      contents: write # commit + push des templates_*.json et d'aide.json
 
     steps:
+      # Actions épinglées par SHA complet (tag en commentaire), mises à jour par Dependabot.
       - name: 📥 Récupération du code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: 🟢 Installation de Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '24' # On force Node 24 pour 2026
 
       - name: ⚙️ Exécution du script
         working-directory: public
-        run: node get_templates.js
+        # get_templates.js (CommonJS) importe shared/poseNameUtils.js (module ES) : on masque
+        # l'avertissement de détection de type de module, sans effet sur le résultat.
+        run: node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON get_templates.js
 
       - name: 📤 Sauvegarde
         run: |
@@ -31,6 +50,20 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add public/templates_*.json public/aide.json
           git commit -m "🚀 Mise à jour auto [skip ci]" || echo "Aucune modification à commit"
+          # Si main a bougé depuis le checkout (ex: push manuel entre-temps), on rebase
+          # avant de pousser plutôt que d'échouer sèchement sur un push rejeté.
+          git pull --rebase origin main
           git push
+
+      # Le commit auto porte [skip ci], que Cloudflare Pages respecte : sans ce hook, les
+      # nouvelles données ne seraient jamais déployées. Lancé à chaque run (même sans
+      # changement) pour rattraper un déploiement précédent qui aurait échoué.
       - name: 🚀 Force redeploy Cloudflare
-        run: curl -fsS -X POST "${{ secrets.CF_DEPLOY_HOOK }}" -o /dev/null
+        env:
+          CF_DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "${CF_DEPLOY_HOOK}" ]; then
+            echo "::error::Secret CF_DEPLOY_HOOK manquant ou vide : le site ne sera pas redéployé. Créez un Deploy Hook dans Cloudflare (projet Pages avatar-explorer, Settings, Deploy hooks) puis enregistrez son URL dans GitHub > Settings > Secrets and variables > Actions > CF_DEPLOY_HOOK."
+            exit 1
+          fi
+          curl -fsS --max-time 30 --retry 3 -X POST "${CF_DEPLOY_HOOK}" -o /dev/null

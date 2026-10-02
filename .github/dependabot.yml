@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Garde à jour les actions épinglées par SHA dans .github/workflows/ (SHA + commentaire de version).
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  # Dépendances npm (package.json à la racine, ex. jszip).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
