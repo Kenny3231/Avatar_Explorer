@@ -1,0 +1,828 @@
+/* =====================================================================
+   Avatar Explorer : thèmes (tokens + composants + effets)
+   ---------------------------------------------------------------------
+   Le thème est porté par <html data-theme="classique|neon|cosmos">, posé
+   avant tout rendu par le petit script inline de <head> (window.aeTheme).
+   - Couleurs : triplets RGB (--c-*) pour garder l'opacité Tailwind
+     (classes sémantiques bg-surface, text-accent/80... déclarées dans
+     tailwind.config, voir index.html).
+   - Seuls les blocs TOKENS (et le bloc FX) changent d'un thème à l'autre :
+     les composants plus bas n'utilisent QUE des var(--…).
+   Vocabulaire d'états (identique dans tous les thèmes) :
+     survol = surface un cran plus claire ou trait --accent-line
+     focus = var(--focus-ring) (un seul anneau pour tout le site)
+     pressé = scale(.97) · sélectionné = --accent-soft + --accent-border
+     (accent plein pour Solo/Duo) · désactivé/occupé = opacité + curseur
+   ===================================================================== */
+
+/* =====================================================================
+   === TOKENS : Classique (défaut, couleurs historiques du site) ===
+   Les rgba() des tokens composites sont des définitions de thème.
+   ===================================================================== */
+:root,
+[data-theme="classique"] {
+    color-scheme: dark;
+
+    /* Fonds et surfaces (slate-950 / 900 / 800 / 700) */
+    --c-bg: 2 6 23;
+    --c-bg-2: 2 6 23;
+    --c-surface: 15 23 42;
+    --c-surface-2: 30 41 59;
+    --c-surface-3: 51 65 85;
+    --surface-card: rgb(15 23 42 / 0.4);
+    --surface-inset: rgb(0 0 0 / 0.4);
+    --overlay: rgb(2 6 23 / 0.96);
+    --halo: rgb(15 23 42 / 0.5);
+
+    /* Bordures et texte (slate-800 / 700 / 600, slate-100 / 300 / 400 / 500) */
+    --c-border: 30 41 59;
+    --c-border-mid: 51 65 85;
+    --c-border-strong: 71 85 105;
+    --border-soft: rgb(30 41 59 / 0.5);
+    --c-text: 241 245 249;
+    --c-text-2: 203 213 225;
+    --c-muted: 148 163 184;
+    --c-faint: 100 116 139;
+
+    /* Accent (yellow-500 / 400 / 600) et accent secondaire (blue-400) */
+    --c-accent: 234 179 8;
+    --c-accent-hover: 250 204 21;
+    --c-accent-press: 202 138 4;
+    --c-on-accent: 0 0 0;
+    --accent-soft: rgb(234 179 8 / 0.12);
+    --accent-border: rgb(234 179 8 / 0.6);
+    --accent-line: rgb(234 179 8 / 0.4);
+    --c-accent-2: 96 165 250;
+    --c-inverse: 255 255 255;
+    --c-on-inverse: 0 0 0;
+    --c-avatar: 100 116 139;
+
+    /* États et retours : un seul jeu par famille (danger, success, info) */
+    --c-focus: 234 179 8;
+    --focus-ring: 0 0 0 2px rgb(var(--c-bg)), 0 0 0 5px rgb(var(--c-focus));
+    --focus-ring-danger: 0 0 0 2px rgb(var(--c-bg)), 0 0 0 5px rgb(var(--c-danger));
+    --c-danger: 248 113 113;
+    --c-danger-text: 254 202 202;
+    --danger-surface: rgb(127 29 29 / 0.3);
+    --danger-border: rgb(239 68 68 / 0.4);
+    --c-success: 74 222 128;
+    --success-border: rgb(34 197 94 / 0.5);
+    --c-warning: 251 191 36;
+    --c-info: 96 165 250;
+    --info-surface: rgb(30 58 138 / 0.2);
+    --info-border: rgb(59 130 246 / 0.2);
+    --disabled-opacity: 0.7;
+
+    /* Ombres : 3 niveaux neutres (sm, lg, inset) + lueurs d'accent */
+    --shadow-sm: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    --shadow-inset: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+    --shadow-accent: 0 25px 50px -12px rgb(234 179 8 / 0.2);
+    --shadow-accent-sm: 0 10px 15px -3px rgb(234 179 8 / 0.2), 0 4px 6px -4px rgb(234 179 8 / 0.2);
+    --glow: none;
+    --image-shadow: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+    --image-glow: drop-shadow(0 0 50px rgb(234 179 8 / 0.25));
+    --backdrop: blur(24px);
+
+    /* Formes : 5 rayons + pilule */
+    --r-xl: 3rem;
+    --r-lg: 2.5rem;
+    --r-btn: 2rem;
+    --r-md: 1.5rem;
+    --r-sm: 0.75rem;
+
+    /* Typographie : police système (aucune police chargée) */
+    --font-display: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-body: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --fw-black: 900;
+    --fw-bold: 700;
+    --tracking-display: -0.05em;
+    --tracking-label: 0.1em;
+    --tracking-wide: 0.3em;
+    --brand-transform: none;
+    --brand-size-mobile: 2.25rem; /* taille du titre sous 640 px (sm:text-5xl au-delà) */
+
+    /* Mouvement */
+    --dur-fast: 100ms;
+    --dur: 150ms;
+    --dur-slow: 300ms;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* rebond historique des vignettes (seul usage : .card-art img) */
+
+    /* Couche d'effets (aucun effet en classique) */
+    --fx-opacity: 1;
+}
+
+/* =====================================================================
+   === TOKENS : Néon Arcade (valeurs de la maquette ThemeNeon.dc.html) ===
+   ===================================================================== */
+[data-theme="neon"] {
+    color-scheme: dark;
+
+    --c-bg: 7 10 26;            /* #070A1A */
+    --c-bg-2: 11 16 48;         /* #0B1030 */
+    --c-surface: 14 19 48;      /* #0E1330 */
+    --c-surface-2: 24 31 71;    /* #181F47 */
+    --c-surface-3: 38 46 100;   /* #262E64 */
+    --surface-card: rgb(14 19 48 / 0.55);
+    --surface-inset: rgb(3 5 18 / 0.55);
+    --overlay: rgb(5 7 22 / 0.96);
+    --halo: rgb(34 211 238 / 0.1);
+
+    --c-border: 30 38 80;           /* #1E2650 */
+    --c-border-mid: 42 53 102;      /* #2A3566 */
+    --c-border-strong: 59 74 122;   /* #3B4A7A */
+    --border-soft: rgb(59 74 122 / 0.5);
+    --c-text: 238 242 255;          /* #EEF2FF */
+    --c-text-2: 199 208 240;        /* #C7D0F0 */
+    --c-muted: 154 166 212;         /* #9AA6D4 */
+    --c-faint: 107 118 168;         /* #6B76A8 */
+
+    --c-accent: 34 211 238;         /* #22D3EE */
+    --c-accent-hover: 103 232 249;  /* #67E8F9 */
+    --c-accent-press: 6 182 212;    /* #06B6D4 */
+    --c-on-accent: 3 6 15;          /* #03060F */
+    --accent-soft: rgb(34 211 238 / 0.14);
+    --accent-border: rgb(34 211 238 / 0.6);
+    --accent-line: rgb(34 211 238 / 0.4);
+    --c-accent-2: 244 114 182;      /* #F472B6 */
+    --c-inverse: 245 247 255;       /* #F5F7FF */
+    --c-on-inverse: 7 10 26;        /* #070A1A */
+    --c-avatar: 109 122 184;        /* #6D7AB8 */
+
+    --c-focus: 34 211 238;
+    --focus-ring: 0 0 0 2px rgb(var(--c-bg)), 0 0 0 4px rgb(var(--c-focus)), 0 0 18px 6px rgb(34 211 238 / 0.55);
+    --focus-ring-danger: 0 0 0 2px rgb(var(--c-bg)), 0 0 0 4px rgb(var(--c-danger)), 0 0 18px 6px rgb(255 107 122 / 0.45);
+    --c-danger: 255 107 122;        /* #FF6B7A */
+    --c-danger-text: 255 208 214;   /* #FFD0D6 */
+    --danger-surface: rgb(255 107 122 / 0.12);
+    --danger-border: rgb(255 107 122 / 0.45);
+    --c-success: 52 211 153;        /* #34D399 */
+    --success-border: rgb(52 211 153 / 0.6);
+    --c-warning: 251 191 36;        /* #FBBF24 */
+    --c-info: 244 114 182;          /* = accent-2 */
+    --info-surface: rgb(244 114 182 / 0.12);
+    --info-border: rgb(244 114 182 / 0.35);
+    --disabled-opacity: 0.5;
+
+    --shadow-sm: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+    --shadow-inset: inset 0 2px 6px 0 rgb(0 0 0 / 0.35);
+    --shadow-accent: 0 0 28px -4px rgb(34 211 238 / 0.45), 0 12px 24px -8px rgb(34 211 238 / 0.3);
+    --shadow-accent-sm: 0 0 16px -2px rgb(34 211 238 / 0.4), 0 4px 6px -4px rgb(34 211 238 / 0.3);
+    --glow: 0 0 14px rgb(34 211 238 / 0.35);
+    --image-shadow: drop-shadow(0 25px 25px rgb(0 0 0 / 0.35));
+    --image-glow: drop-shadow(0 0 40px rgb(34 211 238 / 0.35));
+    --backdrop: blur(20px);
+
+    --r-xl: 1.5rem;
+    --r-lg: 1.25rem;
+    --r-btn: 1rem;
+    --r-md: 0.875rem;
+    --r-sm: 0.5rem;
+
+    --font-display: "Chakra Petch", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    --font-body: "Rajdhani", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    --fw-black: 700;
+    --fw-bold: 600;
+    --tracking-display: 0.03em;
+    --tracking-label: 0.12em;
+    --tracking-wide: 0.3em;
+    --brand-transform: uppercase;
+    --brand-size-mobile: 2.25rem; /* taille du titre sous 640 px (sm:text-5xl au-delà) */
+
+    --dur-fast: 100ms;
+    --dur: 150ms;
+    --dur-slow: 300ms;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* rebond historique des vignettes (seul usage : .card-art img) */
+
+    --fx-opacity: 1;
+}
+
+/* =====================================================================
+   === TOKENS : Cosmos (valeurs de la maquette ThemeCosmos.dc.html) ===
+   ===================================================================== */
+[data-theme="cosmos"] {
+    color-scheme: dark;
+
+    --c-bg: 10 8 32;            /* #0A0820 */
+    --c-bg-2: 14 10 43;         /* #0E0A2B */
+    --c-surface: 21 16 52;      /* #151034 */
+    --c-surface-2: 31 24 80;    /* #1F1850 */
+    --c-surface-3: 45 36 112;   /* #2D2470 */
+    --surface-card: rgb(21 16 52 / 0.55);
+    --surface-inset: rgb(5 3 20 / 0.5);
+    --overlay: rgb(10 8 32 / 0.97);
+    --halo: rgb(124 92 230 / 0.18);
+
+    --c-border: 36 28 88;           /* #241C58 */
+    --c-border-mid: 54 45 124;      /* #362D7C */
+    --c-border-strong: 77 66 148;   /* #4D4294 */
+    --border-soft: rgb(77 66 148 / 0.5);
+    --c-text: 238 240 255;          /* #EEF0FF */
+    --c-text-2: 207 210 242;        /* #CFD2F2 */
+    --c-muted: 171 167 216;         /* #ABA7D8 */
+    --c-faint: 126 121 176;         /* #7E79B0 */
+
+    --c-accent: 167 139 250;        /* #A78BFA */
+    --c-accent-hover: 196 181 253;  /* #C4B5FD */
+    --c-accent-press: 139 92 246;   /* #8B5CF6 */
+    --c-on-accent: 11 6 32;         /* #0B0620 */
+    --accent-soft: rgb(167 139 250 / 0.16);
+    --accent-border: rgb(167 139 250 / 0.6);
+    --accent-line: rgb(167 139 250 / 0.4);
+    --c-accent-2: 125 211 252;      /* #7DD3FC */
+    --c-inverse: 244 242 255;       /* #F4F2FF */
+    --c-on-inverse: 11 6 32;        /* #0B0620 */
+    --c-avatar: 142 136 204;        /* #8E88CC */
+
+    --c-focus: 196 181 253;         /* #C4B5FD */
+    --focus-ring: 0 0 0 2px rgb(var(--c-bg)), 0 0 0 5px rgb(var(--c-focus)), 0 0 16px 4px rgb(167 139 250 / 0.35);
+    --focus-ring-danger: 0 0 0 2px rgb(var(--c-bg)), 0 0 0 5px rgb(var(--c-danger)), 0 0 16px 4px rgb(251 113 133 / 0.35);
+    --c-danger: 251 113 133;        /* #FB7185 */
+    --c-danger-text: 254 205 211;   /* #FECDD3 */
+    --danger-surface: rgb(251 113 133 / 0.12);
+    --danger-border: rgb(251 113 133 / 0.4);
+    --c-success: 110 231 183;       /* #6EE7B7 */
+    --success-border: rgb(110 231 183 / 0.6);
+    --c-warning: 252 211 77;        /* #FCD34D */
+    --c-info: 125 211 252;          /* = accent-2 */
+    --info-surface: rgb(56 130 200 / 0.16);
+    --info-border: rgb(125 211 252 / 0.28);
+    --disabled-opacity: 0.5;
+
+    --shadow-sm: 0 10px 15px -3px rgb(2 0 20 / 0.35), 0 4px 6px -4px rgb(2 0 20 / 0.35);
+    --shadow-lg: 0 25px 50px -12px rgb(2 0 20 / 0.6);
+    --shadow-inset: inset 0 2px 4px 0 rgb(0 0 10 / 0.25);
+    --shadow-accent: 0 25px 50px -12px rgb(139 92 246 / 0.35);
+    --shadow-accent-sm: 0 10px 15px -3px rgb(139 92 246 / 0.3), 0 4px 6px -4px rgb(139 92 246 / 0.3);
+    --glow: 0 0 22px rgb(139 92 246 / 0.45);
+    --image-shadow: drop-shadow(0 25px 25px rgb(0 0 0 / 0.3));
+    --image-glow: drop-shadow(0 0 50px rgb(167 139 250 / 0.4));
+    --backdrop: blur(24px);
+
+    --r-xl: 3rem;
+    --r-lg: 2.5rem;
+    --r-btn: 2rem;
+    --r-md: 1.5rem;
+    --r-sm: 0.75rem;
+
+    --font-display: "Syne", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    --font-body: "Outfit", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    --fw-black: 800;
+    --fw-bold: 500;
+    --tracking-display: -0.02em;
+    --tracking-label: 0.1em;
+    --tracking-wide: 0.3em;
+    --brand-transform: uppercase;
+    --brand-size-mobile: 1.875rem; /* titre sous 640 px : Syne, très large, déborderait à 360 px */
+
+    --dur-fast: 100ms;
+    --dur: 150ms;
+    --dur-slow: 300ms;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* rebond historique des vignettes (seul usage : .card-art img) */
+
+    --fx-opacity: 1;
+}
+
+/* Pastilles du sélecteur de thème : aperçu de CHAQUE thème, quel que soit
+   le thème actif (définitions de thème, d'où les valeurs en dur). */
+.swatch[data-swatch="classique"] { --sw-bg: #020617; --sw-a: #eab308; --sw-b: #60a5fa; }
+.swatch[data-swatch="neon"]      { --sw-bg: #070A1A; --sw-a: #22D3EE; --sw-b: #F472B6; }
+.swatch[data-swatch="cosmos"]    { --sw-bg: #0A0820; --sw-a: #A78BFA; --sw-b: #7DD3FC; }
+
+/* =====================================================================
+   === BASE ===
+   ===================================================================== */
+html {
+    background-color: rgb(var(--c-bg));
+    scrollbar-color: rgb(var(--c-border-strong)) rgb(var(--c-bg));
+    scrollbar-width: thin;
+}
+body {
+    position: relative; /* contexte des éléments positionnés de la page (.fx est fixe) */
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(180deg, rgb(var(--c-bg)) 0%, rgb(var(--c-bg-2)) 100%);
+    color: rgb(var(--c-text));
+    font-family: var(--font-body);
+    caret-color: rgb(var(--c-accent));
+    accent-color: rgb(var(--c-accent));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+::selection { background-color: rgb(var(--c-accent)); color: rgb(var(--c-on-accent)); }
+
+/* Barres de défilement (Firefox / Chrome récents via scrollbar-color ; WebKit ancien ci-dessous) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgb(var(--c-bg)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--c-border-strong)); border-radius: 9999px; border: 2px solid rgb(var(--c-bg)); }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-muted)); }
+::-webkit-scrollbar-corner { background: rgb(var(--c-bg)); }
+
+/* Saisie automatique du navigateur : pas de fond jaune/bleu imposé */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgb(var(--c-text));
+    caret-color: rgb(var(--c-accent));
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+/* Popup natif des <select> (langue, résolution) */
+select option { background-color: rgb(var(--c-surface-2)); color: rgb(var(--c-text)); }
+
+/* Icônes lucide : place réservée avant le remplacement de <i> par <svg> (aucun saut) */
+:where(i[data-lucide]) { display: inline-block; width: 1.25rem; height: 1.25rem; flex-shrink: 0; vertical-align: middle; }
+svg.lucide { flex-shrink: 0; }
+
+/* Typographie de marque */
+.t-brand { text-transform: var(--brand-transform); font-size: var(--brand-size-mobile); } /* sm:text-5xl prend le relais */
+
+/* Calque d'effets et contenu au-dessus */
+.above-fx { position: relative; z-index: 1; }
+
+/* =====================================================================
+   === COMPOSANTS (identiques dans tous les thèmes, QUE des var(--…)) ===
+   ===================================================================== */
+
+/* -- En-tête : une seule ligne seulement quand tout tient (dépend de la largeur des polices) -- */
+@media (min-width: 1600px) {
+    [data-theme="classique"] .header-row,
+    [data-theme="neon"] .header-row { flex-direction: row; gap: 2.5rem; }
+    [data-theme="classique"] .header-brand,
+    [data-theme="neon"] .header-brand { text-align: left; min-width: 0; }
+    [data-theme="classique"] .header-users,
+    [data-theme="neon"] .header-users { flex: none; width: auto; }
+    [data-theme="classique"] .header-actions,
+    [data-theme="neon"] .header-actions { width: auto; }
+}
+@media (min-width: 1800px) {
+    [data-theme="cosmos"] .header-row { flex-direction: row; gap: 2.5rem; }
+    [data-theme="cosmos"] .header-brand { text-align: left; min-width: 0; }
+    [data-theme="cosmos"] .header-users { flex: none; width: auto; }
+    [data-theme="cosmos"] .header-actions { width: auto; }
+}
+
+/* -- Panneaux -- */
+.panel { background: rgb(var(--c-surface)); border: 1px solid rgb(var(--c-border)); border-radius: var(--r-xl); box-shadow: var(--shadow-lg); }
+.panel-sunken { background: rgb(var(--c-bg)); border: 1px solid rgb(var(--c-border)); border-radius: var(--r-md); }
+.panel-info { background: var(--info-surface); border: 1px solid var(--info-border); border-radius: var(--r-md); }
+.panel-danger { background: var(--danger-surface); border: 1px solid var(--danger-border); border-radius: var(--r-md); color: rgb(var(--c-danger-text)); }
+
+/* -- Cartes utilisateur (nom + ID) : focus porté par la carte, pas par les champs -- */
+.ucard {
+    background: var(--surface-inset);
+    border: 1px solid rgb(var(--c-border-strong));
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-inset);
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--dur);
+    transition-timing-function: var(--ease);
+}
+.ucard:hover { border-color: var(--accent-line); }
+[data-theme] .ucard:focus-within { box-shadow: var(--focus-ring); }
+:root[data-theme] .ucard input:focus-visible { box-shadow: none; }
+.ucard[data-invalid] { border-color: rgb(var(--c-danger)); }
+[data-theme] .ucard[data-invalid]:focus-within { box-shadow: var(--focus-ring-danger); }
+.ucard input { background: transparent; border-radius: 0; }
+
+/* -- Socle commun des boutons -- */
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition-property: background-color, color, border-color, box-shadow, transform, opacity;
+    transition-duration: var(--dur);
+    transition-timing-function: var(--ease);
+}
+.btn::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; box-shadow: var(--glow); opacity: 0; transition: opacity var(--dur) var(--ease); }
+.btn:active { transform: scale(.97); }
+.btn:disabled,
+.btn[aria-disabled="true"] { opacity: var(--disabled-opacity); cursor: not-allowed; transform: none; }
+.btn[aria-busy="true"],
+.btn[data-state="busy"] { cursor: wait; }
+
+/* Bouton principal (Générer ZIP, Réessayer) */
+.btn-primary { background: rgb(var(--c-accent)); color: rgb(var(--c-on-accent)); border-radius: var(--r-btn); box-shadow: var(--shadow-accent); }
+.btn-primary::after { opacity: 1; }
+.btn-primary:hover { background: rgb(var(--c-accent-hover)); }
+.btn-primary:active { background: rgb(var(--c-accent-press)); }
+
+/* Bouton icône (aide ; .is-round = échange) : même logique de survol pour les deux */
+.btn-icon { background: rgb(var(--c-surface-2)); color: rgb(var(--c-muted)); border-radius: var(--r-btn); box-shadow: var(--shadow-sm); }
+.btn-icon.is-round { border-radius: 9999px; color: rgb(var(--c-accent)); }
+.btn-icon:hover { background: rgb(var(--c-surface-3)); color: rgb(var(--c-accent)); }
+
+/* Fermer (aperçu, aide) : survol en couleur de texte + rotation */
+.btn-close { background: transparent; color: rgb(var(--c-muted)); border-radius: var(--r-sm); }
+.btn-close:hover { color: rgb(var(--c-text)); transform: rotate(90deg); }
+.btn-close:active { transform: rotate(90deg) scale(.97); }
+
+/* Famille "pilule" de la lightbox : Copier (secondaire) et Enregistrer PNG (inverse) */
+.btn-pill { border-radius: 9999px; }
+.btn-secondary { background: rgb(var(--c-surface-2)); color: rgb(var(--c-text)); box-shadow: var(--shadow-lg); }
+.btn-secondary:hover { background: rgb(var(--c-surface-3)); }
+.btn-inverse { background: rgb(var(--c-inverse)); color: rgb(var(--c-on-inverse)); box-shadow: var(--shadow-lg); }
+.btn-inverse:hover { background: rgb(var(--c-accent)); color: rgb(var(--c-on-accent)); }
+.btn-inverse:active { background: rgb(var(--c-accent-press)); color: rgb(var(--c-on-accent)); }
+.btn[data-state="success"] { border-color: var(--success-border); }
+.btn[data-state="error"] { border-color: var(--danger-border); }
+.icon-ok { color: rgb(var(--c-success)); }
+.icon-ko { color: rgb(var(--c-danger)); }
+
+/* Bouton discret (Effacer les filtres) */
+.btn-ghost { background: transparent; color: rgb(var(--c-muted)); border-radius: 9999px; }
+.btn-ghost:hover { background: rgb(var(--c-surface-2)); color: rgb(var(--c-text)); }
+
+/* -- Groupe segmenté (Solo/Duo, thème) -- */
+.seg { display: flex; padding: .375rem; gap: .25rem; background: rgb(var(--c-surface)); border: 1px solid rgb(var(--c-border-strong)); border-radius: var(--r-md); box-shadow: var(--shadow-sm); }
+.seg-btn { flex: 1 1 0; min-width: 0; padding: .5rem .75rem; border-radius: var(--r-sm); background: transparent; color: rgb(var(--c-muted)); }
+.seg-btn:hover { background: rgb(var(--c-surface-2)); color: rgb(var(--c-text)); }
+/* Solo/Duo : sélection en accent plein */
+.seg-btn[aria-pressed="true"] { background: rgb(var(--c-accent)); border-color: var(--accent-border); color: rgb(var(--c-on-accent)); box-shadow: var(--shadow-accent-sm); }
+.seg-btn[aria-pressed="true"]:hover { background: rgb(var(--c-accent-hover)); }
+.seg-btn[aria-pressed="true"]::after { opacity: 1; }
+/* Thème : sélection "douce" (accent-soft + accent-border) autour de la pastille */
+.seg-btn.is-swatch[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent-border); color: rgb(var(--c-accent)); box-shadow: inset 0 0 0 2px var(--accent-border); }
+.seg-btn.is-swatch[aria-pressed="true"]::after { opacity: 0; }
+.swatch {
+    display: block;
+    width: 1.375rem;
+    height: 1.375rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, var(--sw-a) 0 50%, var(--sw-b) 50% 100%);
+    box-shadow: 0 0 0 2px var(--sw-bg), 0 0 0 3px rgb(var(--c-border-strong));
+}
+
+/* -- Champs de filtre (select, recherche, catégorie) -- */
+.field-wrap { position: relative; }
+.field {
+    display: block;
+    width: 100%;
+    min-height: 60px;
+    background: rgb(var(--c-surface));
+    border: 1px solid rgb(var(--c-border-strong));
+    border-radius: var(--r-md);
+    color: rgb(var(--c-text-2));
+    box-shadow: var(--shadow-sm);
+    -webkit-appearance: none;
+    appearance: none;
+    transition-property: border-color, box-shadow, color;
+    transition-duration: var(--dur);
+    transition-timing-function: var(--ease);
+}
+.field::placeholder { color: rgb(var(--c-muted)); opacity: 1; }
+.field:hover { border-color: var(--accent-line); }
+select.field { cursor: pointer; }
+/* Éléments natifs masqués : croix de recherche, loupe WebKit, flèche de datalist */
+.field::-webkit-search-cancel-button,
+.field::-webkit-search-decoration,
+.field::-webkit-calendar-picker-indicator { -webkit-appearance: none; appearance: none; display: none; }
+.field-icon { position: absolute; top: 50%; transform: translateY(-50%); pointer-events: none; color: rgb(var(--c-muted)); transition: color var(--dur) var(--ease); }
+.field-wrap:hover .field-icon,
+.field-wrap:focus-within .field-icon { color: rgb(var(--c-accent)); }
+
+/* Bouton "Effacer" maison (visible seulement quand le champ est rempli) */
+.field-clear {
+    position: absolute;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+    border-radius: var(--r-sm);
+    color: rgb(var(--c-muted));
+    transform: translateY(-50%);
+    transition-property: background-color, color, box-shadow, transform;
+    transition-duration: var(--dur);
+    transition-timing-function: var(--ease);
+}
+.field-clear[hidden] { display: none; }
+.field-clear:hover { background: rgb(var(--c-surface-2)); color: rgb(var(--c-text)); }
+.field-clear:active { transform: translateY(-50%) scale(.97); }
+
+/* -- Combobox des catégories (remplace la datalist native) -- */
+.combo-list {
+    position: absolute;
+    z-index: 40;
+    top: calc(100% + .5rem);
+    left: 0;
+    min-width: 100%;
+    width: max-content;
+    max-width: min(22rem, calc(100vw - 2rem));
+    max-height: min(18rem, 50vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin: 0;
+    padding: .5rem;
+    list-style: none;
+    background: rgb(var(--c-surface));
+    border: 1px solid rgb(var(--c-border-strong));
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-lg);
+    scrollbar-color: rgb(var(--c-border-strong)) transparent;
+}
+.combo-list[hidden] { display: none; }
+@media (max-width: 767px) {
+    /* Cellule catégorie dans la colonne de droite : liste alignée à droite, jamais hors écran */
+    .combo-list { left: auto; right: 0; max-width: calc(100vw - 2rem); }
+}
+.combo-option {
+    padding: .625rem .875rem;
+    border-radius: var(--r-sm);
+    color: rgb(var(--c-text-2));
+    font-size: .75rem;
+    font-weight: var(--fw-black);
+    letter-spacing: var(--tracking-label);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+.combo-option:hover { background: rgb(var(--c-surface-2)); color: rgb(var(--c-text)); }
+.combo-option[aria-selected="true"] { background: var(--accent-soft); color: rgb(var(--c-accent)); box-shadow: inset 0 0 0 1px var(--accent-border); }
+.combo-option[aria-disabled="true"] { cursor: default; background: transparent; color: rgb(var(--c-muted)); font-weight: var(--fw-bold); letter-spacing: normal; }
+
+/* -- Vignettes de la grille -- */
+.card {
+    position: relative;
+    display: block;
+    width: 100%;
+    background: var(--surface-card);
+    border: 1px solid rgb(var(--c-border));
+    border-radius: var(--r-lg);
+    color: rgb(var(--c-muted));
+    text-align: center;
+    cursor: pointer;
+    transition-property: border-color, box-shadow, transform;
+    transition-duration: var(--dur);
+    transition-timing-function: var(--ease);
+}
+.card::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; box-shadow: var(--glow); opacity: 0; transition: opacity var(--dur) var(--ease); }
+.card:hover { border-color: var(--accent-line); }
+.card:hover::after { opacity: 1; }
+.card:active { transform: scale(.97); }
+.card-art { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; }
+.card-art img { display: block; width: 100%; height: 100%; object-fit: contain; filter: var(--image-shadow); transition: transform var(--dur-slow) var(--ease-spring); }
+.card:hover .card-art img,
+.card:focus-visible .card-art img { transform: translateY(-8px); }
+
+/* Image en erreur (data-broken posé par un écouteur "error" délégué) : silhouette thémée */
+.card[data-broken] .card-art { background: rgb(var(--c-surface)); border-radius: var(--r-md); }
+.card[data-broken] .card-art img,
+.lb-halo[data-broken] .lb-art { visibility: hidden; }
+.card[data-broken] .card-art::after,
+.lb-halo[data-broken]::after {
+    content: "";
+    position: absolute;
+    background-color: rgb(var(--c-avatar));
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='44' r='21'/%3E%3Cpath d='M18 120c0-27 19-45 42-45s42 18 42 45z'/%3E%3C/svg%3E") center bottom / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='44' r='21'/%3E%3Cpath d='M18 120c0-27 19-45 42-45s42 18 42 45z'/%3E%3C/svg%3E") center bottom / contain no-repeat;
+}
+.card[data-broken] .card-art::after { inset: 18% 18% 0; }
+
+/* -- Modales (aperçu, centre d'aide) : fond opaque + flou -- */
+.overlay { background: var(--overlay); -webkit-backdrop-filter: var(--backdrop); backdrop-filter: var(--backdrop); }
+.lb-halo { position: relative; border: 1px solid var(--border-soft); border-radius: 9999px; background: linear-gradient(180deg, var(--halo) 0%, transparent 100%); }
+.lb-art { filter: var(--image-glow); }
+.lb-halo[data-broken] .lb-art { width: clamp(10rem, 40vh, 22rem); height: clamp(10rem, 40vh, 22rem); }
+.lb-halo[data-broken]::after { inset: 3.5rem 3.5rem 3rem; }
+
+/* -- Toast : fondu + légère translation, jamais cliquable (ne bloque rien) -- */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    z-index: 70;
+    display: inline-flex;
+    align-items: center;
+    gap: .625rem;
+    max-width: min(90vw, 36rem);
+    padding: .875rem 1.25rem;
+    border: 1px solid var(--accent-border);
+    border-radius: calc(var(--r-sm) + .25rem);
+    background: rgb(var(--c-surface-2));
+    color: rgb(var(--c-text));
+    font-size: .875rem;
+    font-weight: var(--fw-bold);
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, .5rem);
+    transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+}
+.toast[data-show] { opacity: 1; transform: translate(-50%, 0); }
+.toast:empty { padding: 0; border-width: 0; box-shadow: none; }
+.toast .toast-icon { color: rgb(var(--c-success)); }
+.toast[data-variant="error"] { border-color: rgb(var(--c-danger)); color: rgb(var(--c-danger-text)); }
+.toast[data-variant="error"] .toast-icon { color: rgb(var(--c-danger)); }
+
+/* -- Animations -- */
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-mode-switch { animation: fadeInScale calc(var(--dur-slow) + 100ms) var(--ease) forwards; }
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-animate { animation: modalPop calc(var(--dur) + 50ms) var(--ease) forwards; }
+
+/* =====================================================================
+   === FOCUS : UN SEUL anneau pour tout le site (WCAG 2.4.7 / 2.4.11) ===
+   Placé APRÈS les composants et en :root[data-theme] (spécificité 0,3,0) :
+   il l'emporte sur les ombres des composants (y compris les états
+   sélectionnés) et sur les utilitaires shadow-* de Tailwind.
+   Contour transparent conservé pour le mode contraste élevé de Windows.
+   Seule exception : les champs des cartes utilisateur, dont l'anneau est
+   porté par la carte (:focus-within, voir .ucard).
+   ===================================================================== */
+:focus { outline: none; }
+:root[data-theme] :focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: var(--focus-ring);
+}
+
+/* =====================================================================
+   === FX : calque <div class="fx" aria-hidden="true"> sous le contenu ===
+   Uniquement Néon et Cosmos ; aucun effet en Classique.
+   Calque FIXE de la taille de l'écran (et non de toute la page) ; toutes
+   les animations portent sur transform ou opacity (composition GPU, aucun
+   repeint). Couches : .fx::before/::after et les spans .fx-1 à .fx-5.
+   Les rgba() ci-dessous sont des définitions de thème (maquettes validées).
+   ===================================================================== */
+.fx { display: none; position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; opacity: var(--fx-opacity); }
+.fx > span { display: none; position: absolute; pointer-events: none; }
+[data-theme="neon"] .fx,
+[data-theme="cosmos"] .fx { display: block; }
+
+/* Néon Arcade : ::before = halos magenta/cyan + scanlines (statiques) ;
+   .fx-1 = sol en perspective (masqué), sa grille .fx-1::before défile en translateY */
+[data-theme="neon"] .fx::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0, rgba(255,255,255,.03) 1px, transparent 1px, transparent 3px),
+        radial-gradient(ellipse 55% 22rem at 22% 0%, rgba(244,114,182,.16), transparent 72%),
+        radial-gradient(ellipse 55% 22rem at 78% 0%, rgba(34,211,238,.14), transparent 72%);
+}
+[data-theme="neon"] .fx-1 {
+    display: block;
+    left: -60%;
+    right: -60%;
+    bottom: 0;
+    height: 46vh;
+    overflow: hidden;
+    opacity: .4;
+    transform-origin: 50% 100%;
+    transform: perspective(420px) rotateX(62deg);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+    mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+}
+[data-theme="neon"] .fx-1::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -64px; /* une maille de plus : la translation de 64 px boucle sans saut */
+    bottom: 0;
+    background-image:
+        linear-gradient(90deg, rgba(34,211,238,.6) 0, rgba(34,211,238,.6) 2px, transparent 2px),
+        linear-gradient(0deg, rgba(244,114,182,.5) 0, rgba(244,114,182,.5) 2px, transparent 2px);
+    background-size: 64px 64px;
+    will-change: transform;
+    animation: ae-grid-scroll 7s linear infinite;
+}
+@keyframes ae-grid-scroll { from { transform: translateY(0); } to { transform: translateY(64px); } }
+
+/* Cosmos : nébuleuse en 3 nappes (::before, ::after, .fx-4) qui dérivent lentement ;
+   étoiles en 3 couches .fx-1/2/3 (parallaxe : chaque couche avance d'une tuile par cycle) ;
+   étoile filante rare .fx-5 */
+[data-theme="cosmos"] .fx::before,
+[data-theme="cosmos"] .fx::after,
+[data-theme="cosmos"] .fx-4 {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    will-change: transform;
+    animation: ae-cosmos-nebula-1 70s ease-in-out infinite alternate;
+}
+[data-theme="cosmos"] .fx::before { left: 0; width: 90%; height: 560px; background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(124, 92, 230, 0.30), transparent 70%); }
+[data-theme="cosmos"] .fx::after { left: 20%; width: 80%; height: 520px; background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(56, 150, 230, 0.22), transparent 70%); animation-name: ae-cosmos-nebula-2; }
+[data-theme="cosmos"] .fx-4 { left: -5%; width: 110%; height: 420px; background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(167, 139, 250, 0.14), transparent 75%); animation-name: ae-cosmos-nebula-3; }
+/* Mêmes trajectoires que l'ancienne animation de background-position (0% -> 60%, 100% -> 40%, 50% -> 30%) */
+@keyframes ae-cosmos-nebula-1 { to { transform: translate(6vw, 40px); } }
+@keyframes ae-cosmos-nebula-2 { to { transform: translate(-12vw, 30px); } }
+@keyframes ae-cosmos-nebula-3 { to { transform: translate(2vw, 20px); } }
+
+[data-theme="cosmos"] .fx-1,
+[data-theme="cosmos"] .fx-2,
+[data-theme="cosmos"] .fx-3 {
+    display: block;
+    left: 0;
+    bottom: 0;
+    will-change: transform, opacity;
+}
+/* Couche agrandie d'une tuile vers le haut et la droite : translate(-tuile, +tuile) boucle sans saut */
+[data-theme="cosmos"] .fx-1 {
+    top: -260px;
+    right: -260px;
+    background-image:
+        radial-gradient(1px 1px at 167px 32px, rgba(226,230,255,0.55) 50%, transparent 100%),
+        radial-gradient(1px 1px at 10px 193px, rgba(226,230,255,0.55) 50%, transparent 100%),
+        radial-gradient(1px 1px at 74px 66px, rgba(226,230,255,0.55) 50%, transparent 100%),
+        radial-gradient(1px 1px at 61px 39px, rgba(226,230,255,0.55) 50%, transparent 100%),
+        radial-gradient(1px 1px at 192px 30px, rgba(226,230,255,0.55) 50%, transparent 100%),
+        radial-gradient(1px 1px at 177px 193px, rgba(226,230,255,0.55) 50%, transparent 100%),
+        radial-gradient(1px 1px at 232px 143px, rgba(226,230,255,0.55) 50%, transparent 100%);
+    background-size: 260px 260px;
+    animation: ae-cosmos-drift-1 260s linear infinite, ae-cosmos-twinkle 9s ease-in-out infinite alternate;
+}
+[data-theme="cosmos"] .fx-2 {
+    top: -420px;
+    right: -420px;
+    background-image:
+        radial-gradient(2px 2px at 48px 306px, rgba(255,255,255,0.7) 50%, transparent 100%),
+        radial-gradient(2px 2px at 220px 20px, rgba(196,181,253,0.7) 50%, transparent 100%),
+        radial-gradient(2px 2px at 19px 51px, rgba(255,255,255,0.7) 50%, transparent 100%),
+        radial-gradient(2px 2px at 115px 123px, rgba(196,181,253,0.7) 50%, transparent 100%),
+        radial-gradient(2px 2px at 262px 312px, rgba(255,255,255,0.7) 50%, transparent 100%),
+        radial-gradient(2px 2px at 17px 291px, rgba(196,181,253,0.7) 50%, transparent 100%);
+    background-size: 420px 420px;
+    animation: ae-cosmos-drift-2 260s linear infinite, ae-cosmos-twinkle 9s ease-in-out infinite alternate;
+}
+[data-theme="cosmos"] .fx-3 {
+    top: -640px;
+    right: -640px;
+    background-image:
+        radial-gradient(2px 2px at 207px 562px, rgba(125,211,252,0.85) 50%, transparent 100%),
+        radial-gradient(2px 2px at 433px 229px, rgba(233,213,255,0.85) 50%, transparent 100%),
+        radial-gradient(2px 2px at 463px 607px, rgba(125,211,252,0.85) 50%, transparent 100%),
+        radial-gradient(2px 2px at 288px 10px, rgba(233,213,255,0.85) 50%, transparent 100%);
+    background-size: 640px 640px;
+    animation: ae-cosmos-drift-3 260s linear infinite, ae-cosmos-twinkle 9s ease-in-out infinite alternate;
+}
+@keyframes ae-cosmos-drift-1 { to { transform: translate(-260px, 260px); } }
+@keyframes ae-cosmos-drift-2 { to { transform: translate(-420px, 420px); } }
+@keyframes ae-cosmos-drift-3 { to { transform: translate(-640px, 640px); } }
+@keyframes ae-cosmos-twinkle { 0% { opacity: .7; } 50% { opacity: 1; } 100% { opacity: .78; } }
+
+[data-theme="cosmos"] .fx-5 {
+    display: block;
+    top: 9%;
+    left: 82%;
+    width: 150px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, rgba(196, 181, 253, 0.5) 60%, #ffffff);
+    box-shadow: 0 0 8px 1px rgba(196, 181, 253, 0.55);
+    opacity: 0;
+    transform: rotate(135deg);
+    animation: ae-cosmos-shoot 27s linear 11s infinite;
+}
+@keyframes ae-cosmos-shoot {
+    0% { opacity: 0; transform: rotate(135deg) translateX(0); }
+    0.6% { opacity: 1; }
+    4.5% { opacity: 0; transform: rotate(135deg) translateX(620px); }
+    100% { opacity: 0; transform: rotate(135deg) translateX(620px); }
+}
+
+/* =====================================================================
+   === Préférence système "réduire les animations" ===
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    /* Effets coupés : Néon sans halos ni grille, Cosmos figé (nébuleuse et étoiles fixes) sans étoile filante */
+    [data-theme="neon"] .fx::before,
+    [data-theme="neon"] .fx-1 { display: none; }
+    [data-theme="cosmos"] .fx::before,
+    [data-theme="cosmos"] .fx::after,
+    [data-theme="cosmos"] .fx > span { animation: none !important; }
+    [data-theme="cosmos"] .fx-5 { display: none; }
+    [data-theme="cosmos"] .fx-1,
+    [data-theme="cosmos"] .fx-2,
+    [data-theme="cosmos"] .fx-3 { opacity: .85; }
+    .toast { transform: translate(-50%, 0); }
+}

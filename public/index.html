@@ -1,98 +1,205 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="classique">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#020617">
     <title>Avatar Explorer</title>
+    <!-- Thème posé AVANT tout rendu (pas de flash) : data-theme sur <html>, fond, theme-color et,
+         pour Néon/Cosmos seulement, polices Google chargées à la demande (font-display: swap).
+         Registre des thèmes (les couleurs de fond sont des définitions de thème) exposé
+         explicitement sur window.aeTheme pour le module principal. -->
+    <script>
+        window.aeTheme = (function () {
+            var THEMES = {
+                classique: { bg: '#020617' },
+                neon: { bg: '#070A1A', font: 'https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Rajdhani:wght@500;600;700&display=swap' },
+                cosmos: { bg: '#0A0820', font: 'https://fonts.googleapis.com/css2?family=Outfit:wght@400..900&family=Syne:wght@700..800&display=swap' }
+            };
+            var KEY = 'bt_theme';
+            var root = document.documentElement;
+            var current = 'classique';
+            var valid = function (t) { return typeof t === 'string' && Object.prototype.hasOwnProperty.call(THEMES, t); };
+
+            // Le thème classique ne charge aucune police ; les autres injectent leur <link> une seule fois
+            function loadFont(t) {
+                var url = THEMES[t].font;
+                if (!url || document.querySelector('link[data-font="' + t + '"]')) return;
+                if (!document.querySelector('link[data-font-preconnect]')) {
+                    var pc = document.createElement('link');
+                    pc.rel = 'preconnect';
+                    pc.href = 'https://fonts.gstatic.com';
+                    pc.crossOrigin = 'anonymous';
+                    pc.setAttribute('data-font-preconnect', '');
+                    document.head.appendChild(pc);
+                }
+                var l = document.createElement('link');
+                l.rel = 'stylesheet';
+                l.href = url;
+                l.setAttribute('data-font', t);
+                document.head.appendChild(l);
+            }
+            function apply(t) {
+                current = t;
+                root.setAttribute('data-theme', t);
+                root.style.backgroundColor = THEMES[t].bg;
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute('content', THEMES[t].bg);
+                loadFont(t);
+            }
+
+            // localStorage peut lever une exception (navigation privee, stockage bloque)
+            var saved = null;
+            try { saved = localStorage.getItem(KEY); } catch (e) { /* ignore */ }
+            apply(valid(saved) ? saved : 'classique');
+
+            return {
+                list: function () { return Object.keys(THEMES); },
+                current: function () { return current; },
+                set: function (t) {
+                    if (!valid(t)) return false; // liste blanche
+                    apply(t);
+                    try { localStorage.setItem(KEY, t); } catch (e) { /* ignore */ }
+                    return true;
+                }
+            };
+        })();
+    </script>
+    <!-- Tokens des 3 thèmes, composants et effets (n'utilisent que des var(--…)) -->
+    <link rel="stylesheet" href="./shared/themes.css">
     <!-- Pas de SRI possible sur le Play CDN de Tailwind : cdn.tailwindcss.com sert un script
          généré dont le contenu change sans changement d'URL (aucune empreinte stable à épingler). -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Palette Tailwind REMPLACÉE (pas étendue) par des couleurs sémantiques branchées sur les
+         tokens du thème : aucune classe slate-*, yellow-*... ne peut plus être générée. Les triplets
+         RGB (--c-*) gardent l'opacité Tailwind (ex. text-accent/80). Rayons, ombres, polices,
+         graisses, interlettrages, durées et courbes passent aussi par les tokens. -->
+    <script>
+        (function () {
+            // CDN indisponible (hors ligne, bloqueur) : pas d'exception, themes.css garde la page lisible
+            if (!window.tailwind) return;
+            var c = function (name) { return 'rgb(var(--c-' + name + ') / <alpha-value>)'; };
+            tailwind.config = {
+                theme: {
+                    colors: {
+                        transparent: 'transparent',
+                        current: 'currentColor',
+                        inherit: 'inherit',
+                        bg: c('bg'),
+                        'bg-2': c('bg-2'),
+                        surface: c('surface'),
+                        'surface-2': c('surface-2'),
+                        'surface-3': c('surface-3'),
+                        border: c('border'),
+                        'border-mid': c('border-mid'),
+                        'border-strong': c('border-strong'),
+                        text: c('text'),
+                        'text-2': c('text-2'),
+                        muted: c('muted'),
+                        faint: c('faint'),
+                        accent: c('accent'),
+                        'accent-hover': c('accent-hover'),
+                        'accent-press': c('accent-press'),
+                        'on-accent': c('on-accent'),
+                        'accent-2': c('accent-2'),
+                        inverse: c('inverse'),
+                        'on-inverse': c('on-inverse'),
+                        danger: c('danger'),
+                        'danger-text': c('danger-text'),
+                        success: c('success'),
+                        warning: c('warning'),
+                        info: c('info')
+                    },
+                    borderRadius: {
+                        none: '0',
+                        sm: 'var(--r-sm)',
+                        DEFAULT: 'var(--r-sm)',
+                        md: 'var(--r-md)',
+                        btn: 'var(--r-btn)',
+                        lg: 'var(--r-lg)',
+                        xl: 'var(--r-xl)',
+                        full: '9999px'
+                    },
+                    boxShadow: {
+                        none: 'none',
+                        sm: 'var(--shadow-sm)',
+                        lg: 'var(--shadow-lg)',
+                        inner: 'var(--shadow-inset)',
+                        accent: 'var(--shadow-accent)'
+                    },
+                    fontFamily: {
+                        sans: ['var(--font-body)'],
+                        display: ['var(--font-display)'],
+                        mono: ['var(--font-mono)']
+                    },
+                    extend: {
+                        fontWeight: { black: 'var(--fw-black)', bold: 'var(--fw-bold)' },
+                        letterSpacing: { tighter: 'var(--tracking-display)', widest: 'var(--tracking-label)', wide2: 'var(--tracking-wide)' },
+                        transitionDuration: { DEFAULT: 'var(--dur)', fast: 'var(--dur-fast)', slow: 'var(--dur-slow)' },
+                        transitionTimingFunction: { DEFAULT: 'var(--ease)' }
+                    }
+                }
+            };
+        })();
+    </script>
     <!-- Scripts tiers figés par version + SRI (sha384 du fichier exact) : un fichier modifié sur
          le CDN est refusé par le navigateur. Pour lucide, URL finale du fichier (unpkg redirige
          lucide@1.21.0 vers dist/umd/lucide.min.js) : l'empreinte porte sur un fichier fixe. -->
     <script src="https://unpkg.com/lucide@1.21.0/dist/umd/lucide.min.js" integrity="sha384-xphWpUp6pRlNpM8BxCtyoW96oteA0kPxUX0VP6V32gICuE4ViDFBfaoyj5BS7M4w" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha384-PlRSzpewlarQuj5alIadXwjNUX+2eNMKwr0f07ShWYLy8B6TjEbm7ZlcN/ScSbwy" crossorigin="anonymous"></script>
-    <style>
-        :root { color-scheme: dark; }
-
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: translateY(10px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .animate-mode-switch { animation: fadeInScale 0.4s ease-out forwards; }
-
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .modal-animate { animation: modalPop 0.2s ease-out forwards; }
-
-        /* L'effet de survol est aussi applique au focus clavier */
-        .grid-item:hover img,
-        .grid-item:focus-visible img { transform: translateY(-8px); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        select { appearance: none; -webkit-appearance: none; }
-        /* Permet de styliser legerement le bouton pour vider l'input (croix native) */
-        input[type="text"]::-webkit-search-cancel-button { cursor: pointer; }
-
-        /* Focus clavier visible partout (WCAG 2.4.7 / 2.4.11) */
-        :focus-visible { outline: 3px solid #eab308; outline-offset: 2px; }
-
-        /* Respecte la preference systeme "reduire les animations" */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen p-4 sm:p-6 md:p-8 overflow-x-hidden">
+<body class="text-text min-h-screen p-4 sm:p-6 md:p-8 overflow-x-hidden">
 
-    <a id="skipLink" href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] bg-yellow-500 text-black font-black px-5 py-3 rounded-xl">Aller au contenu principal</a>
+    <!-- Calque d'effets du thème (Néon, Cosmos) : fixe (taille de l'écran), sous le contenu, jamais
+         cliquable. Les couches .fx-1 à .fx-5 sont animées en transform (aucun repeint de la page). -->
+    <div class="fx" aria-hidden="true"><span class="fx-1"></span><span class="fx-2"></span><span class="fx-3"></span><span class="fx-4"></span><span class="fx-5"></span></div>
+
+    <a id="skipLink" href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-5 focus:py-3 bg-accent text-on-accent font-black rounded-sm">Aller au contenu principal</a>
 
     <!-- Message affiche si le module JS (i18n, utilitaires) ne peut pas etre charge -->
-    <div id="fatalError" role="alert" class="hidden mb-6 bg-red-900/30 text-red-200 border border-red-500/40 rounded-3xl p-6 text-sm font-bold"></div>
+    <div id="fatalError" role="alert" class="above-fx panel-danger hidden mb-6 p-6 text-sm font-bold"></div>
 
     <!-- Contenu principal : passe en "inert" pendant qu'une modale est ouverte -->
-    <div id="appRoot" class="w-full">
-        <header class="bg-slate-900 p-6 sm:p-10 rounded-[3rem] border border-slate-800 shadow-2xl mb-10">
-            <div class="flex flex-col xl:flex-row justify-between items-center gap-8 xl:gap-10">
+    <div id="appRoot" class="above-fx w-full">
+        <header class="panel p-6 sm:p-10 mb-10">
+            <!-- Une seule ligne seulement quand titre + cartes + actions tiennent dans le panneau
+                 (.header-row dans themes.css : 1600 px, 1800 px pour Cosmos dont la police est
+                 plus large). Avant, la ligne débordait dès 1280 px (bouton d'aide hors cadre). -->
+            <div class="header-row flex flex-col justify-between items-center gap-8">
 
-                <div class="text-center xl:text-left">
-                    <h1 class="text-4xl sm:text-5xl font-black text-yellow-500 italic leading-none tracking-tighter">Avatar Explorer</h1>
-                    <p id="stats" role="status" aria-live="polite" class="text-xs text-slate-400 uppercase font-black mt-3 tracking-[0.3em] italic">Initialisation...</p>
+                <div class="header-brand text-center">
+                    <h1 class="t-brand font-display sm:text-5xl font-black text-accent italic leading-none tracking-tighter">Avatar Explorer</h1>
+                    <p id="stats" role="status" aria-live="polite" class="text-xs text-muted uppercase font-black mt-3 tracking-wide2 italic">Initialisation...</p>
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center gap-5 w-full xl:w-auto justify-center flex-1">
-                    <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-600 flex flex-col gap-1 w-full md:w-80 shadow-inner">
+                <div class="header-users flex flex-col md:flex-row items-center gap-5 w-full justify-center">
+                    <div class="ucard p-6 flex flex-col gap-1 w-full md:w-80">
                         <input type="text" id="name1" maxlength="40" autocomplete="off" placeholder="Utilisateur 1" aria-label="Nom de l'utilisateur 1"
-                               class="bg-transparent text-yellow-500 font-black text-3xl sm:text-4xl tracking-tighter placeholder:text-yellow-500/80">
+                               class="w-full min-w-0 font-display text-accent font-black text-3xl sm:text-4xl tracking-tighter leading-tight pb-1 placeholder:text-accent/80">
                         <input type="text" id="id1" autocomplete="off" spellcheck="false" placeholder="ID Bitmoji 1" aria-label="ID Bitmoji de l'utilisateur 1"
-                               class="bg-transparent text-slate-300 text-sm font-mono border-t border-slate-700 pt-2 placeholder:text-slate-400 aria-[invalid=true]:text-red-400">
+                               class="w-full min-w-0 text-text-2 text-sm font-mono border-t border-border-mid pt-3 placeholder:text-muted aria-[invalid=true]:text-danger aria-[invalid=true]:border-danger">
                     </div>
 
-                    <button type="button" id="swapBtn" aria-label="Échanger les utilisateurs 1 et 2" class="p-4 bg-slate-800 hover:bg-yellow-500 rounded-full text-yellow-500 hover:text-black transition-all active:scale-90 rotate-90 md:rotate-0 shadow-xl shrink-0">
-                        <i data-lucide="arrow-right-left" class="w-6 h-6" aria-hidden="true"></i>
+                    <button type="button" id="swapBtn" aria-label="Échanger les utilisateurs 1 et 2" class="btn btn-icon is-round p-4 shrink-0">
+                        <i data-lucide="arrow-right-left" class="w-6 h-6 rotate-90 md:rotate-0" aria-hidden="true"></i>
                     </button>
 
-                    <div class="bg-black/40 p-6 rounded-[2.5rem] border border-slate-600 flex flex-col gap-1 w-full md:w-80 shadow-inner">
+                    <div class="ucard p-6 flex flex-col gap-1 w-full md:w-80">
                         <input type="text" id="name2" maxlength="40" autocomplete="off" placeholder="Utilisateur 2" aria-label="Nom de l'utilisateur 2"
-                               class="bg-transparent text-blue-400 font-black text-3xl sm:text-4xl tracking-tighter placeholder:text-blue-400/80">
+                               class="w-full min-w-0 font-display text-accent-2 font-black text-3xl sm:text-4xl tracking-tighter leading-tight pb-1 placeholder:text-accent-2/80">
                         <input type="text" id="id2" autocomplete="off" spellcheck="false" placeholder="ID Bitmoji 2" aria-label="ID Bitmoji de l'utilisateur 2"
-                               class="bg-transparent text-slate-300 text-sm font-mono border-t border-slate-700 pt-2 placeholder:text-slate-400 aria-[invalid=true]:text-red-400">
+                               class="w-full min-w-0 text-text-2 text-sm font-mono border-t border-border-mid pt-3 placeholder:text-muted aria-[invalid=true]:text-danger aria-[invalid=true]:border-danger">
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row items-center gap-4 w-full xl:w-auto justify-center shrink-0">
-                    <button type="button" id="zipBtn" class="w-full sm:w-auto flex-1 bg-yellow-500 hover:bg-yellow-400 text-black px-12 py-6 rounded-[2rem] font-black text-xl flex items-center justify-center gap-4 transition-all shadow-2xl shadow-yellow-500/20 active:scale-95 whitespace-nowrap aria-disabled:opacity-70 aria-disabled:cursor-wait">
+                <div class="header-actions flex flex-col sm:flex-row items-center gap-4 w-full justify-center shrink-0">
+                    <button type="button" id="zipBtn" class="btn btn-primary w-full sm:w-auto flex-1 px-12 py-6 font-black text-xl gap-4 whitespace-nowrap">
                         <i data-lucide="folder-archive" class="w-7 h-7" aria-hidden="true"></i> GÉNÉRER ZIP
                     </button>
 
-                    <button type="button" id="helpBtn" title="Centre d'aide" aria-label="Centre d'aide" aria-haspopup="dialog" class="w-full sm:w-auto shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-yellow-500 p-6 rounded-[2rem] transition-all shadow-xl active:scale-95 flex items-center justify-center group">
+                    <button type="button" id="helpBtn" title="Centre d'aide" aria-label="Centre d'aide" aria-haspopup="dialog" class="btn btn-icon w-full sm:w-auto shrink-0 p-6 group">
                         <i data-lucide="circle-help" class="w-7 h-7 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -100,16 +207,16 @@
         </header>
 
         <main id="main" tabindex="-1">
-            <div id="filters" role="search" aria-label="Recherche et filtres" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-12 items-stretch">
+            <div id="filters" role="search" aria-label="Recherche et filtres" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-4 mb-12 items-stretch">
 
-                <div id="modeGroup" role="group" aria-label="Mode d'affichage" class="flex bg-slate-900 rounded-[1.5rem] p-1.5 border border-slate-600 col-span-2 md:col-span-1 shadow-lg min-h-[60px]">
-                    <button type="button" id="btn-solo" aria-pressed="true" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">SOLO</button>
-                    <button type="button" id="btn-duo" aria-pressed="false" class="flex-1 rounded-xl font-black transition-all text-xs tracking-[0.2em]">DUO</button>
+                <div id="modeGroup" role="group" aria-label="Mode d'affichage" class="seg col-span-2 md:col-span-1 min-h-[60px]">
+                    <button type="button" id="btn-solo" aria-pressed="true" class="btn seg-btn font-black text-xs tracking-[0.2em]">SOLO</button>
+                    <button type="button" id="btn-duo" aria-pressed="false" class="btn seg-btn font-black text-xs tracking-[0.2em]">DUO</button>
                 </div>
 
-                <div class="relative group min-h-[60px] col-span-1">
+                <div class="field-wrap min-h-[60px] col-span-1">
                     <select id="langSelect" aria-label="Langue"
-                            class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-6 rounded-[1.5rem] text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
+                            class="field px-6 pr-12 text-xs font-black tracking-widest">
                         <option value="fr">🇫🇷 FR</option>
                         <option value="en">🇬🇧 EN</option>
                         <option value="es">🇪🇸 ES</option>
@@ -125,96 +232,123 @@
                         <option value="ro">🇷🇴 RO</option>
                         <option value="el">🇬🇷 EL</option>
                     </select>
-                    <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-yellow-500 transition-colors">
+                    <span class="field-icon right-5" aria-hidden="true">
                         <i data-lucide="globe" class="w-5 h-5" aria-hidden="true"></i>
-                    </div>
+                    </span>
                 </div>
 
-                <div class="relative group min-h-[60px] col-span-1">
+                <!-- Sélecteur de thème : 3 boutons bascule (aria-pressed), même famille que Solo/Duo -->
+                <div id="themeGroup" role="group" aria-label="Thème" class="seg col-span-1 min-h-[60px]">
+                    <button type="button" class="btn seg-btn is-swatch" data-theme-btn="classique" aria-pressed="true" title="Classique">
+                        <span class="swatch" data-swatch="classique" aria-hidden="true"></span><span class="sr-only">Classique</span>
+                    </button>
+                    <button type="button" class="btn seg-btn is-swatch" data-theme-btn="neon" aria-pressed="false" title="Néon Arcade">
+                        <span class="swatch" data-swatch="neon" aria-hidden="true"></span><span class="sr-only">Néon Arcade</span>
+                    </button>
+                    <button type="button" class="btn seg-btn is-swatch" data-theme-btn="cosmos" aria-pressed="false" title="Cosmos">
+                        <span class="swatch" data-swatch="cosmos" aria-hidden="true"></span><span class="sr-only">Cosmos</span>
+                    </button>
+                </div>
+
+                <div class="field-wrap min-h-[60px] col-span-1">
                     <select id="scaleSelect" aria-label="Résolution des images"
-                            class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-6 rounded-[1.5rem] text-xs font-black tracking-widest cursor-pointer shadow-lg pr-12 text-slate-300 focus:border-yellow-500">
+                            class="field px-6 pr-12 text-xs font-black tracking-widest">
                         <option value="1" selected>WEB (1x)</option>
                         <option value="2" >HD (2x)</option>
                         <option value="4">ULTRA (4x)</option>
                     </select>
-                    <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-yellow-500 transition-colors">
+                    <span class="field-icon right-5" aria-hidden="true">
                         <i data-lucide="monitor" class="w-5 h-5" aria-hidden="true"></i>
-                    </div>
+                    </span>
                 </div>
 
-                <div class="relative group min-h-[60px] col-span-2 md:col-span-1 xl:col-span-1">
-                    <input type="search" id="categoryInput" list="categoryList" placeholder="Categorie..." aria-label="Filtrer par categorie"
-                           class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-6 rounded-[1.5rem] text-xs font-black tracking-widest cursor-text shadow-lg pr-12 text-slate-300 focus:border-yellow-500 placeholder:text-slate-400">
-                    <datalist id="categoryList">
-                    </datalist>
-                    <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover:text-yellow-500 transition-colors">
+                <!-- Catégorie : combobox ARIA maison (la datalist native n'était pas stylable) -->
+                <div id="categoryCombo" class="field-wrap min-h-[60px] col-span-1 md:col-span-2 xl:col-span-1">
+                    <input type="text" id="categoryInput" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="categoryListbox"
+                           autocomplete="off" spellcheck="false" placeholder="Categorie..." aria-label="Filtrer par categorie"
+                           class="field px-6 pr-12 [&:not(:placeholder-shown)]:pr-24 text-xs font-black tracking-widest cursor-text">
+                    <button type="button" id="categoryClear" class="field-clear right-12" aria-label="Effacer la catégorie" hidden>
+                        <i data-lucide="x" class="w-4 h-4" aria-hidden="true"></i>
+                    </button>
+                    <span class="field-icon right-5" aria-hidden="true">
                         <i data-lucide="filter" class="w-5 h-5" aria-hidden="true"></i>
-                    </div>
+                    </span>
+                    <ul id="categoryListbox" role="listbox" aria-label="Catégories" class="combo-list" hidden></ul>
                 </div>
 
-                <div class="relative col-span-2 md:col-span-2 xl:col-span-2 min-h-[60px]">
-                    <i data-lucide="search" class="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" aria-hidden="true"></i>
-                    <input type="search" id="search" placeholder="Rechercher (ex: sourire, amour)..." aria-label="Rechercher une pose"
-                           class="w-full min-h-[60px] bg-slate-900 border border-slate-600 px-14 rounded-[1.5rem] focus:border-yellow-500 font-bold shadow-lg text-sm placeholder:text-slate-400 placeholder:font-normal">
+                <div class="field-wrap col-span-2 md:col-span-3 xl:col-span-2 min-h-[60px]">
+                    <span class="field-icon left-6" aria-hidden="true">
+                        <i data-lucide="search" class="w-5 h-5" aria-hidden="true"></i>
+                    </span>
+                    <input type="search" id="search" autocomplete="off" spellcheck="false" placeholder="Rechercher (ex: sourire, amour)..." aria-label="Rechercher une pose"
+                           class="field pl-14 pr-5 [&:not(:placeholder-shown)]:pr-14 font-bold text-sm placeholder:font-normal">
+                    <button type="button" id="searchClear" class="field-clear right-4" aria-label="Effacer la recherche" hidden>
+                        <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
 
             <div id="grid-container">
                 <!-- Etats "Aucun resultat" / erreur de chargement (avec bouton Reessayer) -->
-                <div id="gridState" class="hidden text-center text-slate-300 font-bold py-16"></div>
+                <div id="gridState" class="hidden text-center text-text-2 font-bold py-6"></div>
                 <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-10 gap-4 md:gap-6 lg:gap-8"></div>
             </div>
         </main>
     </div>
 
-    <div id="helpLightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-4 sm:p-8">
-        <div id="helpDialog" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1" class="relative max-w-2xl w-full max-h-full overflow-y-auto bg-slate-900 border border-slate-800 rounded-[3rem] p-8 sm:p-12 modal-animate text-left shadow-2xl">
+    <div id="helpLightbox" class="overlay fixed inset-0 z-50 hidden flex items-start justify-center overflow-y-auto p-4 sm:p-8">
+        <div id="helpDialog" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1" class="panel relative my-auto max-w-2xl w-full p-8 sm:p-12 modal-animate text-left">
 
-            <button type="button" id="helpCloseBtn" aria-label="Fermer le centre d'aide" class="absolute top-8 right-8 text-slate-400 hover:text-white transition-all hover:rotate-90">
-                <i data-lucide="x" class="w-8 h-8" aria-hidden="true"></i>
-            </button>
+            <!-- Fermer : collant en haut de l'overlay quand l'aide défile (fenêtre basse) -->
+            <div class="sticky top-8 sm:top-12 z-10 h-0 flex justify-end">
+                <button type="button" id="helpCloseBtn" aria-label="Fermer le centre d'aide" class="btn btn-close p-2 -mt-6 -mr-6 sm:-mt-10 sm:-mr-10">
+                    <i data-lucide="x" class="w-8 h-8" aria-hidden="true"></i>
+                </button>
+            </div>
 
-            <h2 id="helpTitle" class="text-3xl sm:text-4xl font-black text-yellow-500 italic tracking-tighter mb-8 flex items-center gap-4">
+            <h2 id="helpTitle" class="font-display text-3xl sm:text-4xl font-black text-accent italic tracking-tighter mb-8 pr-14 flex items-center gap-4">
                 <i data-lucide="book-open" class="w-8 h-8" aria-hidden="true"></i> <span id="helpTitleText">CENTRE D'AIDE</span>
             </h2>
 
-            <div id="helpContent" class="text-slate-300 space-y-6">
-                <div class="flex items-center gap-3 text-slate-400 animate-pulse">
+            <div id="helpContent" class="text-text-2 space-y-6">
+                <div class="flex items-center gap-3 text-muted animate-pulse">
                     <i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> Chargement des données...
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="lightbox" class="fixed inset-0 bg-slate-950/98 backdrop-blur-xl z-50 hidden flex items-center justify-center p-8">
-        <div id="lightboxDialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" tabindex="-1" class="relative max-w-2xl w-full modal-animate flex flex-col items-center text-center">
+    <div id="lightbox" class="overlay fixed inset-0 z-50 hidden flex items-start justify-center overflow-y-auto p-4 sm:p-8">
+        <div id="lightboxDialog" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" tabindex="-1" class="relative my-auto max-w-2xl w-full modal-animate flex flex-col items-center text-center">
 
-            <button type="button" id="lightboxCloseBtn" aria-label="Fermer l'aperçu" class="absolute -top-16 right-0 text-slate-400 hover:text-white transition-all hover:rotate-90">
+            <button type="button" id="lightboxCloseBtn" aria-label="Fermer l'aperçu" class="btn btn-close sticky top-0 z-10 self-end p-2">
                 <i data-lucide="x" class="w-12 h-12" aria-hidden="true"></i>
             </button>
 
-            <div class="bg-gradient-to-b from-slate-900/50 to-transparent p-10 rounded-full mb-10 border border-slate-800/50">
-                <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async" class="max-h-[50vh] sm:max-h-[55vh] drop-shadow-[0_0_50px_rgba(234,179,8,0.25)] object-contain">
+            <div id="lightboxHalo" class="lb-halo p-10 mb-10">
+                <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" decoding="async" class="lb-art max-h-[50vh] sm:max-h-[55vh] object-contain">
             </div>
 
-            <h3 id="lightbox-title" class="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-yellow-500">Nom de la Pose</h3>
-            <p id="lightbox-res" class="text-slate-400 text-xs mt-3 uppercase font-black tracking-[0.4em]">PNG Transparent</p>
+            <h3 id="lightbox-title" class="font-display text-3xl sm:text-4xl font-black uppercase tracking-tighter text-accent">Nom de la Pose</h3>
+            <p id="lightbox-res" class="text-muted text-xs mt-3 uppercase font-black tracking-[0.4em]">PNG Transparent</p>
 
             <div class="mt-12 w-full flex flex-col sm:flex-row justify-center gap-4">
-                <button type="button" id="copyBtn" class="bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
+                <button type="button" id="copyBtn" class="btn btn-pill btn-secondary px-10 py-5 font-black text-sm gap-4 group">
                     <i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true"></i> COPIER L'IMAGE
                 </button>
-                <button type="button" id="singleDlBtn" class="bg-white text-black px-10 py-5 rounded-full font-black text-sm hover:bg-yellow-500 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group">
+                <button type="button" id="singleDlBtn" class="btn btn-pill btn-inverse px-10 py-5 font-black text-sm gap-4 group">
                     <i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform" aria-hidden="true"></i> ENREGISTRER PNG
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Zone d'annonce visible (copie, ZIP, erreurs) : remplace les alert() -->
-    <div id="toast" role="status" aria-live="polite" aria-atomic="true" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[70] max-w-[90vw] rounded-2xl border bg-slate-800 px-6 py-4 text-sm font-bold text-center shadow-2xl empty:p-0 empty:border-0 empty:shadow-none"></div>
+    <!-- Zone d'annonce visible (copie, ZIP, erreurs) : remplace les alert().
+         Jamais cliquable (pointer-events: none) : elle ne bloque pas la grille dessous. -->
+    <div id="toast" role="status" aria-live="polite" aria-atomic="true" class="toast"></div>
 
-    <!-- Un seul module : plus de globals implicites entre script classique et module -->
+    <!-- Un seul module : plus de globals implicites entre script classique et module
+         (seule exception explicite : window.aeTheme, défini dans <head> pour éviter le flash) -->
     <script type="module">
         // Les modules partages sont charges dynamiquement pour pouvoir afficher un message
         // lisible si le chargement echoue (un import statique planterait sans rien dire).
@@ -224,6 +358,9 @@
         const $ = (id) => document.getElementById(id);
 
         const FLAGS = { fr:'🇫🇷', en:'🇬🇧', es:'🇪🇸', 'fr-ca':'🇨🇦', de:'🇩🇪', ja:'🇯🇵', ko:'🇰🇷', it:'🇮🇹', pt:'🇵🇹', zh:'🇨🇳', tr:'🇹🇷', pl:'🇵🇱', ro:'🇷🇴', el:'🇬🇷' };
+
+        // Libelles traduits des themes (cles i18n)
+        const THEME_LABELS = { classique: 'themeClassique', neon: 'themeNeon', cosmos: 'themeCosmos' };
 
         // Meme motif que l'API (functions/api/export.js) pour les IDs et les noms
         const SAFE_RE = /^[A-Za-z0-9_-]+$/;
@@ -284,19 +421,29 @@
             return SAFE_RE.test(s) ? s : fallback;
         }
 
-        // Annonce visible + lue par les lecteurs d'ecran (role="status")
+        // Annonce visible + lue par les lecteurs d'ecran (role="status").
+        // Entree/sortie en fondu (classe .toast, data-show) ; le texte est vide une fois masque.
         let toastTimer;
         function say(msg, isError = false) {
             const toast = $('toast');
             clearTimeout(toastTimer);
-            toast.textContent = '';
-            toast.classList.toggle('border-red-500', isError);
-            toast.classList.toggle('text-red-200', isError);
-            toast.classList.toggle('border-yellow-500/50', !isError);
-            toast.classList.toggle('text-slate-100', !isError);
+            toast.removeAttribute('data-show');
+            toast.replaceChildren();
+            toast.dataset.variant = isError ? 'error' : 'success';
             toastTimer = setTimeout(() => {
-                toast.textContent = msg;
-                toastTimer = setTimeout(() => { toast.textContent = ''; }, 7000);
+                const icon = document.createElement('i');
+                icon.dataset.lucide = isError ? 'alert-triangle' : 'check';
+                icon.className = 'toast-icon w-[18px] h-[18px]';
+                icon.setAttribute('aria-hidden', 'true');
+                const text = document.createElement('span');
+                text.textContent = msg;
+                toast.replaceChildren(icon, text);
+                icons();
+                toast.setAttribute('data-show', '');
+                toastTimer = setTimeout(() => {
+                    toast.removeAttribute('data-show');
+                    toastTimer = setTimeout(() => { toast.replaceChildren(); }, 400);
+                }, 7000);
             }, 60);
         }
 
@@ -321,8 +468,8 @@
         const toBcp47 = (l) => l.replace(/-([a-z]{2})$/i, (m, r) => '-' + r.toUpperCase());
 
         // --- Boutons : etats "repos" -------------------------------------
-        const COPY_CLASS = "bg-slate-800 text-white px-10 py-5 rounded-full font-black text-sm hover:bg-slate-700 transition-all flex items-center justify-center gap-4 shadow-2xl active:scale-95 group aria-disabled:opacity-70 aria-disabled:cursor-wait";
-
+        // Les classes visuelles sont dans le HTML (et themes.css) ; les etats passent par
+        // des attributs : aria-disabled, aria-busy, data-state="busy|success|error".
         function renderZipBtnIdle() {
             const btn = $('zipBtn');
             btn.innerHTML = `<i data-lucide="folder-archive" class="w-7 h-7" aria-hidden="true"></i> ${escapeHtml(tr().zipBtn)}`;
@@ -330,26 +477,43 @@
         function renderCopyBtnIdle() {
             const btn = $('copyBtn');
             btn.innerHTML = `<i data-lucide="copy" class="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true"></i> ${escapeHtml(tr().copyBtnText)}`;
-            btn.className = COPY_CLASS;
+            btn.removeAttribute('data-state');
             btn.removeAttribute('aria-disabled');
         }
         function renderSaveBtnIdle() {
             const btn = $('singleDlBtn');
             btn.innerHTML = `<i data-lucide="download" class="w-5 h-5 group-hover:translate-y-1 transition-transform" aria-hidden="true"></i> ${escapeHtml(tr().saveBtnText)}`;
+            btn.removeAttribute('data-state');
             btn.removeAttribute('aria-disabled');
         }
 
         function renderModeButtons() {
             const t = tr();
             const isS = currentMode === 'solo';
-            const on = 'flex-1 rounded-xl bg-yellow-500 text-black font-black text-xs tracking-[0.2em] shadow-lg shadow-yellow-500/20 transition-all';
-            const off = 'flex-1 rounded-xl text-slate-400 hover:text-white font-black text-xs tracking-[0.2em] transition-all';
-            $('btn-solo').className = isS ? on : off;
-            $('btn-duo').className = !isS ? on : off;
             $('btn-solo').setAttribute('aria-pressed', String(isS));
             $('btn-duo').setAttribute('aria-pressed', String(!isS));
             $('btn-solo').textContent = t.modeSolo;
             $('btn-duo').textContent = t.modeDuo;
+        }
+
+        // --- Theme -------------------------------------------------------
+        const themeApi = window.aeTheme || null;
+
+        function renderThemeButtons() {
+            const t = tr();
+            const cur = themeApi ? themeApi.current() : 'classique';
+            document.querySelectorAll('[data-theme-btn]').forEach((btn) => {
+                const name = btn.dataset.themeBtn;
+                const label = t[THEME_LABELS[name]] || name;
+                btn.setAttribute('aria-pressed', String(name === cur));
+                btn.title = label;
+                btn.querySelector('.sr-only').textContent = label;
+            });
+        }
+
+        function changeTheme(name) {
+            if (!themeApi || !themeApi.set(name)) return; // liste blanche dans aeTheme.set
+            renderThemeButtons();
         }
 
         function applyTranslations(lang) {
@@ -378,12 +542,18 @@
             $('modeGroup').setAttribute('aria-label', t.modeAria);
             $('langSelect').setAttribute('aria-label', t.langAria);
             $('scaleSelect').setAttribute('aria-label', t.scaleAria);
+            $('themeGroup').setAttribute('aria-label', t.themeAria);
             renderModeButtons();
+            renderThemeButtons();
 
             $('categoryInput').placeholder = t.categoryPlaceholder;
             $('categoryInput').setAttribute('aria-label', t.categoryAria);
+            $('categoryListbox').setAttribute('aria-label', t.categoryListAria);
+            $('categoryClear').setAttribute('aria-label', t.clearCategoryAria);
             $('search').placeholder = t.searchPlaceholder;
             $('search').setAttribute('aria-label', t.searchAria);
+            $('searchClear').setAttribute('aria-label', t.clearSearchAria);
+            if (combo.open) renderComboList();
 
             $('helpCloseBtn').setAttribute('aria-label', t.helpCloseAria);
             $('helpTitleText').textContent = t.helpTitle;
@@ -458,14 +628,10 @@
                     item.categories.forEach((catName) => categoriesMap.set(normalizeStr(catName), catName));
                 });
 
-                // Remplissage de la datalist (via le DOM : aucun HTML injecte)
-                const frag = document.createDocumentFragment();
-                Array.from(categoriesMap.keys()).sort().forEach((normCat) => {
-                    const opt = document.createElement('option');
-                    opt.value = categoriesMap.get(normCat).toUpperCase();
-                    frag.appendChild(opt);
-                });
-                $('categoryList').replaceChildren(frag);
+                // Options de la combobox : memes valeurs (MAJUSCULES) et meme tri que l'ancienne datalist
+                categoryOptions = Array.from(categoriesMap.keys()).sort()
+                    .map((normCat) => categoriesMap.get(normCat).toUpperCase());
+                if (combo.open) renderComboList();
 
                 setMode(currentMode);
             } catch (err) {
@@ -473,13 +639,14 @@
                 console.error(err);
                 dataReady = false;
                 currentRenderItems = [];
+                categoryOptions = [];
                 $('grid').replaceChildren();
                 setStats(tr().statsError);
                 showGridState('error');
             }
         }
 
-        // Etat "Aucun resultat" ou erreur (avec bouton Reessayer)
+        // Etat "Aucun resultat" (avec bouton Effacer les filtres) ou erreur (avec bouton Reessayer)
         function showGridState(kind) {
             gridStateKind = kind;
             const box = $('gridState');
@@ -491,17 +658,25 @@
             if (kind === 'error') {
                 box.setAttribute('role', 'alert');
                 p.textContent = t.statsError;
-                p.className = 'text-red-300 mb-6';
+                p.className = 'text-danger mb-6';
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.id = 'retryBtn';
-                btn.className = 'bg-yellow-500 hover:bg-yellow-400 text-black px-8 py-4 rounded-full font-black text-sm transition-all active:scale-95';
+                btn.className = 'btn btn-primary btn-pill px-8 py-4 font-black text-sm';
                 btn.textContent = t.retryBtn;
                 btn.addEventListener('click', () => { setStats(tr().statsInit); loadData(currentLang); });
                 box.append(p, btn);
             } else {
                 p.textContent = t.noResults;
                 box.append(p);
+                if ($('search').value || $('categoryInput').value) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'btn btn-ghost mt-4 px-6 py-3 text-xs font-black tracking-widest uppercase';
+                    btn.textContent = t.clearFiltersBtn;
+                    btn.addEventListener('click', clearFilters);
+                    box.append(btn);
+                }
             }
             box.classList.remove('hidden');
         }
@@ -512,6 +687,7 @@
         const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
         function openModal(overlay, focusEl, trigger) {
+            closeCombo();
             lastTrigger = trigger || document.activeElement;
             activeModal = overlay;
             overlay.classList.remove('hidden');
@@ -555,7 +731,7 @@
             const seq = ++helpSeq;
             const t = tr();
             const helpContent = $('helpContent');
-            helpContent.innerHTML = `<div class="flex items-center gap-3 text-slate-400 animate-pulse"><i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> ${escapeHtml(t.helpLoading)}</div>`;
+            helpContent.innerHTML = `<div class="flex items-center gap-3 text-muted animate-pulse"><i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> ${escapeHtml(t.helpLoading)}</div>`;
             icons();
             openModal($('helpLightbox'), $('helpCloseBtn'), $('helpBtn'));
 
@@ -570,27 +746,27 @@
 
                 // Formater l'affichage avec le JSON (tout est echappe ou converti en nombre)
                 helpContent.innerHTML = `
-                    <div class="bg-slate-950 p-6 rounded-3xl border border-slate-800 mb-8">
-                        <h4 class="text-xs font-black tracking-widest text-slate-400 mb-2">${escapeHtml(t.catalogLabel)} ${flag}</h4>
-                        <p class="text-2xl font-black text-slate-200">${num(stats.solo)} <span class="text-sm font-normal text-slate-400">${escapeHtml(t.modeSolo)}</span></p>
-                        <p class="text-2xl font-black text-slate-200">${num(stats.duo)} <span class="text-sm font-normal text-slate-400">${escapeHtml(t.modeDuo)}</span></p>
+                    <div class="panel-sunken p-6 mb-8">
+                        <h4 class="text-xs font-black tracking-widest text-muted mb-2">${escapeHtml(t.catalogLabel)} ${flag}</h4>
+                        <p class="text-2xl font-black text-text">${num(stats.solo)} <span class="text-sm font-normal text-muted">${escapeHtml(t.modeSolo)}</span></p>
+                        <p class="text-2xl font-black text-text">${num(stats.duo)} <span class="text-sm font-normal text-muted">${escapeHtml(t.modeDuo)}</span></p>
                     </div>
 
-                    <div class="bg-blue-900/20 border border-blue-500/20 p-6 rounded-3xl">
-                        <h4 class="text-xs font-black tracking-widest text-blue-400 mb-4 uppercase">${escapeHtml(t.helpGuideTitle)}</h4>
-                        <p class="text-slate-300 leading-relaxed whitespace-pre-line">${escapeHtml(guide)}</p>
+                    <div class="panel-info p-6">
+                        <h4 class="text-xs font-black tracking-widest text-info mb-4 uppercase">${escapeHtml(t.helpGuideTitle)}</h4>
+                        <p class="text-text-2 leading-relaxed whitespace-pre-line">${escapeHtml(guide)}</p>
                     </div>
 
                     <div class="text-center mt-6">
-                        <p class="text-xs font-black tracking-[0.3em] text-slate-400 uppercase">${escapeHtml(t.helpLastUpdate)} ${escapeHtml(aideDonnees.date_maj)}</p>
+                        <p class="text-xs font-black tracking-wide2 text-muted uppercase">${escapeHtml(t.helpLastUpdate)} ${escapeHtml(aideDonnees.date_maj)}</p>
                     </div>
                 `;
             } catch (e) {
                 if (seq !== helpSeq) return;
                 console.error(e);
                 helpContent.innerHTML = `
-                    <div class="bg-red-900/20 text-red-300 p-6 rounded-2xl border border-red-500/20" role="alert">
-                        <p><i data-lucide="alert-triangle" class="inline w-5 h-5 mr-2" aria-hidden="true"></i> ${escapeHtml(t.helpErrorTitle)} <strong>aide.json</strong>.</p>
+                    <div class="panel-danger p-6" role="alert">
+                        <p><i data-lucide="alert-triangle" class="inline w-5 h-5 mr-2 text-danger" aria-hidden="true"></i> ${escapeHtml(t.helpErrorTitle)} <strong>aide.json</strong>.</p>
                         <p class="text-sm mt-2">${escapeHtml(t.helpErrorSubtitle)}</p>
                     </div>
                 `;
@@ -604,10 +780,17 @@
         // --- Champs et persistance ---------------------------------------
         const idState = { id1: true, id2: true }; // dernier etat de validite (evite de repeter l'annonce)
 
+        // Etat d'erreur porte par le champ (aria-invalid) ET par toute la carte utilisateur
+        function setIdInvalid(el, bad) {
+            el.setAttribute('aria-invalid', String(bad));
+            const card = el.closest('.ucard');
+            if (card) card.toggleAttribute('data-invalid', bad);
+        }
+
         function checkIdField(el) {
             const raw = el.value.trim();
             const bad = raw !== '' && !SAFE_RE.test(raw);
-            el.setAttribute('aria-invalid', String(bad));
+            setIdInvalid(el, bad);
             if (bad && idState[el.id]) say(tr().invalidIdMsg, true);
             idState[el.id] = !bad;
             return bad;
@@ -647,6 +830,8 @@
         function setMode(mode) {
             currentMode = mode;
             renderModeButtons();
+            // Efface un marquage "ID manquant" posé par le clic ZIP (le besoin depend du mode)
+            checkIdField($('id1')); checkIdField($('id2'));
 
             const container = $('grid-container');
             container.classList.remove('animate-mode-switch');
@@ -682,17 +867,188 @@
                 return { url, title: t.displayTag || t.slugFallback || '', file: t._file };
             });
 
-            // Le span nomme deja le bouton : l'image est decorative (alt vide)
+            // Le span nomme deja le bouton : l'image est decorative (alt vide).
+            // Image en erreur : data-broken pose par l'ecouteur "error" delegue (silhouette thematisee).
             grid.innerHTML = currentRenderItems.map((item, i) => `
-                <button type="button" data-i="${i}" title="${escapeHtml(item.title)}" class="grid-item group block w-full bg-slate-900/40 p-5 rounded-[2.5rem] border border-slate-800 text-center cursor-pointer hover:border-yellow-500/40 focus-visible:border-yellow-500/60 transition-all">
-                    <img src="${escapeHtml(item.url)}" alt="" class="w-full drop-shadow-2xl mb-5 aspect-square object-contain" loading="lazy" decoding="async">
-                    <span class="text-xs text-slate-400 uppercase font-black tracking-widest block truncate">${escapeHtml(item.title)}</span>
+                <button type="button" data-i="${i}" title="${escapeHtml(item.title)}" class="grid-item card p-5">
+                    <span class="card-art mb-5" aria-hidden="true"><img src="${escapeHtml(item.url)}" alt="" loading="lazy" decoding="async"></span>
+                    <span class="text-xs uppercase font-black tracking-widest block truncate">${escapeHtml(item.title)}</span>
                 </button>`).join('');
 
             setStats(`${currentRenderItems.length} ${tr().statsSuffix}`);
             showGridState(currentRenderItems.length === 0 ? 'empty' : null);
         }
         const renderDebounced = debounce(render, 180);
+
+        // --- Boutons "Effacer" (recherche, categorie) ----------------------
+        function syncClearButtons() {
+            $('searchClear').hidden = $('search').value === '';
+            $('categoryClear').hidden = $('categoryInput').value === '';
+        }
+        function clearField(input) {
+            input.value = '';
+            syncClearButtons();
+            closeCombo();
+            render();
+            input.focus();
+        }
+        function clearFilters() {
+            $('search').value = '';
+            $('categoryInput').value = '';
+            syncClearButtons();
+            closeCombo();
+            render();
+            $('search').focus();
+        }
+
+        // --- Combobox des categories (remplace la datalist native, non stylable) ---
+        // Motif WAI-ARIA "combobox avec liste et autocompletion" : le focus reste dans le champ,
+        // l'option active est designee par aria-activedescendant.
+        let categoryOptions = []; // libelles affiches (MAJUSCULES), tries comme l'ancienne datalist
+        const combo = { open: false, active: -1, items: [] };
+
+        // Filtrage insensible aux accents et a la casse (meme normalisation que la grille)
+        function comboMatches() {
+            const q = normalizeStr($('categoryInput').value);
+            return q ? categoryOptions.filter((label) => normalizeStr(label).includes(q)) : categoryOptions.slice();
+        }
+
+        // Options construites via le DOM (textContent) : aucun HTML injecte
+        function renderComboList() {
+            const list = $('categoryListbox');
+            combo.items = comboMatches();
+            if (combo.active >= combo.items.length) combo.active = -1;
+            const frag = document.createDocumentFragment();
+            if (!combo.items.length) {
+                const li = document.createElement('li');
+                li.id = 'cat-opt-none';
+                li.className = 'combo-option';
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-disabled', 'true');
+                li.setAttribute('aria-selected', 'false');
+                li.textContent = tr().categoryNone;
+                frag.appendChild(li);
+            } else {
+                combo.items.forEach((label, i) => {
+                    const li = document.createElement('li');
+                    li.id = `cat-opt-${i}`;
+                    li.className = 'combo-option';
+                    li.setAttribute('role', 'option');
+                    li.setAttribute('aria-selected', String(i === combo.active));
+                    li.dataset.i = String(i);
+                    li.textContent = label;
+                    frag.appendChild(li);
+                });
+            }
+            list.replaceChildren(frag);
+            syncActiveOption();
+        }
+
+        function syncActiveOption() {
+            const input = $('categoryInput');
+            const list = $('categoryListbox');
+            list.querySelectorAll('[aria-selected="true"]').forEach((el) => el.setAttribute('aria-selected', 'false'));
+            const el = combo.active >= 0 ? $(`cat-opt-${combo.active}`) : null;
+            if (el) {
+                el.setAttribute('aria-selected', 'true');
+                input.setAttribute('aria-activedescendant', el.id);
+                el.scrollIntoView({ block: 'nearest' });
+            } else {
+                input.removeAttribute('aria-activedescendant');
+            }
+        }
+
+        function openCombo() {
+            if (combo.open) return;
+            combo.open = true;
+            combo.active = -1;
+            renderComboList();
+            $('categoryListbox').hidden = false;
+            $('categoryInput').setAttribute('aria-expanded', 'true');
+        }
+        function closeCombo() {
+            if (!combo.open) return;
+            combo.open = false;
+            combo.active = -1;
+            $('categoryListbox').hidden = true;
+            $('categoryInput').setAttribute('aria-expanded', 'false');
+            $('categoryInput').removeAttribute('aria-activedescendant');
+        }
+        function moveActive(delta) {
+            const n = combo.items.length;
+            if (!n) return;
+            combo.active = combo.active < 0
+                ? (delta > 0 ? 0 : n - 1)
+                : (combo.active + delta + n) % n;
+            syncActiveOption();
+        }
+        // Choix d'une option : meme valeur que la datalist (MAJUSCULES), meme filtrage de la grille
+        function chooseCategory(i) {
+            const label = combo.items[i];
+            if (label === undefined) return;
+            $('categoryInput').value = label;
+            closeCombo();
+            syncClearButtons();
+            render();
+        }
+
+        function onComboKeydown(e) {
+            if (e.isComposing || e.keyCode === 229) return; // composition IME en cours (ja, ko, zh)
+            if (e.altKey && e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+            switch (e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    if (!combo.open) { openCombo(); if (!e.altKey) moveActive(1); }
+                    else moveActive(1);
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    if (!combo.open) { openCombo(); if (!e.altKey) moveActive(-1); }
+                    else moveActive(-1);
+                    break;
+                case 'Enter':
+                    if (combo.open) {
+                        e.preventDefault();
+                        if (combo.active >= 0) chooseCategory(combo.active);
+                        else closeCombo();
+                    }
+                    break;
+                case 'Escape':
+                    // Liste ouverte : on la ferme ; sinon on vide le champ (comme un champ de recherche)
+                    if (combo.open) { e.preventDefault(); closeCombo(); }
+                    else if (e.currentTarget.value) { e.preventDefault(); clearField(e.currentTarget); }
+                    break;
+                case 'Tab':
+                    closeCombo(); // on laisse le focus sortir
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function wireCombo() {
+            const input = $('categoryInput');
+            const list = $('categoryListbox');
+            input.addEventListener('keydown', onComboKeydown);
+            input.addEventListener('input', () => {
+                combo.active = -1;
+                if (combo.open) renderComboList(); else openCombo();
+                syncClearButtons();
+                renderDebounced();
+            });
+            input.addEventListener('click', openCombo);
+            input.addEventListener('blur', closeCombo);
+            // mousedown annule : le champ garde le focus (pas de blur) pendant le clic d'une option
+            list.addEventListener('mousedown', (e) => e.preventDefault());
+            list.addEventListener('click', (e) => {
+                const opt = e.target.closest('[role="option"][data-i]');
+                if (opt) chooseCategory(Number(opt.dataset.i));
+            });
+            // Clic hors de la combobox : fermeture
+            document.addEventListener('pointerdown', (e) => {
+                if (combo.open && !$('categoryCombo').contains(e.target)) closeCombo();
+            });
+        }
 
         function openLightboxByIndex(i, trigger) {
             const item = currentRenderItems[i];
@@ -712,7 +1068,9 @@
             if (saveBusy) return;
             saveBusy = true;
             const btn = $('singleDlBtn');
+            // Desactive pendant le telechargement (aria-disabled garde le focus clavier sur le bouton)
             btn.setAttribute('aria-disabled', 'true');
+            btn.dataset.state = 'busy';
             btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i>...`;
             icons();
 
@@ -736,6 +1094,7 @@
             const btn = $('copyBtn');
             const t = tr();
             btn.setAttribute('aria-disabled', 'true');
+            btn.dataset.state = 'busy';
 
             // Animation de chargement
             btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin" aria-hidden="true"></i> ${escapeHtml(t.copyInProgress)}`;
@@ -749,14 +1108,15 @@
                 // On ecrit le fichier PNG directement dans le presse-papier
                 await navigator.clipboard.write([new ClipboardItem({ 'image/png': png })]);
 
-                // Animation de succes
-                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-green-400" aria-hidden="true"></i> ${escapeHtml(t.copiedSuccess)}`;
-                btn.classList.add('bg-green-900/30', 'border', 'border-green-500/50');
+                // Etat de succes (tokens success via data-state)
+                btn.innerHTML = `<i data-lucide="check" class="w-5 h-5 icon-ok" aria-hidden="true"></i> ${escapeHtml(t.copiedSuccess)}`;
+                btn.dataset.state = 'success';
                 say(t.copiedSuccess);
             } catch (e) {
                 console.error("Erreur de copie :", e);
-                // Animation d'erreur (si le navigateur bloque l'acces)
-                btn.innerHTML = `<i data-lucide="x" class="w-5 h-5 text-red-400" aria-hidden="true"></i> ${escapeHtml(t.copyError)}`;
+                // Etat d'erreur (si le navigateur bloque l'acces)
+                btn.innerHTML = `<i data-lucide="x" class="w-5 h-5 icon-ko" aria-hidden="true"></i> ${escapeHtml(t.copyError)}`;
+                btn.dataset.state = 'error';
                 say(t.copyError, true);
             } finally {
                 icons();
@@ -773,6 +1133,7 @@
         function openLightbox(url, title, file, trigger) {
             const scale = $('scaleSelect').value;
             const t = tr();
+            $('lightboxHalo').removeAttribute('data-broken');
             $('lightbox-img').src = url;
             $('lightbox-img').alt = ''; // le titre juste en dessous nomme deja l'image
             $('lightbox-title').textContent = title;
@@ -815,7 +1176,16 @@
             const id1 = validId($('id1').value), id2 = validId($('id2').value);
             const bad1 = checkIdField($('id1')), bad2 = checkIdField($('id2'));
             if (bad1 || bad2) { say(t.invalidIdMsg, true); return; }
-            if (!id1 || (currentMode === 'duo' && !id2)) { say(t.zipMissingIds, true); return; }
+            if (!id1 || (currentMode === 'duo' && !id2)) {
+                // Champ(s) manquant(s) marques comme un ID invalide (champ + carte), focus sur le premier
+                const missing = [];
+                if (!id1) missing.push($('id1'));
+                if (currentMode === 'duo' && !id2) missing.push($('id2'));
+                missing.forEach((el) => setIdInvalid(el, true));
+                missing[0].focus();
+                say(t.zipMissingIds, true);
+                return;
+            }
 
             const n1 = sanitizeName($('name1').value, DEFAULT_NAME_1);
             const n2 = sanitizeName($('name2').value, DEFAULT_NAME_2);
@@ -944,7 +1314,7 @@
                 : "Unable to load the application files (translations or utilities). Check your connection, then ";
             const a = document.createElement('a');
             a.href = location.pathname;
-            a.className = 'underline text-yellow-400';
+            a.className = 'underline text-accent-hover';
             a.textContent = fr ? "rechargez la page." : "reload the page.";
             box.appendChild(a);
             box.classList.remove('hidden');
@@ -962,14 +1332,29 @@
             $('btn-duo').addEventListener('click', () => setMode('duo'));
             $('langSelect').addEventListener('change', changeLanguage);
             $('scaleSelect').addEventListener('change', render);
-            $('categoryInput').addEventListener('input', renderDebounced);
-            $('search').addEventListener('input', renderDebounced);
+            $('search').addEventListener('input', () => { syncClearButtons(); renderDebounced(); });
+            $('searchClear').addEventListener('click', () => clearField($('search')));
+            $('categoryClear').addEventListener('click', () => clearField($('categoryInput')));
+            wireCombo();
+
+            // Selecteur de theme
+            document.querySelectorAll('[data-theme-btn]').forEach((btn) => {
+                btn.addEventListener('click', () => changeTheme(btn.dataset.themeBtn));
+            });
 
             // Clic delegue sur les cartes de la grille
             $('grid').addEventListener('click', (e) => {
                 const card = e.target.closest('.grid-item');
                 if (card) openLightboxByIndex(Number(card.dataset.i), card);
             });
+            // Image en erreur : "error" ne remonte pas, d'ou l'ecoute en phase de capture
+            $('grid').addEventListener('error', (e) => {
+                const img = e.target;
+                if (!img || img.tagName !== 'IMG') return;
+                const card = img.closest('.grid-item');
+                if (card) card.setAttribute('data-broken', '');
+            }, true);
+            $('lightbox-img').addEventListener('error', () => $('lightboxHalo').setAttribute('data-broken', ''));
 
             // Fermeture des modales : bouton x ou clic sur le fond
             $('helpCloseBtn').addEventListener('click', closeHelp);
@@ -1002,6 +1387,7 @@
             $('id2').value = validId(store.get('bt_id2') || '');
             $('name1').value = (store.get('bt_name1') || '').slice(0, 40);
             $('name2').value = (store.get('bt_name2') || '').slice(0, 40);
+            syncClearButtons();
 
             // Langue enregistree si valide, sinon detection navigateur
             const saved = store.get('bt_lang');

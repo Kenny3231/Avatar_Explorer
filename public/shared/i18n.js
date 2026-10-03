@@ -34,7 +34,10 @@ export const I18N = {
         catalogLabel: "CATALOGUE", helpGuideTitle: "Mode d'emploi", helpLastUpdate: "Dernière mise à jour :",
         helpErrorTitle: "Impossible de charger le fichier", helpErrorSubtitle: "Assurez-vous d'avoir créé le fichier à la racine de votre dossier.",
         downloadError: "Erreur de téléchargement.", copyInProgress: "COPIE...", copiedSuccess: "COPIÉ !", copyError: "ERREUR",
-        lightboxResFormat: "FORMAT PNG • RÉSOLUTION", zipMissingIds: "Veuillez renseigner les IDs Bitmoji.", zipCompressing: "COMPRESSION..."
+        lightboxResFormat: "FORMAT PNG • RÉSOLUTION", zipMissingIds: "Veuillez renseigner les IDs Bitmoji.", zipCompressing: "COMPRESSION...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Thème", themeClassique: "Classique", themeNeon: "Néon Arcade", themeCosmos: "Cosmos",
+        clearSearchAria: "Effacer la recherche", clearCategoryAria: "Effacer la catégorie", categoryListAria: "Catégories", categoryNone: "Aucune catégorie", clearFiltersBtn: "Effacer les filtres"
     },
     en: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -68,7 +71,10 @@ export const I18N = {
         catalogLabel: "CATALOG", helpGuideTitle: "User guide", helpLastUpdate: "Last update:",
         helpErrorTitle: "Unable to load the file", helpErrorSubtitle: "Make sure the file was created at the root of your folder.",
         downloadError: "Download error.", copyInProgress: "COPYING...", copiedSuccess: "COPIED!", copyError: "ERROR",
-        lightboxResFormat: "PNG FORMAT • RESOLUTION", zipMissingIds: "Please enter the Bitmoji IDs.", zipCompressing: "COMPRESSING..."
+        lightboxResFormat: "PNG FORMAT • RESOLUTION", zipMissingIds: "Please enter the Bitmoji IDs.", zipCompressing: "COMPRESSING...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Theme", themeClassique: "Classic", themeNeon: "Neon Arcade", themeCosmos: "Cosmos",
+        clearSearchAria: "Clear search", clearCategoryAria: "Clear category", categoryListAria: "Categories", categoryNone: "No matching category", clearFiltersBtn: "Clear filters"
     },
     es: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -102,7 +108,10 @@ export const I18N = {
         catalogLabel: "CATÁLOGO", helpGuideTitle: "Modo de empleo", helpLastUpdate: "Última actualización:",
         helpErrorTitle: "No se pudo cargar el archivo", helpErrorSubtitle: "Asegúrate de haber creado el archivo en la raíz de tu carpeta.",
         downloadError: "Error de descarga.", copyInProgress: "COPIANDO...", copiedSuccess: "¡COPIADO!", copyError: "ERROR",
-        lightboxResFormat: "FORMATO PNG • RESOLUCIÓN", zipMissingIds: "Por favor, introduce los IDs de Bitmoji.", zipCompressing: "COMPRIMIENDO..."
+        lightboxResFormat: "FORMATO PNG • RESOLUCIÓN", zipMissingIds: "Por favor, introduce los IDs de Bitmoji.", zipCompressing: "COMPRIMIENDO...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Tema", themeClassique: "Clásico", themeNeon: "Neón Arcade", themeCosmos: "Cosmos",
+        clearSearchAria: "Borrar la búsqueda", clearCategoryAria: "Borrar la categoría", categoryListAria: "Categorías", categoryNone: "Ninguna categoría", clearFiltersBtn: "Borrar los filtros"
     },
     'fr-ca': {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -136,7 +145,10 @@ export const I18N = {
         catalogLabel: "CATALOGUE", helpGuideTitle: "Mode d'emploi", helpLastUpdate: "Dernière mise à jour :",
         helpErrorTitle: "Impossible de charger le fichier", helpErrorSubtitle: "Assurez-vous d'avoir créé le fichier à la racine de votre dossier.",
         downloadError: "Erreur de téléchargement.", copyInProgress: "COPIE...", copiedSuccess: "COPIÉ !", copyError: "ERREUR",
-        lightboxResFormat: "FORMAT PNG • RÉSOLUTION", zipMissingIds: "Veuillez renseigner les IDs Bitmoji.", zipCompressing: "COMPRESSION..."
+        lightboxResFormat: "FORMAT PNG • RÉSOLUTION", zipMissingIds: "Veuillez renseigner les IDs Bitmoji.", zipCompressing: "COMPRESSION...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Thème", themeClassique: "Classique", themeNeon: "Néon Arcade", themeCosmos: "Cosmos",
+        clearSearchAria: "Effacer la recherche", clearCategoryAria: "Effacer la catégorie", categoryListAria: "Catégories", categoryNone: "Aucune catégorie", clearFiltersBtn: "Effacer les filtres"
     },
     de: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -170,7 +182,10 @@ export const I18N = {
         catalogLabel: "KATALOG", helpGuideTitle: "Bedienungsanleitung", helpLastUpdate: "Letzte Aktualisierung:",
         helpErrorTitle: "Datei konnte nicht geladen werden", helpErrorSubtitle: "Stellen Sie sicher, dass die Datei im Stammverzeichnis Ihres Ordners erstellt wurde.",
         downloadError: "Download-Fehler.", copyInProgress: "KOPIEREN...", copiedSuccess: "KOPIERT!", copyError: "FEHLER",
-        lightboxResFormat: "PNG-FORMAT • AUFLÖSUNG", zipMissingIds: "Bitte geben Sie die Bitmoji-IDs ein.", zipCompressing: "KOMPRIMIEREN..."
+        lightboxResFormat: "PNG-FORMAT • AUFLÖSUNG", zipMissingIds: "Bitte geben Sie die Bitmoji-IDs ein.", zipCompressing: "KOMPRIMIEREN...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Design", themeClassique: "Klassisch", themeNeon: "Neon-Arcade", themeCosmos: "Kosmos",
+        clearSearchAria: "Suche löschen", clearCategoryAria: "Kategorie löschen", categoryListAria: "Kategorien", categoryNone: "Keine passende Kategorie", clearFiltersBtn: "Filter zurücksetzen"
     },
     ja: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -204,7 +219,10 @@ export const I18N = {
         catalogLabel: "カタログ", helpGuideTitle: "使い方", helpLastUpdate: "最終更新日：",
         helpErrorTitle: "ファイルを読み込めませんでした", helpErrorSubtitle: "フォルダーのルートにファイルが作成されていることを確認してください。",
         downloadError: "ダウンロードエラー。", copyInProgress: "コピー中...", copiedSuccess: "コピーしました！", copyError: "エラー",
-        lightboxResFormat: "PNG形式 • 解像度", zipMissingIds: "Bitmoji IDを入力してください。", zipCompressing: "圧縮中..."
+        lightboxResFormat: "PNG形式 • 解像度", zipMissingIds: "Bitmoji IDを入力してください。", zipCompressing: "圧縮中...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "テーマ", themeClassique: "クラシック", themeNeon: "ネオンアーケード", themeCosmos: "コスモス",
+        clearSearchAria: "検索をクリア", clearCategoryAria: "カテゴリーをクリア", categoryListAria: "カテゴリー", categoryNone: "該当するカテゴリーはありません", clearFiltersBtn: "フィルターをクリア"
     },
     ko: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -238,7 +256,10 @@ export const I18N = {
         catalogLabel: "카탈로그", helpGuideTitle: "사용 방법", helpLastUpdate: "마지막 업데이트:",
         helpErrorTitle: "파일을 불러올 수 없습니다", helpErrorSubtitle: "폴더 루트에 파일이 생성되었는지 확인하세요.",
         downloadError: "다운로드 오류.", copyInProgress: "복사 중...", copiedSuccess: "복사됨!", copyError: "오류",
-        lightboxResFormat: "PNG 형식 • 해상도", zipMissingIds: "Bitmoji ID를 입력해 주세요.", zipCompressing: "압축 중..."
+        lightboxResFormat: "PNG 형식 • 해상도", zipMissingIds: "Bitmoji ID를 입력해 주세요.", zipCompressing: "압축 중...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "테마", themeClassique: "클래식", themeNeon: "네온 아케이드", themeCosmos: "코스모스",
+        clearSearchAria: "검색어 지우기", clearCategoryAria: "카테고리 지우기", categoryListAria: "카테고리", categoryNone: "일치하는 카테고리가 없습니다", clearFiltersBtn: "필터 지우기"
     },
     it: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -272,7 +293,10 @@ export const I18N = {
         catalogLabel: "CATALOGO", helpGuideTitle: "Istruzioni per l'uso", helpLastUpdate: "Ultimo aggiornamento:",
         helpErrorTitle: "Impossibile caricare il file", helpErrorSubtitle: "Assicurati di aver creato il file nella radice della tua cartella.",
         downloadError: "Errore di download.", copyInProgress: "COPIA IN CORSO...", copiedSuccess: "COPIATO!", copyError: "ERRORE",
-        lightboxResFormat: "FORMATO PNG • RISOLUZIONE", zipMissingIds: "Inserisci gli ID Bitmoji.", zipCompressing: "COMPRESSIONE..."
+        lightboxResFormat: "FORMATO PNG • RISOLUZIONE", zipMissingIds: "Inserisci gli ID Bitmoji.", zipCompressing: "COMPRESSIONE...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Tema", themeClassique: "Classico", themeNeon: "Neon Arcade", themeCosmos: "Cosmo",
+        clearSearchAria: "Cancella la ricerca", clearCategoryAria: "Cancella la categoria", categoryListAria: "Categorie", categoryNone: "Nessuna categoria", clearFiltersBtn: "Cancella i filtri"
     },
     pt: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -306,7 +330,10 @@ export const I18N = {
         catalogLabel: "CATÁLOGO", helpGuideTitle: "Modo de uso", helpLastUpdate: "Última atualização:",
         helpErrorTitle: "Não foi possível carregar o arquivo", helpErrorSubtitle: "Certifique-se de ter criado o arquivo na raiz da sua pasta.",
         downloadError: "Erro de download.", copyInProgress: "COPIANDO...", copiedSuccess: "COPIADO!", copyError: "ERRO",
-        lightboxResFormat: "FORMATO PNG • RESOLUÇÃO", zipMissingIds: "Por favor, informe os IDs do Bitmoji.", zipCompressing: "COMPACTANDO..."
+        lightboxResFormat: "FORMATO PNG • RESOLUÇÃO", zipMissingIds: "Por favor, informe os IDs do Bitmoji.", zipCompressing: "COMPACTANDO...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Tema", themeClassique: "Clássico", themeNeon: "Neon Arcade", themeCosmos: "Cosmos",
+        clearSearchAria: "Limpar a pesquisa", clearCategoryAria: "Limpar a categoria", categoryListAria: "Categorias", categoryNone: "Nenhuma categoria", clearFiltersBtn: "Limpar os filtros"
     },
     zh: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -340,7 +367,10 @@ export const I18N = {
         catalogLabel: "目录", helpGuideTitle: "使用说明", helpLastUpdate: "最后更新：",
         helpErrorTitle: "无法加载文件", helpErrorSubtitle: "请确保已在文件夹根目录创建该文件。",
         downloadError: "下载错误。", copyInProgress: "复制中...", copiedSuccess: "已复制！", copyError: "错误",
-        lightboxResFormat: "PNG格式 • 分辨率", zipMissingIds: "请填写Bitmoji ID。", zipCompressing: "压缩中..."
+        lightboxResFormat: "PNG格式 • 分辨率", zipMissingIds: "请填写Bitmoji ID。", zipCompressing: "压缩中...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "主题", themeClassique: "经典", themeNeon: "霓虹街机", themeCosmos: "宇宙",
+        clearSearchAria: "清除搜索", clearCategoryAria: "清除分类", categoryListAria: "分类", categoryNone: "没有匹配的分类", clearFiltersBtn: "清除筛选"
     },
     tr: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -374,7 +404,10 @@ export const I18N = {
         catalogLabel: "KATALOG", helpGuideTitle: "Kullanım kılavuzu", helpLastUpdate: "Son güncelleme:",
         helpErrorTitle: "Dosya yüklenemedi", helpErrorSubtitle: "Dosyanın klasörünüzün kök dizininde oluşturulduğundan emin olun.",
         downloadError: "İndirme hatası.", copyInProgress: "KOPYALANIYOR...", copiedSuccess: "KOPYALANDI!", copyError: "HATA",
-        lightboxResFormat: "PNG FORMATI • ÇÖZÜNÜRLÜK", zipMissingIds: "Lütfen Bitmoji ID'lerini girin.", zipCompressing: "SIKIŞTIRILIYOR..."
+        lightboxResFormat: "PNG FORMATI • ÇÖZÜNÜRLÜK", zipMissingIds: "Lütfen Bitmoji ID'lerini girin.", zipCompressing: "SIKIŞTIRILIYOR...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Tema", themeClassique: "Klasik", themeNeon: "Neon Arcade", themeCosmos: "Kozmos",
+        clearSearchAria: "Aramayı temizle", clearCategoryAria: "Kategoriyi temizle", categoryListAria: "Kategoriler", categoryNone: "Eşleşen kategori yok", clearFiltersBtn: "Filtreleri temizle"
     },
     pl: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -408,7 +441,10 @@ export const I18N = {
         catalogLabel: "KATALOG", helpGuideTitle: "Instrukcja obsługi", helpLastUpdate: "Ostatnia aktualizacja:",
         helpErrorTitle: "Nie można wczytać pliku", helpErrorSubtitle: "Upewnij się, że plik został utworzony w katalogu głównym folderu.",
         downloadError: "Błąd pobierania.", copyInProgress: "KOPIOWANIE...", copiedSuccess: "SKOPIOWANO!", copyError: "BŁĄD",
-        lightboxResFormat: "FORMAT PNG • ROZDZIELCZOŚĆ", zipMissingIds: "Proszę podać identyfikatory Bitmoji.", zipCompressing: "KOMPRESOWANIE..."
+        lightboxResFormat: "FORMAT PNG • ROZDZIELCZOŚĆ", zipMissingIds: "Proszę podać identyfikatory Bitmoji.", zipCompressing: "KOMPRESOWANIE...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Motyw", themeClassique: "Klasyczny", themeNeon: "Neonowy automat", themeCosmos: "Kosmos",
+        clearSearchAria: "Wyczyść wyszukiwanie", clearCategoryAria: "Wyczyść kategorię", categoryListAria: "Kategorie", categoryNone: "Brak pasującej kategorii", clearFiltersBtn: "Wyczyść filtry"
     },
     ro: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -442,7 +478,10 @@ export const I18N = {
         catalogLabel: "CATALOG", helpGuideTitle: "Mod de utilizare", helpLastUpdate: "Ultima actualizare:",
         helpErrorTitle: "Nu s-a putut încărca fișierul", helpErrorSubtitle: "Asigură-te că ai creat fișierul în rădăcina folderului tău.",
         downloadError: "Eroare de descarcare.", copyInProgress: "SE COPIAZĂ...", copiedSuccess: "COPIAT!", copyError: "EROARE",
-        lightboxResFormat: "FORMAT PNG • REZOLUȚIE", zipMissingIds: "Te rugăm să introduci ID-urile Bitmoji.", zipCompressing: "SE COMPRIMĂ..."
+        lightboxResFormat: "FORMAT PNG • REZOLUȚIE", zipMissingIds: "Te rugăm să introduci ID-urile Bitmoji.", zipCompressing: "SE COMPRIMĂ...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Temă", themeClassique: "Clasic", themeNeon: "Neon Arcade", themeCosmos: "Cosmos",
+        clearSearchAria: "Șterge căutarea", clearCategoryAria: "Șterge categoria", categoryListAria: "Categorii", categoryNone: "Nicio categorie găsită", clearFiltersBtn: "Șterge filtrele"
     },
     el: {
         // Accessibilité, états et messages ajoutés (audit 2026-10)
@@ -476,6 +515,9 @@ export const I18N = {
         catalogLabel: "ΚΑΤΑΛΟΓΟΣ", helpGuideTitle: "Οδηγίες χρήσης", helpLastUpdate: "Τελευταία ενημέρωση:",
         helpErrorTitle: "Δεν ήταν δυνατή η φόρτωση του αρχείου", helpErrorSubtitle: "Βεβαιωθείτε ότι το αρχείο έχει δημιουργηθεί στη ρίζα του φακέλου σας.",
         downloadError: "Σφάλμα λήψης.", copyInProgress: "ΓΙΝΕΤΑΙ ΑΝΤΙΓΡΑΦΗ...", copiedSuccess: "ΑΝΤΙΓΡΑΦΗΚΕ!", copyError: "ΣΦΑΛΜΑ",
-        lightboxResFormat: "ΜΟΡΦΗ PNG • ΑΝΑΛΥΣΗ", zipMissingIds: "Παρακαλώ εισαγάγετε τα ID Bitmoji.", zipCompressing: "ΓΙΝΕΤΑΙ ΣΥΜΠΙΕΣΗ..."
+        lightboxResFormat: "ΜΟΡΦΗ PNG • ΑΝΑΛΥΣΗ", zipMissingIds: "Παρακαλώ εισαγάγετε τα ID Bitmoji.", zipCompressing: "ΓΙΝΕΤΑΙ ΣΥΜΠΙΕΣΗ...",
+        // Thèmes, combobox de catégorie et boutons Effacer (2026-10)
+        themeAria: "Θέμα", themeClassique: "Κλασικό", themeNeon: "Νέον Arcade", themeCosmos: "Κόσμος",
+        clearSearchAria: "Απαλοιφή αναζήτησης", clearCategoryAria: "Απαλοιφή κατηγορίας", categoryListAria: "Κατηγορίες", categoryNone: "Καμία κατηγορία", clearFiltersBtn: "Απαλοιφή φίλτρων"
     }
 };
