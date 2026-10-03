@@ -54,21 +54,24 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions[bot]"
           git add public/templates_*.json public/aide.json
-          git commit -m "🚀 Mise à jour auto [skip ci]" || echo "Aucune modification à commit"
+          # Pas de [skip ci] : l'intégration Git de Cloudflare Pages déploie ce commit d'elle-même.
+          # Aucune boucle possible : un push fait avec GITHUB_TOKEN ne relance pas de workflow,
+          # et le filtre `paths` du déclencheur exclut de toute façon les fichiers de données.
+          git commit -m "🚀 Mise à jour auto du catalogue" || echo "Aucune modification à commit"
           # Si main a bougé depuis le checkout (ex: push manuel entre-temps), on rebase
           # avant de pousser plutôt que d'échouer sèchement sur un push rejeté.
           git pull --rebase origin main
           git push
 
-      # Le commit auto porte [skip ci], que Cloudflare Pages respecte : sans ce hook, les
-      # nouvelles données ne seraient jamais déployées. Lancé à chaque run (même sans
-      # changement) pour rattraper un déploiement précédent qui aurait échoué.
-      - name: 🚀 Force redeploy Cloudflare
+      # Facultatif : le déploiement se fait déjà via l'intégration Git de Cloudflare Pages
+      # (commit auto ci-dessus). Si un Deploy Hook est configuré, il force en plus un
+      # redéploiement, utile pour rattraper un déploiement précédent qui aurait échoué.
+      - name: 🚀 Force redeploy Cloudflare (facultatif)
         env:
           CF_DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
         run: |
           if [ -z "${CF_DEPLOY_HOOK}" ]; then
-            echo "::error::Secret CF_DEPLOY_HOOK manquant ou vide : le site ne sera pas redéployé. Créez un Deploy Hook dans Cloudflare (projet Pages avatar-explorer, Settings, Deploy hooks) puis enregistrez son URL dans GitHub > Settings > Secrets and variables > Actions > CF_DEPLOY_HOOK."
-            exit 1
+            echo "::notice::Pas de secret CF_DEPLOY_HOOK : le déploiement repose sur l'intégration Git de Cloudflare Pages."
+            exit 0
           fi
           curl -fsS --max-time 30 --retry 3 -X POST "${CF_DEPLOY_HOOK}" -o /dev/null
