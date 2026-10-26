@@ -1,13 +1,13 @@
 {
-  "date_maj": "19 octobre 2026",
-  "last_updated_iso": "2026-10-19T12:39:26.985Z",
+  "date_maj": "26 octobre 2026",
+  "last_updated_iso": "2026-10-26T12:33:46.138Z",
   "stats": {
     "en": {
-      "solo": 1981,
+      "solo": 1980,
       "duo": 1052
     },
     "fr": {
-      "solo": 1262,
+      "solo": 1263,
       "duo": 616
     },
     "es": {
@@ -15,7 +15,7 @@
       "duo": 609
     },
     "fr-ca": {
-      "solo": 1262,
+      "solo": 1263,
       "duo": 616
     },
     "de": {
