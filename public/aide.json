@@ -1,37 +1,37 @@
 {
-  "date_maj": "2 novembre 2026",
-  "last_updated_iso": "2026-11-02T15:13:45.771Z",
+  "date_maj": "9 novembre 2026",
+  "last_updated_iso": "2026-11-09T15:42:23.189Z",
   "stats": {
     "en": {
-      "solo": 1980,
+      "solo": 1984,
       "duo": 1053
     },
     "fr": {
-      "solo": 1263,
+      "solo": 1266,
       "duo": 617
     },
     "es": {
-      "solo": 1281,
+      "solo": 1284,
       "duo": 610
     },
     "fr-ca": {
-      "solo": 1263,
+      "solo": 1266,
       "duo": 617
     },
     "de": {
-      "solo": 1249,
+      "solo": 1252,
       "duo": 606
     },
     "ja": {
-      "solo": 1132,
+      "solo": 1135,
       "duo": 594
     },
     "ko": {
-      "solo": 1062,
+      "solo": 1065,
       "duo": 550
     },
     "it": {
-      "solo": 1078,
+      "solo": 1081,
       "duo": 576
     },
     "pt": {
